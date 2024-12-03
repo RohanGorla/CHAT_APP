@@ -29,6 +29,9 @@ io.on("connection", async (socket) => {
   console.log("Socket connection made...");
   const allChat = await collection.find({}).toArray();
   io.emit("allChat", allChat);
+  socket.on("message_input", (payload) => {
+    console.log(payload.message);
+  });
 });
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));

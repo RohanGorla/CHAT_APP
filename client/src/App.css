@@ -1,7 +1,7 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
-  --Chat_Header: 30px;
+  --Chat_Header: 40px;
 }
 
 .Chat_App {
@@ -18,7 +18,7 @@
   margin: 0em auto;
 }
 
-.Chat_App--Header {
+.Chat_App--Header h1 {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Header);
   text-align: center;
