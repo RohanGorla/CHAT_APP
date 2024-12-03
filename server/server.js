@@ -15,15 +15,15 @@ const io = new Server(server, {
   },
 });
 
-/* CONNECTING TO MONGODB CLIENT */
+io.on("connection", (socket) => {
+  console.log("Socket connection made...");
+});
+
+/* CREATING AND CONNECTING TO MONGODB CLIENT */
 const client = new MongoClient(process.env.DB_URL);
 client
   .connect()
   .then(() => console.log("Mongodb connected..."))
   .catch((err) => console.log(err));
-
-io.on("connection", (socket) => {
-  console.log("Socket connection made...");
-});
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));
