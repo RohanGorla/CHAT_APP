@@ -30,7 +30,11 @@ io.on("connection", async (socket) => {
   const allChat = await collection.find({}).toArray();
   io.emit("allChat", allChat);
   socket.on("message_input", async (payload) => {
-    await collection.insertOne({ name: payload.username, msg: payload.message });
+    await collection.insertOne({
+      name: payload.username,
+      msg: payload.message,
+    });
+    io.emit("message_output", payload);
   });
 });
 

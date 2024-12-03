@@ -10,6 +10,7 @@ function App() {
   const [access, setAccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  console.log("hello");
 
   async function sendMessage(e) {
     e.preventDefault();
@@ -20,6 +21,9 @@ function App() {
   useEffect(() => {
     socket.on("allChat", (paylod) => {
       setChat(paylod);
+    });
+    socket.on("message_output", (payload) => {
+      setChat([...chat, { name: payload.username, msg: payload.message }]);
     });
   });
 
