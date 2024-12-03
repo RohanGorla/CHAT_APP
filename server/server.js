@@ -15,15 +15,20 @@ const io = new Server(server, {
   },
 });
 
-io.on("connection", (socket) => {
-  console.log("Socket connection made...");
-});
-
 /* CREATING AND CONNECTING TO MONGODB CLIENT */
 const client = new MongoClient(process.env.DB_URL);
 client
   .connect()
   .then(() => console.log("Mongodb connected..."))
   .catch((err) => console.log(err));
+
+const db = client.db(process.env.DB_NAME);
+const collection = db.collection("ChatApp_Chats");
+
+io.on("connection", async (socket) => {
+  console.log("Socket connection made...");
+  const allChat = await collection.find({}).toArray();
+  io.emit("allChat", allChat);
+});
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));
