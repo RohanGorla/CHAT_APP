@@ -72,3 +72,43 @@
   align-items: center;
   border-style: none;
 }
+
+.Chat_App--EnterName {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100dvh;
+  width: 100dvw;
+}
+
+.Chat_App--EnterName_Form {
+  background-color: rgb(256, 256, 256, .3);
+  width: 80%;
+  padding: 2em .5em;
+  border-style: none;
+  border-radius: 10px;
+  box-shadow: 5px 5px black;
+}
+
+.Chat_App--EnterName_Form p {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Enter_Name_Note);
+}
+
+.Chat_App--EnterName_Form input {
+  font-family: var(--Chat_Sub_Font);
+  display: block;
+  padding: .4em 0em .2em .3em;
+  margin: .5em 0em;
+}
+
+.Chat_App--EnterName_Form button {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Submit_Name_Button);
+  font-weight: 600;
+  background-color: black;
+  color: white;
+  padding: .5em 1.2em;
+  border-style: none;
+  border-radius: 8px;
+}

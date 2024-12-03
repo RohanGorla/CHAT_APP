@@ -32,37 +32,63 @@ function App() {
 
   return (
     <div className="Chat_App">
-      <div className="Chat_App--Container">
-        <section className="Chat_App--Header">
-          <h1>Chit-Chat</h1>
-        </section>
-        <section className="Chat_App--Chats">
-          <div className="Chat_App--Chat_Messages">
-            {chat.map((message, index) => {
-              return (
-                <div key={index} className="Chat_App--Chat_Message">
-                  <p>{message.name}</p>
-                  <p>{message.msg}</p>
-                </div>
-              );
-            })}
-          </div>
-        </section>
-        <section className="Chat_App--Type_Message">
-          <form onSubmit={sendMessage} className="Chat_App--Type_Message--Form">
+      {access ? (
+        <div className="Chat_App--Container">
+          <section className="Chat_App--Header">
+            <h1>Chit-Chat</h1>
+          </section>
+          <section className="Chat_App--Chats">
+            <div className="Chat_App--Chat_Messages">
+              {chat.map((message, index) => {
+                return (
+                  <div key={index} className="Chat_App--Chat_Message">
+                    <p>{message.name}</p>
+                    <p>{message.msg}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+          <section className="Chat_App--Type_Message">
+            <form
+              onSubmit={sendMessage}
+              className="Chat_App--Type_Message--Form"
+            >
+              <input
+                type="text"
+                value={message}
+                onChange={(e) => {
+                  setMessage(e.target.value);
+                }}
+              ></input>
+              <button type="submit">
+                <IoMdSend size={25} />
+              </button>
+            </form>
+          </section>
+        </div>
+      ) : (
+        <div className="Chat_App--EnterName">
+          <div className="Chat_App--EnterName_Form">
+            <p>Enter your name</p>
             <input
               type="text"
-              value={message}
+              value={username}
               onChange={(e) => {
-                setMessage(e.target.value);
+                setUsername(e.target.value);
               }}
             ></input>
-            <button type="submit">
-              <IoMdSend size={25} />
+            <button
+              onClick={() => {
+                localStorage.setItem("chitchat_username", username);
+                setAccess(true);
+              }}
+            >
+              Submit
             </button>
-          </form>
-        </section>
-      </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
