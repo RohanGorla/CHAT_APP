@@ -10,7 +10,6 @@ function App() {
   const [access, setAccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
-  console.log("hello");
 
   async function sendMessage(e) {
     e.preventDefault();
@@ -50,12 +49,16 @@ function App() {
                     key={index}
                     className={
                       username === message.name
-                        ? "Chat_App--Chat_Message Chat_App--Chat_Message--Others"
-                        : "Chat_App--Chat_Message Chat_App--Chat_Message--Own"
+                        ? "Chat_App--Chat_Message Chat_App--Chat_Message--Own"
+                        : "Chat_App--Chat_Message Chat_App--Chat_Message--Others"
                     }
                   >
-                    <p>{message.name}</p>
-                    <p>{message.msg}</p>
+                    <p className={username === message.name ? "Chat_App--Chat_Message--Username--Inactive" : "Chat_App--Chat_Message--Username"}>
+                      {message.name}
+                    </p>
+                    <p className="Chat_App--Chat_Message--Message">
+                      {message.msg}
+                    </p>
                   </div>
                 );
               })}

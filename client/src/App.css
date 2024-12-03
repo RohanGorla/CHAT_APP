@@ -2,6 +2,8 @@
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
   --Chat_Header: 27px;
+  --Chat_Username: 16px;
+  --Chat_Message: 18px;
   --Message_Input: 17px;
   --Enter_Name_Note: 18px;
   --Submit_Name_Button: 16px;
@@ -50,12 +52,35 @@
   width: fit-content;
   padding: .6em 1.5em;
   border-style: none;
-  border-radius: 20px 20px 20px 5px;
-  margin: 1em 0em;
+  margin: .2em 0em;
+}
+
+.Chat_App--Chat_Message--Others {
+  margin-right: auto;
+  border-radius: 15px 15px 15px 3px;
+}
+
+.Chat_App--Chat_Message--Own {
+  margin-left: auto;
+  border-radius: 15px 15px 3px 15px;
 }
 
 .Chat_App--Chat_Message p {
   font-family: var(--Chat_Sub_Font);
+}
+
+.Chat_App--Chat_Message--Username {
+  font-size: var(--Chat_Username);
+  font-weight: 600;
+  margin-bottom: .3em;
+}
+
+.Chat_App--Chat_Message--Username--Inactive {
+  display: none;
+}
+
+.Chat_App--Chat_Message--Message {
+  font-size: var(--Chat_Message);
 }
 
 .Chat_App--Type_Message {
