@@ -25,6 +25,11 @@ client
 const db = client.db(process.env.DB_NAME);
 const collection = db.collection("ChatApp_Chats");
 
+/* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
+app.get("/", (req, res) => {
+  res.json("Connected...");
+});
+
 io.on("connection", async (socket) => {
   console.log("Socket connection made...");
   const allChat = await collection.find({}).toArray();
