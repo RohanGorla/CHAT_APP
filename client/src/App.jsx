@@ -7,6 +7,7 @@ const socket = io(`${import.meta.env.VITE_SERVER_URL}`);
 
 function App() {
   const [username, setUsername] = useState("");
+  const [access, setAccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
 
@@ -20,6 +21,14 @@ function App() {
       setChat(paylod);
     });
   });
+
+  useEffect(() => {
+    const name = localStorage.getItem("chitchat_username");
+    if (name) {
+      setUsername(name);
+      setAccess(true);
+    }
+  }, []);
 
   return (
     <div className="Chat_App">
@@ -40,17 +49,16 @@ function App() {
           </div>
         </section>
         <section className="Chat_App--Type_Message">
-          <form onSubmit={sendMessage}>
+          <form onSubmit={sendMessage} className="Chat_App--Type_Message--Form">
             <input
               type="text"
-              className="Chat_App--Message_Input"
               value={message}
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
             ></input>
             <button type="submit">
-              <IoMdSend />
+              <IoMdSend size={25} />
             </button>
           </form>
         </section>

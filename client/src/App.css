@@ -1,7 +1,10 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
-  --Chat_Header: 40px;
+  --Chat_Header: 27px;
+  --Message_Input: 17px;
+  --Enter_Name_Note: 18px;
+  --Submit_Name_Button: 16px;
 }
 
 .Chat_App {
@@ -18,9 +21,54 @@
   margin: 0em auto;
 }
 
+.Chat_App--Header {
+  background-color: blue;
+  height: 50px;
+}
+
+.Chat_App--Header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .Chat_App--Header h1 {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Header);
-  text-align: center;
   padding: .5em 0em;
+}
+
+.Chat_App--Chats {
+  height: calc(100dvh - 90px);
+  overflow-y: scroll;
+}
+
+.Chat_App--Type_Message {
+  /* background-color: red; */
+  height: 40px;
+}
+
+.Chat_App--Type_Message--Form {
+  display: flex;
+  height: 100%;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chat_App--Type_Message--Form input {
+  font-size: var(--Message_Input);
+  display: inline-block;
+  width: 70%;
+  padding: .3em 0em .1em .2em;
+  margin-right: .5em;
+}
+
+.Chat_App--Type_Message--Form button {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
 }
