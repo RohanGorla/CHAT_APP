@@ -13,7 +13,8 @@ function App() {
 
   async function sendMessage(e) {
     e.preventDefault();
-    socket.emit("message_input", { message });
+    socket.emit("message_input", { username, message });
+    setMessage("");
   }
 
   useEffect(() => {
@@ -41,7 +42,14 @@ function App() {
             <div className="Chat_App--Chat_Messages">
               {chat.map((message, index) => {
                 return (
-                  <div key={index} className="Chat_App--Chat_Message">
+                  <div
+                    key={index}
+                    className={
+                      username === message.name
+                        ? "Chat_App--Chat_Message Chat_App--Chat_Message--Others"
+                        : "Chat_App--Chat_Message Chat_App--Chat_Message--Own"
+                    }
+                  >
                     <p>{message.name}</p>
                     <p>{message.msg}</p>
                   </div>
