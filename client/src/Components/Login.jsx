@@ -23,6 +23,7 @@ function Login() {
         password,
       }
     );
+
     /* LOGIN FAIL */
     if (!response.data.access) {
       switch (response.data.errorCode) {
@@ -39,6 +40,7 @@ function Login() {
       setErrorMessage(response.data.errorMsg);
       return;
     }
+
     /* LOGIN SUCCESS */
     setMailError(false);
     setPasswordError(false);
@@ -81,7 +83,7 @@ function Login() {
           ></input>
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
-        <button type="submit">Submit</button>
+        <button type="submit">Login</button>
       </form>
     </div>
   );
