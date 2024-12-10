@@ -2,7 +2,6 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Route,
-  Router,
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
@@ -14,8 +13,9 @@ import Login from "./Components/Login.jsx";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<App />}>
-        
+      <Route path="/">
+        <Route path="" element={<App />} />
+        <Route path="login" element={<Login />} />
       </Route>
     </>
   )
