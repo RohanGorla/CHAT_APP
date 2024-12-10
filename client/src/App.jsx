@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { IoMdSend } from "react-icons/io";
 import "./App.css";
@@ -6,6 +7,9 @@ import "./App.css";
 const socket = io(`${import.meta.env.VITE_SERVER_URL}`);
 
 function App() {
+  /* SPECIAL VARIABLES */
+  const navigate = useNavigate();
+  /* STATE VARIABLES */
   const [username, setUsername] = useState("");
   const [access, setAccess] = useState(false);
   const [message, setMessage] = useState("");
@@ -31,6 +35,8 @@ function App() {
     if (name) {
       setUsername(name);
       setAccess(true);
+    } else {
+      navigate("/login");
     }
   }, []);
 
@@ -53,7 +59,13 @@ function App() {
                         : "Chat_App--Chat_Message Chat_App--Chat_Message--Others"
                     }
                   >
-                    <p className={username === message.name ? "Chat_App--Chat_Message--Username--Inactive" : "Chat_App--Chat_Message--Username"}>
+                    <p
+                      className={
+                        username === message.name
+                          ? "Chat_App--Chat_Message--Username--Inactive"
+                          : "Chat_App--Chat_Message--Username"
+                      }
+                    >
                       {message.name}
                     </p>
                     <p className="Chat_App--Chat_Message--Message">
@@ -83,26 +95,7 @@ function App() {
           </section>
         </div>
       ) : (
-        <div className="Chat_App--EnterName">
-          <div className="Chat_App--EnterName_Form">
-            <p>Enter your name</p>
-            <input
-              type="text"
-              value={username}
-              onChange={(e) => {
-                setUsername(e.target.value);
-              }}
-            ></input>
-            <button
-              onClick={() => {
-                localStorage.setItem("chitchat_username", username);
-                setAccess(true);
-              }}
-            >
-              Submit
-            </button>
-          </div>
-        </div>
+        <></>
       )}
     </div>
   );
