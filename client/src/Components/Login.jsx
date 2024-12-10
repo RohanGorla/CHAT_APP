@@ -33,9 +33,11 @@ function Login() {
         case "pass":
           setPasswordError(true);
           setMailError(false);
+          setPassword("");
           break;
       }
       setErrorMessage(response.data.errorMsg);
+      return;
     }
     /* LOGIN SUCCESS */
     setMailError(false);
@@ -53,25 +55,31 @@ function Login() {
           <label htmlFor="Login_Usermail">Email:</label>
           <input
             id="Login_Usermail"
+            className={mailError ? "Login_Input--Error" : null}
             type="email"
             value={mail}
             required
+            placeholder="Enter your email"
             onChange={(e) => {
               setMail(e.target.value);
             }}
           ></input>
+          <p>{mailError ? errorMessage : ""}</p>
         </div>
         <div className="Login_Form--Field">
           <label htmlFor="Login_Password">Password:</label>
           <input
             id="Login_Password"
+            className={passwordError ? "Login_Input--Error" : null}
             type="password"
             value={password}
             required
+            placeholder="Enter your password"
             onChange={(e) => {
               setPassword(e.target.value);
             }}
           ></input>
+          <p>{passwordError ? errorMessage : ""}</p>
         </div>
         <button type="submit">Submit</button>
       </form>

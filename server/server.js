@@ -50,7 +50,7 @@ app.post("/checkuser", async (req, res) => {
     return res.send({
       access: false,
       errorMsg:
-        "No account linked with this email address. Please check and try again!",
+        "No account linked with this email address!",
       errorCode: "mail",
     });
 
