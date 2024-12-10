@@ -11,8 +11,9 @@ function Register() {
     <div className="Login_Page">
       <form className="Login_Page--Form">
         <div className="Login_Form--Field">
-          <label>Email address:</label>
+          <label htmlFor="Login_Mail">Email address:</label>
           <input
+            id="Login_Mail"
             type="email"
             value={mail}
             onChange={(e) => {
@@ -21,8 +22,9 @@ function Register() {
           ></input>
         </div>
         <div className="Login_Form--Field">
-          <label>User Id:</label>
+          <label htmlFor="Login_UserId">User Id:</label>
           <input
+            id="Login_UserId"
             type="text"
             value={userId}
             onChange={(e) => {
@@ -31,8 +33,9 @@ function Register() {
           ></input>
         </div>
         <div className="Login_Form--Field">
-          <label>Username:</label>
+          <label htmlFor="Login_Username">Username:</label>
           <input
+            id="Login_Username"
             type="text"
             value={username}
             onChange={(e) => {
@@ -41,8 +44,9 @@ function Register() {
           ></input>
         </div>
         <div className="Login_Form--Field">
-          <label>Password:</label>
+          <label htmlFor="Login_Password">Password:</label>
           <input
+            id="Login_Password"
             type="password"
             value={password}
             onChange={(e) => {
@@ -51,8 +55,9 @@ function Register() {
           ></input>
         </div>
         <div className="Login_Form--Field">
-          <label>Confirm password:</label>
+          <label htmlFor="Login_Confirm_Password">Confirm password:</label>
           <input
+            id="Login_Confirm_Password"
             type="password"
             value={confirmPassword}
             onChange={(e) => {

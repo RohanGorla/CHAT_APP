@@ -28,6 +28,7 @@
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Enter_Name_Note);
   font-weight: 600;
+  cursor: pointer;
 }
 
 .Login_Page--Form input {
@@ -35,6 +36,7 @@
   display: block;
   padding: 0.4em 0em 0.2em 0.3em;
   margin: 0.3em 0em;
+  cursor: text;
 }
 
 .Login_Page--Form button {
@@ -49,5 +51,5 @@
 }
 
 .Login_Form--Field {
-    margin: 1.5em 0em;        
+  margin: 1.5em 0em;
 }
