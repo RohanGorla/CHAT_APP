@@ -2,8 +2,9 @@
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
   --Chat_Username: 16px;
-  --Enter_Name_Note: 18px;
-  --Submit_Name_Button: 16px;
+  --Login_Enter_Name_Label: 18px;
+  --Login_Enter_Name_Input: 18px;
+  --Login_Submit_Name_Button: 16px;
 }
 
 .Login_Page {
@@ -16,7 +17,8 @@
 }
 
 .Login_Page--Form {
-  background-color: rgb(256, 256, 256, 0.3);
+  /* background-color: rgb(256, 256, 256, 0.3); */
+  background-color: rgb(255, 255, 255, 0.7);
   width: 80%;
   padding: 2em 0.5em;
   border-style: none;
@@ -26,22 +28,36 @@
 
 .Login_Page--Form label {
   font-family: var(--Chat_Sub_Font);
-  font-size: var(--Enter_Name_Note);
+  font-size: var(--Login_Enter_Name_Label);
   font-weight: 600;
   cursor: pointer;
 }
 
 .Login_Page--Form input {
   font-family: var(--Chat_Sub_Font);
+  font-size: var(--Login_Enter_Name_Input);
   display: block;
   padding: 0.4em 0em 0.2em 0.3em;
+  border-style: none;
+  border-radius: 7px;
   margin: 0.3em 0em;
   cursor: text;
 }
 
+input.Login_Input--Error {
+  background-color: rgb(245, 120, 120);
+  border: 2px solid red;
+}
+
+.Login_Form--Field p {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Login_Error_Message);
+  color: rgb(177, 0, 0);
+}
+
 .Login_Page--Form button {
   font-family: var(--Chat_Main_Font);
-  font-size: var(--Submit_Name_Button);
+  font-size: var(--Login_Submit_Name_Button);
   font-weight: 600;
   background-color: black;
   color: white;
@@ -52,5 +68,5 @@
 }
 
 .Login_Form--Field {
-  margin: 1.5em 0em;
+  margin: 1em 0em;
 }
