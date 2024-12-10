@@ -1,15 +1,19 @@
 import "dotenv/config";
 import express from "express";
 import cors from "cors";
+import bcrypt from "bcrypt";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient } from "mongodb";
 
 const PORT = process.env.PORT;
 
-/* CREATING AND CONNECTING TO SOCKET SERVER */
+/* CREATING AN EXPRESS SERVER FOR API REQUEST HANDLING */
 const app = express();
 app.use(cors());
+app.use(express.json());
+
+/* CREATING A WEB SOCKET SERVER */
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
@@ -26,6 +30,7 @@ client
 
 const db = client.db(process.env.DB_NAME);
 const collection = db.collection("ChatApp_Chats");
+const userInfoCollection = db.collection("ChatApp_UserInfo");
 
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
@@ -36,8 +41,48 @@ app.post("/checkuser", async (req, res) => {
   res.send("hello");
 });
 
-app.post("/register", async (req, res) => {
-  
+/* REGISTER A NEW USER SERVER ROUTE */
+app.post("/registeruser", async (req, res) => {
+  /* CHECK IF THE EMAIL IS LINKED TO ANY EXISTING ACCOUNTS */
+  const checkMailExists = await userInfoCollection
+    .find({
+      email: req.body.mail,
+    })
+    .toArray();
+  if (checkMailExists.length)
+    return res.send({
+      access: false,
+      errorMsg: "Email is already linked to an account!",
+      errorCode: "mail",
+    });
+
+  /* CHECK IF THE USER ID IS ALREADY TAKEN */
+  const checkUserIdExists = await userInfoCollection
+    .find({
+      usr_id: req.body.userId,
+    })
+    .toArray();
+  if (checkUserIdExists.length)
+    return res.send({
+      access: false,
+      errorMsg: "User id is already taken!",
+      errorCode: "id",
+    });
+
+  /* CREATE A HASHED PASSWORD */
+  const password = await bcrypt.hash(req.body.password, 10);
+
+  /* CREATE A NEW USER RECORD AND STORE IT IN THE MONGODB COLLECTION */
+  const newUser = {
+    email: req.body.mail,
+    pass: password,
+    usr_nm: req.body.username,
+    usr_id: req.body.userId,
+  };
+  const response = await userInfoCollection.insertOne(newUser);
+  if (response.acknowledged) {
+    return res.send({ access: true });
+  }
 });
 
 io.on("connection", async (socket) => {
