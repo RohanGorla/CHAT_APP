@@ -9,7 +9,11 @@ function Login() {
   /* STATE VARIABLES */
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState(false);
+  const [mailError, setMailError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  /* CHECK USER CREDENTIALS API */
   async function checkUser(e) {
     e.preventDefault();
     const response = await axios.post(
@@ -19,11 +23,27 @@ function Login() {
         password,
       }
     );
-    if (response.data.access) {
-      const userData = JSON.stringify(response.data.userData);
-      localStorage.setItem("ChatApp_UserInfo", userData);
-      navigate("/");
+    /* LOGIN FAIL */
+    if (!response.data.access) {
+      switch (response.data.errorCode) {
+        case "mail":
+          setMailError(true);
+          setPasswordError(false);
+          break;
+        case "pass":
+          setPasswordError(true);
+          setMailError(false);
+          break;
+      }
+      setErrorMessage(response.data.errorMsg);
     }
+    /* LOGIN SUCCESS */
+    setMailError(false);
+    setPasswordError(false);
+    setErrorMessage("");
+    const userData = JSON.stringify(response.data.userData);
+    localStorage.setItem("ChatApp_UserInfo", userData);
+    navigate("/");
   }
 
   return (
