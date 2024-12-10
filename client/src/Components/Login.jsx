@@ -8,14 +8,14 @@ function Login() {
 
   async function checkUser(e) {
     e.preventDefault();
-    const result = await axios.post(
+    const response = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/checkuser`,
       {
         mail,
         password,
       }
     );
-    console.log(result);
+    console.log(response);
   }
 
   return (
@@ -25,8 +25,9 @@ function Login() {
           <label htmlFor="Login_Usermail">Email:</label>
           <input
             id="Login_Usermail"
-            type="text"
+            type="email"
             value={mail}
+            required
             onChange={(e) => {
               setMail(e.target.value);
             }}
@@ -38,6 +39,7 @@ function Login() {
             id="Login_Password"
             type="password"
             value={password}
+            required
             onChange={(e) => {
               setPassword(e.target.value);
             }}

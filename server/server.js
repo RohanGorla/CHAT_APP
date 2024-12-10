@@ -5,6 +5,8 @@ import bcrypt from "bcrypt";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient } from "mongodb";
+import { access } from "fs";
+import { error } from "console";
 
 const PORT = process.env.PORT;
 
@@ -38,7 +40,33 @@ app.get("/", (req, res) => {
 });
 
 app.post("/checkuser", async (req, res) => {
-  res.send("hello");
+  /* CHECK IF THE EMAIL IS LINKED TO ANY EXISTING ACCOUNTS */
+  const emailRecords = await userInfoCollection
+    .find({
+      email: req.body.mail,
+    })
+    .toArray();
+  if (!emailRecords.length)
+    return res.send({
+      access: false,
+      errorMsg:
+        "No account linked with this email address. Please check and try again!",
+      errorCode: "mail",
+    });
+
+  /* CHECK IF THE PASSWORD ENTERED IS CORRECT */
+  const actual_password = emailRecords[0].pass;
+  const entered_password = req.body.password;
+  const passwordCheck = await bcrypt.compare(entered_password, actual_password);
+  if (!passwordCheck)
+    return res.send({
+      access: false,
+      errorMsg: "Password incorrect. Please try again!",
+      errorCode: "pass",
+    });
+
+  /* IF THE ENTERED DETAILS ARE CORRECT SEND THE USER DATA */
+  return res.send({ access: true, userData: emailRecords[0] });
 });
 
 /* REGISTER A NEW USER SERVER ROUTE */
