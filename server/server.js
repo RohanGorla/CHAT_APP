@@ -39,6 +39,7 @@ app.get("/", (req, res) => {
   res.json("Connected...");
 });
 
+/* USER LOGIN AUTHENTICATION */
 app.post("/checkuser", async (req, res) => {
   /* CHECK IF THE EMAIL IS LINKED TO ANY EXISTING ACCOUNTS */
   const emailRecords = await userInfoCollection
@@ -49,8 +50,7 @@ app.post("/checkuser", async (req, res) => {
   if (!emailRecords.length)
     return res.send({
       access: false,
-      errorMsg:
-        "No account linked with this email address!",
+      errorMsg: "No account linked with this email address!",
       errorCode: "mail",
     });
 
