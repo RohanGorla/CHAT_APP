@@ -1,10 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { IoMdSend } from "react-icons/io";
 import "./App.css";
-
-const socket = io(`${import.meta.env.VITE_SERVER_URL}`);
 
 function App() {
   /* SPECIAL VARIABLES */
@@ -15,6 +13,9 @@ function App() {
   const [access, setAccess] = useState(false);
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+
+  /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
+  const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
 
   async function sendMessage(e) {
     e.preventDefault();
@@ -32,7 +33,7 @@ function App() {
   });
 
   useEffect(() => {
-    if (userData.username) {
+    if (userData?.username) {
       setUsername(userData.username);
       setAccess(true);
     } else {

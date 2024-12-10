@@ -65,8 +65,13 @@ app.post("/checkuser", async (req, res) => {
       errorCode: "pass",
     });
 
-  /* IF THE ENTERED DETAILS ARE CORRECT SEND THE USER DATA */
-  return res.send({ access: true, userData: emailRecords[0] });
+  /* IF ALL CREDENTIALS MATCH SEND THE USER DATA */
+  const userData = {
+    mail: emailRecords[0].email,
+    userId: emailRecords[0].usr_id,
+    username: emailRecords[0].usr_nm,
+  };
+  return res.send({ access: true, userData });
 });
 
 /* REGISTER A NEW USER SERVER ROUTE */

@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "../Styles/Login.css";
 
 function Login() {
+  /* SPECIAL VARIABLES */
+  const navigate = useNavigate();
+  /* STATE VARIABLES */
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -15,7 +19,11 @@ function Login() {
         password,
       }
     );
-    console.log(response);
+    if (response.data.access) {
+      const userData = JSON.stringify(response.data.userData);
+      localStorage.setItem("ChatApp_UserInfo", userData);
+      navigate("/");
+    }
   }
 
   return (
