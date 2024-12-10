@@ -9,8 +9,9 @@ function Login() {
     <div className="Login_Page">
       <form className="Login_Page--Form">
         <div className="Login_Form--Field">
-          <label>Username:</label>
+          <label htmlFor="Login_Username">Username:</label>
           <input
+            id="Login_Username"
             type="text"
             value={username}
             onChange={(e) => {
@@ -19,8 +20,9 @@ function Login() {
           ></input>
         </div>
         <div className="Login_Form--Field">
-          <label>Password:</label>
+          <label htmlFor="Login_Password">Password:</label>
           <input
+            id="Login_Password"
             type="password"
             value={password}
             onChange={(e) => {
