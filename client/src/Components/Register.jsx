@@ -57,7 +57,7 @@ function Register() {
     /* REGISTER SUCCESS */
     setMailError(false);
     setUserIdError(false);
-    const userData = JSON.stringify({ mail, userId, username });
+    const userData = JSON.stringify(response.data.userData);
     localStorage.setItem("ChatApp_UserInfo", userData);
     navigate("/");
   }

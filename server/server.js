@@ -114,7 +114,7 @@ app.post("/registeruser", async (req, res) => {
   };
   const response = await userInfoCollection.insertOne(newUser);
   if (response.acknowledged) {
-    return res.send({ access: true });
+    return res.send({ access: true, userData: { mail, userId, username } });
   }
 });
 
