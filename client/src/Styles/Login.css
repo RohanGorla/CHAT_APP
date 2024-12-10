@@ -48,6 +48,7 @@
   padding: 0.5em 1.2em;
   border-style: none;
   border-radius: 8px;
+  cursor: pointer;
 }
 
 .Login_Form--Field {

@@ -1,21 +1,34 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../Styles/Login.css";
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+
+  async function checkUser(e) {
+    e.preventDefault();
+    const result = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/checkuser`,
+      {
+        mail,
+        password,
+      }
+    );
+    console.log(result);
+  }
 
   return (
     <div className="Login_Page">
-      <form className="Login_Page--Form">
+      <form className="Login_Page--Form" onSubmit={checkUser}>
         <div className="Login_Form--Field">
-          <label htmlFor="Login_Username">Username:</label>
+          <label htmlFor="Login_Usermail">Email:</label>
           <input
-            id="Login_Username"
+            id="Login_Usermail"
             type="text"
-            value={username}
+            value={mail}
             onChange={(e) => {
-              setUsername(e.target.value);
+              setMail(e.target.value);
             }}
           ></input>
         </div>
@@ -30,15 +43,7 @@ function Login() {
             }}
           ></input>
         </div>
-        <button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            // localStorage.setItem("chitchat_username", username);
-          }}
-        >
-          Submit
-        </button>
+        <button type="submit">Submit</button>
       </form>
     </div>
   );
