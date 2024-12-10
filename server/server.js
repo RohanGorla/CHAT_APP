@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import cors from "cors";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient } from "mongodb";
@@ -8,6 +9,7 @@ const PORT = process.env.PORT;
 
 /* CREATING AND CONNECTING TO SOCKET SERVER */
 const app = express();
+app.use(cors());
 const server = createServer(app);
 const io = new Server(server, {
   cors: {
@@ -28,6 +30,14 @@ const collection = db.collection("ChatApp_Chats");
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
   res.json("Connected...");
+});
+
+app.post("/checkuser", async (req, res) => {
+  res.send("hello");
+});
+
+app.post("/register", async (req, res) => {
+  
 });
 
 io.on("connection", async (socket) => {
