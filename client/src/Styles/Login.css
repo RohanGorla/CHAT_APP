@@ -1,9 +1,9 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
-  --Chat_Username: 16px;
   --Login_Enter_Name_Label: 18px;
   --Login_Enter_Name_Input: 18px;
+  --Login_Error_Message: 16px;
   --Login_Submit_Name_Button: 16px;
 }
 
@@ -18,7 +18,7 @@
 
 .Login_Page--Form {
   background-color: rgb(255, 255, 255, 0.7);
-  width: 80%;
+  width: 90%;
   max-width: 500px;
   padding: 2em 0.5em;
   border-style: none;
@@ -37,7 +37,8 @@
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Login_Enter_Name_Input);
   display: block;
-  width: 300px;
+  width: 80%;
+  max-width: 300px;
   padding: 0.4em 0em 0.2em 0.3em;
   border-radius: 7px;
   border: 2px solid black;
@@ -70,4 +71,17 @@ input.Login_Input--Error {
 
 .Login_Form--Field {
   margin: 1em 0em;
+}
+
+@media (max-width: 550px) {
+  :root {
+    --Login_Enter_Name_Label: 16px;
+    --Login_Enter_Name_Input: 16px;
+    --Login_Error_Message: 14px;
+    --Login_Submit_Name_Button: 14px;
+  }
+
+  .Login_Page--Form input {
+    max-width: 250px;
+  }
 }
