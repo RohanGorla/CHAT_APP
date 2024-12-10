@@ -9,6 +9,7 @@ const socket = io(`${import.meta.env.VITE_SERVER_URL}`);
 function App() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
+  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [username, setUsername] = useState("");
   const [access, setAccess] = useState(false);
@@ -31,9 +32,8 @@ function App() {
   });
 
   useEffect(() => {
-    const name = localStorage.getItem("chitchat_username");
-    if (name) {
-      setUsername(name);
+    if (userData.username) {
+      setUsername(userData.username);
       setAccess(true);
     } else {
       navigate("/login");

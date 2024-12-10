@@ -26,6 +26,8 @@ function Register() {
         }
       );
       if (response.data.access) {
+        const userData = JSON.stringify({ mail, userId, username });
+        localStorage.setItem("ChatApp_UserInfo", userData);
         navigate("/");
       }
     }
