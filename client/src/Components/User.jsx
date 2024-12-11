@@ -11,7 +11,7 @@ function User() {
   const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
-  const [notif, setNotif] = useState("");
+  const [notifications, setNotifications] = useState([]);
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
@@ -19,13 +19,18 @@ function User() {
       socket.emit("join_personal", { room: userData.userId });
     });
     socket.on("allChat", (paylod) => {
-      setChat(paylod);
+        setChat(paylod);
     });
     socket.on("message_output", (payload) => {
-      setChat([...chat, { name: payload.username, msg: payload.message }]);
+        setChat([...chat, { name: payload.username, msg: payload.message }]);
+    });
+    socket.on("your_notifications", (payload) => {
+      console.log(payload);
+      setNotifications(payload);
     });
     socket.on("friend_request", (payload) => {
-      setNotif(payload.type);
+      console.log(payload);
+      setNotifications([...notifications, payload]);
     });
   });
 
@@ -63,7 +68,7 @@ function User() {
           </NavLink>
         </div>
       </nav>
-      <Outlet context={{ socket, notif, setNotif }} />
+      <Outlet context={{ socket, notifications, setNotifications }} />
     </div>
   );
 }
