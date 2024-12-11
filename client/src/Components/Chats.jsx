@@ -1,6 +1,5 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { useNavigate } from "react-router-dom";
-import { io } from "socket.io-client";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
 import axios from "axios";
 import "../Styles/Chats.css";
@@ -9,6 +8,7 @@ function Chats() {
   /* SPECIAL VARIABLES */
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
+  const context = useOutletContext();
   /* STATE VARIABLES */
   const [username, setUsername] = useState("");
   const [chatslist, setChatslist] = useState([]);
@@ -16,7 +16,7 @@ function Chats() {
   const [message, setMessage] = useState("");
 
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
-  const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
+  const socket = context.socket;
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {

@@ -1,0 +1,13 @@
+.User_Navbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.User_Nav_Options {
+  display: flex;
+  gap: 1em;
+}
+
+.User_Nav_Options--Selected {
+  color: red;
+}
