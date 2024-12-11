@@ -25,19 +25,6 @@ function Chats() {
     setMessage("");
   }
 
-  /* WEB SOCKET EVENT LISTENERS */
-  useEffect(() => {
-    socket.on("socket_connect", (payload) => {
-      socket.emit("join_personal", { room: userData.userId });
-    });
-    socket.on("allChat", (paylod) => {
-      setChat(paylod);
-    });
-    socket.on("message_output", (payload) => {
-      setChat([...chat, { name: payload.username, msg: payload.message }]);
-    });
-  });
-
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");

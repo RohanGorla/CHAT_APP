@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { io } from "socket.io-client";
 import { PiChats } from "react-icons/pi";
@@ -9,6 +9,25 @@ import "../App.css";
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
   const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
+  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  /* STATE VARIABLES */
+  const [notif, setNotif] = useState("");
+
+  /* WEB SOCKET EVENT LISTENERS */
+  useEffect(() => {
+    socket.on("socket_connect", (payload) => {
+      socket.emit("join_personal", { room: userData.userId });
+    });
+    socket.on("allChat", (paylod) => {
+      setChat(paylod);
+    });
+    socket.on("message_output", (payload) => {
+      setChat([...chat, { name: payload.username, msg: payload.message }]);
+    });
+    socket.on("friend_request", (payload) => {
+      setNotif(payload.type);
+    });
+  });
 
   return (
     <div className="User_Page">
@@ -44,7 +63,7 @@ function User() {
           </NavLink>
         </div>
       </nav>
-      <Outlet context={{ socket }} />
+      <Outlet context={{ socket, notif, setNotif }} />
     </div>
   );
 }
