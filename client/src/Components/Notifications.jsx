@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useOutletContext } from "react-router-dom";
 
 function Notifications() {
+  /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const [user, setUser] = useState("");
-
-  async function finduser() {}
+  const { socket, notifications, setNotifications } = useOutletContext();
+  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
 
   return (
-    <div>
-      <input
-        type="text"
-        value={user}
-        onChange={(e) => {
-          setUser(e.target.value);
-        }}
-      ></input>
-      <button onClick={finduser}>Find</button>
+    <div className="Notifications_Page">
+      {notifications.map((notification, index) => {
+        return (
+          <div key={index}>
+            <p>{notification.from}</p>
+            <div>
+              <button>Accept</button>
+              <button>Decline</button>
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
