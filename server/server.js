@@ -33,6 +33,8 @@ client
 const db = client.db(process.env.DB_NAME);
 const collection = db.collection("ChatApp_Chats");
 const userInfoCollection = db.collection("ChatApp_UserInfo");
+const chatMessagesCollection = db.collection("ChatApp_ChatMessages");
+const chatsList = db.collection("ChatApp_ChatsList");
 
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
@@ -118,10 +120,16 @@ app.post("/registeruser", async (req, res) => {
   }
 });
 
+/* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
-  console.log("Socket connection made...");
+  console.log("Socket connection made...", socket.id);
+  socket.emit("socket_connect", "Connection has been made!");
+  socket.on("join_personal", (payload) => {
+    socket.join(payload.room);
+    console.log(`joined room: ${payload.room}, ${socket.id}`);
+  });
   const allChat = await collection.find({}).toArray();
-  io.emit("allChat", allChat);
+  // io.emit("allChat", allChat);
   socket.on("message_input", async (payload) => {
     await collection.insertOne({
       name: payload.username,
