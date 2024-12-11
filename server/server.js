@@ -142,7 +142,7 @@ io.on("connection", async (socket) => {
   socket.on("send_request", async (payload) => {
     const record = { from: payload.from, to: payload.to, type: "Request" };
     const response = await notificationsCollection.insertOne(record);
-    socket.to(payload.to).emit("friend_request", payload);
+    socket.to(payload.to).emit("friend_request", record);
   });
 });
 
