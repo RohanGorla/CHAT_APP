@@ -126,9 +126,15 @@ app.post("/registeruser", async (req, res) => {
 io.on("connection", async (socket) => {
   console.log("Socket connection made...", socket.id);
   socket.emit("socket_connect", "Connection has been made!");
-  socket.on("join_personal", (payload) => {
+  socket.on("join_personal", async (payload) => {
     socket.join(payload.room);
     console.log(`joined room: ${payload.room}, ${socket.id}`);
+    const notifications = await notificationsCollection
+      .find({
+        to: payload.room,
+      })
+      .toArray();
+    socket.emit("your_notifications", notifications);
   });
   const allChat = await collection.find({}).toArray();
   // io.emit("allChat", allChat);
