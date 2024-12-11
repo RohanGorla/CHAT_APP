@@ -2,6 +2,7 @@ import "dotenv/config";
 import express from "express";
 import cors from "cors";
 import bcrypt from "bcrypt";
+import { v4 } from "uuid";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient } from "mongodb";
@@ -34,7 +35,8 @@ const db = client.db(process.env.DB_NAME);
 const collection = db.collection("ChatApp_Chats");
 const userInfoCollection = db.collection("ChatApp_UserInfo");
 const chatMessagesCollection = db.collection("ChatApp_ChatMessages");
-const chatsList = db.collection("ChatApp_ChatsList");
+const chatsListCollection = db.collection("ChatApp_ChatsList");
+const notificationsCollection = db.collection("ChatApp_Notifications");
 
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
@@ -136,6 +138,11 @@ io.on("connection", async (socket) => {
       msg: payload.message,
     });
     io.emit("message_output", payload);
+  });
+  socket.on("send_request", async (payload) => {
+    const record = { from: payload.from, to: payload.to, type: "Request" };
+    const response = await notificationsCollection.insertOne(record);
+    socket.to(payload.to).emit("friend_request", payload);
   });
 });
 
