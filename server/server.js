@@ -125,7 +125,9 @@ app.post("/registeruser", async (req, res) => {
 /* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
   console.log("Socket connection made...", socket.id);
+  /* SEND BACK SUCCESSFUL SOCKET CONNECTION MESSAGE */
   socket.emit("socket_connect", "Connection has been made!");
+  /* JOIN PERSONAL ROOM TO GET LIVE CHATS AND NOTIFICATIONS */
   socket.on("join_personal", async (payload) => {
     socket.join(payload.room);
     console.log(`joined room: ${payload.room}, ${socket.id}`);
@@ -136,8 +138,7 @@ io.on("connection", async (socket) => {
       .toArray();
     socket.emit("your_notifications", notifications);
   });
-  const allChat = await collection.find({}).toArray();
-  // io.emit("allChat", allChat);
+  /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
     await collection.insertOne({
       name: payload.username,
@@ -145,10 +146,20 @@ io.on("connection", async (socket) => {
     });
     io.emit("message_output", payload);
   });
+  /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
     const record = { from: payload.from, to: payload.to, type: "Request" };
     const response = await notificationsCollection.insertOne(record);
     socket.to(payload.to).emit("friend_request", record);
+  });
+  /* ACCEPT FRIEND REQUESTS */
+  socket.on("accept_request", async (payload) => {
+    const roomId = v4();
+    const response = await userInfoCollection.updateMany(
+      { usr_id: { $in: [payload.to, payload.from] } },
+      { $push: { rooms: roomId } }
+    );
+    console.log(response);
   });
 });
 
