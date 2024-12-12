@@ -15,24 +15,29 @@ function User() {
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
-    socket.on("socket_connect", (payload) => {
-      socket.emit("join_personal", { room: userData.userId });
-    });
     socket.on("allChat", (paylod) => {
-        setChat(paylod);
+      setChat(paylod);
     });
     socket.on("message_output", (payload) => {
-        setChat([...chat, { name: payload.username, msg: payload.message }]);
-    });
-    socket.on("your_notifications", (payload) => {
-      console.log(payload);
-      setNotifications(payload);
+      setChat([...chat, { name: payload.username, msg: payload.message }]);
     });
     socket.on("friend_request", (payload) => {
       console.log(payload);
       setNotifications([...notifications, payload]);
     });
   });
+
+  useEffect(() => {
+    /* JOIN PERSONAL ROOOM ON SOCKET CONNECTION */
+    socket.on("socket_connect", (payload) => {
+      socket.emit("join_personal", { room: userData.userId });
+    });
+    /* GET ALL NOTIFICATIONS ON SOCKET CONNECTION */
+    socket.on("your_notifications", (payload) => {
+      console.log(payload);
+      setNotifications(payload);
+    });
+  }, []);
 
   return (
     <div className="User_Page">
