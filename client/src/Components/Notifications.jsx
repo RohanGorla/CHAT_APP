@@ -11,6 +11,10 @@ function Notifications() {
   async function acceptRequest(request) {
     socket.emit("accept_request", request);
   }
+  
+  async function declineRequest(request) {
+    socket.emit("decline_request", request);
+  }
 
   return (
     <div className="Notifications_Page">
@@ -22,7 +26,9 @@ function Notifications() {
               <button onClick={() => acceptRequest(notification)}>
                 Accept
               </button>
-              <button>Decline</button>
+              <button onClick={() => declineRequest(notification)}>
+                Decline
+              </button>
             </div>
           </div>
         );
