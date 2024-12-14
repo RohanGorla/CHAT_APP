@@ -25,6 +25,10 @@ function User() {
       console.log(payload);
       setNotifications([...notifications, payload]);
     });
+    socket.on("join_room", (payload) => {
+      console.log(payload);
+      socket.emit("join_room", payload);
+    });
   });
 
   useEffect(() => {
