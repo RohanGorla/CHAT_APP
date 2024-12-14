@@ -159,6 +159,8 @@ io.on("connection", async (socket) => {
       { usr_id: { $in: [payload.to, payload.from] } },
       { $push: { rooms: roomId } }
     );
+    io.to(payload.to).emit("join_room", { roomId });
+    io.to(payload.from).emit("join_room", { roomId });
     console.log(response);
   });
 });
