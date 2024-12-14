@@ -138,6 +138,9 @@ io.on("connection", async (socket) => {
       })
       .toArray();
     socket.emit("your_notifications", notifications);
+    const userData = await userInfoCollection.findOne({ usr_id: payload.room });
+    userData.rooms.forEach((room) => socket.join(room));
+    console.log(userData);
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
