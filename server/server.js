@@ -34,6 +34,7 @@ client
 const db = client.db(process.env.DB_NAME);
 const collection = db.collection("ChatApp_Chats");
 const userInfoCollection = db.collection("ChatApp_UserInfo");
+const roomsCollection = db.collection("ChatApp_Rooms");
 const chatMessagesCollection = db.collection("ChatApp_ChatMessages");
 const chatsListCollection = db.collection("ChatApp_ChatsList");
 const notificationsCollection = db.collection("ChatApp_Notifications");
@@ -159,6 +160,12 @@ io.on("connection", async (socket) => {
       { usr_id: { $in: [payload.to, payload.from] } },
       { $push: { rooms: roomId } }
     );
+    const roomRecord = {
+      roomId: roomId,
+      users: [payload.to, payload.from],
+      type: "single",
+    };
+    const roomsResponse = await roomsCollection.insertOne(roomRecord);
     io.to(payload.to).emit("join_room", { roomId });
     io.to(payload.from).emit("join_room", { roomId });
     console.log(response);
