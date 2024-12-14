@@ -163,6 +163,11 @@ io.on("connection", async (socket) => {
     io.to(payload.from).emit("join_room", { roomId });
     console.log(response);
   });
+  /* JOIN ROOMS */
+  socket.on("join_room", async (payload) => {
+    socket.join(payload.roomId);
+    console.log(`${socket.id} joined ${payload.roomId}`);
+  });
 });
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));
