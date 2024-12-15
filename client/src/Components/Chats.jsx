@@ -8,15 +8,10 @@ function Chats() {
   /* SPECIAL VARIABLES */
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
-  const context = useOutletContext();
+  const { socket, userChats } = useOutletContext();
   /* STATE VARIABLES */
-  const [username, setUsername] = useState("");
-  const [chatslist, setChatslist] = useState([]);
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
-
-  /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
-  const socket = context.socket;
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {

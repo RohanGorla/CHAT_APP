@@ -12,6 +12,7 @@ function User() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [notifications, setNotifications] = useState([]);
+  const [userChats, setUserChats] = useState([]);
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
@@ -37,9 +38,10 @@ function User() {
       socket.emit("join_personal", { room: userData.userId });
     });
     /* GET ALL NOTIFICATIONS ON SOCKET CONNECTION */
-    socket.on("your_notifications", (payload) => {
+    socket.on("your_data", (payload) => {
       console.log(payload);
-      setNotifications(payload);
+      setNotifications(payload.notifications);
+      setUserChats(payload.rooms);
     });
   }, []);
 
@@ -77,7 +79,9 @@ function User() {
           </NavLink>
         </div>
       </nav>
-      <Outlet context={{ socket, notifications, setNotifications }} />
+      <Outlet
+        context={{ socket, notifications, setNotifications, userChats }}
+      />
     </div>
   );
 }
