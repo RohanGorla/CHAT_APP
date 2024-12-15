@@ -137,10 +137,9 @@ io.on("connection", async (socket) => {
         to: payload.room,
       })
       .toArray();
-    socket.emit("your_notifications", notifications);
     const userData = await userInfoCollection.findOne({ usr_id: payload.room });
     userData.rooms.forEach((room) => socket.join(room));
-    console.log(userData);
+    socket.emit("your_data", { rooms: userData.rooms, notifications });
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
