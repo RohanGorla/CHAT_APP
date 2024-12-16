@@ -1,9 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, Outlet } from "react-router-dom";
 import { io } from "socket.io-client";
-import { PiChats } from "react-icons/pi";
-import { CiSearch } from "react-icons/ci";
-import { IoNotificationsOutline } from "react-icons/io5";
+import { ImUsers } from "react-icons/im";
+import { RiSearch2Fill } from "react-icons/ri";
+import { GoBellFill } from "react-icons/go";
 import "../App.css";
 
 function User() {
@@ -62,48 +62,53 @@ function User() {
         <p className="User_Appname">Chat app</p>
         <div className="User_Nav_Options">
           <NavLink
-            to="/user/chats"
+            to="/user/friends"
             className={({ isActive }) =>
-              isActive ? "User_Nav_Options--Selected" : ""
+              isActive
+                ? "User_Nav_Options--Active"
+                : "User_Nav_Options--Inactive"
             }
           >
-            <PiChats className="User_Nav_Options--Icon" size={25} />
+            <ImUsers className="User_Nav_Options--Icon" />
           </NavLink>
           <NavLink
             to="/user/findfriends"
             className={({ isActive }) =>
-              isActive ? "User_Nav_Options--Selected" : ""
+              isActive
+                ? "User_Nav_Options--Active"
+                : "User_Nav_Options--Inactive"
             }
           >
-            <CiSearch className="User_Nav_Options--Icon" size={25} />
+            <RiSearch2Fill className="User_Nav_Options--Icon" />
           </NavLink>
           <NavLink
             to="/user/notifications"
             className={({ isActive }) =>
-              isActive ? "User_Nav_Options--Selected" : ""
+              isActive
+                ? "User_Nav_Options--Active"
+                : "User_Nav_Options--Inactive"
             }
           >
-            <IoNotificationsOutline
-              className="User_Nav_Options--Icon"
-              size={25}
-            />
+            <GoBellFill className="User_Nav_Options--Icon" />
           </NavLink>
         </div>
       </nav>
       {/* RENDER OUTLET ELEMENTS */}
-      <Outlet
-        context={{
-          socket,
-          rooms,
-          setRooms,
-          friends,
-          setFriends,
-          notifications,
-          setNotifications,
-          chat,
-          setChat,
-        }}
-      />
+      <section className="User_Outlet_Container">
+        <Outlet
+          context={{
+            socket,
+            rooms,
+            setRooms,
+            friends,
+            setFriends,
+            notifications,
+            setNotifications,
+            chat,
+            setChat,
+          }}
+        />
+      </section>
     </div>
   );
 }
