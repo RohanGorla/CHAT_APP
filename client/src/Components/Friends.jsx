@@ -9,6 +9,10 @@ function Friends() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
   const { socket, friends, rooms } = useOutletContext();
+  /* STATE VARIABLES */
+  const [friendListSearch, setFriendListSearch] = useState("");
+
+  useEffect(() => {}, [friendListSearch]);
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
@@ -19,6 +23,16 @@ function Friends() {
     <div className="Friends_Page">
       {/* USER'S FRIENDS LIST */}
       <section className="Friends_List">
+        <search className="Friends_List--Search">
+          <input
+            type="text"
+            value={friendListSearch}
+            onChange={(e) => {
+              setFriendListSearch(e.target.value);
+            }}
+            placeholder="Search friend list..."
+          ></input>
+        </search>
         {rooms.map((room, index) => {
           let roomName;
           switch (room.type) {
