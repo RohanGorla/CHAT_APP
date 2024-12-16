@@ -13,6 +13,7 @@ function User() {
   /* STATE VARIABLES */
   const [notifications, setNotifications] = useState([]);
   const [friendsList, setFriendsList] = useState([]);
+  const [rooms, setRooms] = useState([]);
   const [chat, setChat] = useState([]);
 
   /* WEB SOCKET EVENT LISTENERS */
@@ -39,10 +40,15 @@ function User() {
       socket.emit("join_personal", { room: userData.userId });
     });
     /* GET ALL NOTIFICATIONS ON SOCKET CONNECTION */
-    socket.on("your_data", (payload) => {
-      console.log(payload);
-      setNotifications(payload.notifications);
-      setFriendsList(payload.rooms);
+    socket.on("your_data", ({ rooms, friends, notifications }) => {
+      console.log(
+        "Rooms Data -> ",
+        rooms,
+        "\n\nFriends Data -> ",
+        friends,
+        "\n\nRooms Data -> ",
+        rooms
+      );
     });
   }, []);
 
