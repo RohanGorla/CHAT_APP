@@ -133,21 +133,30 @@ app.post("/registeruser", async (req, res) => {
 
 /* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
-  console.log("Socket connection made...", socket.id);
+  // console.log("Socket connection made...", socket.id);
   /* SEND BACK SUCCESSFUL SOCKET CONNECTION MESSAGE */
   socket.emit("socket_connect", "Connection has been made!");
   /* JOIN PERSONAL ROOM TO GET LIVE CHATS AND NOTIFICATIONS */
   socket.on("join_personal", async (payload) => {
-    socket.join(payload.room);
-    console.log(`joined room: ${payload.room}, ${socket.id}`);
+    const personalRoomId = payload.room;
+    socket.join(personalRoomId);
+    /* GET USER DATA */
+    const userData = await userInfoCollection.findOne({
+      usr_id: personalRoomId,
+    });
+    /* GET USER NOTIFICATIONS */
     const notifications = await notificationsCollection
       .find({
-        to: payload.room,
+        to: personalRoomId,
       })
       .toArray();
-    const userData = await userInfoCollection.findOne({ usr_id: payload.room });
-    userData.rooms.forEach((room) => socket.join(room));
-    socket.emit("your_data", { rooms: userData.rooms, notifications });
+    /* GET ROOMS DATA THE USER IS INCLUDED IN */
+    const rooms = await roomsCollection
+      .find({
+        roomId: { $in: userData.rooms },
+      })
+      .toArray();
+    socket.emit("your_data", { rooms, notifications });
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
