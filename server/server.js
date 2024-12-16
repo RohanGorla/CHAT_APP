@@ -116,10 +116,18 @@ app.post("/registeruser", async (req, res) => {
     pass: password,
     usr_nm: req.body.username,
     usr_id: req.body.userId,
+    rooms: [],
   };
   const response = await userInfoCollection.insertOne(newUser);
   if (response.acknowledged) {
-    return res.send({ access: true, userData: { mail, userId, username } });
+    return res.send({
+      access: true,
+      userData: {
+        mail: req.body.mail,
+        userId: req.body.userId,
+        username: req.body.username,
+      },
+    });
   }
 });
 
