@@ -137,7 +137,7 @@ io.on("connection", async (socket) => {
   /* SEND BACK SUCCESSFUL SOCKET CONNECTION MESSAGE */
   socket.emit("socket_connect", "Connection has been made!");
   /* JOIN PERSONAL ROOM TO GET LIVE CHATS AND NOTIFICATIONS */
-  socket.on("join_personal", async (payload) => {
+  socket.on("get_user_data", async (payload) => {
     const personalRoomId = payload.room;
     socket.join(personalRoomId);
     /* GET USER DATA */
@@ -168,7 +168,7 @@ io.on("connection", async (socket) => {
         }
       )
       .toArray();
-    socket.emit("your_data", { rooms, friends, notifications });
+    socket.emit("user_data", { rooms, friends, notifications });
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
