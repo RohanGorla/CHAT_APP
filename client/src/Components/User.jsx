@@ -12,7 +12,7 @@ function User() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [notifications, setNotifications] = useState([]);
-  const [friendsList, setFriendsList] = useState([]);
+  const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [chat, setChat] = useState([]);
 
@@ -35,25 +35,29 @@ function User() {
   });
 
   useEffect(() => {
-    /* JOIN PERSONAL ROOOM ON SOCKET CONNECTION */
-    socket.on("socket_connect", (payload) => {
-      socket.emit("join_personal", { room: userData.userId });
+    /* SEND USER ID TO GET USER DATA ON SOCKET CONNECTION */
+    socket.on("socket_connect", () => {
+      socket.emit("get_user_data", { room: userData.userId });
     });
-    /* GET ALL NOTIFICATIONS ON SOCKET CONNECTION */
-    socket.on("your_data", ({ rooms, friends, notifications }) => {
+    /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
+    socket.on("user_data", ({ rooms, friends, notifications }) => {
       console.log(
         "Rooms Data -> ",
         rooms,
         "\n\nFriends Data -> ",
         friends,
-        "\n\nRooms Data -> ",
-        rooms
+        "\n\nNotifications Data -> ",
+        notifications
       );
+      setRooms(rooms);
+      setFriends(friends);
+      setNotifications(notifications);
     });
   }, []);
 
   return (
     <div className="User_Page">
+      {/* NAVBAR */}
       <nav className="User_Navbar">
         <p className="User_Appname">Chat app</p>
         <div className="User_Nav_Options">
@@ -86,8 +90,19 @@ function User() {
           </NavLink>
         </div>
       </nav>
+      {/* RENDER OUTLET ELEMENTS */}
       <Outlet
-        context={{ socket, notifications, setNotifications, friendsList }}
+        context={{
+          socket,
+          rooms,
+          setRooms,
+          friends,
+          setFriends,
+          notifications,
+          setNotifications,
+          chat,
+          setChat,
+        }}
       />
     </div>
   );

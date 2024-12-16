@@ -8,9 +8,8 @@ function Chats() {
   /* SPECIAL VARIABLES */
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
-  const { socket, friendsList } = useOutletContext();
+  const { socket, friendsList, chat, setChat } = useOutletContext();
   /* STATE VARIABLES */
-  const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
