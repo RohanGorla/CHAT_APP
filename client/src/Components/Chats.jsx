@@ -8,7 +8,7 @@ function Chats() {
   /* SPECIAL VARIABLES */
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
-  const { socket, userChats } = useOutletContext();
+  const { socket, friendsList } = useOutletContext();
   /* STATE VARIABLES */
   const [chat, setChat] = useState([]);
   const [message, setMessage] = useState("");
@@ -24,7 +24,7 @@ function Chats() {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
   }, []);
-  
+
   return (
     <div className="Chat_App">
       <div className="Chat_App--Container">

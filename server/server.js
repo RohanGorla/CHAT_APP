@@ -156,7 +156,14 @@ io.on("connection", async (socket) => {
         roomId: { $in: userData.rooms },
       })
       .toArray();
-    socket.emit("your_data", { rooms, notifications });
+    /* GET USER FRIENDS LIST */
+    const friends = await userInfoCollection
+      .find({
+        rooms: { $in: userData.rooms },
+        usr_id: { $ne: personalRoomId },
+      })
+      .toArray();
+    socket.emit("your_data", { rooms, friends, notifications });
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("message_input", async (payload) => {
