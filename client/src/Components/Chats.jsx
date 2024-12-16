@@ -24,7 +24,7 @@ function Chats() {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
   }, []);
-
+  
   return (
     <div className="Chat_App">
       <div className="Chat_App--Container">
