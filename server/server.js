@@ -158,10 +158,15 @@ io.on("connection", async (socket) => {
       .toArray();
     /* GET USER FRIENDS LIST */
     const friends = await userInfoCollection
-      .find({
-        rooms: { $in: userData.rooms },
-        usr_id: { $ne: personalRoomId },
-      })
+      .find(
+        {
+          rooms: { $in: userData.rooms },
+          usr_id: { $ne: personalRoomId },
+        },
+        {
+          projection: { usr_nm: 1, usr_id: 1, _id: 0 },
+        }
+      )
       .toArray();
     socket.emit("your_data", { rooms, friends, notifications });
   });
