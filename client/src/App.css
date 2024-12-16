@@ -1,6 +1,21 @@
+:root {
+  --Navbar_Main_Font: "Varela Round", sans-serif;
+  --Navbar_Element_Fontsize: 35px;
+}
+
 .User_Navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  height: 70px;
+  background-color: rgb(37, 110, 255);
+}
+
+.User_Appname {
+  font-family: var(--Navbar_Main_Font);
+  font-size: var(--Navbar_Element_Fontsize);
+  font-weight: 700;
+  color: rgb(13, 6, 48);
 }
 
 .User_Nav_Options {
@@ -8,6 +23,32 @@
   gap: 1em;
 }
 
-.User_Nav_Options--Selected {
-  color: red;
+.User_Nav_Options--Active {
+  color: rgb(46, 46, 58);
+}
+
+.User_Nav_Options--Inactive {
+  color: white;
+}
+
+.User_Nav_Options--Icon {
+  font-size: var(--Navbar_Element_Fontsize);
+}
+
+.User_Outlet_Container {
+  height: calc(100dvh - 70px);
+}
+
+@media (max-width: 550px) {
+  :root {
+    --Navbar_Element_Fontsize: 25px;
+  }
+
+  .User_Navbar {
+    height: 50px;
+  }
+
+  .User_Outlet_Container {
+    height: calc(100dvh - 50px);
+  }
 }
