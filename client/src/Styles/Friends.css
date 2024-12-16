@@ -1,0 +1,33 @@
+:root {
+  --Friends_Main_Chat: "Inter", sans-serif;
+}
+
+.Friends_Page {
+  font-family: var(--Friends_Main_Chat);
+  height: 100%;
+  width: 100%;
+  display: flex;
+}
+
+.Friends_List {
+  outline: 2px solid black;
+  height: 100%;
+  width: 25%;
+  padding: 0.5em 1em;
+}
+
+.Friends_List--Search {
+  width: 100%;
+}
+
+.Friends_List--Search input {
+  display: block;
+  width: 100%;
+  padding: 0.4em 0.2em 0.2em 0.2em;
+}
+
+.Friends_Chat {
+  outline: 2px solid black;
+  height: 100%;
+  width: 75%;
+}
