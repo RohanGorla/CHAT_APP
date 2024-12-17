@@ -35,19 +35,27 @@ function Friends() {
         </search>
         {rooms.map((room, index) => {
           let roomName;
+          let friendsList;
           switch (room.type) {
+            /* IF SINGLE CHAT */
             case "single":
               const friendId = room.users.filter(
                 (user) => user !== userData.userId
               );
-              for (let i = 0; i < friends.length; i++) {
-                if (friends[i].usr_id === friendId[0]) {
-                  roomName = friends[i].usr_nm;
-                  break;
-                }
-              }
+              friendsList = friends.filter(
+                (friend) => friend.usr_id === friendId[0]
+              );
+              roomName = friendsList[0].usr_nm;
               break;
+            /* IF GROUP CHAT */
             case "group":
+              const friendsIdList = room.users.filter(
+                (user) => user !== userData.userId
+              );
+              friendsList = friends.filter((friend) =>
+                friendsIdList.includes(friend.usr_id)
+              );
+              roomName = room.name;
               break;
           }
           return (
