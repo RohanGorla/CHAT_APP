@@ -1,7 +1,7 @@
 :root {
   --Friends_Main_Font: "Inter", sans-serif;
   --Friends_Sub_Font: "Varela Round", sans-serif;
-  --Friends_User_Icon_Size: 40px;
+  --Friends_User_Icon_Size: 30px;
   --Friends_Chat_Name: 18px;
   --Friends_Last_Message: 16px;
   --Friends_Last_Message_Time: 14px;
@@ -24,6 +24,7 @@
   font-family: var(--Friends_Main_Font);
   height: 100%;
   width: 25%;
+  min-width: 400px;
   padding: 0.5em;
   border-radius: 5px;
 }
@@ -41,7 +42,7 @@
 .Friends_List--Friend_Card {
   background-color: black;
   display: flex;
-  gap: 0.5em;
+  height: 70px;
   width: 100%;
   padding: 0.5em;
   border-radius: 5px;
@@ -50,20 +51,29 @@
 
 .Friend_Card--Image {
   display: flex;
-  width: 12%;
+  width: 15%;
   justify-content: center;
   align-items: center;
+  /* outline: 1px solid white; */
 }
 
-.Friend_Card--Image_Icon {
+.Friend_Card--Image_Icon_Container {
   background-color: rgb(20, 33, 61);
-  font-size: var(--Friends_User_Icon_Size);
-  color: white;
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
   border-radius: 50%;
 }
 
+.Friend_Card--Image_Icon {
+  font-size: var(--Friends_User_Icon_Size);
+  color: white;
+}
+
 .Friend_Card--Details {
-  width: 88%;
+  width: 85%;
 }
 
 .Friend_Card--Name_And_Time {

@@ -63,7 +63,9 @@ function Friends() {
             <div key={index} className="Friends_List--Friend_Card">
               {/* USER/GROUP DISPLAY PICTURE */}
               <div className="Friend_Card--Image">
-                <IoMdPerson className="Friend_Card--Image_Icon" />
+                <div className="Friend_Card--Image_Icon_Container">
+                  <IoMdPerson className="Friend_Card--Image_Icon" />
+                </div>
               </div>
               {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
               <div className="Friend_Card--Details">
