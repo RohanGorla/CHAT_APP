@@ -82,12 +82,16 @@
   align-items: center;
 }
 
-.Chat--New_Message--Form input {
-  font-size: var(--Message_Input);
+.Chat--New_Message--Form textarea {
+  font-size: 16px;
   display: inline-block;
+  height: 40px;
   width: 70%;
-  padding: 0.4em 0em 0.2em 0.3em;
+  resize: none;
+  overflow: hidden;
+  padding: 5px 0;
   margin-right: 0.5em;
+  outline: none;
 }
 
 .Chat--New_Message--Form button {
