@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { IoMdSend } from "react-icons/io";
+import { IoMdPerson } from "react-icons/io";
 import axios from "axios";
 import "../Styles/Friends.css";
 
@@ -59,9 +59,22 @@ function Friends() {
               break;
           }
           return (
-            <div key={index} className="Friends_List--Friend">
-              {/* EACH FRIEND'S CARD */}
-              <p className="Friends_List--Friend_Name">{roomName}</p>
+            /* EACH FRIEND'S DISPLAY CARD */
+            <div key={index} className="Friends_List--Friend_Card">
+              {/* USER/GROUP DISPLAY PICTURE */}
+              <div className="Friend_Card--Image">
+                <IoMdPerson className="Friend_Card--Image_Icon" />
+              </div>
+              {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
+              <div className="Friend_Card--Details">
+                <div className="Friend_Card--Name_And_Time">
+                  <p className="Friend_Card--Name">{roomName}</p>
+                  <p className="Friend_Card--Time">07:00 PM</p>
+                </div>
+                <p className="Friend_Card--Message">
+                  This is the final message!
+                </p>
+              </div>
             </div>
           );
         })}
