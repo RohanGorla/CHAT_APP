@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useOutletContext } from "react-router-dom";
+import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 
 function FriendsList() {
   /* SPECIAL VARIABLES */
-  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
+  const params = useParams();
   const { friends, rooms } = useOutletContext();
+  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
 
@@ -56,7 +57,8 @@ function FriendsList() {
             key={index}
             className="Friends_List--Friend_Card"
             onClick={() => {
-              navigate(`/user/chats/${room.roomId}`);
+              if (params.id !== room.roomId)
+                return navigate(`/user/chats/${room.roomId}`);
             }}
           >
             {/* USER/GROUP DISPLAY PICTURE */}
