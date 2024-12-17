@@ -8,28 +8,32 @@
   --Submit_Name_Button: 16px;
 }
 
-.Chat_App {
+.Chat_Page {
   background-color: rgb(25, 25, 25);
-  color: white;
+  color: rgb(229, 229, 229);
   height: 100%;
   width: 100%;
+  display: flex;
+  gap: 0.5em;
+  padding: 0.5em;
 }
 
-.Chat_App--Container {
-  background-color: black;
+.Chat_Container {
+  background-color: rgb(20, 33, 61);
   height: 100%;
-  max-width: 1800px;
-  margin: 0em auto;
+  width: 75%;
+  padding: 0.5em;
+  border-radius: 5px;
 }
 
-.Chat_App--Chats {
+.Chat--Messages {
   height: calc(100% - 40px);
   width: 100%;
   padding: 0em 0.7em;
   overflow-y: scroll;
 }
 
-.Chat_App--Chat_Message {
+.Chat--Message_Card {
   background-color: rgb(65, 65, 65);
   width: fit-content;
   padding: 0.6em 1.5em;
@@ -37,40 +41,40 @@
   margin: 0.2em 0em;
 }
 
-.Chat_App--Chat_Message--Others {
+.Chat--Message_Card--Others {
   margin-right: auto;
   border-radius: 15px 15px 15px 3px;
 }
 
-.Chat_App--Chat_Message--Own {
+.Chat--Message_Card--Own {
   margin-left: auto;
   border-radius: 15px 15px 3px 15px;
 }
 
-.Chat_App--Chat_Message p {
+.Chat--Message_Card p {
   font-family: var(--Chat_Sub_Font);
 }
 
-.Chat_App--Chat_Message--Username {
+.Chat--Message_Card--Username {
   font-size: var(--Chat_Username);
   font-weight: 600;
   margin-bottom: 0.3em;
 }
 
-.Chat_App--Chat_Message--Username--Inactive {
+.Chat--Message_Card--Username--Inactive {
   display: none;
 }
 
-.Chat_App--Chat_Message--Message {
+.Chat--Message_Card--Message {
   font-size: var(--Chat_Message);
 }
 
-.Chat_App--Type_Message {
+.Chat--New_Message {
   background-color: rgb(25, 25, 25);
   height: 40px;
 }
 
-.Chat_App--Type_Message--Form {
+.Chat--New_Message--Form {
   display: flex;
   height: 100%;
   width: 100%;
@@ -78,7 +82,7 @@
   align-items: center;
 }
 
-.Chat_App--Type_Message--Form input {
+.Chat--New_Message--Form input {
   font-size: var(--Message_Input);
   display: inline-block;
   width: 70%;
@@ -86,7 +90,7 @@
   margin-right: 0.5em;
 }
 
-.Chat_App--Type_Message--Form button {
+.Chat--New_Message--Form button {
   background-color: rgb(25, 25, 25);
   color: white;
   display: flex;
