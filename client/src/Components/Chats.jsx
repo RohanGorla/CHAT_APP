@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { IoMdSend } from "react-icons/io";
+import { LuSend } from "react-icons/lu";
+import FriendsList from "./FriendsList";
 import axios from "axios";
 
 function Chats() {
   /* SPECIAL VARIABLES */
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
-  const { socket, friendsList, chat, setChat } = useOutletContext();
+  const { socket, chat, setChat } = useOutletContext();
   /* STATE VARIABLES */
   const [message, setMessage] = useState("");
 
@@ -24,39 +25,36 @@ function Chats() {
   }, []);
 
   return (
-    <div className="Chat_App">
-      <div className="Chat_App--Container">
-        <section className="Chat_App--Chats">
-          <div className="Chat_App--Chat_Messages">
-            {chat.map((message, index) => {
-              return (
-                <div
-                  key={index}
+    <div className="Chat_Page">
+      <FriendsList />
+      <div className="Chat_Container">
+        <section className="Chat--Messages">
+          {chat.map((message, index) => {
+            return (
+              <div
+                key={index}
+                className={
+                  username === message.name
+                    ? "Chat--Message_Card Chat--Message_Card--Own"
+                    : "Chat--Message_Card Chat--Message_Card--Others"
+                }
+              >
+                <p
                   className={
                     username === message.name
-                      ? "Chat_App--Chat_Message Chat_App--Chat_Message--Own"
-                      : "Chat_App--Chat_Message Chat_App--Chat_Message--Others"
+                      ? "Chat--Message_Card--Username--Inactive"
+                      : "Chat--Message_Card--Username"
                   }
                 >
-                  <p
-                    className={
-                      username === message.name
-                        ? "Chat_App--Chat_Message--Username--Inactive"
-                        : "Chat_App--Chat_Message--Username"
-                    }
-                  >
-                    {message.name}
-                  </p>
-                  <p className="Chat_App--Chat_Message--Message">
-                    {message.msg}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+                  {message.name}
+                </p>
+                <p className="Chat--Message_Card--Message">{message.msg}</p>
+              </div>
+            );
+          })}
         </section>
-        <section className="Chat_App--Type_Message">
-          <form onSubmit={sendMessage} className="Chat_App--Type_Message--Form">
+        <section className="Chat--New_Message">
+          <form onSubmit={sendMessage} className="Chat--New_Message--Form">
             <input
               type="text"
               value={message}
@@ -65,7 +63,7 @@ function Chats() {
               }}
             ></input>
             <button type="submit">
-              <IoMdSend size={25} />
+              <LuSend />
             </button>
           </form>
         </section>
