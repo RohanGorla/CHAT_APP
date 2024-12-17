@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import FriendsList from "./FriendsList";
@@ -9,6 +9,7 @@ function Chats() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
   const { socket, chat, setChat } = useOutletContext();
+  const textAreaRef = useRef(null);
   /* STATE VARIABLES */
   const [message, setMessage] = useState("");
 
@@ -19,6 +20,14 @@ function Chats() {
     setMessage("");
   }
 
+  function adjustHeight(e) {
+    const textArea = textAreaRef.current;
+    if (!e.target.value.length) return (textArea.style.height = "40px");
+    textArea.style.height = "auto";
+    textArea.style.height = textArea.scrollHeight + "px";
+    setMessage(e.target.value);
+  }
+
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
@@ -27,8 +36,8 @@ function Chats() {
   return (
     <div className="Chat_Page">
       <FriendsList />
-      <div className="Chat_Container">
-        <section className="Chat--Messages">
+      <div className="Chat_Container" ref={chatContainerRef}>
+        <section className="Chat--Messages" ref={messagesRef}>
           {chat.map((message, index) => {
             return (
               <div
@@ -55,13 +64,12 @@ function Chats() {
         </section>
         <section className="Chat--New_Message">
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
-            <input
+            <textarea
+              ref={textAreaRef}
               type="text"
               value={message}
-              onChange={(e) => {
-                setMessage(e.target.value);
-              }}
-            ></input>
+              onChange={adjustHeight}
+            ></textarea>
             <button type="submit">
               <LuSend />
             </button>
