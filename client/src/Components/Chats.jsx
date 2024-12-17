@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdSend } from "react-icons/io";
 import axios from "axios";
-import "../Styles/Chats.css";
 
 function Chats() {
   /* SPECIAL VARIABLES */
@@ -27,9 +26,6 @@ function Chats() {
   return (
     <div className="Chat_App">
       <div className="Chat_App--Container">
-        <section className="Chat_App--Header">
-          <h1>Chit-Chat</h1>
-        </section>
         <section className="Chat_App--Chats">
           <div className="Chat_App--Chat_Messages">
             {chat.map((message, index) => {

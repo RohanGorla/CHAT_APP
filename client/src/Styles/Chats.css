@@ -1,7 +1,6 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
-  --Chat_Header: 27px;
   --Chat_Username: 16px;
   --Chat_Message: 18px;
   --Message_Input: 17px;
@@ -12,36 +11,19 @@
 .Chat_App {
   background-color: rgb(25, 25, 25);
   color: white;
-  height: 100dvh;
-  width: 100dvw;
+  height: 100%;
+  width: 100%;
 }
 
 .Chat_App--Container {
   background-color: black;
-  height: 100dvh;
+  height: 100%;
   max-width: 1800px;
   margin: 0em auto;
 }
 
-.Chat_App--Header {
-  background-color: rgb(25, 25, 25);
-  height: 50px;
-}
-
-.Chat_App--Header {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.Chat_App--Header h1 {
-  font-family: var(--Chat_Sub_Font);
-  font-size: var(--Chat_Header);
-  padding: 0.5em 0em;
-}
-
 .Chat_App--Chats {
-  height: calc(100dvh - 90px);
+  height: calc(100% - 40px);
   width: 100%;
   padding: 0em 0.7em;
   overflow-y: scroll;
