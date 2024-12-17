@@ -8,7 +8,7 @@
   justify-content: space-between;
   align-items: center;
   height: 70px;
-  background-color: rgb(37, 110, 255);
+  background-color: rgb(32, 139, 58);
 }
 
 .User_Appname {
@@ -16,6 +16,7 @@
   font-size: var(--Navbar_Element_Fontsize);
   font-weight: 700;
   color: rgb(13, 6, 48);
+  color: white;
 }
 
 .User_Nav_Options {
