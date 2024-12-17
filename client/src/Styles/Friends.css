@@ -1,13 +1,15 @@
 :root {
-  --Friends_Main_Chat: "Inter", sans-serif;
+  --Friends_Main_Font: "Inter", sans-serif;
+  --Friends_Sub_Font: "Varela Round", sans-serif;
   --Friends_User_Icon_Size: 40px;
   --Friends_Chat_Name: 18px;
   --Friends_Last_Message: 16px;
   --Friends_Last_Message_Time: 14px;
+  --Friends_Welcome_Title: 24px;
+  --Friends_Welcome_Greeting: 16px;
 }
 
 .Friends_Page {
-  font-family: var(--Friends_Main_Chat);
   background-color: black;
   color: rgb(229, 229, 229);
   height: 100%;
@@ -19,6 +21,7 @@
 
 .Friends_List {
   background-color: rgb(20, 33, 61);
+  font-family: var(--Friends_Main_Font);
   height: 100%;
   width: 25%;
   padding: 0.5em;
@@ -38,7 +41,7 @@
 .Friends_List--Friend_Card {
   background-color: black;
   display: flex;
-  gap: .5em;
+  gap: 0.5em;
   width: 100%;
   padding: 0.5em;
   border-radius: 5px;
@@ -85,7 +88,32 @@
 
 .Friends_Chat {
   background-color: rgb(20, 33, 61);
+  font-family: var(--Friends_Sub_Font);
+  display: flex;
   height: 100%;
   width: 75%;
+  justify-content: center;
+  align-items: center;
   border-radius: 5px;
+}
+
+.Friends_Welcome_Card {
+  background-color: rgb(0, 0, 0, .4);
+  max-width: 600px;
+  padding: 2em;
+  border-radius: 10px;
+}
+
+.Friends_Welcome_Card--Title {
+  font-size: var(--Friends_Welcome_Title);
+  font-weight: 600;
+  letter-spacing: 1.3px;
+  margin-bottom: .7em;
+}
+
+.Friends_Welcome_Card--Greeting {
+  font-size: var(--Friends_Welcome_Greeting);
+  letter-spacing: 1.3px;
+  word-spacing: 5px;
+  line-height: 1.5;
 }
