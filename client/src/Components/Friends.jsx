@@ -23,6 +23,7 @@ function Friends() {
     <div className="Friends_Page">
       {/* USER'S FRIENDS LIST */}
       <section className="Friends_List">
+        {/* SEARCH FRIEND IN FRIENDS LIST */}
         <search className="Friends_List--Search">
           <input
             type="text"
@@ -60,7 +61,13 @@ function Friends() {
           }
           return (
             /* EACH FRIEND'S DISPLAY CARD */
-            <div key={index} className="Friends_List--Friend_Card">
+            <div
+              key={index}
+              className="Friends_List--Friend_Card"
+              onClick={() => {
+                navigate(`/user/chats/${room.roomId}`);
+              }}
+            >
               {/* USER/GROUP DISPLAY PICTURE */}
               <div className="Friend_Card--Image">
                 <div className="Friend_Card--Image_Icon_Container">
@@ -81,6 +88,7 @@ function Friends() {
           );
         })}
       </section>
+      {/* USER GREETING CARD */}
       <section className="Friends_Chat">
         <article className="Friends_Welcome_Card">
           <p className="Friends_Welcome_Card--Title">

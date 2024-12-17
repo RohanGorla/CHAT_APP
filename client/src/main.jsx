@@ -25,7 +25,7 @@ const router = createBrowserRouter(
         <Route path="register" element={<Register />} />
         <Route path="user" element={<User />}>
           <Route path="friends" element={<Friends />} />
-          <Route path="chats" element={<Chats />} />
+          <Route path="chats/:id" element={<Chats />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="findfriends" element={<FindFriends />} />
         </Route>
