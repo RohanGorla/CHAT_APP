@@ -1,6 +1,9 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.css";
+import "./Styles/Friends.css";
+import "./Styles/Chats.css";
+import "./Styles/Login.css";
 
 function App() {
   /* SPECIAL VARIABLES */

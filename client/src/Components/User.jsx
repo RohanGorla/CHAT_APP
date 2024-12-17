@@ -4,7 +4,6 @@ import { io } from "socket.io-client";
 import { ImUsers } from "react-icons/im";
 import { RiSearch2Fill } from "react-icons/ri";
 import { GoBellFill } from "react-icons/go";
-import "../App.css";
 
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
