@@ -9,6 +9,9 @@ function Chats() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
   const { socket, chat, setChat } = useOutletContext();
+  const chatContainerRef = useRef(null);
+  const messagesRef = useRef(null);
+  const textAreaContainerRef = useRef(null);
   const textAreaRef = useRef(null);
   /* STATE VARIABLES */
   const [message, setMessage] = useState("");
@@ -22,8 +25,16 @@ function Chats() {
 
   function adjustHeight(e) {
     const textArea = textAreaRef.current;
-    if (!e.target.value.length) return (textArea.style.height = "40px");
+    const textAreaContainer = textAreaContainerRef.current;
+    if (!e.target.value.length) {
+      textArea.style.height = "40px";
+      textAreaContainer.style.height = "40px";
+      setMessage("");
+      return;
+    }
+    textAreaContainer.style.height = "auto";
     textArea.style.height = "auto";
+    textAreaContainer.style.height = textArea.scrollHeight + "px";
     textArea.style.height = textArea.scrollHeight + "px";
     setMessage(e.target.value);
   }
@@ -62,7 +73,7 @@ function Chats() {
             );
           })}
         </section>
-        <section className="Chat--New_Message">
+        <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
             <textarea
               ref={textAreaRef}
