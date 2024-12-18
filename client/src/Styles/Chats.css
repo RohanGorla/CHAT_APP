@@ -22,12 +22,11 @@
   background-color: rgb(20, 33, 61);
   height: 100%;
   width: 75%;
-  padding: 0.5em;
   border-radius: 5px;
 }
 
 .Chat--Messages {
-  height: calc(100% - 40px);
+  height: calc(100% - 50px);
   width: 100%;
   padding: 0em 0.7em;
   overflow-y: scroll;
@@ -71,7 +70,7 @@
 
 .Chat--New_Message {
   background-color: rgb(25, 25, 25);
-  height: 40px;
+  height: 50px;
 }
 
 .Chat--New_Message--Form {
@@ -83,14 +82,19 @@
 }
 
 .Chat--New_Message--Form textarea {
+  background-color: rgb(25, 25, 25);
+  font-family: var(--Chat_Sub_Font);
   font-size: 16px;
+  color: white;
+  line-height: 1.25;
   display: inline-block;
-  height: 40px;
+  height: 50px;
   width: 70%;
   resize: none;
   overflow: hidden;
-  padding: 5px 0;
-  margin-right: 0.5em;
+  padding: 15px 0;
+  border: 0px;
+  margin-right: 2em;
   outline: none;
 }
 
