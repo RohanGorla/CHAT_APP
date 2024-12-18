@@ -169,6 +169,17 @@ io.on("connection", async (socket) => {
       .toArray();
     socket.emit("user_data", { rooms, friends, notifications });
   });
+  /* HANDLE INCOMING MESSAGES */
+  socket.on("send_message", async (payload) => {
+    await chatMessagesCollection.insertOne({
+      usr_nm: payload.userData.username,
+      usr_id: payload.userData.userId,
+      msg: payload.message,
+      room: payload.id,
+      time: payload.time,
+    });
+    io.to(payload.id).emit("receive_message", payload);
+  });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
     const record = { from: payload.from, to: payload.to, type: "Request" };
