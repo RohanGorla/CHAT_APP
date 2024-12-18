@@ -50,6 +50,7 @@ function Chats() {
         chatContainer.offsetHeight - textArea.scrollHeight
       }px`;
     }
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
     setMessage(e.target.value);
   }
 
@@ -58,6 +59,11 @@ function Chats() {
     const roomChats = chats.filter((message) => message.room === id);
     setRoomChats(roomChats);
   }, [chats]);
+
+  /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
+  useEffect(() => {
+    messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+  }, [roomChats]);
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
