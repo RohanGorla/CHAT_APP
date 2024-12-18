@@ -6,16 +6,16 @@ import axios from "axios";
 
 function Chats() {
   /* SPECIAL VARIABLES */
-  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
   const { id } = useParams();
-  const { socket, chat, setChat } = useOutletContext();
+  const { socket, chats, roomChats, setRoomChats } = useOutletContext();
+  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  /* STATE VARIABLES AND ELEMENT REFS */
+  const [message, setMessage] = useState("");
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
   const textAreaRef = useRef(null);
-  /* STATE VARIABLES */
-  const [message, setMessage] = useState("");
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
@@ -24,6 +24,7 @@ function Chats() {
     setMessage("");
   }
 
+  /* FUNCTION TO MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHEN TYPING A NEW MESSAGE */
   function adjustHeight(e) {
     const chatContainer = chatContainerRef.current;
     const messages = messagesRef.current;
@@ -52,6 +53,12 @@ function Chats() {
     setMessage(e.target.value);
   }
 
+  /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
+  useEffect(() => {
+    const roomChats = chats.filter((message) => message.room === id);
+    setRoomChats(roomChats);
+  }, [chats]);
+
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
@@ -62,19 +69,19 @@ function Chats() {
       <FriendsList />
       <div className="Chat_Container" ref={chatContainerRef}>
         <section className="Chat--Messages" ref={messagesRef}>
-          {chat.map((message, index) => {
+          {roomChats.map((message, index) => {
             return (
               <div
                 key={index}
                 className={
-                  userData?.username === message.usr_nm
+                  userData?.userId === message.usr_id
                     ? "Chat--Message_Card Chat--Message_Card--Own"
                     : "Chat--Message_Card Chat--Message_Card--Others"
                 }
               >
                 <p
                   className={
-                    userData?.username === message.usr_nm
+                    userData?.userId === message.usr_id
                       ? "Chat--Message_Card--Username--Inactive"
                       : "Chat--Message_Card--Username"
                   }

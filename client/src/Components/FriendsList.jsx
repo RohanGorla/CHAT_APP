@@ -57,7 +57,9 @@ function FriendsList() {
             key={index}
             className="Friends_List--Friend_Card"
             onClick={() => {
+              /* AVOID RENAVIGATION TO THE SAME PAGE */
               if (params.id !== room.roomId) {
+                /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
                 const roomChats = chats.filter(
                   (chat) => chat.room === room.roomId
                 );
