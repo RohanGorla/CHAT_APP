@@ -20,8 +20,18 @@ function User() {
     socket.on("allChat", (paylod) => {
       setChat(paylod);
     });
-    socket.on("message_output", (payload) => {
-      setChat([...chat, { name: payload.username, msg: payload.message }]);
+    socket.on("receive_message", (payload) => {
+      console.log("Message received", payload);
+      setChat([
+        ...chat,
+        {
+          usr_nm: payload.userData.username,
+          usr_id: payload.userData.userId,
+          msg: payload.message,
+          room: payload.id,
+          time: payload.time,
+        },
+      ]);
     });
     socket.on("friend_request", (payload) => {
       console.log(payload);
