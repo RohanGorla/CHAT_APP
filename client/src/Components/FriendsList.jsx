@@ -6,7 +6,7 @@ function FriendsList() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const params = useParams();
-  const { friends, rooms } = useOutletContext();
+  const { friends, rooms, chats, setRoomChats } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
@@ -57,8 +57,13 @@ function FriendsList() {
             key={index}
             className="Friends_List--Friend_Card"
             onClick={() => {
-              if (params.id !== room.roomId)
+              if (params.id !== room.roomId) {
+                const roomChats = chats.filter(
+                  (chat) => chat.room === room.roomId
+                );
+                setRoomChats(roomChats);
                 return navigate(`/user/chats/${room.roomId}`);
+              }
             }}
           >
             {/* USER/GROUP DISPLAY PICTURE */}
