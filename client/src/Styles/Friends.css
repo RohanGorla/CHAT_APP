@@ -23,10 +23,29 @@
   background-color: rgb(20, 33, 61);
   font-family: var(--Friends_Main_Font);
   height: 100%;
+  overflow-y: scroll;
   width: 25%;
   min-width: 400px;
   padding: 0.5em;
   border-radius: 5px;
+}
+
+.Friends_List::-webkit-scrollbar {
+  width: 3px;
+}
+
+.Friends_List::-webkit-scrollbar-track {
+  background: rgb(20, 33, 61);
+  border-radius: 3px;
+}
+
+.Friends_List::-webkit-scrollbar-thumb {
+  background: rgb(20, 33, 61);
+  border-radius: 3px;
+}
+
+.Friends_List:hover::-webkit-scrollbar-thumb {
+  background: rgb(100, 99, 99);
 }
 
 .Friends_List--Search {
@@ -45,7 +64,7 @@
   height: 70px;
   width: 100%;
   align-items: center;
-  gap: .5em;
+  gap: 0.5em;
   padding: 0.5em;
   border-radius: 5px;
   margin: 1em 0em;
@@ -113,7 +132,7 @@
 }
 
 .Friends_Welcome_Card {
-  background-color: rgb(0, 0, 0, .4);
+  background-color: rgb(0, 0, 0, 0.4);
   max-width: 600px;
   padding: 2em;
   border-radius: 10px;
@@ -123,7 +142,7 @@
   font-size: var(--Friends_Welcome_Title);
   font-weight: 600;
   letter-spacing: 1.3px;
-  margin-bottom: .7em;
+  margin-bottom: 0.7em;
 }
 
 .Friends_Welcome_Card--Greeting {
