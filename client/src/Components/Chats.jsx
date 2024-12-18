@@ -24,18 +24,30 @@ function Chats() {
   }
 
   function adjustHeight(e) {
+    const chatContainer = chatContainerRef.current;
+    const messages = messagesRef.current;
     const textArea = textAreaRef.current;
     const textAreaContainer = textAreaContainerRef.current;
     if (!e.target.value.length) {
-      textArea.style.height = "40px";
-      textAreaContainer.style.height = "40px";
+      textArea.style.height = "50px";
+      textAreaContainer.style.height = "50px";
+      messages.style.height = `${chatContainer.offsetHeight - 50}px`;
       setMessage("");
       return;
     }
-    textAreaContainer.style.height = "auto";
-    textArea.style.height = "auto";
-    textAreaContainer.style.height = textArea.scrollHeight + "px";
-    textArea.style.height = textArea.scrollHeight + "px";
+    if (textArea.scrollHeight > 50) {
+      console.log("yes");
+      textAreaContainer.style.height =
+        textArea.style.height =
+        chatContainer.style.height =
+        messages.style.height =
+          "auto";
+      textAreaContainer.style.height =
+        textArea.style.height = `${textArea.scrollHeight}px`;
+      messages.style.height = `${
+        chatContainer.offsetHeight - textArea.scrollHeight
+      }px`;
+    }
     setMessage(e.target.value);
   }
 
@@ -80,9 +92,11 @@ function Chats() {
               type="text"
               value={message}
               onChange={adjustHeight}
+              autoFocus
+              placeholder="Type a message..."
             ></textarea>
             <button type="submit">
-              <LuSend />
+              <LuSend size={25} />
             </button>
           </form>
         </section>
