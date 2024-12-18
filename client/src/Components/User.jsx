@@ -13,17 +13,14 @@ function User() {
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
-  const [chat, setChat] = useState([]);
+  const [chats, setChats] = useState([]);
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
-    socket.on("allChat", (paylod) => {
-      setChat(paylod);
-    });
     socket.on("receive_message", (payload) => {
       console.log("Message received", payload);
-      setChat([
-        ...chat,
+      setChats([
+        ...chats,
         {
           usr_nm: payload.userData.username,
           usr_id: payload.userData.userId,
@@ -49,17 +46,20 @@ function User() {
       socket.emit("get_user_data", { room: userData.userId });
     });
     /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
-    socket.on("user_data", ({ rooms, friends, notifications }) => {
+    socket.on("user_data", ({ rooms, friends, chats, notifications }) => {
       console.log(
         "Rooms Data -> ",
         rooms,
         "\n\nFriends Data -> ",
         friends,
         "\n\nNotifications Data -> ",
-        notifications
+        notifications,
+        "\n\nChats Data -> ",
+        chats
       );
       setRooms(rooms);
       setFriends(friends);
+      setChats(chats);
       setNotifications(notifications);
     });
   }, []);
@@ -113,8 +113,8 @@ function User() {
             setFriends,
             notifications,
             setNotifications,
-            chat,
-            setChat,
+            chats,
+            setChats,
           }}
         />
       </section>
