@@ -14,6 +14,7 @@ function User() {
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [chats, setChats] = useState([]);
+  const [roomChats, setRoomChats] = useState([]);
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
@@ -115,6 +116,8 @@ function User() {
             setNotifications,
             chats,
             setChats,
+            roomChats,
+            setRoomChats,
           }}
         />
       </section>
