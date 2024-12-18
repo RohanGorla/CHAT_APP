@@ -32,11 +32,9 @@ client
   .catch((err) => console.log(err));
 
 const db = client.db(process.env.DB_NAME);
-const collection = db.collection("ChatApp_Chats");
 const userInfoCollection = db.collection("ChatApp_UserInfo");
 const roomsCollection = db.collection("ChatApp_Rooms");
-const chatMessagesCollection = db.collection("ChatApp_ChatMessages");
-const chatsListCollection = db.collection("ChatApp_ChatsList");
+const chatMessagesCollection = db.collection("ChatApp_Chats");
 const notificationsCollection = db.collection("ChatApp_Notifications");
 
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
@@ -150,12 +148,13 @@ io.on("connection", async (socket) => {
         to: personalRoomId,
       })
       .toArray();
-    /* GET ROOMS DATA THE USER IS INCLUDED IN */
+    /* GET ROOMS DATA THE USER IS INCLUDED IN AND JOIN THEM TO SEND AND RECEIVE MESSAGES */
     const rooms = await roomsCollection
       .find({
         roomId: { $in: userData.rooms },
       })
       .toArray();
+    rooms.forEach((room) => socket.join(room.roomId));
     /* GET USER FRIENDS LIST */
     const friends = await userInfoCollection
       .find(
@@ -169,14 +168,6 @@ io.on("connection", async (socket) => {
       )
       .toArray();
     socket.emit("user_data", { rooms, friends, notifications });
-  });
-  /* HANDLE INCOMING MESSAGES */
-  socket.on("message_input", async (payload) => {
-    await collection.insertOne({
-      name: payload.username,
-      msg: payload.message,
-    });
-    io.emit("message_output", payload);
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
