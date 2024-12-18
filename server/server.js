@@ -142,12 +142,6 @@ io.on("connection", async (socket) => {
     const userData = await userInfoCollection.findOne({
       usr_id: personalRoomId,
     });
-    /* GET USER NOTIFICATIONS */
-    const notifications = await notificationsCollection
-      .find({
-        to: personalRoomId,
-      })
-      .toArray();
     /* GET ROOMS DATA THE USER IS INCLUDED IN AND JOIN THEM TO SEND AND RECEIVE MESSAGES */
     const rooms = await roomsCollection
       .find({
@@ -167,7 +161,19 @@ io.on("connection", async (socket) => {
         }
       )
       .toArray();
-    socket.emit("user_data", { rooms, friends, notifications });
+    /* GET USER CHAT MESSAGES */
+    const chats = await chatMessagesCollection
+      .find({
+        room: { $in: userData.rooms },
+      })
+      .toArray();
+    /* GET USER NOTIFICATIONS */
+    const notifications = await notificationsCollection
+      .find({
+        to: personalRoomId,
+      })
+      .toArray();
+    socket.emit("user_data", { rooms, friends, chats, notifications });
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("send_message", async (payload) => {
