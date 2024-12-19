@@ -1,0 +1,32 @@
+:root {
+  --FindFriends_Main_Font: "Inter", sans-serif;
+  --FindFriends_Searchbar: 16px;
+}
+
+.FindFriends_Page {
+  background-color: rgb(25, 25, 25);
+  height: 100%;
+  width: 100%;
+  padding: 1em;
+}
+
+.FindFriends_Container {
+  height: 100%;
+  width: 100%;
+  max-width: 600px;
+  padding: 0em 2em;
+  margin: 0em auto;
+}
+
+.FindFriends--SearchBar {
+  font-family: var(--FindFriends_Main_Font);
+  font-size: var(--FindFriends_Searchbar);
+  letter-spacing: 1px;
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+  border-style: none;
+  border-radius: 7px;
+  margin: 0em auto;
+  outline: none;
+}
