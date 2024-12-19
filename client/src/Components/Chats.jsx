@@ -24,35 +24,24 @@ function Chats() {
     setMessage("");
   }
 
-  /* FUNCTION TO MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHEN TYPING A NEW MESSAGE */
-  function adjustHeight(e) {
+  /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
+  useEffect(() => {
     const chatContainer = chatContainerRef.current;
     const messages = messagesRef.current;
     const textArea = textAreaRef.current;
     const textAreaContainer = textAreaContainerRef.current;
-    if (!e.target.value.length) {
-      textArea.style.height = "50px";
-      textAreaContainer.style.height = "50px";
-      messages.style.height = `${chatContainer.offsetHeight - 50}px`;
-      setMessage("");
-      return;
-    }
-    if (textArea.scrollHeight > 50) {
-      console.log("yes");
-      textAreaContainer.style.height =
-        textArea.style.height =
-        chatContainer.style.height =
-        messages.style.height =
-          "auto";
-      textAreaContainer.style.height =
-        textArea.style.height = `${textArea.scrollHeight}px`;
-      messages.style.height = `${
-        chatContainer.offsetHeight - textArea.scrollHeight
-      }px`;
-    }
+    /* READJUST THE HEIGHTS OF COMPONENTS */
+    textArea.style.height = textAreaContainer.style.height = "50px";
+    messages.style.height = `${chatContainer.offsetHeight - 50}px`;
+    /* SET THE HEIGHTS OF COMPONENTS ACCORDING TO THE TEXT IN TEXTAREA */
+    textAreaContainer.style.height =
+      textArea.style.height = `${textArea.scrollHeight}px`;
+    messages.style.height = `${
+      chatContainer.offsetHeight - textArea.scrollHeight
+    }px`;
+    /* SCROLL THE MESSAGES CONTAINER TO BOTTOM IF TEXTAREA HAS MULTIPLE LINE TEXT */
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    setMessage(e.target.value);
-  }
+  }, [message]);
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
   useEffect(() => {
@@ -105,7 +94,9 @@ function Chats() {
               ref={textAreaRef}
               type="text"
               value={message}
-              onChange={adjustHeight}
+              onChange={(e) => {
+                setMessage(e.target.value);
+              }}
               autoFocus
               placeholder="Type a message..."
             ></textarea>

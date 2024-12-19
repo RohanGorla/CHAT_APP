@@ -42,6 +42,11 @@
 }
 
 .Chat--Messages::-webkit-scrollbar-thumb {
+  background: rgb(20, 33, 61);
+  border-radius: 3px;
+}
+
+.Chat--Messages:hover::-webkit-scrollbar-thumb {
   background: rgb(100, 99, 99);
   border-radius: 3px;
 }
