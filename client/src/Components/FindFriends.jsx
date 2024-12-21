@@ -10,6 +10,7 @@ function FindFriends() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
 
   async function finduser() {
     socket.emit("send_request", { from: userData.userId, to: user });
@@ -21,12 +22,13 @@ function FindFriends() {
     return function (searchInput) {
       clearTimeout(timeout);
       timeout = setTimeout(async () => {
-        if (!searchInput.length) return;
+        if (!searchInput.length) return setSearchResults([]);
         const response = await axios.post(
           `${import.meta.env.VITE_SERVER_URL}/finduser`,
           { user: searchInput }
         );
         console.log(response.data);
+        setSearchResults(response.data);
       }, 700);
     };
   }
@@ -36,9 +38,9 @@ function FindFriends() {
   return (
     <div className="FindFriends_Page">
       <div className="FindFriends_Container">
-        <div>
+        <section className="FindFriends--SearchBar">
           <input
-            className="FindFriends--SearchBar"
+            className="FindFriends--SearchBar_Input"
             type="text"
             value={user}
             onChange={(e) => {
@@ -48,7 +50,26 @@ function FindFriends() {
             autoFocus
             placeholder="Search username/user ID"
           ></input>
-        </div>
+        </section>
+        <section className="FindFriends--Search_Results">
+          {searchResults.map((user, index) => {
+            return (
+              <div key={index} className="FindFriends--User_Card">
+                <div className="FindFriends_User_Card--Image">
+                  <div className="FindFriends_User_Card--Image_Icon_Container">
+                    <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
+                  </div>
+                </div>
+                <div className="FindFriends_User_Card--Details">
+                  <p className="FindFriends_User_Card--Username">
+                    {user.usr_nm}
+                  </p>
+                  <p className="FindFriends_User_Card--Userid">{user.usr_id}</p>
+                </div>
+              </div>
+            );
+          })}
+        </section>
       </div>
     </div>
   );
