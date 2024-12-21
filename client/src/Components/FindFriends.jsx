@@ -21,8 +21,13 @@ function FindFriends() {
     return function (searchInput) {
       clearTimeout(timeout);
       timeout = setTimeout(async () => {
-        console.log(searchInput);
-      }, 1000);
+        if (!searchInput.length) return;
+        const response = await axios.post(
+          `${import.meta.env.VITE_SERVER_URL}/finduser`,
+          { user: searchInput }
+        );
+        console.log(response.data);
+      }, 700);
     };
   }
   /* USE THE CLOSURE RETURNED BY DEBOUNCE */
