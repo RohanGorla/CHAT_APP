@@ -129,6 +129,20 @@ app.post("/registeruser", async (req, res) => {
   }
 });
 
+/* FIND USER */
+app.post("/finduser", async (req, res) => {
+  const searchString = req.body.user;
+  const users = await userInfoCollection
+    .find({
+      $or: [
+        { usr_id: { $regex: `^${searchString}`, $options: "i" } },
+        { usr_nm: { $regex: `^${searchString}`, $options: "i" } },
+      ],
+    })
+    .toArray();
+  res.send(users);
+});
+
 /* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
   // console.log("Socket connection made...", socket.id);
