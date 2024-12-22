@@ -14,8 +14,8 @@ function FindFriends() {
   const [showDetailsCard, setShowDetailsCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
 
-  async function finduser() {
-    socket.emit("send_request", { from: userData.userId, to: user });
+  async function findUser(user) {
+    socket.emit("send_request", { from: userData, to: user });
   }
 
   /* DEBOUNCE FUNCTION FOR SEARCHING USER */
@@ -75,7 +75,12 @@ function FindFriends() {
             <p className="FindFriends--Selected_User--Mail">
               {selectedUser.email}
             </p>
-            <button className="FindFriends--Selected_User--Send_Request_Button">
+            <button
+              className="FindFriends--Selected_User--Send_Request_Button"
+              onClick={() => {
+                findUser(selectedUser);
+              }}
+            >
               Send friend request
             </button>
           </div>
