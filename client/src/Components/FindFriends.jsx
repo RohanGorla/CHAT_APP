@@ -11,6 +11,8 @@ function FindFriends() {
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [showDetailsCard, setShowDetailsCard] = useState(false);
+  const [selectedUser, setSelectedUser] = useState({});
 
   async function finduser() {
     socket.emit("send_request", { from: userData.userId, to: user });
@@ -37,6 +39,35 @@ function FindFriends() {
 
   return (
     <div className="FindFriends_Page">
+      <div
+        className={
+          showDetailsCard
+            ? "FindFriends--Selected_User_Container"
+            : "FindFriends--Selected_User_Container--Hidden"
+        }
+      >
+        <div className="FindFriends--Selected_User">
+          <div className="FindFriends--Selected_User--Image">
+            <div className="FindFriends--Selected_User--Image_Icon_Container">
+              <IoMdPerson className="FindFriends--Selected_User--Image_Icon" />
+            </div>
+          </div>
+          <div className="FindFriends--Selected_User--Details">
+            <p className="FindFriends--Selected_User--Username">
+              {selectedUser.usr_nm}
+            </p>
+            <p className="FindFriends--Selected_User--Userid">
+              {selectedUser.usr_id}
+            </p>
+            <p className="FindFriends--Selected_User--Mail">
+              {selectedUser.email}
+            </p>
+            <button className="FindFriends--Selected_User--Send_Request_Button">
+              Send friend request
+            </button>
+          </div>
+        </div>
+      </div>
       <div className="FindFriends_Container">
         <section className="FindFriends--SearchBar">
           <input
@@ -54,7 +85,14 @@ function FindFriends() {
         <section className="FindFriends--Search_Results">
           {searchResults.map((user, index) => {
             return (
-              <div key={index} className="FindFriends--User_Card">
+              <div
+                key={index}
+                className="FindFriends--User_Card"
+                onClick={() => {
+                  setShowDetailsCard(true);
+                  setSelectedUser(user);
+                }}
+              >
                 <div className="FindFriends_User_Card--Image">
                   <div className="FindFriends_User_Card--Image_Icon_Container">
                     <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
