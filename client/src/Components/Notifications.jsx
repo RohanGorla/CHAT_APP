@@ -11,7 +11,7 @@ function Notifications() {
   async function acceptRequest(request) {
     socket.emit("accept_request", request);
   }
-  
+
   async function declineRequest(request) {
     socket.emit("decline_request", request);
   }
@@ -21,7 +21,7 @@ function Notifications() {
       {notifications.map((notification, index) => {
         return (
           <div key={index}>
-            <p>{notification.from}</p>
+            <p>{notification.from.username}</p>
             <div>
               <button onClick={() => acceptRequest(notification)}>
                 Accept
