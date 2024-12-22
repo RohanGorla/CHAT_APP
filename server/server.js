@@ -133,12 +133,17 @@ app.post("/registeruser", async (req, res) => {
 app.post("/finduser", async (req, res) => {
   const searchString = req.body.user;
   const users = await userInfoCollection
-    .find({
-      $or: [
-        { usr_id: { $regex: `^${searchString}`, $options: "i" } },
-        { usr_nm: { $regex: `^${searchString}`, $options: "i" } },
-      ],
-    })
+    .find(
+      {
+        $or: [
+          { usr_id: { $regex: `^${searchString}`, $options: "i" } },
+          { usr_nm: { $regex: `^${searchString}`, $options: "i" } },
+        ],
+      },
+      {
+        projection: { usr_nm: 1, usr_id: 1, email: 1 },
+      }
+    )
     .toArray();
   res.send(users);
 });
