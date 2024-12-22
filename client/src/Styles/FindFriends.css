@@ -1,14 +1,97 @@
 :root {
   --FindFriends_Main_Font: "Inter", sans-serif;
+  --FindFriends--Selected_User_Icon: 70px;
+  --FindFriends--Selected_User--Username: 22px;
+  --FindFriends--Selected_User--Userid: 18px;
+  --FindFriends--Selected_User--Mail: 18px;
+  --FindFriends--Selected_User--Send_Request_Button: 16px;
   --FindFriends_Searchbar: 16px;
   --FindFriends_User_Icon_Size: 30px;
 }
 
 .FindFriends_Page {
   background-color: rgb(25, 25, 25);
+  position: relative;
   height: 100%;
   width: 100%;
   padding: 1em;
+}
+
+.FindFriends--Selected_User_Container {
+  background-color: rgb(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.FindFriends--Selected_User {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  font-family: var(--FindFriends_Main_Font);
+  width: 100%;
+  max-width: 500px;
+  padding: 2em 3em;
+  border-radius: 7px;
+}
+
+.FindFriends--Selected_User--Image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5em;
+}
+
+.FindFriends--Selected_User--Image_Icon_Container {
+  background-color: rgb(20, 33, 61);
+  width: 80px;
+  height: 80px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.FindFriends--Selected_User--Image_Icon {
+  font-size: var(--FindFriends--Selected_User_Icon);
+}
+
+.FindFriends--Selected_User--Username {
+  font-size: var(--FindFriends--Selected_User--Username);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.FindFriends--Selected_User--Userid {
+  font-size: var(--FindFriends--Selected_User--Userid);
+  margin: .1em 0em .5em 0em;
+}
+
+.FindFriends--Selected_User--Mail {
+  font-size: var(--FindFriends--Selected_User--Mail);
+}
+
+.FindFriends--Selected_User--Send_Request_Button {
+  background-color: rgb(112, 224, 0);
+  font-size: var(--FindFriends--Selected_User--Send_Request_Button);
+  font-weight: 600;
+  padding: .5em 1em;
+  border-style: none;
+  border-radius: 7px;
+  margin-top: 1.5em;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: rgb(112, 224, 0);
+  }
+}
+
+.FindFriends--Selected_User_Container--Hidden {
+  display: none;
 }
 
 .FindFriends_Container {
