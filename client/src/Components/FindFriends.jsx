@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
-import { IoMdPerson } from "react-icons/io";
+import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import axios from "axios";
 
 function FindFriends() {
@@ -45,8 +45,21 @@ function FindFriends() {
             ? "FindFriends--Selected_User_Container"
             : "FindFriends--Selected_User_Container--Hidden"
         }
+        onClick={(e) => {
+          setShowDetailsCard(false);
+          e.stopPropagation();
+        }}
       >
-        <div className="FindFriends--Selected_User">
+        <div
+          className="FindFriends--Selected_User"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="FindFriends--Selected_User--Back_Button">
+            <IoMdArrowRoundBack
+              className="FindFriends--Selected_User--Back_Button--Icon"
+              onClick={() => setShowDetailsCard(false)}
+            />
+          </div>
           <div className="FindFriends--Selected_User--Image">
             <div className="FindFriends--Selected_User--Image_Icon_Container">
               <IoMdPerson className="FindFriends--Selected_User--Image_Icon" />

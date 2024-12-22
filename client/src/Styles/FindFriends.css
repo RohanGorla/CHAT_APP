@@ -30,6 +30,7 @@
 }
 
 .FindFriends--Selected_User {
+  position: relative;
   background-color: rgb(20, 20, 20);
   color: white;
   font-family: var(--FindFriends_Main_Font);
@@ -37,6 +38,17 @@
   max-width: 500px;
   padding: 2em 3em;
   border-radius: 7px;
+}
+
+.FindFriends--Selected_User--Back_Button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+
+.FindFriends--Selected_User--Back_Button--Icon {
+  font-size: 30px;
+  cursor: pointer;
 }
 
 .FindFriends--Selected_User--Image {
