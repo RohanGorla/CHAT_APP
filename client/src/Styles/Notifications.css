@@ -34,21 +34,7 @@
 }
 
 .Notifications_Container::-webkit-scrollbar {
-  width: 3px;
-}
-
-.Notifications_Container::-webkit-scrollbar-track {
-  background: rgb(25, 25, 25);
-  border-radius: 3px;
-}
-
-.Notifications_Container::-webkit-scrollbar-thumb {
-  background: rgb(25, 25, 25);
-  border-radius: 3px;
-}
-
-.Notifications_Container:hover::-webkit-scrollbar-thumb {
-  background: rgb(100, 99, 99);
+  width: 0px;
 }
 
 .Notifications_Card {

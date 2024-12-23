@@ -215,18 +215,17 @@ io.on("connection", async (socket) => {
   socket.on("accept_request", async (payload) => {
     const roomId = v4();
     const response = await userInfoCollection.updateMany(
-      { usr_id: { $in: [payload.to, payload.from] } },
+      { usr_id: { $in: [payload.to.usr_id, payload.from.userId] } },
       { $push: { rooms: roomId } }
     );
     const roomRecord = {
       roomId: roomId,
-      users: [payload.to, payload.from],
+      users: [payload.to.usr_id, payload.from.userId],
       type: "single",
     };
     const roomsResponse = await roomsCollection.insertOne(roomRecord);
-    io.to(payload.to).emit("join_room", { roomId });
-    io.to(payload.from).emit("join_room", { roomId });
-    console.log(response);
+    io.to(payload.to.usr_id).emit("join_room", { roomId });
+    io.to(payload.from.userId).emit("join_room", { roomId });
   });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
