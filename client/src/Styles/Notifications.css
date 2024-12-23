@@ -2,6 +2,9 @@
   --Notifications_Main_Font: "Inter", sans-serif;
   --Notifications_Sub_Font: "Varela Round", sans-serif;
   --Notifications--Title: 26px;
+  --Notifications_User_Icon_Size: 30px;
+  --Notifications_Username: 20px;
+  --Notifications_Buttons: 14px;
 }
 
 .Notifications_Page {
@@ -14,6 +17,7 @@
 .Notifications--Title {
   font-family: var(--Notifications_Sub_Font);
   font-size: var(--Notifications--Title);
+  font-weight: 600;
   color: white;
   height: 60px;
 }
@@ -25,7 +29,7 @@
   width: 100%;
   max-width: 600px;
   padding: 0em 2em;
-  /* margin: 0em auto; */
+  margin: 0em auto;
   border-radius: 15px;
 }
 
@@ -52,11 +56,75 @@
   color: white;
   font-family: var(--Notifications_Main_Font);
   display: flex;
-  height: 70px;
   width: 100%;
   align-items: center;
   gap: 0.5em;
   padding: 0.5em;
   border-radius: 5px;
   margin: 1em 0em;
+}
+
+.Notifications_Card--Image_Container {
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Notifications_Card--Image_Icon_Container {
+  background-color: rgb(20, 33, 61);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.Notifications_Card--Image_Icon {
+  font-size: var(--Notifications_User_Icon_Size);
+  color: white;
+}
+
+.Notifications_Card--User_Details {
+  width: 85%;
+}
+
+.Notifications_Card--Username {
+  font-size: var(--Notifications_Username);
+  font-weight: 600;
+}
+
+.Notifications_Card--Userid {
+  font-size: var(--Notifications_Userid);
+  margin-bottom: 0.7em;
+}
+
+.Notifications_Card--Buttons button {
+  font-family: var(--Notifications_Sub_Font);
+  font-size: var(--Notifications_Buttons);
+  font-weight: 600;
+  padding: 0.3em 0.7em;
+  border: 2px solid black;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Notifications_Card--Buttons--Accept {
+  background-color: rgb(112, 224, 0);
+  margin-right: 1em;
+  &:hover {
+    background-color: black;
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
+  }
+}
+
+.Notifications_Card--Buttons--Reject {
+  background-color: rgb(200, 0, 0);
+  &:hover {
+    background-color: black;
+    color: rgb(200, 0, 0);
+    border: 2px solid rgb(200, 0, 0);
+  }
 }
