@@ -34,12 +34,21 @@ function Notifications() {
                 <p className="Notifications_Card--Username">
                   {notification.from.username}
                 </p>
+                <p className="Notifications_Card--Userid">
+                  {notification.from.userId}
+                </p>
                 <div className="Notifications_Card--Buttons">
-                  <button onClick={() => acceptRequest(notification)}>
+                  <button
+                    className="Notifications_Card--Buttons--Accept"
+                    onClick={() => acceptRequest(notification)}
+                  >
                     Accept
                   </button>
-                  <button onClick={() => declineRequest(notification)}>
-                    Decline
+                  <button
+                    className="Notifications_Card--Buttons--Reject"
+                    onClick={() => declineRequest(notification)}
+                  >
+                    Reject
                   </button>
                 </div>
               </div>
