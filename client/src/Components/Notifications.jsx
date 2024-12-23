@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
+import { IoMdPerson } from "react-icons/io";
+import "../Styles/Notifications.css";
 
 function Notifications() {
   /* SPECIAL VARIABLES */
@@ -18,21 +20,33 @@ function Notifications() {
 
   return (
     <div className="Notifications_Page">
-      {notifications.map((notification, index) => {
-        return (
-          <div key={index}>
-            <p>{notification.from.username}</p>
-            <div>
-              <button onClick={() => acceptRequest(notification)}>
-                Accept
-              </button>
-              <button onClick={() => declineRequest(notification)}>
-                Decline
-              </button>
+      <p className="Notifications--Title">NOTIFICATIONS</p>
+      <div className="Notifications_Container">
+        {notifications.map((notification, index) => {
+          return (
+            <div key={index} className="Notifications_Card">
+              <div className="Notifications_Card--Image_Container">
+                <div className="Notifications_Card--Image_Icon_Container">
+                  <IoMdPerson className="Notifications_Card--Image_Icon" />
+                </div>
+              </div>
+              <div className="Notifications_Card--User_Details">
+                <p className="Notifications_Card--Username">
+                  {notification.from.username}
+                </p>
+                <div className="Notifications_Card--Buttons">
+                  <button onClick={() => acceptRequest(notification)}>
+                    Accept
+                  </button>
+                  <button onClick={() => declineRequest(notification)}>
+                    Decline
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 }
