@@ -19,7 +19,6 @@ function User() {
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
     socket.on("receive_message", (payload) => {
-      console.log("Message received", payload);
       setChats([
         ...chats,
         {
@@ -32,12 +31,13 @@ function User() {
       ]);
     });
     socket.on("friend_request", (payload) => {
-      console.log(payload);
       setNotifications([...notifications, payload]);
     });
     socket.on("join_room", (payload) => {
-      console.log(payload);
       socket.emit("join_room", payload);
+    });
+    socket.on("join_room_success", () => {
+      socket.emit("get_user_data", { room: userData.userId });
     });
   });
 
