@@ -79,6 +79,7 @@ function FindFriends() {
               className="FindFriends--Selected_User--Send_Request_Button"
               onClick={() => {
                 findUser(selectedUser);
+                setShowDetailsCard(false);
               }}
             >
               Send friend request

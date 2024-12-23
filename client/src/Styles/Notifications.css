@@ -18,6 +18,8 @@
   font-family: var(--Notifications_Sub_Font);
   font-size: var(--Notifications--Title);
   font-weight: 600;
+  letter-spacing: 1.5px;
+  text-align: center;
   color: white;
   height: 60px;
 }

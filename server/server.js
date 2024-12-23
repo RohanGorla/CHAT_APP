@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { v4 } from "uuid";
 import { createServer } from "http";
 import { Server } from "socket.io";
-import { MongoClient } from "mongodb";
+import { MongoClient, ObjectId } from "mongodb";
 import { access } from "fs";
 import { error } from "console";
 
@@ -226,11 +226,15 @@ io.on("connection", async (socket) => {
     const roomsResponse = await roomsCollection.insertOne(roomRecord);
     io.to(payload.to.usr_id).emit("join_room", { roomId });
     io.to(payload.from.userId).emit("join_room", { roomId });
+    const id = new ObjectId(payload._id);
+    const deleteResponse = await notificationsCollection.deleteOne({
+      _id: id,
+    });
   });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
     socket.join(payload.roomId);
-    console.log(`${socket.id} joined ${payload.roomId}`);
+    socket.emit("join_room_success");
   });
 });
 
