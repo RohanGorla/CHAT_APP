@@ -18,6 +18,12 @@
   padding: 0.5em;
 }
 
+.Chat_Friends_List_Container {
+  height: 100%;
+  width: 25%;
+  min-width: 400px;
+}
+
 .Chat_Container {
   background-color: rgb(20, 33, 61);
   height: 100%;
@@ -125,3 +131,15 @@
   align-items: center;
   border-style: none;
 }
+
+/* @media (max-width: ) {
+  :root {
+    --Chat_Main_Font: "Inter", sans-serif;
+    --Chat_Sub_Font: "Varela Round", sans-serif;
+    --Chat_Username: 16px;
+    --Chat_Message: 18px;
+    --Message_Input: 17px;
+    --Enter_Name_Note: 18px;
+    --Submit_Name_Button: 16px;
+  }
+} */

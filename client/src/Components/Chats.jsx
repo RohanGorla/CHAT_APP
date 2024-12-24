@@ -61,7 +61,9 @@ function Chats() {
 
   return (
     <div className="Chat_Page">
-      <FriendsList />
+      <section className="Chat_Friends_List_Container">
+        <FriendsList />
+      </section>
       <div className="Chat_Container" ref={chatContainerRef}>
         <section className="Chat--Messages" ref={messagesRef}>
           {roomChats.map((message, index) => {
