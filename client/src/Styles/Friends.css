@@ -19,13 +19,18 @@
   padding: 0.5em;
 }
 
+.Friends_List_Container {
+  height: 100%;
+  width: 25%;
+  min-width: 400px;
+}
+
 .Friends_List {
   background-color: rgb(20, 33, 61);
   font-family: var(--Friends_Main_Font);
-  height: 100%;
   overflow-y: scroll;
-  width: 25%;
-  min-width: 400px;
+  height: 100%;
+  width: 100%;
   padding: 0.5em;
   border-radius: 5px;
 }
@@ -128,6 +133,7 @@
   width: 75%;
   justify-content: center;
   align-items: center;
+  padding: 0em 1em;
   border-radius: 5px;
 }
 
@@ -150,4 +156,48 @@
   letter-spacing: 1.3px;
   word-spacing: 5px;
   line-height: 1.5;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --Friends_User_Icon_Size: 25px;
+    --Friends_Chat_Name: 16px;
+    --Friends_Last_Message: 14px;
+    --Friends_Last_Message_Time: 12px;
+    --Friends_Welcome_Title: 22px;
+    --Friends_Welcome_Greeting: 14px;
+  }
+
+  .Friends_List_Container {
+    height: 100%;
+    width: 20%;
+    min-width: 300px;
+  }
+
+  .Friends_List--Friend_Card {
+    height: 60px;
+  }
+
+  .Friend_Card--Image_Icon_Container {
+    height: 40px;
+    width: 40px;
+  }
+
+  .Friends_Chat {
+    width: 80%;
+    padding: 0.5em;
+  }
+
+  .Friends_Welcome_Card {
+    padding: 1em;
+  }
+
+  .Friends_Welcome_Card--Title {
+    margin-bottom: 1em;
+    line-height: 1.5;
+  }
+
+  .Friends_Welcome_Card--Greeting {
+    line-height: 2;
+  }
 }

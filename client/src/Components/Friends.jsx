@@ -15,7 +15,9 @@ function Friends() {
   return (
     <div className="Friends_Page">
       {/* USER'S FRIENDS LIST */}
-      <FriendsList />
+      <section className="Friends_List_Container">
+        <FriendsList />
+      </section>
       {/* USER GREETING CARD */}
       <section className="Friends_Chat">
         <article className="Friends_Welcome_Card">
