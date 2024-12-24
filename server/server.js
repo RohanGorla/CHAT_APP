@@ -231,6 +231,15 @@ io.on("connection", async (socket) => {
       _id: id,
     });
   });
+  /* REJECT FRIEND REQUESTS */
+  socket.on("reject_request", async (payload) => {
+    io.to(payload.to.usr_id).emit("request_rejected");
+    io.to(payload.from.userId).emit("request_rejected");
+    const id = new ObjectId(payload._id);
+    const deleteResponse = await notificationsCollection.deleteOne({
+      _id: id,
+    });
+  });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
     socket.join(payload.roomId);

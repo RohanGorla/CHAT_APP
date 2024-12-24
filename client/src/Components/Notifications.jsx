@@ -15,7 +15,7 @@ function Notifications() {
   }
 
   async function declineRequest(request) {
-    socket.emit("decline_request", request);
+    socket.emit("reject_request", request);
   }
 
   return (
