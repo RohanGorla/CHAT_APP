@@ -5,6 +5,7 @@
   --Notifications_User_Icon_Size: 30px;
   --Notifications_Username: 20px;
   --Notifications_Buttons: 14px;
+  --Notifications_Empty: 20px;
 }
 
 .Notifications_Page {
@@ -25,12 +26,9 @@
 }
 
 .Notifications_Container {
-  background-color: rgb(15, 15, 15);
   height: calc(100% - 60px);
   overflow-y: scroll;
   width: 100%;
-  max-width: 600px;
-  padding: 0em 2em;
   margin: 0em auto;
   border-radius: 15px;
 }
@@ -44,12 +42,13 @@
   color: white;
   font-family: var(--Notifications_Main_Font);
   display: flex;
-  width: 100%;
+  width: 95%;
+  max-width: 500px;
   align-items: center;
   gap: 0.5em;
   padding: 0.5em;
   border-radius: 5px;
-  margin: 1em 0em;
+  margin: 1em auto;
 }
 
 .Notifications_Card--Image_Container {
@@ -115,4 +114,21 @@
     color: rgb(200, 0, 0);
     border: 2px solid rgb(200, 0, 0);
   }
+}
+
+.Notifications_Empty {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Notifications_Empty--Message {
+  font-family: var(--Notifications_Sub_Font);
+  font-size: var(--Notifications_Empty);
+  line-height: 1.5;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  color: white;
 }
