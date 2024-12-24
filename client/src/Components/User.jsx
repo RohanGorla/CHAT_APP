@@ -39,6 +39,9 @@ function User() {
     socket.on("join_room_success", () => {
       socket.emit("get_user_data", { room: userData.userId });
     });
+    socket.on("request_rejected", () => {
+      socket.emit("get_user_data", { room: userData.userId });
+    });
   });
 
   useEffect(() => {
