@@ -102,30 +102,41 @@ function FindFriends() {
           ></input>
         </section>
         <section className="FindFriends--Search_Results">
-          {searchResults.map((user, index) => {
-            return (
-              <div
-                key={index}
-                className="FindFriends--User_Card"
-                onClick={() => {
-                  setShowDetailsCard(true);
-                  setSelectedUser(user);
-                }}
-              >
-                <div className="FindFriends_User_Card--Image">
-                  <div className="FindFriends_User_Card--Image_Icon_Container">
-                    <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
+          {searchResults.length ? (
+            searchResults.map((user, index) => {
+              return (
+                <div
+                  key={index}
+                  className="FindFriends--User_Card"
+                  onClick={() => {
+                    setShowDetailsCard(true);
+                    setSelectedUser(user);
+                  }}
+                >
+                  <div className="FindFriends_User_Card--Image">
+                    <div className="FindFriends_User_Card--Image_Icon_Container">
+                      <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
+                    </div>
+                  </div>
+                  <div className="FindFriends_User_Card--Details">
+                    <p className="FindFriends_User_Card--Username">
+                      {user.usr_nm}
+                    </p>
+                    <p className="FindFriends_User_Card--Userid">
+                      {user.usr_id}
+                    </p>
                   </div>
                 </div>
-                <div className="FindFriends_User_Card--Details">
-                  <p className="FindFriends_User_Card--Username">
-                    {user.usr_nm}
-                  </p>
-                  <p className="FindFriends_User_Card--Userid">{user.usr_id}</p>
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div className="FindFriends--Instructions">
+              <p className="FindFriends--Instructions_Message">
+                Find your friends using their user name or user id and send them
+                a friend request!
+              </p>
+            </div>
+          )}
         </section>
       </div>
     </div>
