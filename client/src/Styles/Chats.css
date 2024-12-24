@@ -3,9 +3,6 @@
   --Chat_Sub_Font: "Varela Round", sans-serif;
   --Chat_Username: 16px;
   --Chat_Message: 18px;
-  --Message_Input: 17px;
-  --Enter_Name_Note: 18px;
-  --Submit_Name_Button: 16px;
 }
 
 .Chat_Page {
@@ -67,12 +64,12 @@
 
 .Chat--Message_Card--Others {
   margin-right: auto;
-  border-radius: 15px 15px 15px 3px;
+  border-radius: 15px 15px 15px 0px;
 }
 
 .Chat--Message_Card--Own {
   margin-left: auto;
-  border-radius: 15px 15px 3px 15px;
+  border-radius: 15px 15px 0px 15px;
 }
 
 .Chat--Message_Card p {
@@ -132,14 +129,56 @@
   border-style: none;
 }
 
-/* @media (max-width: ) {
+@media (max-width: 1200px) {
   :root {
-    --Chat_Main_Font: "Inter", sans-serif;
-    --Chat_Sub_Font: "Varela Round", sans-serif;
     --Chat_Username: 16px;
     --Chat_Message: 18px;
-    --Message_Input: 17px;
-    --Enter_Name_Note: 18px;
-    --Submit_Name_Button: 16px;
   }
-} */
+
+  .Chat_Friends_List_Container {
+    display: none;
+  }
+
+  .Chat_Container {
+    width: 100%;
+  }
+
+  .Chat--Message_Card {
+    max-width: 50%;
+    padding: 0.4em 1em;
+  }
+
+  .Chat--Message_Card--Own {
+    border-radius: 10px 10px 0px 10px;
+  }
+
+  .Chat--Message_Card--Others {
+    border-radius: 10px 10px 10px 0px;
+  }
+}
+
+@media (max-width: 800px) {
+  :root {
+    --Chat_Username: 14px;
+    --Chat_Message: 16px;
+  }
+}
+
+@media (max-width: 550px) {
+  :root {
+    --Chat_Username: 12px;
+    --Chat_Message: 14px;
+  }
+
+  .Chat--Message_Card {
+    padding: 0.4em 0.7em;
+  }
+
+  .Chat--Message_Card--Own {
+    border-radius: 10px 10px 0px 10px;
+  }
+
+  .Chat--Message_Card--Others {
+    border-radius: 10px 10px 10px 0px;
+  }
+}
