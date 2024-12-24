@@ -201,3 +201,50 @@
     line-height: 2;
   }
 }
+
+@media (max-width: 600px) {
+  :root {
+    --Friends_User_Icon_Size: 30px;
+    --Friends_Chat_Name: 18px;
+    --Friends_Last_Message: 16px;
+    --Friends_Last_Message_Time: 14px;
+  }
+
+  .Friends_List_Container {
+    height: 100%;
+    width: 100%;
+    min-width: 300px;
+  }
+
+  .Friends_List--Friend_Card {
+    height: 70px;
+  }
+
+  .Friend_Card--Image_Icon_Container {
+    height: 45px;
+    width: 45px;
+  }
+
+  .Friends_Chat {
+    display: none;
+    width: 0%;
+  }
+}
+
+@media (max-width: 450px) {
+  :root {
+    --Friends_User_Icon_Size: 25px;
+    --Friends_Chat_Name: 16px;
+    --Friends_Last_Message: 14px;
+    --Friends_Last_Message_Time: 12px;
+  }
+
+  .Friends_List--Friend_Card {
+    height: 60px;
+  }
+
+  .Friend_Card--Image_Icon_Container {
+    height: 40px;
+    width: 40px;
+  }
+}
