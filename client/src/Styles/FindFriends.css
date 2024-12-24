@@ -1,5 +1,6 @@
 :root {
   --FindFriends_Main_Font: "Inter", sans-serif;
+  --FindFriends_Sub_Font: "Varela Round", sans-serif;
   --FindFriends--Selected_User_Icon: 70px;
   --FindFriends--Selected_User--Username: 22px;
   --FindFriends--Selected_User--Userid: 18px;
@@ -80,7 +81,7 @@
 
 .FindFriends--Selected_User--Userid {
   font-size: var(--FindFriends--Selected_User--Userid);
-  margin: .1em 0em .5em 0em;
+  margin: 0.1em 0em 0.5em 0em;
 }
 
 .FindFriends--Selected_User--Mail {
@@ -91,7 +92,7 @@
   background-color: rgb(112, 224, 0);
   font-size: var(--FindFriends--Selected_User--Send_Request_Button);
   font-weight: 600;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   border-style: none;
   border-radius: 7px;
   margin-top: 1.5em;
@@ -208,4 +209,17 @@
 
 .FindFriends_User_Card--Userid {
   font-size: var(--FindFriends_Userid);
+}
+
+.FindFriends--Instructions {
+  margin-top: 2em;
+}
+
+.FindFriends--Instructions_Message {
+  font-family: var(--FindFriends_Sub_Font);
+  font-size: var(--FindFriends_Instructions);
+  line-height: 1.5;
+  word-spacing: 5px;
+  letter-spacing: 1px;
+  color: white;
 }
