@@ -2,7 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import FriendsList from "./FriendsList";
-import axios from "axios";
 
 function Chats() {
   /* SPECIAL VARIABLES */
