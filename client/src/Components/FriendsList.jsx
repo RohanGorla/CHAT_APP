@@ -6,12 +6,31 @@ function FriendsList() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const params = useParams();
-  const { friends, rooms, chats, setRoomChats } = useOutletContext();
+  const { friends, rooms, searchRooms, setSearchRooms, chats, setRoomChats } =
+    useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
 
-  useEffect(() => {}, [friendListSearch]);
+  useEffect(() => {
+    if (!friendListSearch.length) return setSearchRooms(rooms);
+    const filteredRooms = rooms.filter((room) => {
+      if (room.type === "single") {
+        const friendId = room.users.filter((user) => user !== userData.userId);
+        for (let i = 0; i < friends.length; i++) {
+          if (
+            friends[i].usr_id === friendId[0] &&
+            friends[i].usr_nm
+              .toLowerCase()
+              .includes(friendListSearch.toLowerCase())
+          ) {
+            return room;
+          }
+        }
+      }
+    });
+    setSearchRooms(filteredRooms);
+  }, [friendListSearch]);
 
   return (
     <section className="Friends_List">
@@ -26,7 +45,7 @@ function FriendsList() {
           placeholder="Search friend list..."
         ></input>
       </search>
-      {rooms.map((room, index) => {
+      {searchRooms.map((room, index) => {
         let roomName;
         let friendsList;
         switch (room.type) {
