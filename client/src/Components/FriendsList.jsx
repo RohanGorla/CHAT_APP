@@ -15,7 +15,7 @@ function FriendsList() {
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
     const filteredRooms = rooms.filter((room) =>
-      room.name.toLowerCase().includes(friendListSearch.toLowerCase())
+      room.name.toLowerCase().startsWith(friendListSearch.toLowerCase())
     );
     setSearchRooms(filteredRooms);
   }, [friendListSearch]);
