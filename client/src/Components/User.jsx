@@ -62,6 +62,17 @@ function User() {
         "\n\nChats Data -> ",
         chats
       );
+      rooms.map((room) => {
+        if (room.type === "single") {
+          const friendId = room.users.filter(
+            (user) => user !== userData.userId
+          );
+          const friend = friends.filter(
+            (friend) => friend.usr_id === friendId[0]
+          );
+          room.name = friend[0].usr_nm;
+        }
+      });
       setRooms(rooms);
       setSearchRooms(rooms);
       setFriends(friends);
