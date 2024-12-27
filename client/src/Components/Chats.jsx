@@ -7,7 +7,8 @@ function Chats() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const { id } = useParams();
-  const { socket, chats, roomChats, setRoomChats } = useOutletContext();
+  const { socket, chats, roomChats, setRoomChats, usernameColor } =
+    useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
@@ -81,6 +82,7 @@ function Chats() {
                       ? "Chat--Message_Card--Username--Inactive"
                       : "Chat--Message_Card--Username"
                   }
+                  style={{ color: usernameColor }}
                 >
                   {message.usr_nm}
                 </p>

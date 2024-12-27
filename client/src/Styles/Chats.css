@@ -54,7 +54,6 @@
 }
 
 .Chat--Message_Card {
-  background-color: rgb(65, 65, 65);
   width: fit-content;
   padding: 0.6em 1.5em;
   border-style: none;
@@ -62,13 +61,15 @@
 }
 
 .Chat--Message_Card--Others {
+  background-color: rgb(15, 15, 15);
   margin-right: auto;
-  border-radius: 15px 15px 15px 0px;
+  border-radius: 10px 10px 10px 0px;
 }
 
 .Chat--Message_Card--Own {
+  background-color: black;
   margin-left: auto;
-  border-radius: 15px 15px 0px 15px;
+  border-radius: 10px 10px 0px 10px;
 }
 
 .Chat--Message_Card p {
