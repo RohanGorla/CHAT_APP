@@ -14,21 +14,9 @@ function FriendsList() {
 
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
-    const filteredRooms = rooms.filter((room) => {
-      if (room.type === "single") {
-        const friendId = room.users.filter((user) => user !== userData.userId);
-        for (let i = 0; i < friends.length; i++) {
-          if (
-            friends[i].usr_id === friendId[0] &&
-            friends[i].usr_nm
-              .toLowerCase()
-              .includes(friendListSearch.toLowerCase())
-          ) {
-            return room;
-          }
-        }
-      }
-    });
+    const filteredRooms = rooms.filter((room) =>
+      room.name.toLowerCase().includes(friendListSearch.toLowerCase())
+    );
     setSearchRooms(filteredRooms);
   }, [friendListSearch]);
 
