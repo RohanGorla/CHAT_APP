@@ -13,6 +13,7 @@ function User() {
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
+  const [searchRooms, setSearchRooms] = useState([]);
   const [chats, setChats] = useState([]);
   const [roomChats, setRoomChats] = useState([]);
 
@@ -62,6 +63,7 @@ function User() {
         chats
       );
       setRooms(rooms);
+      setSearchRooms(rooms);
       setFriends(friends);
       setChats(chats);
       setNotifications(notifications);
@@ -113,6 +115,8 @@ function User() {
             socket,
             rooms,
             setRooms,
+            searchRooms,
+            setSearchRooms,
             friends,
             setFriends,
             notifications,
