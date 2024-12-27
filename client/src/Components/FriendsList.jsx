@@ -6,11 +6,19 @@ function FriendsList() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const params = useParams();
-  const { friends, rooms, searchRooms, setSearchRooms, chats, setRoomChats } =
-    useOutletContext();
+  const {
+    friends,
+    rooms,
+    searchRooms,
+    setSearchRooms,
+    chats,
+    setRoomChats,
+    setUsernameColor,
+  } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
+  const usernameColors = ["orange", "green", "violet", "goldenrod"];
 
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
@@ -68,6 +76,11 @@ function FriendsList() {
                   (chat) => chat.room === room.roomId
                 );
                 setRoomChats(roomChats);
+                const randomColor =
+                  usernameColors[
+                    Math.floor(Math.random() * usernameColors.length)
+                  ];
+                setUsernameColor(randomColor);
                 return navigate(`/user/chats/${room.roomId}`);
               }
             }}
