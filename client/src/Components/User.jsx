@@ -16,6 +16,7 @@ function User() {
   const [searchRooms, setSearchRooms] = useState([]);
   const [chats, setChats] = useState([]);
   const [roomChats, setRoomChats] = useState([]);
+  const [usernameColor, setUsernameColor] = useState("");
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
@@ -136,6 +137,8 @@ function User() {
             setChats,
             roomChats,
             setRoomChats,
+            usernameColor,
+            setUsernameColor,
           }}
         />
       </section>
