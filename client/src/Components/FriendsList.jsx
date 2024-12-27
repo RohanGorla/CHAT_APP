@@ -46,7 +46,6 @@ function FriendsList() {
         ></input>
       </search>
       {searchRooms.map((room, index) => {
-        let roomName;
         let friendsList;
         switch (room.type) {
           /* IF SINGLE CHAT */
@@ -57,7 +56,6 @@ function FriendsList() {
             friendsList = friends.filter(
               (friend) => friend.usr_id === friendId[0]
             );
-            roomName = friendsList[0].usr_nm;
             break;
           /* IF GROUP CHAT */
           case "group":
@@ -67,7 +65,6 @@ function FriendsList() {
             friendsList = friends.filter((friend) =>
               friendsIdList.includes(friend.usr_id)
             );
-            roomName = room.name;
             break;
         }
         return (
@@ -96,7 +93,7 @@ function FriendsList() {
             {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
             <div className="Friend_Card--Details">
               <div className="Friend_Card--Name_And_Time">
-                <p className="Friend_Card--Name">{roomName}</p>
+                <p className="Friend_Card--Name">{room.name}</p>
                 <p className="Friend_Card--Time">07:00 PM</p>
               </div>
               <p className="Friend_Card--Message">This is the final message!</p>
