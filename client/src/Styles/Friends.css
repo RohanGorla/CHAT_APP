@@ -58,9 +58,15 @@
 }
 
 .Friends_List--Search input {
+  background-color: rgb(25, 25, 25);
+  color: white;
   display: block;
   width: 100%;
-  padding: 0.4em 0.2em 0.2em 0.2em;
+  padding: .6em;
+  padding-top: .8em;
+  border-style: none;
+  border-radius: 5px;
+  outline: none;
 }
 
 .Friends_List--Friend_Card {
