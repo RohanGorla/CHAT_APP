@@ -76,11 +76,13 @@ function FriendsList() {
                   (chat) => chat.room === room.roomId
                 );
                 setRoomChats(roomChats);
+                /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
                 const randomColor =
                   usernameColors[
                     Math.floor(Math.random() * usernameColors.length)
                   ];
                 setUsernameColor(randomColor);
+                /* NAVIGATE TO THE DESIRED CHAT PAGE */
                 return navigate(`/user/chats/${room.roomId}`);
               }
             }}

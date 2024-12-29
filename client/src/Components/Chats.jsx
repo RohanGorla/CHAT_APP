@@ -100,7 +100,6 @@ function Chats() {
               onChange={(e) => {
                 setMessage(e.target.value);
               }}
-              autoFocus
               placeholder="Type a message..."
             ></textarea>
             <button type="submit">

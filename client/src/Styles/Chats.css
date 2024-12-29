@@ -175,10 +175,10 @@
   }
 
   .Chat--Message_Card--Own {
-    border-radius: 10px 10px 0px 10px;
+    border-radius: 8px 8px 0px 8px;
   }
 
   .Chat--Message_Card--Others {
-    border-radius: 10px 10px 10px 0px;
+    border-radius: 8px 8px 8px 0px;
   }
 }
