@@ -8,6 +8,8 @@
   --FindFriends--Selected_User--Send_Request_Button: 16px;
   --FindFriends_Searchbar: 16px;
   --FindFriends_User_Icon_Size: 30px;
+  --FindFriends_Username: 18px;
+  --FindFriends_Userid: 16px;
   --FindFriends_Instructions: 18px;
 }
 
@@ -205,11 +207,13 @@
 
 .FindFriends_User_Card--Username {
   font-size: var(--FindFriends_Username);
+  font-weight: 700;
   margin-bottom: 0.3em;
 }
 
 .FindFriends_User_Card--Userid {
   font-size: var(--FindFriends_Userid);
+  color: rgb(254, 254, 254, .7);
 }
 
 .FindFriends--Instructions {
@@ -255,6 +259,8 @@
     --FindFriends--Selected_User--Userid: 14px;
     --FindFriends--Selected_User--Mail: 14px;
     --FindFriends--Selected_User--Send_Request_Button: 12px;
+    --FindFriends_Username: 16px;
+    --FindFriends_Userid: 14px;
     --FindFriends_Instructions: 16px;
   }
 
