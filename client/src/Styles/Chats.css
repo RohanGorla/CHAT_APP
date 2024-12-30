@@ -1,6 +1,9 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
+  --Chat_Icon_Size: 30px;
+  --Chat_Name: 18px;
+  --Chat_Show_Details: 14px;
   --Chat_Username: 16px;
   --Chat_Message: 18px;
 }
@@ -32,6 +35,41 @@
   height: 70px;
   width: 100%;
   padding: 0.5em 1em;
+  display: flex;
+  gap: 1em;
+}
+
+.Chat--Image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chat--Image_Icon_Container {
+  background-color: rgb(20, 33, 61);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.Chat--Image_Icon {
+  font-size: var(--Chat_Icon_Size);
+  color: white;
+}
+
+.Chat--Name {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Name);
+  margin-bottom: .3em;
+}
+
+.Chat--Show_Details {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Show_Details);
+  cursor: pointer;
 }
 
 .Chat--Messages {
