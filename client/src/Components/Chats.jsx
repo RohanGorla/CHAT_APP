@@ -58,7 +58,6 @@ function Chats() {
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
-    console.log(currentRoom);
   }, []);
 
   return (
@@ -75,6 +74,7 @@ function Chats() {
           </div>
           <div className="Chat--Room_Details">
             <div className="Chat--Name">{currentRoom}</div>
+            <div className="Chat--Show_Details">Show details</div>
           </div>
         </section>
         <section className="Chat--Messages" ref={messagesRef}>
