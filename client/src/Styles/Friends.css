@@ -130,6 +130,21 @@
   font-size: var(--Friends_Last_Message);
 }
 
+.Friends_List--Empty {
+  background-color: rgb(0, 0, 0, 0.4);
+  width: 100%;
+  padding: 1em;
+  border-radius: 10px;
+  margin-top: 1em;
+}
+
+.Friends_List--Empty--Message {
+  font-family: var(--Friends_Sub_Font);
+  line-height: 1.5;
+  letter-spacing: 1.3px;
+  word-spacing: 5px;
+}
+
 .Friends_Chat {
   background-color: rgb(20, 33, 61);
   font-family: var(--Friends_Sub_Font);
