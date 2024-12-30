@@ -32,12 +32,12 @@ function Chats() {
     const textAreaContainer = textAreaContainerRef.current;
     /* READJUST THE HEIGHTS OF COMPONENTS */
     textArea.style.height = textAreaContainer.style.height = "50px";
-    messages.style.height = `${chatContainer.offsetHeight - 50}px`;
+    messages.style.height = `${chatContainer.offsetHeight - 120}px`;
     /* SET THE HEIGHTS OF COMPONENTS ACCORDING TO THE TEXT IN TEXTAREA */
     textAreaContainer.style.height =
       textArea.style.height = `${textArea.scrollHeight}px`;
     messages.style.height = `${
-      chatContainer.offsetHeight - textArea.scrollHeight
+      chatContainer.offsetHeight - (textArea.scrollHeight + 70)
     }px`;
     /* SCROLL THE MESSAGES CONTAINER TO BOTTOM IF TEXTAREA HAS MULTIPLE LINE TEXT */
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
@@ -65,6 +65,17 @@ function Chats() {
         <FriendsList />
       </section>
       <div className="Chat_Container" ref={chatContainerRef}>
+        <section className="Chat--Details">
+          <div className="Friend_Card--Image">
+            <div className="Friend_Card--Image_Icon_Container">
+              <IoMdPerson className="Friend_Card--Image_Icon" />
+            </div>
+          </div>
+          <div className="Friend_Card--Details">
+            <p className="Friend_Card--Time">07:00 PM</p>
+            <p className="Friend_Card--Message">This is the final message!</p>
+          </div>
+        </section>
         <section className="Chat--Messages" ref={messagesRef}>
           {roomChats.map((message, index) => {
             return (

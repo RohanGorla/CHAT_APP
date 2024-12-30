@@ -27,8 +27,15 @@
   width: 75%;
 }
 
+.Chat--Details {
+  background-color: rgb(25, 25, 25);
+  height: 70px;
+  width: 100%;
+  padding: 0.5em 1em;
+}
+
 .Chat--Messages {
-  height: calc(100% - 50px);
+  height: calc(100% - 120px);
   width: 100%;
   padding: 0em 0.7em;
   overflow-y: scroll;
