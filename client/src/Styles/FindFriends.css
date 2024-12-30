@@ -8,6 +8,7 @@
   --FindFriends--Selected_User--Send_Request_Button: 16px;
   --FindFriends_Searchbar: 16px;
   --FindFriends_User_Icon_Size: 30px;
+  --FindFriends_Instructions: 18px;
 }
 
 .FindFriends_Page {
@@ -222,4 +223,14 @@
   word-spacing: 5px;
   letter-spacing: 1px;
   color: white;
+}
+
+@media (max-width: 600px) {
+  :root {
+    --FindFriends_Instructions: 16px;
+  }
+
+  .FindFriends_Container {
+    padding: 0em;
+  }
 }
