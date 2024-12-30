@@ -14,6 +14,7 @@ function User() {
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [searchRooms, setSearchRooms] = useState([]);
+  const [currentRoom, setCurrentRoom] = useState("");
   const [chats, setChats] = useState([]);
   const [roomChats, setRoomChats] = useState([]);
   const [usernameColor, setUsernameColor] = useState("");
@@ -129,6 +130,8 @@ function User() {
             setRooms,
             searchRooms,
             setSearchRooms,
+            currentRoom,
+            setCurrentRoom,
             friends,
             setFriends,
             notifications,
