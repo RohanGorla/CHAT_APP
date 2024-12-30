@@ -1,13 +1,14 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
+import { IoMdPerson } from "react-icons/io";
 import FriendsList from "./FriendsList";
 
 function Chats() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const { id } = useParams();
-  const { socket, chats, roomChats, setRoomChats, usernameColor } =
+  const { socket, chats, roomChats, setRoomChats, currentRoom, usernameColor } =
     useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES AND ELEMENT REFS */
@@ -57,6 +58,7 @@ function Chats() {
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) return navigate("/login");
+    console.log(currentRoom);
   }, []);
 
   return (
@@ -66,14 +68,13 @@ function Chats() {
       </section>
       <div className="Chat_Container" ref={chatContainerRef}>
         <section className="Chat--Details">
-          <div className="Friend_Card--Image">
-            <div className="Friend_Card--Image_Icon_Container">
-              <IoMdPerson className="Friend_Card--Image_Icon" />
+          <div className="Chat--Image">
+            <div className="Chat--Image_Icon_Container">
+              <IoMdPerson className="Chat--Image_Icon" />
             </div>
           </div>
-          <div className="Friend_Card--Details">
-            <p className="Friend_Card--Time">07:00 PM</p>
-            <p className="Friend_Card--Message">This is the final message!</p>
+          <div className="Chat--Room_Details">
+            <div className="Chat--Name">{currentRoom}</div>
           </div>
         </section>
         <section className="Chat--Messages" ref={messagesRef}>
