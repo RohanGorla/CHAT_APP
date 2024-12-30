@@ -11,6 +11,7 @@ function FriendsList() {
     rooms,
     searchRooms,
     setSearchRooms,
+    setCurrentRoom,
     chats,
     setRoomChats,
     setUsernameColor,
@@ -76,6 +77,8 @@ function FriendsList() {
                   (chat) => chat.room === room.roomId
                 );
                 setRoomChats(roomChats);
+                console.log(room.name);
+                setCurrentRoom(room.name);
                 /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
                 const randomColor =
                   usernameColors[
