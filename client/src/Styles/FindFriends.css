@@ -1,7 +1,7 @@
 :root {
   --FindFriends_Main_Font: "Inter", sans-serif;
   --FindFriends_Sub_Font: "Varela Round", sans-serif;
-  --FindFriends--Selected_User_Icon: 70px;
+  --FindFriends--Selected_User_Icon: 60px;
   --FindFriends--Selected_User--Username: 22px;
   --FindFriends--Selected_User--Userid: 18px;
   --FindFriends--Selected_User--Mail: 18px;
@@ -36,7 +36,7 @@
   background-color: rgb(20, 20, 20);
   color: white;
   font-family: var(--FindFriends_Main_Font);
-  width: 100%;
+  width: 90%;
   max-width: 500px;
   padding: 2em 3em;
   border-radius: 7px;
@@ -223,6 +223,29 @@
   word-spacing: 5px;
   letter-spacing: 1px;
   color: white;
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --FindFriends--Selected_User_Icon: 50px;
+    --FindFriends--Selected_User--Username: 20px;
+    --FindFriends--Selected_User--Userid: 16px;
+    --FindFriends--Selected_User--Mail: 16px;
+    --FindFriends--Selected_User--Send_Request_Button: 14px;
+  }
+
+  .FindFriends--Selected_User {
+    padding: 1.5em 2.5em;
+  }
+
+  .FindFriends--Selected_User--Back_Button--Icon {
+    font-size: 25px;
+  }
+
+  .FindFriends--Selected_User--Image_Icon_Container {
+    width: 70px;
+    height: 70px;
+  }
 }
 
 @media (max-width: 600px) {
