@@ -65,6 +65,9 @@ function FriendsList() {
               );
               break;
           }
+          /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
+          const roomChats = chats.filter((chat) => chat.room === room.roomId);
+          const lastMessage = roomChats[roomChats.length - 1];
           return (
             /* EACH FRIEND'S DISPLAY CARD */
             <div
@@ -73,12 +76,7 @@ function FriendsList() {
               onClick={() => {
                 /* AVOID RENAVIGATION TO THE SAME PAGE */
                 if (params.id !== room.roomId) {
-                  /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
-                  const roomChats = chats.filter(
-                    (chat) => chat.room === room.roomId
-                  );
                   setRoomChats(roomChats);
-                  console.log(room.name);
                   setCurrentRoom(room.name);
                   /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
                   const randomColor =
@@ -104,7 +102,7 @@ function FriendsList() {
                   <p className="Friend_Card--Time">07:00 PM</p>
                 </div>
                 <p className="Friend_Card--Message">
-                  This is the final message!
+                  {lastMessage.msg}
                 </p>
               </div>
             </div>
@@ -112,7 +110,9 @@ function FriendsList() {
         })
       ) : (
         <div className="Friends_List--Empty">
-          <p className="Friends_List--Empty--Message">Send a request to your friends and start chatting!</p>
+          <p className="Friends_List--Empty--Message">
+            Send a request to your friends and start chatting!
+          </p>
         </div>
       )}
     </section>
