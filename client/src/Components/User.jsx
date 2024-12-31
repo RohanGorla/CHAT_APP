@@ -87,7 +87,7 @@ function User() {
     <div className="User_Page">
       {/* NAVBAR */}
       <nav className="User_Navbar">
-        <p className="User_Appname">Chat app</p>
+        <p className="User_Appname">Frens</p>
         <div className="User_Nav_Options">
           <NavLink
             to="/user/friends"
