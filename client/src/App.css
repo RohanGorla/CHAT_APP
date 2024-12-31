@@ -41,7 +41,22 @@
   height: calc(100dvh - 70px);
 }
 
-@media (max-width: 550px) {
+@media (max-width: 1000px) {
+  :root {
+    --Navbar_Element_Fontsize: 30px;
+  }
+
+  .User_Navbar {
+    height: 60px;
+    padding-inline: 2em;
+  }
+
+  .User_Outlet_Container {
+    height: calc(100dvh - 60px);
+  }
+}
+
+@media (max-width: 600px) {
   :root {
     --Navbar_Element_Fontsize: 25px;
   }
