@@ -67,7 +67,17 @@ function FriendsList() {
           }
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
           const roomChats = chats.filter((chat) => chat.room === room.roomId);
+          /* SET LAST MESSAGE OF THIS CHAT FROM THE ROOM CHATS */
           const lastMessage = roomChats[roomChats.length - 1];
+          /* SET THE DISPLAY TIME OF THIS CHAT'S LAST MESSAGE */
+          const currentDate = new Date().toLocaleDateString();
+          const lastMessageDate = new Date(
+            lastMessage.time
+          ).toLocaleDateString();
+          const lastMessageTime = new Date(lastMessage.time).toLocaleTimeString(
+            "en-IN",
+            { hour: "numeric", minute: "numeric", hour12: true }
+          );
           return (
             /* EACH FRIEND'S DISPLAY CARD */
             <div
@@ -99,11 +109,15 @@ function FriendsList() {
               <div className="Friend_Card--Details">
                 <div className="Friend_Card--Name_And_Time">
                   <p className="Friend_Card--Name">{room.name}</p>
-                  <p className="Friend_Card--Time">07:00 PM</p>
+                  <p className="Friend_Card--Time">
+                    {lastMessageDate === currentDate
+                      ? `${lastMessageTime.split(" ")[0]} ${lastMessageTime
+                          .split(" ")[1]
+                          .toUpperCase()}`
+                      : lastMessageDate}
+                  </p>
                 </div>
-                <p className="Friend_Card--Message">
-                  {lastMessage.msg}
-                </p>
+                <p className="Friend_Card--Message">{lastMessage.msg}</p>
               </div>
             </div>
           );
