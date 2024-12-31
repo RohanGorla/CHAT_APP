@@ -135,10 +135,16 @@
   color: white;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1000px) {
   :root {
     --Notifications--Title: 22px;
-    --Notifications_User_Icon_Size: 30px;
+    --Notifications_Empty: 18px;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --Notifications--Title: 20px;
     --Notifications_Username: 16px;
     --Notifications_Userid: 14px;
     --Notifications_Buttons: 12px;
