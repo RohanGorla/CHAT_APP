@@ -4,11 +4,12 @@
 }
 
 .User_Navbar {
+  background-color: rgb(32, 139, 58);
+  height: 70px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 70px;
-  background-color: rgb(32, 139, 58);
+  padding-inline: 3em;
 }
 
 .User_Appname {
@@ -47,6 +48,7 @@
 
   .User_Navbar {
     height: 50px;
+    padding-inline: 1em;
   }
 
   .User_Outlet_Container {
