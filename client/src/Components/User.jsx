@@ -81,6 +81,11 @@ function User() {
       setChats(chats);
       setNotifications(notifications);
     });
+    /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
+    const usernameColors = ["orange", "green", "violet", "goldenrod"];
+    const randomColor =
+      usernameColors[Math.floor(Math.random() * usernameColors.length)];
+    setUsernameColor(randomColor);
   }, []);
 
   return (

@@ -19,7 +19,6 @@ function FriendsList() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
-  const usernameColors = ["orange", "green", "violet", "goldenrod"];
 
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
@@ -89,6 +88,12 @@ function FriendsList() {
                   setRoomChats(roomChats);
                   setCurrentRoom(room.name);
                   /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
+                  const usernameColors = [
+                    "orange",
+                    "green",
+                    "violet",
+                    "goldenrod",
+                  ];
                   const randomColor =
                     usernameColors[
                       Math.floor(Math.random() * usernameColors.length)
