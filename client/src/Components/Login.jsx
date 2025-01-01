@@ -83,6 +83,17 @@ function Login() {
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
         <button type="submit">Login</button>
+        <p className="Login--Create_Account">
+          New user?{" "}
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/register");
+            }}
+          >
+            Create new account!
+          </span>
+        </p>
       </form>
     </div>
   );
