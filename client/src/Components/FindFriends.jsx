@@ -82,7 +82,7 @@ function FindFriends() {
                 setShowDetailsCard(false);
               }}
             >
-              Send friend request
+              Send fren request
             </button>
           </div>
         </div>
@@ -132,8 +132,8 @@ function FindFriends() {
           ) : (
             <div className="FindFriends--Instructions">
               <p className="FindFriends--Instructions_Message">
-                Find your friends using their user name or user id and send them
-                a friend request!
+                Find your next frens using their user name or user id and send them
+                a fren request!
               </p>
             </div>
           )}

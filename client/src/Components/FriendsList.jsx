@@ -130,7 +130,8 @@ function FriendsList() {
       ) : (
         <div className="Friends_List--Empty">
           <p className="Friends_List--Empty--Message">
-            Send a request to your friends and start chatting!
+            Oops! Looks like your frens list is empty. Send a request to a fren
+            to show them here!
           </p>
         </div>
       )}

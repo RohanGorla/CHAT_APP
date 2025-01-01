@@ -59,7 +59,7 @@ function Notifications() {
         ) : (
           <div className="Notifications_Empty">
             <p className="Notifications_Empty--Message">
-              When you receive any friend requests, they will be shown here!.
+              When you receive any fren requests, they will be shown here!.
             </p>
           </div>
         )}

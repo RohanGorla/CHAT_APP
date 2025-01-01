@@ -25,7 +25,7 @@ function Friends() {
             Hey there, {userData.username}👋
           </p>
           <p className="Friends_Welcome_Card--Greeting">
-            Conversations aren't just for extroverts. Select a friend and prove
+            Conversations aren't just for extroverts. Select a fren and prove
             to the world (or just yourself) that you're a great
             conversationalist.
           </p>
