@@ -34,15 +34,20 @@
   background-color: rgb(25, 25, 25);
   height: 70px;
   width: 100%;
-  padding: 0.5em 1em;
+  padding: 0.5em;
   display: flex;
-  gap: 1em;
+  align-items: center;
+}
+
+.Chat--Back_Button {
+  display: none;
 }
 
 .Chat--Image {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-inline: 0.5em 1em;
 }
 
 .Chat--Image_Icon_Container {
@@ -63,7 +68,7 @@
 .Chat--Name {
   font-family: var(--Chat_Main_Font);
   font-size: var(--Chat_Name);
-  margin-bottom: .3em;
+  margin-bottom: 0.3em;
 }
 
 .Chat--Show_Details {
@@ -188,6 +193,14 @@
     width: 100%;
   }
 
+  .Chat--Back_Button {
+    display: inline-block;
+  }
+
+  .Chat--Back_Button--Icon {
+    font-size: 25px;
+  }
+
   .Chat--Message_Card {
     max-width: 50%;
     padding: 0.4em 1em;
@@ -204,6 +217,8 @@
 
 @media (max-width: 800px) {
   :root {
+    --Chat_Name: 17px;
+    --Chat_Show_Details: 13px;
     --Chat_Username: 14px;
     --Chat_Message: 16px;
   }
