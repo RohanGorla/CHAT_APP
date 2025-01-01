@@ -83,7 +83,7 @@ function Login() {
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
         <button type="submit">Login</button>
-        <p className="Login--Create_Account">
+        <p className="Login--Toggle">
           New user?{" "}
           <span
             onClick={(e) => {

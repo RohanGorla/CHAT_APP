@@ -139,6 +139,17 @@ function Register() {
         </div>
         {/* REGISTRATION FORM SUBMIT BUTTON */}
         <button type="submit">Sign up</button>
+        <p className="Login--Toggle">
+          Already have an account?{" "}
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/login");
+            }}
+          >
+            Login!
+          </span>
+        </p>
       </form>
     </div>
   );

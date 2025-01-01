@@ -73,14 +73,14 @@ input.Login_Input--Error {
   margin: 1em 0em;
 }
 
-.Login--Create_Account {
+.Login--Toggle {
   font-family: var(--Chat_Main_Font);
   font-size: 14px;
   text-align: center;
   margin-top: 1em;
 }
 
-.Login--Create_Account span {
+.Login--Toggle span {
   text-decoration: underline;
   font-weight: 600;
   cursor: pointer;
