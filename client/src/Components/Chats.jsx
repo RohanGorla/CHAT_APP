@@ -81,6 +81,12 @@ function Chats() {
       </section>
       <div className="Chat_Container" ref={chatContainerRef}>
         <section className="Chat--Details">
+          <div className="Chat--Back_Button">
+            <IoMdArrowRoundBack
+              className="Chat--Back_Button--Icon"
+              onClick={() => navigate("/user/friends")}
+            />
+          </div>
           <div className="Chat--Image">
             <div className="Chat--Image_Icon_Container">
               <IoMdPerson className="Chat--Image_Icon" />
