@@ -1,15 +1,23 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
-import { IoMdPerson } from "react-icons/io";
+import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import FriendsList from "./FriendsList";
 
 function Chats() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const { id } = useParams();
-  const { socket, chats, roomChats, setRoomChats, currentRoom, usernameColor } =
-    useOutletContext();
+  const {
+    socket,
+    rooms,
+    chats,
+    roomChats,
+    setRoomChats,
+    currentRoom,
+    setCurrentRoom,
+    usernameColor,
+  } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
@@ -43,6 +51,12 @@ function Chats() {
     /* SCROLL THE MESSAGES CONTAINER TO BOTTOM IF TEXTAREA HAS MULTIPLE LINE TEXT */
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }, [message]);
+
+  /* GET THE ROOM NAME FROM THE ROOM ID */
+  useEffect(() => {
+    const room = rooms.filter((room) => room.roomId === id);
+    setCurrentRoom(room[0]?.name);
+  }, [rooms]);
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
   useEffect(() => {
