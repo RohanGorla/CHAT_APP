@@ -69,10 +69,10 @@ function FriendsList() {
           /* SET LAST MESSAGE OF THIS CHAT FROM THE ROOM CHATS */
           const lastMessage = roomChats[roomChats.length - 1];
           /* SET THE DISPLAY TIME OF THIS CHAT'S LAST MESSAGE */
-          const currentDate = new Date().toLocaleDateString();
-          const lastMessageDate = new Date(
-            lastMessage.time
-          ).toLocaleDateString();
+          const currentDate = new Date().toLocaleDateString("en-IN");
+          const lastMessageDate = new Date(lastMessage.time).toLocaleDateString(
+            "en-IN"
+          );
           const lastMessageTime = new Date(lastMessage.time).toLocaleTimeString(
             "en-IN",
             { hour: "numeric", minute: "numeric", hour12: true }
