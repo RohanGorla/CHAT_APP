@@ -22,6 +22,7 @@ function Chats() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
+  const [unreadMessages, setUnreadMessages] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -67,14 +68,20 @@ function Chats() {
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
   useEffect(() => {
-    const roomChats = chats.filter((message) => message.room === id);
+    let count = 0;
+    const roomChats = chats.filter((message) => {
+      if (!message.read && message.usr_id !== userData?.userId) count += 1;
+      if (message.room === id) return message;
+    });
     setRoomChats(roomChats);
+    if (count > 0) return setUnreadMessages(true);
+    setUnreadMessages(false);
   }, [chats]);
 
   /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
   useEffect(() => {
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    socket.emit("update_message_read", {id, userData})
+    if (unreadMessages) socket.emit("update_message_read", { id, userData });
   }, [roomChats]);
 
   useEffect(() => {
