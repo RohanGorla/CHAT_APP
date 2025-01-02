@@ -140,10 +140,31 @@
   font-size: var(--Chat_Message);
 }
 
+.Chat--Message_Card--Time_And_Status {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  margin-top: .7em;
+}
+
 .Chat--Message_Card--Time {
-  text-align: end;
   font-size: 10px;
-  margin-top: 1em;
+}
+
+.Chat--Message_Card--Read_Status--True {
+  font-size: 12px;
+  color: rgb(16, 226, 69);
+  margin-left: 0.5em;
+}
+
+.Chat--Message_Card--Read_Status--False {
+  font-size: 12px;
+  color: grey;
+  margin-left: 0.5em;
+}
+
+.Chat--Message_Card--Read_Status--Inactive {
+  display: none;
 }
 
 .Chat--Empty {
@@ -152,7 +173,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: .5em;
+  gap: 0.5em;
 }
 
 .Chat--Empty_Message {
@@ -164,7 +185,7 @@
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat--Empty_Button);
   font-weight: 600;
-  padding: .5em 1em;
+  padding: 0.5em 1em;
   border-style: none;
   border-radius: 100px;
   cursor: pointer;
