@@ -206,6 +206,14 @@ io.on("connection", async (socket) => {
     });
     io.to(payload.id).emit("receive_message", payload);
   });
+  /* UPDATE THE MESSAGE READ STATUS */
+  socket.on("update_message_read", async ({ id, userData }) => {
+    await chatMessagesCollection.updateMany(
+      { $and: [{ room: id }, { usr_id: { $ne: userData.userId } }] },
+      { $set: { read: true } }
+    );
+    io.to(id).emit("message_read_updated");
+  });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
     const record = { from: payload.from, to: payload.to, type: "Request" };
