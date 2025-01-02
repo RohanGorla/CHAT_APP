@@ -12,6 +12,7 @@ function Chats() {
   const {
     socket,
     rooms,
+    friends,
     chats,
     roomChats,
     setRoomChats,
@@ -23,6 +24,8 @@ function Chats() {
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
   const [unreadMessages, setUnreadMessages] = useState(false);
+  const [friendsList, setFriendsList] = useState([]);
+  const [showRoomDetails, setShowRoomDetails] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -63,7 +66,29 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
-    setCurrentRoom(room[0]?.name);
+    switch (room[0].type) {
+      /* IF SINGLE CHAT */
+      case "single":
+        const friendId = room[0].users.filter(
+          (user) => user !== userData.userId
+        );
+        room[0].friendsList = friends.filter(
+          (friend) => friend.usr_id === friendId[0]
+        );
+        break;
+      /* IF GROUP CHAT */
+      case "group":
+        const friendsIdList = room[0].users.filter(
+          (user) => user !== userData.userId
+        );
+        room[0].friendsList = friends.filter((friend) =>
+          friendsIdList.includes(friend.usr_id)
+        );
+        break;
+    }
+    console.log(room[0].friendsList);
+    setFriendsList(room[0].friendsList);
+    setCurrentRoom(room[0]);
   }, [rooms]);
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
@@ -95,6 +120,39 @@ function Chats() {
         <FriendsList />
       </section>
       <div className="Chat_Container" ref={chatContainerRef}>
+        <div
+          className={
+            showRoomDetails
+              ? "Chat--Room_Information_Container"
+              : "Chat--Room_Information--Inactive"
+          }
+        >
+          <div className="Chat--Room_Information">
+            <div className="Chat--Room_Information--Image">
+              <IoMdPerson className="Chat--Room_Information--Image--Icon" />
+            </div>
+            <div className="Chat--Room_Information--Friends_List">
+              {friendsList?.map((friend, index) => {
+                return (
+                  <div key={index} className="Chat--Room_Information--Friend">
+                    <p className="Chat--Room_Information--Friend_Username">
+                      {friend.usr_nm}
+                    </p>
+                    <p className="Chat--Room_Information--Friend_Userid">
+                      {friend.usr_id}
+                    </p>
+                    <p className="Chat--Room_Information--Friend_Email">
+                      {friend.email}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+            <div className="Chat--Room_Information--Delete_Chat">
+              <button>Delete chat</button>
+            </div>
+          </div>
+        </div>
         <section className="Chat--Details">
           <div className="Chat--Back_Button">
             <IoMdArrowRoundBack
@@ -108,8 +166,13 @@ function Chats() {
             </div>
           </div>
           <div className="Chat--Room_Details">
-            <div className="Chat--Name">{currentRoom}</div>
-            <div className="Chat--Show_Details">Show details</div>
+            <div className="Chat--Name">{currentRoom?.name}</div>
+            <div
+              className="Chat--Show_Details"
+              onClick={() => setShowRoomDetails(true)}
+            >
+              Show details
+            </div>
           </div>
         </section>
         <section className="Chat--Messages" ref={messagesRef}>
@@ -175,14 +238,14 @@ function Chats() {
           ) : (
             <div className="Chat--Empty">
               <p className="Chat--Empty_Message">
-                Say hello 👋 to your new fren, {currentRoom}!
+                Say hello 👋 to your new fren, {currentRoom?.name}!
               </p>
               <button
                 className="Chat--Empty_Button"
                 onClick={() => {
                   socket.emit("send_message", {
                     userData,
-                    message: `Hello, ${currentRoom}`,
+                    message: `Hello, ${currentRoom?.name}`,
                     id,
                     time: new Date(),
                   });
