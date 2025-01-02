@@ -55,6 +55,10 @@ function User() {
     socket.on("request_rejected", () => {
       socket.emit("get_user_data", { room: userData.userId });
     });
+    socket.on("chat_deleted", ({ id }) => {
+      const updatedChat = chats.filter((message) => message.room !== id);
+      setChats(updatedChat);
+    });
   });
 
   useEffect(() => {
