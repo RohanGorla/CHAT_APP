@@ -1,6 +1,13 @@
 :root {
   --Chat_Main_Font: "Inter", sans-serif;
   --Chat_Sub_Font: "Varela Round", sans-serif;
+  --Chat_Room_Info_Close: 20px;
+  --Chat_Room_Info_Icon: 170px;
+  --Chat_Room_Info_Username: 18px;
+  --Chat_Room_Info_Userid: 16px;
+  --Chat_Room_Info_Email: 16px;
+  --Chat_Room_Info_Email--Heading: 18px;
+  --Chat_Room_Info_Delete_Chat: 14px;
   --Chat_Icon_Size: 30px;
   --Chat_Name: 18px;
   --Chat_Show_Details: 14px;
@@ -25,9 +32,96 @@
 }
 
 .Chat_Container {
+  position: relative;
   background-color: rgb(20, 33, 61);
   height: 100%;
   width: 75%;
+}
+
+.Chat--Room_Information_Container {
+  background-color: rgb(25, 25, 25, 0.8);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 1em;
+}
+
+.Chat--Room_Information {
+  position: relative;
+  background-color: rgb(15, 15, 15);
+  height: 100%;
+  width: 100%;
+  max-width: 600px;
+  padding: 2em;
+  border-radius: 10px;
+  margin-inline: auto;
+}
+
+.Chat--Room_Information--Image {
+  background-color: rgb(20, 33, 61);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-inline: auto;
+}
+
+.Chat--Room_Information--Image--Icon {
+  font-size: var(--Chat_Room_Info_Icon);
+}
+
+.Chat--Room_Information--Friends_List {
+  margin-top: 4em;
+}
+
+.Chat--Room_Information--Friend {
+  font-family: var(--Chat_Sub_Font);
+}
+
+.Chat--Room_Information--Friend_Username {
+  font-size: var(--Chat_Room_Info_Username);
+  margin-bottom: 0.1em;
+}
+
+.Chat--Room_Information--Friend_Userid {
+  font-size: var(--Chat_Room_Info_Userid);
+  margin-bottom: 1.5em;
+}
+
+.Chat--Room_Information--Friend_Email {
+  font-size: var(--Chat_Room_Info_Email);
+  margin-bottom: 2em;
+}
+
+.Chat--Room_Information--Friend_Email--Heading {
+  font-size: var(--Chat_Room_Info_Email--Heading);
+  font-weight: 600;
+  display: block;
+}
+
+.Chat--Room_Information--Delete_Chat button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Delete_Chat);
+  font-weight: 600;
+  background-color: red;
+  padding: 0.5em 1.2em;
+  border-style: none;
+  border: 2px solid rgb(25, 25, 25);
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: red;
+    border: 2px solid red;
+  }
+}
+
+.Chat--Room_Information--Inactive {
+  display: none;
 }
 
 .Chat--Details {
@@ -144,7 +238,7 @@
   display: flex;
   align-items: center;
   justify-content: end;
-  margin-top: .7em;
+  margin-top: 0.7em;
 }
 
 .Chat--Message_Card--Time {
