@@ -129,6 +129,10 @@ function Chats() {
           }
         >
           <div className="Chat--Room_Information">
+            <FaXmark
+              onClick={() => setShowRoomDetails(false)}
+              className="Chat--Room_Information--Close"
+            />
             <div className="Chat--Room_Information--Image">
               <IoMdPerson className="Chat--Room_Information--Image--Icon" />
             </div>

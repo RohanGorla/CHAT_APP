@@ -59,6 +59,17 @@
   margin-inline: auto;
 }
 
+.Chat--Room_Information--Close {
+  position: absolute;
+  font-size: var(--Chat_Room_Info_Close);
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
+}
+
 .Chat--Room_Information--Image {
   background-color: rgb(20, 33, 61);
   display: flex;
