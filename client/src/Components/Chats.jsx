@@ -45,6 +45,11 @@ function Chats() {
     setMessage("");
   }
 
+  /* DELETE ALL THE CHAT MESSAGES */
+  async function deleteChat() {
+    socket.emit("delete_chat", { id });
+  }
+
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -157,7 +162,7 @@ function Chats() {
               })}
             </div>
             <div className="Chat--Room_Information--Delete_Chat">
-              <button>Delete chat</button>
+              <button onClick={deleteChat}>Delete chat</button>
             </div>
           </div>
         </div>
