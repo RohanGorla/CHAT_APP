@@ -74,6 +74,7 @@ function Chats() {
   /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
   useEffect(() => {
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
+    socket.emit("update_message_read", {id, userData})
   }, [roomChats]);
 
   useEffect(() => {
