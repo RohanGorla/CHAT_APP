@@ -7,7 +7,6 @@ function FriendsList() {
   const navigate = useNavigate();
   const params = useParams();
   const {
-    friends,
     rooms,
     searchRooms,
     setSearchRooms,
@@ -43,27 +42,6 @@ function FriendsList() {
       </search>
       {searchRooms.length ? (
         searchRooms.map((room, index) => {
-          let friendsList;
-          switch (room.type) {
-            /* IF SINGLE CHAT */
-            case "single":
-              const friendId = room.users.filter(
-                (user) => user !== userData.userId
-              );
-              friendsList = friends.filter(
-                (friend) => friend.usr_id === friendId[0]
-              );
-              break;
-            /* IF GROUP CHAT */
-            case "group":
-              const friendsIdList = room.users.filter(
-                (user) => user !== userData.userId
-              );
-              friendsList = friends.filter((friend) =>
-                friendsIdList.includes(friend.usr_id)
-              );
-              break;
-          }
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
           const roomChats = chats.filter((chat) => chat.room === room.roomId);
           /* SET LAST MESSAGE OF THIS CHAT FROM THE ROOM CHATS */
@@ -89,7 +67,7 @@ function FriendsList() {
                 /* AVOID RENAVIGATION TO THE SAME PAGE */
                 if (params.id !== room.roomId) {
                   setRoomChats(roomChats);
-                  setCurrentRoom(room.name);
+                  setCurrentRoom(room);
                   /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
                   const usernameColors = [
                     "orange",
@@ -128,7 +106,9 @@ function FriendsList() {
                   </p>
                 </div>
                 <p className="Friend_Card--Message">
-                  {lastMessage ? lastMessage.msg : `Say hello, to your new fren!`}
+                  {lastMessage
+                    ? lastMessage.msg
+                    : `Say hello, to your new fren!`}
                 </p>
               </div>
             </div>
