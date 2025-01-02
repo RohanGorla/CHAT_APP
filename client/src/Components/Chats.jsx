@@ -99,6 +99,18 @@ function Chats() {
         </section>
         <section className="Chat--Messages" ref={messagesRef}>
           {roomChats.map((message, index) => {
+            const currentDate = new Date().toLocaleDateString("en-IN");
+            const messageDate = new Date(message.time).toLocaleDateString(
+              "en-IN"
+            );
+            const messageTime = new Date(message.time).toLocaleTimeString(
+              "en-IN",
+              {
+                hour: "numeric",
+                minute: "numeric",
+                hour12: true,
+              }
+            );
             return (
               <div
                 key={index}
@@ -119,6 +131,15 @@ function Chats() {
                   {message.usr_nm}
                 </p>
                 <p className="Chat--Message_Card--Message">{message.msg}</p>
+                <p className="Chat--Message_Card--Time">
+                  {currentDate === messageDate
+                    ? `${messageTime.split(" ")[0]} ${messageTime
+                        .split(" ")[1]
+                        .toUpperCase()}`
+                    : `${messageDate}, ${
+                        messageTime.split(" ")[0]
+                      } ${messageTime.split(" ")[1].toUpperCase()}`}
+                </p>
               </div>
             );
           })}
