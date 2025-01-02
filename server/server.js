@@ -212,7 +212,7 @@ io.on("connection", async (socket) => {
       { $and: [{ room: id }, { usr_id: { $ne: userData.userId } }] },
       { $set: { read: true } }
     );
-    io.to(id).emit("message_read_updated");
+    io.to(id).emit("message_read_updated", { id, userData });
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {

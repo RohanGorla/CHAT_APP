@@ -31,8 +31,17 @@ function User() {
           msg: payload.message,
           room: payload.id,
           time: payload.time,
+          read: payload.read,
         },
       ]);
+    });
+    socket.on("message_read_updated", ({ id, userData }) => {
+      const updatedChat = chats.filter((message) => {
+        if (message.room === id && message.usr_id !== userData.userId)
+          message.read = true;
+        return message;
+      });
+      setChats(updatedChat);
     });
     socket.on("friend_request", (payload) => {
       setNotifications([...notifications, payload]);
