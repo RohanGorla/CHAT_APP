@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
+import { GoDotFill } from "react-icons/go";
 import FriendsList from "./FriendsList";
 
 function Chats() {
@@ -29,7 +30,13 @@ function Chats() {
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
     e?.preventDefault();
-    socket.emit("send_message", { userData, message, id, time: new Date() });
+    socket.emit("send_message", {
+      userData,
+      message,
+      id,
+      time: new Date(),
+      read: false,
+    });
     setMessage("");
   }
 

@@ -202,6 +202,7 @@ io.on("connection", async (socket) => {
       msg: payload.message,
       room: payload.id,
       time: payload.time,
+      read: payload.read,
     });
     io.to(payload.id).emit("receive_message", payload);
   });
