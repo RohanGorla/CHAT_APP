@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
+import { FaXmark } from "react-icons/fa6";
 import FriendsList from "./FriendsList";
 
 function Chats() {
@@ -142,6 +143,9 @@ function Chats() {
                       {friend.usr_id}
                     </p>
                     <p className="Chat--Room_Information--Friend_Email">
+                      <span className="Chat--Room_Information--Friend_Email--Heading">
+                        Contact email:
+                      </span>
                       {friend.email}
                     </p>
                   </div>
