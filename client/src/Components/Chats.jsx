@@ -28,7 +28,7 @@ function Chats() {
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
-    e.preventDefault();
+    e?.preventDefault();
     socket.emit("send_message", { userData, message, id, time: new Date() });
     setMessage("");
   }
@@ -98,51 +98,72 @@ function Chats() {
           </div>
         </section>
         <section className="Chat--Messages" ref={messagesRef}>
-          {roomChats.map((message, index) => {
-            const currentDate = new Date().toLocaleDateString("en-IN");
-            const messageDate = new Date(message.time).toLocaleDateString(
-              "en-IN"
-            );
-            const messageTime = new Date(message.time).toLocaleTimeString(
-              "en-IN",
-              {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: true,
-              }
-            );
-            return (
-              <div
-                key={index}
-                className={
-                  userData?.userId === message.usr_id
-                    ? "Chat--Message_Card Chat--Message_Card--Own"
-                    : "Chat--Message_Card Chat--Message_Card--Others"
+          {roomChats.length ? (
+            roomChats.map((message, index) => {
+              const currentDate = new Date().toLocaleDateString("en-IN");
+              const messageDate = new Date(message.time).toLocaleDateString(
+                "en-IN"
+              );
+              const messageTime = new Date(message.time).toLocaleTimeString(
+                "en-IN",
+                {
+                  hour: "numeric",
+                  minute: "numeric",
+                  hour12: true,
                 }
-              >
-                <p
+              );
+              return (
+                <div
+                  key={index}
                   className={
                     userData?.userId === message.usr_id
-                      ? "Chat--Message_Card--Username--Inactive"
-                      : "Chat--Message_Card--Username"
+                      ? "Chat--Message_Card Chat--Message_Card--Own"
+                      : "Chat--Message_Card Chat--Message_Card--Others"
                   }
-                  style={{ color: usernameColor }}
                 >
-                  {message.usr_nm}
-                </p>
-                <p className="Chat--Message_Card--Message">{message.msg}</p>
-                <p className="Chat--Message_Card--Time">
-                  {currentDate === messageDate
-                    ? `${messageTime.split(" ")[0]} ${messageTime
-                        .split(" ")[1]
-                        .toUpperCase()}`
-                    : `${messageDate}, ${
-                        messageTime.split(" ")[0]
-                      } ${messageTime.split(" ")[1].toUpperCase()}`}
-                </p>
-              </div>
-            );
-          })}
+                  <p
+                    className={
+                      userData?.userId === message.usr_id
+                        ? "Chat--Message_Card--Username--Inactive"
+                        : "Chat--Message_Card--Username"
+                    }
+                    style={{ color: usernameColor }}
+                  >
+                    {message.usr_nm}
+                  </p>
+                  <p className="Chat--Message_Card--Message">{message.msg}</p>
+                  <p className="Chat--Message_Card--Time">
+                    {currentDate === messageDate
+                      ? `${messageTime.split(" ")[0]} ${messageTime
+                          .split(" ")[1]
+                          .toUpperCase()}`
+                      : `${messageDate}, ${
+                          messageTime.split(" ")[0]
+                        } ${messageTime.split(" ")[1].toUpperCase()}`}
+                  </p>
+                </div>
+              );
+            })
+          ) : (
+            <div className="Chat--Empty">
+              <p className="Chat--Empty_Message">
+                Say hello 👋 to your new fren, {currentRoom}!
+              </p>
+              <button
+                className="Chat--Empty_Button"
+                onClick={() => {
+                  socket.emit("send_message", {
+                    userData,
+                    message: `Hello, ${currentRoom}`,
+                    id,
+                    time: new Date(),
+                  });
+                }}
+              >
+                Hello!
+              </button>
+            </div>
+          )}
         </section>
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">

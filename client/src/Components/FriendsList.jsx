@@ -128,7 +128,7 @@ function FriendsList() {
                   </p>
                 </div>
                 <p className="Friend_Card--Message">
-                  {lastMessage ? lastMessage.msg : `Say hi, to your new fren!`}
+                  {lastMessage ? lastMessage.msg : `Say hello, to your new fren!`}
                 </p>
               </div>
             </div>
