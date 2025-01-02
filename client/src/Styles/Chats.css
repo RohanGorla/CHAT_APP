@@ -146,6 +146,34 @@
   margin-top: 1em;
 }
 
+.Chat--Empty {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5em;
+}
+
+.Chat--Empty_Message {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat--Empty_Message);
+}
+
+.Chat--Empty_Button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat--Empty_Button);
+  font-weight: 600;
+  padding: .5em 1em;
+  border-style: none;
+  border-radius: 100px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(32, 139, 58);
+    color: white;
+  }
+}
+
 .Chat--New_Message {
   background-color: rgb(25, 25, 25);
   height: 50px;
