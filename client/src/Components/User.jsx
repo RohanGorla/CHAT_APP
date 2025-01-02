@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { ImUsers } from "react-icons/im";
 import { RiSearch2Fill } from "react-icons/ri";
@@ -8,6 +8,7 @@ import { GoBellFill } from "react-icons/go";
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
   const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
+  const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [notifications, setNotifications] = useState([]);
@@ -48,6 +49,7 @@ function User() {
   });
 
   useEffect(() => {
+    if (!userData) return navigate("/login");
     /* SEND USER ID TO GET USER DATA ON SOCKET CONNECTION */
     socket.on("socket_connect", () => {
       socket.emit("get_user_data", { room: userData.userId });
@@ -80,6 +82,7 @@ function User() {
       setFriends(friends);
       setChats(chats);
       setNotifications(notifications);
+      navigate("friends");
     });
     /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
     const usernameColors = ["orange", "green", "violet", "goldenrod"];
