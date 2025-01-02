@@ -140,6 +140,12 @@
   font-size: var(--Chat_Message);
 }
 
+.Chat--Message_Card--Time {
+  text-align: end;
+  font-size: 10px;
+  margin-top: 1em;
+}
+
 .Chat--New_Message {
   background-color: rgb(25, 25, 25);
   height: 50px;
