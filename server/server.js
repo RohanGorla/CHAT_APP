@@ -254,6 +254,12 @@ io.on("connection", async (socket) => {
     socket.join(payload.roomId);
     socket.emit("join_room_success");
   });
+  socket.on("delete_chat", async ({ id }) => {
+    const deleteChatResponse = await chatMessagesCollection.deleteMany({
+      room: id,
+    });
+    socket.emit("chat_deleted", { id });
+  });
 });
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));
