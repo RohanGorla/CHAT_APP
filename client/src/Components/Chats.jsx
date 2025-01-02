@@ -147,15 +147,28 @@ function Chats() {
                     {message.usr_nm}
                   </p>
                   <p className="Chat--Message_Card--Message">{message.msg}</p>
-                  <p className="Chat--Message_Card--Time">
-                    {currentDate === messageDate
-                      ? `${messageTime.split(" ")[0]} ${messageTime
-                          .split(" ")[1]
-                          .toUpperCase()}`
-                      : `${messageDate}, ${
-                          messageTime.split(" ")[0]
-                        } ${messageTime.split(" ")[1].toUpperCase()}`}
-                  </p>
+                  <div className="Chat--Message_Card--Time_And_Status">
+                    <p className="Chat--Message_Card--Time">
+                      {currentDate === messageDate
+                        ? `${messageTime.split(" ")[0]} ${messageTime
+                            .split(" ")[1]
+                            .toUpperCase()}`
+                        : `${messageDate}, ${
+                            messageTime.split(" ")[0]
+                          } ${messageTime.split(" ")[1].toUpperCase()}`}
+                    </p>
+                    <div className="Chat--Message_Card--Read_Status--Icon">
+                      <GoDotFill
+                        className={
+                          message.usr_id === userData.userId
+                            ? message.read
+                              ? "Chat--Message_Card--Read_Status--True"
+                              : "Chat--Message_Card--Read_Status--False"
+                            : "Chat--Message_Card--Read_Status--Inactive"
+                        }
+                      />
+                    </div>
+                  </div>
                 </div>
               );
             })
