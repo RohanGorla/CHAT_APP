@@ -15,6 +15,7 @@ import Friends from "./Components/Friends.jsx";
 import Chats from "./Components/Chats.jsx";
 import Notifications from "./Components/Notifications.jsx";
 import FindFriends from "./Components/FindFriends.jsx";
+import Profile from "./Components/Profile.jsx";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -28,6 +29,7 @@ const router = createBrowserRouter(
           <Route path="chats/:id" element={<Chats />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="findfriends" element={<FindFriends />} />
+          <Route path="profile" element={<Profile />} />
         </Route>
       </Route>
     </>
