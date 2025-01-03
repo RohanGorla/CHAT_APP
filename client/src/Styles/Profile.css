@@ -68,6 +68,10 @@
   width: 80%;
 }
 
+.Profile--Show_Credential--Inactive {
+  display: none;
+}
+
 .Profile--Edit_Credential_Button {
   width: 20%;
   display: flex;
@@ -78,6 +82,13 @@
 .Profile--Edit_Credential_Button--Icon {
   font-size: var(--Profile_Edit_Button);
   cursor: pointer;
+  &:hover {
+    color: rgb(16, 226, 69);
+  }
+}
+
+.Profile--Edit_Credentials--Inactive {
+  display: none;
 }
 
 .Profile--Logout {
