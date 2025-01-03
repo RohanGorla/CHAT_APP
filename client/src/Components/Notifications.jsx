@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
-import "../Styles/Notifications.css";
 
 function Notifications() {
   /* SPECIAL VARIABLES */
