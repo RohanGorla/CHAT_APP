@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
+import axios from "axios";
 import { IoMdPerson } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
@@ -15,12 +16,27 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [newUsername, setNewUsername] = useState(userData?.username);
 
+  async function changeUsername() {
+    if (userData.username === newUsername) return;
+    const response = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/editusername`,
+      { username: newUsername, userId: userData.userId }
+    );
+    if (response.data.access) {
+      userData.username = newUsername;
+      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      return setEditUsername(false);
+    }
+  }
+
   return (
     <div className="Profile_Page">
       <div className="Profile">
+        {/* PROFILE PICTURE/ICON */}
         <div className="Profile--Image">
           <IoMdPerson className="Profile--Image--Icon" />
         </div>
+        {/* PROFILE DETAILS */}
         <div className="Profile--Details">
           {/* USERNAME */}
           <div className="Profile--Credential_Container">
@@ -63,7 +79,10 @@ function Profile() {
                 >
                   Cancel
                 </button>
-                <button className="Profile--Edit_Credentials--Buttons--Save">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Save"
+                  onClick={changeUsername}
+                >
                   Save
                 </button>
               </div>
@@ -190,6 +209,7 @@ function Profile() {
             </div>
           </div>
         </div>
+        {/* LOGOUT BUTTON */}
         <div className="Profile--Logout">
           <button
             className="Profile--Logout_Button"
