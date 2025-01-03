@@ -276,6 +276,10 @@ io.on("connection", async (socket) => {
         { "to.usr_id": userId },
         { $set: { "to.usr_nm": username } }
       );
+    const updateChats = await chatMessagesCollection.updateMany(
+      { usr_id: userId },
+      { $set: { usr_nm: username } }
+    );
   });
 });
 
