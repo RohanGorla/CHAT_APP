@@ -62,18 +62,25 @@ function User() {
     });
     socket.on("update_username", ({ userId, username }) => {
       const updatedFriends = friends.map((friend) => {
-        if (friend.usr_id !== userId) return friend;
-        friend.usr_nm = username;
+        if (friend.usr_id === userId) friend.usr_nm = username;
         return friend;
       });
       setFriends(updatedFriends);
       const updatedRooms = rooms.map((room) => {
-        if (!room.users.includes(userId) || !room.type === "single")
-          return room;
-        room.name = username;
+        if (room.users.includes(userId) && room.type === "single")
+          room.name = username;
         return room;
       });
       setRooms(updatedRooms);
+      const updatedNotifications = notifications.map((notification) => {
+        if (notification.to.usr_id === userId) {
+          notification.to.usr_nm = username;
+        } else if (notification.from.userId === userId) {
+          notification.from.username = username;
+        }
+        return notification;
+      });
+      setNotifications(updatedNotifications);
     });
   });
 
