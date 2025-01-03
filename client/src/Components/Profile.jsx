@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { MdModeEditOutline } from "react-icons/md";
 
 function Profile() {
   /* SPECIAL VARIABLES */
   const { socket, notifications } = useOutletContext();
+  const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
 
   return (
@@ -49,7 +50,15 @@ function Profile() {
           </div>
         </div>
         <div className="Profile--Logout">
-          <button className="Profile--Logout_Button">Logout</button>
+          <button
+            className="Profile--Logout_Button"
+            onClick={() => {
+              navigate("/login");
+              localStorage.removeItem("ChatApp_UserInfo");
+            }}
+          >
+            Logout
+          </button>
         </div>
       </div>
     </div>
