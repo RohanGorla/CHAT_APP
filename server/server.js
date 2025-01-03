@@ -148,18 +148,6 @@ app.post("/finduser", async (req, res) => {
   res.send(users);
 });
 
-/* EDIT USERNAME */
-app.post("/editusername", async (req, res) => {
-  const { username, userId } = req.body;
-  const updateUsernameResponse = await userInfoCollection.updateOne(
-    { usr_id: userId },
-    { $set: { usr_nm: username } }
-  );
-  console.log(updateUsernameResponse);
-  if (updateUsernameResponse.acknowledged) return res.send({ access: true });
-  res.send({ access: false });
-});
-
 /* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
   // console.log("Socket connection made...", socket.id);
@@ -271,6 +259,12 @@ io.on("connection", async (socket) => {
       room: id,
     });
     socket.emit("chat_deleted", { id });
+  });
+  socket.on("update_username", async ({ userId, username, rooms }) => {
+    const updateUsernameResponse = await userInfoCollection.updateOne(
+      { usr_id: userId },
+      { $set: { usr_nm: username } }
+    );
   });
 });
 
