@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 
 function Profile() {
   /* SPECIAL VARIABLES */
-  const { socket, rooms, notifications } = useOutletContext();
+  const { socket, friends } = useOutletContext();
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
@@ -21,7 +21,7 @@ function Profile() {
     socket.emit("update_username", {
       username: newUsername,
       userId: userData.userId,
-      rooms,
+      friends,
     });
     userData.username = newUsername;
     localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));

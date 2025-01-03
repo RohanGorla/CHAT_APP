@@ -260,7 +260,7 @@ io.on("connection", async (socket) => {
     });
     socket.emit("chat_deleted", { id });
   });
-  socket.on("update_username", async ({ userId, username, rooms }) => {
+  socket.on("update_username", async ({ userId, username, friends }) => {
     const updateUsernameResponse = await userInfoCollection.updateOne(
       { usr_id: userId },
       { $set: { usr_nm: username } }
@@ -280,6 +280,9 @@ io.on("connection", async (socket) => {
       { usr_id: userId },
       { $set: { usr_nm: username } }
     );
+    friends.forEach((friend) => {
+      socket.to(friend.usr_id).emit("update_username", { userId, username });
+    });
   });
 });
 
