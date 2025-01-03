@@ -4,10 +4,8 @@
   --Profile_User_Icon_Size: 120px;
   --Profile_Credential: 18px;
   --Profile_Edit_Button: 22px;
-  --Profile_Username: 18px;
-  --Profile_Userid: 16px;
-  --Profile_Email: 16px;
-  --Profile_Password: 16px;
+  --Profile_Input: 16px;
+  --Profile_Edit_Credentials_Button: 14px;
   --Profile_Logout_Button: 14px;
 }
 
@@ -70,6 +68,49 @@
 
 .Profile--Show_Credential--Inactive {
   display: none;
+}
+
+.Profile--Edit_Credentials--Input_Section {
+  margin-bottom: 0.5em;
+}
+
+.Profile--Edit_Credentials--Input {
+  font-size: var(--Profile_Input);
+  padding: 0.3em;
+  border-style: none;
+  border-radius: 5px;
+  outline: none;
+}
+
+.Profile--Edit_Credentials--Buttons button {
+  font-family: var(--Profile_Sub_Font);
+  font-size: var(--Profile_Edit_Credentials_Button);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-style: none;
+  border: 2px solid rgb(25, 25, 25);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Profile--Edit_Credentials--Buttons--Cancel {
+  background-color: red;
+  margin-right: 0.7em;
+  &:hover {
+    background-color: rgb(25, 25, 25);
+    color: red;
+    border: 2px solid red;
+  }
+}
+
+.Profile--Edit_Credentials--Buttons--Save {
+  background-color: rgb(16, 226, 69);
+  margin-right: 0.7em;
+  &:hover {
+    background-color: rgb(25, 25, 25);
+    color: rgb(16, 226, 69);
+    border: 2px solid rgb(16, 226, 69);
+  }
 }
 
 .Profile--Edit_Credential_Button {
