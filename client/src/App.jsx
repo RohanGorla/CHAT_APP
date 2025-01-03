@@ -5,6 +5,8 @@ import "./Styles/Friends.css";
 import "./Styles/Chats.css";
 import "./Styles/Login.css";
 import "./Styles/FindFriends.css";
+import "./Styles/Notifications.css";
+import "./Styles/Profile.css";
 
 function App() {
   /* SPECIAL VARIABLES */

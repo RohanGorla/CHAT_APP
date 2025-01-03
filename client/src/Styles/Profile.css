@@ -1,0 +1,104 @@
+:root {
+  --Profile_Main_Font: "Inter", sans-serif;
+  --Profile_Sub_Font: "Varela Round", sans-serif;
+  --Profile_User_Icon_Size: 120px;
+  --Profile_Credential: 18px;
+  --Profile_Edit_Button: 22px;
+  --Profile_Username: 18px;
+  --Profile_Userid: 16px;
+  --Profile_Email: 16px;
+  --Profile_Password: 16px;
+  --Profile_Logout_Button: 14px;
+}
+
+.Profile_Page {
+  background-color: rgb(20, 20, 20);
+  height: 100%;
+  width: 100%;
+  padding: 1em;
+  overflow-y: scroll;
+}
+
+.Profile {
+  background-color: rgb(20, 20, 20);
+  color: white;
+  font-family: var(--Profile_Main_Font);
+  height: 100%;
+  padding-inline: 2em;
+  padding-top: 2em;
+  border-radius: 20px;
+}
+
+.Profile--Image {
+  background-color: rgb(20, 33, 61);
+  width: 150px;
+  height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 50%;
+  margin-inline: auto;
+}
+
+.Profile--Image--Icon {
+  font-size: var(--Profile_User_Icon_Size);
+}
+
+.Profile--Details {
+  margin-top: 4em;
+}
+
+.Profile--Credential_Container {
+  background-color: rgb(25, 25, 25);
+  width: 100%;
+  max-width: 600px;
+  padding: 2em 1em;
+  border-radius: 10px;
+  margin-bottom: 2em;
+  margin-inline: auto;
+}
+
+.Profile--Show_Credential {
+  display: flex;
+}
+
+.Profile--Credential {
+  font-size: var(--Profile_Credential);
+  width: 80%;
+}
+
+.Profile--Edit_Credential_Button {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Profile--Edit_Credential_Button--Icon {
+  font-size: var(--Profile_Edit_Button);
+  cursor: pointer;
+}
+
+.Profile--Logout {
+  width: 100%;
+  max-width: 600px;
+  margin-inline: auto;
+}
+
+.Profile--Logout_Button {
+  background-color: red;
+  font-family: var(--Profile_Sub_Font);
+  font-size: var(--Profile_Logout_Button);
+  font-weight: 600;
+  padding: 0.6em 1.2em;
+  border-style: none;
+  border: 2px solid rgb(20, 20, 20);
+  border-radius: 8px;
+  cursor: pointer;
+  &:hover {
+    background-color: rgb(20, 20, 20);
+    color: red;
+    border: 2px solid red;
+  }
+}
