@@ -6,7 +6,7 @@ import { FaEdit } from "react-icons/fa";
 
 function Profile() {
   /* SPECIAL VARIABLES */
-  const { socket, notifications } = useOutletContext();
+  const { socket, rooms, notifications } = useOutletContext();
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
@@ -18,15 +18,14 @@ function Profile() {
 
   async function changeUsername() {
     if (userData.username === newUsername) return;
-    const response = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/editusername`,
-      { username: newUsername, userId: userData.userId }
-    );
-    if (response.data.access) {
-      userData.username = newUsername;
-      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
-      return setEditUsername(false);
-    }
+    socket.emit("update_username", {
+      username: newUsername,
+      userId: userData.userId,
+      rooms,
+    });
+    userData.username = newUsername;
+    localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+    setEditUsername(false);
   }
 
   return (
