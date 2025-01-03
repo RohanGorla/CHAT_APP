@@ -265,6 +265,17 @@ io.on("connection", async (socket) => {
       { usr_id: userId },
       { $set: { usr_nm: username } }
     );
+    const updateSentNotifications = await notificationsCollection.updateMany(
+      {
+        "from.userId": userId,
+      },
+      { $set: { "from.username": username } }
+    );
+    const updateReceivedNotifications =
+      await notificationsCollection.updateMany(
+        { "to.usr_id": userId },
+        { $set: { "to.usr_nm": username } }
+      );
   });
 });
 
