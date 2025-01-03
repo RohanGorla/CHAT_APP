@@ -81,6 +81,11 @@ function User() {
         return notification;
       });
       setNotifications(updatedNotifications);
+      const updatedChats = chats.map((chat) => {
+        if (chat.usr_id === userId) chat.usr_nm = username;
+        return chat;
+      });
+      setChats(updatedChats);
     });
   });
 
