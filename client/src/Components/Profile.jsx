@@ -13,7 +13,7 @@ function Profile() {
   const [editUserid, setEditUserid] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
-  const [newUsername, setNewUsername] = useState("");
+  const [newUsername, setNewUsername] = useState(userData?.username);
 
   return (
     <div className="Profile_Page">
@@ -24,6 +24,7 @@ function Profile() {
         <div className="Profile--Details">
           {/* USERNAME */}
           <div className="Profile--Credential_Container">
+            {/* SHOW USERNAME */}
             <div
               className={
                 editUsername
@@ -39,6 +40,7 @@ function Profile() {
                 />
               </div>
             </div>
+            {/* EDIT USERNAME */}
             <div
               className={
                 editUsername
@@ -47,7 +49,23 @@ function Profile() {
               }
             >
               <div className="Profile--Edit_Credentials--Input_Section">
-                <input className="Profile--Edit_Credentials--Input"></input>
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  value={newUsername}
+                  onChange={(e) => setNewUsername(e.target.value)}
+                  placeholder="Enter username..."
+                ></input>
+              </div>
+              <div className="Profile--Edit_Credentials--Buttons">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Cancel"
+                  onClick={() => setEditUsername(false)}
+                >
+                  Cancel
+                </button>
+                <button className="Profile--Edit_Credentials--Buttons--Save">
+                  Save
+                </button>
               </div>
             </div>
           </div>
@@ -78,6 +96,17 @@ function Profile() {
               <div className="Profile--Edit_Credentials--Input_Section">
                 <input className="Profile--Edit_Credentials--Input"></input>
               </div>
+              <div className="Profile--Edit_Credentials--Buttons">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Cancel"
+                  onClick={() => setEditUserid(false)}
+                >
+                  Cancel
+                </button>
+                <button className="Profile--Edit_Credentials--Buttons--Save">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
           {/* EMAIL */}
@@ -107,6 +136,17 @@ function Profile() {
               <div className="Profile--Edit_Credentials--Input_Section">
                 <input className="Profile--Edit_Credentials--Input"></input>
               </div>
+              <div className="Profile--Edit_Credentials--Buttons">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Cancel"
+                  onClick={() => setEditEmail(false)}
+                >
+                  Cancel
+                </button>
+                <button className="Profile--Edit_Credentials--Buttons--Save">
+                  Save
+                </button>
+              </div>
             </div>
           </div>
           {/* PASSWORD */}
@@ -135,6 +175,17 @@ function Profile() {
             >
               <div className="Profile--Edit_Credentials--Input_Section">
                 <input className="Profile--Edit_Credentials--Input"></input>
+              </div>
+              <div className="Profile--Edit_Credentials--Buttons">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Cancel"
+                  onClick={() => setEditPassword(false)}
+                >
+                  Cancel
+                </button>
+                <button className="Profile--Edit_Credentials--Buttons--Save">
+                  Save
+                </button>
               </div>
             </div>
           </div>
