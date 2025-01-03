@@ -60,6 +60,21 @@ function User() {
       const updatedChat = chats.filter((message) => message.room !== id);
       setChats(updatedChat);
     });
+    socket.on("update_username", ({ userId, username }) => {
+      const updatedFriends = friends.map((friend) => {
+        if (friend.usr_id !== userId) return friend;
+        friend.usr_nm = username;
+        return friend;
+      });
+      setFriends(updatedFriends);
+      const updatedRooms = rooms.map((room) => {
+        if (!room.users.includes(userId) || !room.type === "single")
+          return room;
+        room.name = username;
+        return room;
+      });
+      setRooms(updatedRooms);
+    });
   });
 
   useEffect(() => {
