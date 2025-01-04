@@ -15,7 +15,9 @@ function Profile() {
   const [editEmail, setEditEmail] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [newUsername, setNewUsername] = useState(userData?.username);
+  const [newUserid, setNewUserid] = useState(userData?.userId);
 
+  /* CHANGE USERNAME SOCKET METHOD */
   async function changeUsername() {
     if (userData.username === newUsername) return;
     socket.emit("update_username", {
@@ -26,6 +28,19 @@ function Profile() {
     userData.username = newUsername;
     localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
     setEditUsername(false);
+  }
+
+  /* CHNAGE USERID SOCKET METHOD */
+  async function changeUserid() {
+    if (newUserid === userData.userId) return;
+    socket.emit("update_userid", {
+      oldUserid: userData.userId,
+      newUserid,
+      friends,
+    });
+    userData.userId = newUserid;
+    localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+    setEditUserid(false);
   }
 
   return (
@@ -89,6 +104,7 @@ function Profile() {
           </div>
           {/* USERID */}
           <div className="Profile--Credential_Container">
+            {/* SHOW USERID */}
             <div
               className={
                 editUserid
@@ -104,6 +120,7 @@ function Profile() {
                 />
               </div>
             </div>
+            {/* EDIT USERID */}
             <div
               className={
                 editUserid
@@ -112,7 +129,14 @@ function Profile() {
               }
             >
               <div className="Profile--Edit_Credentials--Input_Section">
-                <input className="Profile--Edit_Credentials--Input"></input>
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  value={newUserid}
+                  onChange={(e) => {
+                    setNewUserid(e.target.value);
+                  }}
+                  placeholder="Enter user id..."
+                ></input>
               </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
@@ -121,7 +145,10 @@ function Profile() {
                 >
                   Cancel
                 </button>
-                <button className="Profile--Edit_Credentials--Buttons--Save">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Save"
+                  onClick={changeUserid}
+                >
                   Save
                 </button>
               </div>

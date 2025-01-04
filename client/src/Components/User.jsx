@@ -61,17 +61,20 @@ function User() {
       setChats(updatedChat);
     });
     socket.on("update_username", ({ userId, username }) => {
+      /* CHANGE USERNAME IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
         if (friend.usr_id === userId) friend.usr_nm = username;
         return friend;
       });
       setFriends(updatedFriends);
+      /* CHANGE USERNAME IN ROOMS LIST */
       const updatedRooms = rooms.map((room) => {
         if (room.users.includes(userId) && room.type === "single")
           room.name = username;
         return room;
       });
       setRooms(updatedRooms);
+      /* CHANGE USERNAME IN NOTIFICATIONS */
       const updatedNotifications = notifications.map((notification) => {
         if (notification.to.usr_id === userId) {
           notification.to.usr_nm = username;
@@ -81,6 +84,7 @@ function User() {
         return notification;
       });
       setNotifications(updatedNotifications);
+      /* CHANGE USERNAME IN CHATS */
       const updatedChats = chats.map((chat) => {
         if (chat.usr_id === userId) chat.usr_nm = username;
         return chat;
