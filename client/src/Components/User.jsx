@@ -105,6 +105,16 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      /* CHANGE USERID IN NOTIFICATIONS */
+      const updatedNotifications = notifications.map((notification) => {
+        if (notification.to.usr_id === oldUserid) {
+          notification.to.usr_id = newUserid;
+        } else if (notification.from.userId === oldUserid) {
+          notification.from.userId = newUserid;
+        }
+        return notification;
+      });
+      setNotifications(updatedNotifications);
     });
   });
 
