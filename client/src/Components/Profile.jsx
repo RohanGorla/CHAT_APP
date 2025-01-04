@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
-import axios from "axios";
 import { IoMdPerson } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
 
@@ -20,14 +19,12 @@ function Profile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  const [error, setError] = useState(false);
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   /* CHANGE USERNAME SOCKET METHOD */
   async function changeUsername() {
     if (userData.username === newUsername) {
-      setError(true);
       setErrorType("username");
       setErrorMsg("New username cannot be the same as old username!");
       return;
@@ -45,7 +42,6 @@ function Profile() {
   /* CHNAGE USERID SOCKET METHOD */
   async function changeUserid() {
     if (newUserid === userData.userId) {
-      setError(true);
       setErrorType("userid");
       setErrorMsg("New userid cannot be the same as old userid!");
       return;
@@ -61,7 +57,6 @@ function Profile() {
   async function changeEmail(e) {
     e.preventDefault();
     if (userData.mail === newEmail) {
-      setError(true);
       setErrorType("email");
       setErrorMsg("New email cannot be the same as old email!");
       return;
@@ -73,13 +68,11 @@ function Profile() {
   async function changePassword(e) {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
-      setError(true);
       setErrorType("newpassword");
       setErrorMsg("Passwords do not match!");
       return;
     }
     if (oldPassword === newPassword) {
-      setError(true);
       setErrorType("newpassword");
       setErrorMsg("New password cannot be the same as old password!");
       return;
@@ -97,13 +90,11 @@ function Profile() {
       userData.userId = newUserid;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditUserid(false);
-      setError(false);
       setErrorType("");
       setErrorMsg("");
     });
 
     socket.on("update_userid_failed", ({ error }) => {
-      setError(true);
       setErrorType("userid");
       setErrorMsg(error);
     });
@@ -113,13 +104,11 @@ function Profile() {
       userData.mail = newEmail;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditEmail(false);
-      setError(false);
       setErrorType("");
       setErrorMsg("");
     });
 
     socket.on("update_email_failed", ({ error }) => {
-      setError(true);
       setErrorType("email");
       setErrorMsg(error);
     });
@@ -130,13 +119,11 @@ function Profile() {
       setOldPassword("");
       setNewPassword("");
       setConfirmNewPassword("");
-      setError(false);
       setErrorType("");
       setErrorMsg("");
     });
 
     socket.on("update_password_failed", ({ error }) => {
-      setError(true);
       setErrorType("oldpassword");
       setErrorMsg(error);
     });
@@ -166,6 +153,7 @@ function Profile() {
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
                   onClick={() => {
+                    setErrorType("");
                     setEditUsername(true);
                     setEditUserid(false);
                     setEditEmail(false);
@@ -210,6 +198,7 @@ function Profile() {
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
                   onClick={() => {
+                    setErrorType("");
                     setEditUsername(false);
                     setNewUsername(userData.username);
                   }}
@@ -240,6 +229,7 @@ function Profile() {
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
                   onClick={() => {
+                    setErrorType("");
                     setEditUsername(false);
                     setEditUserid(true);
                     setEditEmail(false);
@@ -286,6 +276,7 @@ function Profile() {
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
                   onClick={() => {
+                    setErrorType("");
                     setEditUserid(false);
                     setNewUserid(userData.userId);
                   }}
@@ -316,6 +307,7 @@ function Profile() {
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
                   onClick={() => {
+                    setErrorType("");
                     setEditUsername(false);
                     setEditUserid(false);
                     setEditEmail(true);
@@ -364,6 +356,7 @@ function Profile() {
                   className="Profile--Edit_Credentials--Buttons--Cancel"
                   onClick={(e) => {
                     e.preventDefault();
+                    setErrorType("");
                     setEditEmail(false);
                     setNewEmail(userData.mail);
                   }}
@@ -394,6 +387,7 @@ function Profile() {
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
                   onClick={() => {
+                    setErrorType("");
                     setEditUsername(false);
                     setEditUserid(false);
                     setEditEmail(false);
@@ -471,6 +465,7 @@ function Profile() {
                   className="Profile--Edit_Credentials--Buttons--Cancel"
                   onClick={(e) => {
                     e.preventDefault();
+                    setErrorType("");
                     setEditPassword(false);
                     setOldPassword("");
                     setNewPassword("");
