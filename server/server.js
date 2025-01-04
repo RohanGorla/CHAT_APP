@@ -313,6 +313,12 @@ io.on("connection", async (socket) => {
       },
       { $pull: { users: oldUserid } }
     );
+    const UpdateChatMessages = await chatMessagesCollection.updateMany(
+      {
+        usr_id: oldUserid,
+      },
+      { $set: { usr_id: newUserid } }
+    );
   });
 });
 
