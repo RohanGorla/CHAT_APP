@@ -115,6 +115,12 @@ function User() {
         return notification;
       });
       setNotifications(updatedNotifications);
+      /* CHANGE USERID IN CHATS */
+      const updatedChats = chats.map((chat) => {
+        if (chat.usr_id === oldUserid) chat.usr_id = newUserid;
+        return chat;
+      });
+      setChats(updatedChats);
     });
   });
 
