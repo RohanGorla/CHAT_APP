@@ -122,6 +122,14 @@ function User() {
       });
       setChats(updatedChats);
     });
+    socket.on("update_email", ({ userId, newEmail }) => {
+      /* CHANGE USERID IN FRIENDS LIST */
+      const updatedFriends = friends.map((friend) => {
+        if (friend.usr_id === userId) friend.email = newEmail;
+        return friend;
+      });
+      setFriends(updatedFriends);
+    });
   });
 
   useEffect(() => {
