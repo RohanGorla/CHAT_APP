@@ -58,13 +58,11 @@ function Profile() {
     if (newPassword !== confirmNewPassword) {
       setError(true);
       setErrorMsg("Passwords do not match!");
-      console.log("Passwords do not match!");
       return;
     }
     if (oldPassword === newPassword) {
       setError(true);
       setErrorMsg("New password cannot be the same as old password!");
-      console.log("New password cannot be the same as old password!");
       return;
     }
     socket.emit("update_password", {
@@ -76,6 +74,7 @@ function Profile() {
   }
 
   useEffect(() => {
+    /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
     socket.on("update_userid_success", ({ newUserid }) => {
       userData.userId = newUserid;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
@@ -87,6 +86,7 @@ function Profile() {
       setErrorMsg(error);
     });
 
+    /* HANDLE UPDATE EMAIL SUCCESS AND FAILURE */
     socket.on("update_email_success", ({ newEmail }) => {
       userData.mail = newEmail;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
@@ -94,6 +94,19 @@ function Profile() {
     });
 
     socket.on("update_email_failed", ({ error }) => {
+      setError(true);
+      setErrorMsg(error);
+    });
+
+    /* HANDLE UPDATE PASSWORD SUCCESS AND FAILURE */
+    socket.on("update_password_success", () => {
+      setEditPassword(false);
+      setOldPassword("");
+      setNewPassword("");
+      setConfirmNewPassword("");
+    });
+
+    socket.on("update_password_failed", ({ error }) => {
       setError(true);
       setErrorMsg(error);
     });
