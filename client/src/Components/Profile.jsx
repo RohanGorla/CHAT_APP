@@ -17,6 +17,9 @@ function Profile() {
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
   const [newEmail, setNewEmail] = useState(userData?.mail);
+  const [oldPassword, setOldPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -47,6 +50,29 @@ function Profile() {
   async function changeEmail(e) {
     e.preventDefault();
     socket.emit("update_email", { userId: userData.userId, newEmail, friends });
+  }
+
+  /* CHNAGE PASSWORD SOCKET METHOD */
+  async function changePassword(e) {
+    e.preventDefault();
+    if (newPassword !== confirmNewPassword) {
+      setError(true);
+      setErrorMsg("Passwords do not match!");
+      console.log("Passwords do not match!");
+      return;
+    }
+    if (oldPassword === newPassword) {
+      setError(true);
+      setErrorMsg("New password cannot be the same as old password!");
+      console.log("New password cannot be the same as old password!");
+      return;
+    }
+    socket.emit("update_password", {
+      userId: userData.userId,
+      oldPassword,
+      newPassword,
+      friends,
+    });
   }
 
   useEffect(() => {
@@ -242,6 +268,7 @@ function Profile() {
           </div>
           {/* PASSWORD */}
           <div className="Profile--Credential_Container">
+            {/* SHOW PASSWORD */}
             <div
               className={
                 editPassword
@@ -257,28 +284,63 @@ function Profile() {
                 />
               </div>
             </div>
-            <div
+            {/* EDIT PASSWORD */}
+            <form
               className={
                 editPassword
                   ? "Profile--Edit_Credentials"
                   : "Profile--Edit_Credentials--Inactive"
               }
+              onSubmit={changePassword}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
-                <input className="Profile--Edit_Credentials--Input"></input>
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  type="password"
+                  value={oldPassword}
+                  onChange={(e) => setOldPassword(e.target.value)}
+                  placeholder="Enter old password..."
+                  required
+                ></input>
+              </div>
+              <div className="Profile--Edit_Credentials--Input_Section">
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  type="password"
+                  value={newPassword}
+                  onChange={(e) => setNewPassword(e.target.value)}
+                  placeholder="Enter new password..."
+                  required
+                ></input>
+              </div>
+              <div className="Profile--Edit_Credentials--Input_Section">
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  type="password"
+                  value={confirmNewPassword}
+                  onChange={(e) => setConfirmNewPassword(e.target.value)}
+                  placeholder="Confirm new password..."
+                  required
+                ></input>
               </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
-                  onClick={() => setEditPassword(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setEditPassword(false);
+                  }}
                 >
                   Cancel
                 </button>
-                <button className="Profile--Edit_Credentials--Buttons--Save">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Save"
+                  type="submit"
+                >
                   Save
                 </button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         {/* LOGOUT BUTTON */}
