@@ -60,6 +60,17 @@ function Profile() {
       setError(true);
       setErrorMsg(error);
     });
+
+    socket.on("update_email_success", ({ newEmail }) => {
+      userData.mail = newEmail;
+      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      setEditEmail(false);
+    });
+
+    socket.on("update_email_failed", ({ error }) => {
+      setError(true);
+      setErrorMsg(error);
+    });
   }, []);
 
   return (
