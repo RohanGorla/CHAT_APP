@@ -195,12 +195,23 @@ function Profile() {
                   placeholder="Enter username..."
                 ></input>
               </div>
+              <div
+                className={
+                  errorType === "username"
+                    ? "Profile--Edit_Credential_Error"
+                    : "Profile--Edit_Credential_Error--Inactive"
+                }
+              >
+                <p className="Profile--Edit_Credential_Error--Message">
+                  {errorMsg}
+                </p>
+              </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
                   onClick={() => {
                     setEditUsername(false);
-                    setNewUsername(userData.mail);
+                    setNewUsername(userData.username);
                   }}
                 >
                   Cancel
@@ -259,6 +270,17 @@ function Profile() {
                   }}
                   placeholder="Enter user id..."
                 ></input>
+              </div>
+              <div
+                className={
+                  errorType === "userid"
+                    ? "Profile--Edit_Credential_Error"
+                    : "Profile--Edit_Credential_Error--Inactive"
+                }
+              >
+                <p className="Profile--Edit_Credential_Error--Message">
+                  {errorMsg}
+                </p>
               </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
@@ -326,6 +348,17 @@ function Profile() {
                   placeholder="Enter email..."
                 ></input>
               </div>
+              <div
+                className={
+                  errorType === "email"
+                    ? "Profile--Edit_Credential_Error"
+                    : "Profile--Edit_Credential_Error--Inactive"
+                }
+              >
+                <p className="Profile--Edit_Credential_Error--Message">
+                  {errorMsg}
+                </p>
+              </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
@@ -391,6 +424,17 @@ function Profile() {
                   required
                 ></input>
               </div>
+              <div
+                className={
+                  errorType === "oldpassword"
+                    ? "Profile--Edit_Credential_Error"
+                    : "Profile--Edit_Credential_Error--Inactive"
+                }
+              >
+                <p className="Profile--Edit_Credential_Error--Message">
+                  {errorMsg}
+                </p>
+              </div>
               <div className="Profile--Edit_Credentials--Input_Section">
                 <input
                   className="Profile--Edit_Credentials--Input"
@@ -410,6 +454,17 @@ function Profile() {
                   placeholder="Confirm new password..."
                   required
                 ></input>
+              </div>
+              <div
+                className={
+                  errorType === "newpassword"
+                    ? "Profile--Edit_Credential_Error"
+                    : "Profile--Edit_Credential_Error--Inactive"
+                }
+              >
+                <p className="Profile--Edit_Credential_Error--Message">
+                  {errorMsg}
+                </p>
               </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button

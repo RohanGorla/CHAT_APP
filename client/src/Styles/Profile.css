@@ -82,6 +82,18 @@
   outline: none;
 }
 
+.Profile--Edit_Credential_Error {
+  margin-block: .3em .8em;
+}
+
+.Profile--Edit_Credential_Error--Message {
+  color: rgb(249, 47, 47);
+}
+
+.Profile--Edit_Credential_Error--Inactive {
+  display: none;
+}
+
 .Profile--Edit_Credentials--Buttons button {
   font-family: var(--Profile_Sub_Font);
   font-size: var(--Profile_Edit_Credentials_Button);
