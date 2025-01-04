@@ -176,6 +176,9 @@ function Profile() {
               }
             >
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  Username:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   value={newUsername}
@@ -252,6 +255,9 @@ function Profile() {
               }
             >
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  User id:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   value={newUserid}
@@ -331,6 +337,9 @@ function Profile() {
               onSubmit={changeEmail}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  Email:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   type="email"
@@ -409,6 +418,9 @@ function Profile() {
               onSubmit={changePassword}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  Old password:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   type="password"
@@ -430,6 +442,9 @@ function Profile() {
                 </p>
               </div>
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  New password:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   type="password"
@@ -440,6 +455,9 @@ function Profile() {
                 ></input>
               </div>
               <div className="Profile--Edit_Credentials--Input_Section">
+                <label className="Profile--Edit_Credentials--Label">
+                  Confirm new password:
+                </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
                   type="password"

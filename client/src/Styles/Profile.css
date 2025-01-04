@@ -71,19 +71,25 @@
 }
 
 .Profile--Edit_Credentials--Input_Section {
-  margin-bottom: 0.5em;
+  margin-bottom: 1em;
+}
+
+.Profile--Edit_Credentials--Label {
+  display: block;
+  margin-bottom: .5em;
 }
 
 .Profile--Edit_Credentials--Input {
   font-size: var(--Profile_Input);
+  width: 50%;
   padding: 0.3em;
   border-style: none;
-  border-radius: 5px;
+  border-radius: 3px;
   outline: none;
 }
 
 .Profile--Edit_Credential_Error {
-  margin-block: .3em .8em;
+  margin-block: 0.3em 0.8em;
 }
 
 .Profile--Edit_Credential_Error--Message {
