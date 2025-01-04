@@ -349,6 +349,17 @@ io.on("connection", async (socket) => {
           error: "Email id has already been taken!",
         });
     }
+    const updateSentNotifications = await notificationsCollection.updateMany(
+      {
+        "from.userId": userId,
+      },
+      { $set: { "from.mail": newEmail } }
+    );
+    const updateReceivedNotifications =
+      await notificationsCollection.updateMany(
+        { "to.usr_id": userId },
+        { $set: { "to.email": newEmail } }
+      );
   });
 });
 
