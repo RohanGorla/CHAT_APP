@@ -292,7 +292,7 @@ io.on("connection", async (socket) => {
       );
       friends.forEach((friend) => {
         socket.join(newUserid);
-        socket.emit("update_userid_success", {newUserid});
+        socket.emit("update_userid_success", { newUserid });
         io.to(friend.usr_id).emit("update_userid", { oldUserid, newUserid });
       });
     } catch (e) {
@@ -301,6 +301,18 @@ io.on("connection", async (socket) => {
           error: "User id has already been taken!",
         });
     }
+    const addNewRoomUsers = await roomsCollection.updateMany(
+      {
+        users: oldUserid,
+      },
+      { $push: { users: newUserid } }
+    );
+    const removeOldRoomUsers = await roomsCollection.updateMany(
+      {
+        users: oldUserid,
+      },
+      { $pull: { users: oldUserid } }
+    );
   });
 });
 
