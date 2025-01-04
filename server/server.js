@@ -361,6 +361,23 @@ io.on("connection", async (socket) => {
         { $set: { "to.email": newEmail } }
       );
   });
+  socket.on(
+    "update_password",
+    async ({ userId, oldPassword, newPassword, friends }) => {
+      const user = await userInfoCollection.findOne({ usr_id: userId });
+      const passwordCheck = await bcrypt.compare(oldPassword, user.pass);
+      if (!passwordCheck)
+        return socket.emit("update_password_failed", {
+          error: "Old password is incorrect!",
+        });
+      const hashedPassword = await bcrypt.hash(newPassword, 10);
+      const updateUserInfo = await userInfoCollection.updateOne(
+        { usr_id: userId },
+        { $set: { pass: hashedPassword } }
+      );
+      socket.emit("update_password_success");
+    }
+  );
 });
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));
