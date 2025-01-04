@@ -26,7 +26,12 @@ function Profile() {
 
   /* CHANGE USERNAME SOCKET METHOD */
   async function changeUsername() {
-    if (userData.username === newUsername) return;
+    if (userData.username === newUsername) {
+      setError(true);
+      setErrorType("username");
+      setErrorMsg("New username cannot be the same as old username!");
+      return;
+    }
     socket.emit("update_username", {
       username: newUsername,
       userId: userData.userId,
@@ -39,7 +44,12 @@ function Profile() {
 
   /* CHNAGE USERID SOCKET METHOD */
   async function changeUserid() {
-    if (newUserid === userData.userId) return;
+    if (newUserid === userData.userId) {
+      setError(true);
+      setErrorType("userid");
+      setErrorMsg("New userid cannot be the same as old userid!");
+      return;
+    }
     socket.emit("update_userid", {
       oldUserid: userData.userId,
       newUserid,
@@ -50,6 +60,12 @@ function Profile() {
   /* CHANGE EMAIL SOCKET METHOD */
   async function changeEmail(e) {
     e.preventDefault();
+    if (userData.mail === newEmail) {
+      setError(true);
+      setErrorType("email");
+      setErrorMsg("New email cannot be the same as old email!");
+      return;
+    }
     socket.emit("update_email", { userId: userData.userId, newEmail, friends });
   }
 
@@ -58,11 +74,13 @@ function Profile() {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
       setError(true);
+      setErrorType("newpassword");
       setErrorMsg("Passwords do not match!");
       return;
     }
     if (oldPassword === newPassword) {
       setError(true);
+      setErrorType("newpassword");
       setErrorMsg("New password cannot be the same as old password!");
       return;
     }
@@ -119,7 +137,7 @@ function Profile() {
 
     socket.on("update_password_failed", ({ error }) => {
       setError(true);
-      setErrorType("password");
+      setErrorType("oldpassword");
       setErrorMsg(error);
     });
   }, []);
