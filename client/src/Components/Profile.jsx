@@ -38,10 +38,17 @@ function Profile() {
       newUserid,
       friends,
     });
-    userData.userId = newUserid;
-    localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
-    setEditUserid(false);
   }
+
+  useEffect(() => {
+    socket.on("update_userid_success", ({ newUserid }) => {
+      userData.userId = newUserid;
+      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      setEditUserid(false);
+    });
+
+    socket.on("update_userid_failed", ({ error }) => {});
+  }, []);
 
   return (
     <div className="Profile_Page">
