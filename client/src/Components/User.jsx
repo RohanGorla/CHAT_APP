@@ -91,6 +91,14 @@ function User() {
       });
       setChats(updatedChats);
     });
+    socket.on("update_userid", ({ oldUserid, newUserid }) => {
+      /* CHANGE USERNAME IN FRIENDS LIST */
+      const updatedFriends = friends.map((friend) => {
+        if (friend.usr_id === oldUserid) friend.usr_id = newUserid;
+        return friend;
+      });
+      setFriends(updatedFriends);
+    });
   });
 
   useEffect(() => {

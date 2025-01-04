@@ -16,6 +16,8 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
+  const [error, setError] = useState(false);
+  const [errorMsg, setErrorMsg] = useState("");
 
   /* CHANGE USERNAME SOCKET METHOD */
   async function changeUsername() {
@@ -47,7 +49,10 @@ function Profile() {
       setEditUserid(false);
     });
 
-    socket.on("update_userid_failed", ({ error }) => {});
+    socket.on("update_userid_failed", ({ error }) => {
+      setError(true);
+      setErrorMsg(error);
+    });
   }, []);
 
   return (
