@@ -261,7 +261,7 @@ io.on("connection", async (socket) => {
     socket.emit("chat_deleted", { id });
   });
   socket.on("update_username", async ({ userId, username, friends }) => {
-    const updateUsernameResponse = await userInfoCollection.updateOne(
+    const updateUserInfo = await userInfoCollection.updateOne(
       { usr_id: userId },
       { $set: { usr_nm: username } }
     );
@@ -281,8 +281,25 @@ io.on("connection", async (socket) => {
       { $set: { usr_nm: username } }
     );
     friends.forEach((friend) => {
-      socket.to(friend.usr_id).emit("update_username", { userId, username });
+      io.to(friend.usr_id).emit("update_username", { userId, username });
     });
+  });
+  socket.on("update_userid", async ({ oldUserid, newUserid, friends }) => {
+    try {
+      const updateUserInfo = await userInfoCollection.updateOne(
+        { usr_id: oldUserid },
+        { $set: { usr_id: newUserid } }
+      );
+      friends.forEach((friend) => {
+        io.to(friend.usr_id).emit("update_userid", { oldUserid, newUserid });
+      });
+    } catch (e) {
+      console.log(e);
+      if (e?.keyPattern?.usr_id === 1)
+        socket.emit("update_userid_failed", {
+          error: "User id has already been taken!",
+        });
+    }
   });
 });
 
