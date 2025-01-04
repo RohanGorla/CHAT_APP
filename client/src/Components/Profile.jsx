@@ -69,7 +69,7 @@ function Profile() {
     socket.emit("update_email", { userId: userData.userId, newEmail, friends });
   }
 
-  /* CHNAGE PASSWORD SOCKET METHOD */
+  /* CHANGE PASSWORD SOCKET METHOD */
   async function changePassword(e) {
     e.preventDefault();
     if (newPassword !== confirmNewPassword) {
@@ -165,7 +165,17 @@ function Profile() {
               <div className="Profile--Edit_Credential_Button">
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
-                  onClick={() => setEditUsername(true)}
+                  onClick={() => {
+                    setEditUsername(true);
+                    setEditUserid(false);
+                    setEditEmail(false);
+                    setEditPassword(false);
+                    setNewUserid(userData.userId);
+                    setNewEmail(userData.mail);
+                    setOldPassword("");
+                    setNewPassword("");
+                    setConfirmNewPassword("");
+                  }}
                 />
               </div>
             </div>
@@ -188,7 +198,10 @@ function Profile() {
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
-                  onClick={() => setEditUsername(false)}
+                  onClick={() => {
+                    setEditUsername(false);
+                    setNewUsername(userData.mail);
+                  }}
                 >
                   Cancel
                 </button>
@@ -215,7 +228,17 @@ function Profile() {
               <div className="Profile--Edit_Credential_Button">
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
-                  onClick={() => setEditUserid(true)}
+                  onClick={() => {
+                    setEditUsername(false);
+                    setEditUserid(true);
+                    setEditEmail(false);
+                    setEditPassword(false);
+                    setNewUsername(userData.username);
+                    setNewEmail(userData.mail);
+                    setOldPassword("");
+                    setNewPassword("");
+                    setConfirmNewPassword("");
+                  }}
                 />
               </div>
             </div>
@@ -240,7 +263,10 @@ function Profile() {
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
-                  onClick={() => setEditUserid(false)}
+                  onClick={() => {
+                    setEditUserid(false);
+                    setNewUserid(userData.userId);
+                  }}
                 >
                   Cancel
                 </button>
@@ -267,7 +293,17 @@ function Profile() {
               <div className="Profile--Edit_Credential_Button">
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
-                  onClick={() => setEditEmail(true)}
+                  onClick={() => {
+                    setEditUsername(false);
+                    setEditUserid(false);
+                    setEditEmail(true);
+                    setEditPassword(false);
+                    setNewUsername(userData.username);
+                    setNewUserid(userData.userId);
+                    setOldPassword("");
+                    setNewPassword("");
+                    setConfirmNewPassword("");
+                  }}
                 />
               </div>
             </div>
@@ -296,6 +332,7 @@ function Profile() {
                   onClick={(e) => {
                     e.preventDefault();
                     setEditEmail(false);
+                    setNewEmail(userData.mail);
                   }}
                 >
                   Cancel
@@ -323,7 +360,15 @@ function Profile() {
               <div className="Profile--Edit_Credential_Button">
                 <FaEdit
                   className="Profile--Edit_Credential_Button--Icon"
-                  onClick={() => setEditPassword(true)}
+                  onClick={() => {
+                    setEditUsername(false);
+                    setEditUserid(false);
+                    setEditEmail(false);
+                    setEditPassword(true);
+                    setNewUsername(userData.username);
+                    setNewUserid(userData.userId);
+                    setNewEmail(userData.mail);
+                  }}
                 />
               </div>
             </div>
@@ -372,6 +417,9 @@ function Profile() {
                   onClick={(e) => {
                     e.preventDefault();
                     setEditPassword(false);
+                    setOldPassword("");
+                    setNewPassword("");
+                    setConfirmNewPassword("");
                   }}
                 >
                   Cancel
