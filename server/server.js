@@ -331,6 +331,25 @@ io.on("connection", async (socket) => {
         { $set: { "to.usr_id": newUserid } }
       );
   });
+  socket.on("update_email", async ({ userId, newEmail, friends }) => {
+    try {
+      const updateUserInfo = await userInfoCollection.updateOne(
+        { usr_id: userId },
+        { $set: { email: newEmail } }
+      );
+      console.log("done");
+      friends.forEach((friend) => {
+        socket.emit("update_email_success", { newEmail });
+        io.to(friend.usr_id).emit("update_email", { userId, newEmail });
+      });
+    } catch (e) {
+      console.log(e);
+      if (e?.keyPattern?.email === 1)
+        socket.emit("update_email_failed", {
+          error: "Email id has already been taken!",
+        });
+    }
+  });
 });
 
 server.listen(PORT, () => console.log(`Listening at port ${PORT}`));

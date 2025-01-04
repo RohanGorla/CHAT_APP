@@ -46,7 +46,7 @@ function Profile() {
   /* CHANGE EMAIL SOCKET METHOD */
   async function changeEmail(e) {
     e.preventDefault();
-    socket.emit("update_email", { userId: userData.userId, newEmail });
+    socket.emit("update_email", { userId: userData.userId, newEmail, friends });
   }
 
   useEffect(() => {
