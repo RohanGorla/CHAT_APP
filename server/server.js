@@ -291,10 +291,11 @@ io.on("connection", async (socket) => {
         { $set: { usr_id: newUserid } }
       );
       friends.forEach((friend) => {
+        socket.join(newUserid);
+        socket.emit("update_userid_success", {newUserid});
         io.to(friend.usr_id).emit("update_userid", { oldUserid, newUserid });
       });
     } catch (e) {
-      console.log(e);
       if (e?.keyPattern?.usr_id === 1)
         socket.emit("update_userid_failed", {
           error: "User id has already been taken!",
