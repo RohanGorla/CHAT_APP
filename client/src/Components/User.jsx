@@ -92,12 +92,19 @@ function User() {
       setChats(updatedChats);
     });
     socket.on("update_userid", ({ oldUserid, newUserid }) => {
-      /* CHANGE USERNAME IN FRIENDS LIST */
+      /* CHANGE USERID IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
         if (friend.usr_id === oldUserid) friend.usr_id = newUserid;
         return friend;
       });
       setFriends(updatedFriends);
+      /* CHANGE USERID IN ROOMS LIST */
+      const updatedRooms = rooms.map((room) => {
+        if (room.users.includes(oldUserid))
+          room.users[room.users.indexOf(oldUserid)] = newUserid;
+        return room;
+      });
+      setRooms(updatedRooms);
     });
   });
 
