@@ -16,6 +16,7 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
+  const [newEmail, setNewEmail] = useState(userData?.mail);
   const [error, setError] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -40,6 +41,12 @@ function Profile() {
       newUserid,
       friends,
     });
+  }
+
+  /* CHANGE EMAIL SOCKET METHOD */
+  async function changeEmail(e) {
+    e.preventDefault();
+    socket.emit("update_email", { userId: userData.userId, newEmail });
   }
 
   useEffect(() => {
@@ -168,6 +175,7 @@ function Profile() {
           </div>
           {/* EMAIL */}
           <div className="Profile--Credential_Container">
+            {/* SHOW EMAIL */}
             <div
               className={
                 editEmail
@@ -183,28 +191,43 @@ function Profile() {
                 />
               </div>
             </div>
-            <div
+            {/* EDIT EMAIL */}
+            <form
               className={
                 editEmail
                   ? "Profile--Edit_Credentials"
                   : "Profile--Edit_Credentials--Inactive"
               }
+              onSubmit={changeEmail}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
-                <input className="Profile--Edit_Credentials--Input"></input>
+                <input
+                  className="Profile--Edit_Credentials--Input"
+                  type="email"
+                  value={newEmail}
+                  onChange={(e) => setNewEmail(e.target.value)}
+                  required
+                  placeholder="Enter email..."
+                ></input>
               </div>
               <div className="Profile--Edit_Credentials--Buttons">
                 <button
                   className="Profile--Edit_Credentials--Buttons--Cancel"
-                  onClick={() => setEditEmail(false)}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setEditEmail(false);
+                  }}
                 >
                   Cancel
                 </button>
-                <button className="Profile--Edit_Credentials--Buttons--Save">
+                <button
+                  className="Profile--Edit_Credentials--Buttons--Save"
+                  type="submit"
+                >
                   Save
                 </button>
               </div>
-            </div>
+            </form>
           </div>
           {/* PASSWORD */}
           <div className="Profile--Credential_Container">
