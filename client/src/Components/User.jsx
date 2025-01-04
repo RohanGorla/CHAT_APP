@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
-import { ImUsers } from "react-icons/im";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RiSearch2Fill } from "react-icons/ri";
 import { GoBellFill } from "react-icons/go";

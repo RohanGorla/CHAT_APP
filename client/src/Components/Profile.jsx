@@ -21,6 +21,7 @@ function Profile() {
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
   const [error, setError] = useState(false);
+  const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
   /* CHANGE USERNAME SOCKET METHOD */
@@ -69,7 +70,6 @@ function Profile() {
       userId: userData.userId,
       oldPassword,
       newPassword,
-      friends,
     });
   }
 
@@ -79,10 +79,14 @@ function Profile() {
       userData.userId = newUserid;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditUserid(false);
+      setError(false);
+      setErrorType("");
+      setErrorMsg("");
     });
 
     socket.on("update_userid_failed", ({ error }) => {
       setError(true);
+      setErrorType("userid");
       setErrorMsg(error);
     });
 
@@ -91,10 +95,14 @@ function Profile() {
       userData.mail = newEmail;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditEmail(false);
+      setError(false);
+      setErrorType("");
+      setErrorMsg("");
     });
 
     socket.on("update_email_failed", ({ error }) => {
       setError(true);
+      setErrorType("email");
       setErrorMsg(error);
     });
 
@@ -104,10 +112,14 @@ function Profile() {
       setOldPassword("");
       setNewPassword("");
       setConfirmNewPassword("");
+      setError(false);
+      setErrorType("");
+      setErrorMsg("");
     });
 
     socket.on("update_password_failed", ({ error }) => {
       setError(true);
+      setErrorType("password");
       setErrorMsg(error);
     });
   }, []);
