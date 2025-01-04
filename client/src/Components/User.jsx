@@ -123,12 +123,23 @@ function User() {
       setChats(updatedChats);
     });
     socket.on("update_email", ({ userId, newEmail }) => {
-      /* CHANGE USERID IN FRIENDS LIST */
+      /* CHANGE EMAIL IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
         if (friend.usr_id === userId) friend.email = newEmail;
         return friend;
       });
       setFriends(updatedFriends);
+      /* CHANGE EMAIL IN NOTIFICATIONS */
+      const updatedNotifications = notifications.map((notification) => {
+        if (notification.to.usr_id === userId) {
+          notification.to.email = newEmail;
+        } else if (notification.from.userId === userId) {
+          notification.from.mail = newEmail;
+        }
+        return notification;
+      });
+      console.log(updatedNotifications);
+      setNotifications(updatedNotifications);
     });
   });
 
