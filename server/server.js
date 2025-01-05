@@ -255,6 +255,9 @@ io.on("connection", async (socket) => {
       { usr_id: { $in: [to.usr_id, from.userId] } },
       { $pull: { rooms: { $in: [room.roomId] } } }
     );
+    const deleteRoom = await roomsCollection.deleteOne({
+      roomId: room.roomId,
+    });
   });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
