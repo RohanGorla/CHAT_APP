@@ -151,6 +151,10 @@ function User() {
           return friend;
       });
       setFriends(updatedFriends);
+      const updatedChats = chats.filter(
+        (chat) => chat.room !== roomToRemove.roomId
+      );
+      setChats(updatedChats);
     });
   });
 
