@@ -258,6 +258,11 @@ io.on("connection", async (socket) => {
     const deleteRoom = await roomsCollection.deleteOne({
       roomId: room.roomId,
     });
+    const deleteChat = await chatMessagesCollection.deleteMany({
+      room: room.roomId,
+    });
+    io.to(to.usr_id).emit("remove_friend", { from, to, roomToRemove: room });
+    io.to(from.userId).emit("remove_friend", { from, to, roomToRemove: room });
   });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
