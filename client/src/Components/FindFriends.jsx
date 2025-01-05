@@ -6,7 +6,7 @@ import axios from "axios";
 function FindFriends() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const { socket, friends } = useOutletContext();
+  const { socket, friends, rooms } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
@@ -23,6 +23,17 @@ function FindFriends() {
   /* SEND FRIEND REQUEST TO SELECTED USER */
   async function sendRequest(user) {
     socket.emit("send_request", { from: userData, to: user });
+    setShowDetailsCard(false);
+  }
+
+  /* REMOVE SELECTED USER FROM FRIENDS LIST */
+  async function removeFriend(user) {
+    const room = rooms.filter((room) => {
+      const users = [userData.userId, user.usr_id];
+      const usersCheck = users.every((user) => room.users.includes(user));
+      if (usersCheck && room.type === "single") return room;
+    });
+    socket.emit("remove_friend", { from: userData, to: user, room: room[0] });
     setShowDetailsCard(false);
   }
 
@@ -112,7 +123,10 @@ function FindFriends() {
               messages will be deleted permanently and you will no longer be
               frens!
             </i>
-            <button className="FindFriends--Selected_User--Confirm_Remove--Button">
+            <button
+              className="FindFriends--Selected_User--Confirm_Remove--Button"
+              onClick={() => removeFriend(selectedUser)}
+            >
               Confirm remove fren
             </button>
           </div>
