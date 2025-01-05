@@ -189,7 +189,10 @@ io.on("connection", async (socket) => {
     /* GET USER NOTIFICATIONS */
     const notifications = await notificationsCollection
       .find({
-        "to.usr_id": personalRoomId,
+        $or: [
+          { "to.usr_id": personalRoomId },
+          { "from.userId": personalRoomId },
+        ],
       })
       .toArray();
     socket.emit("user_data", { rooms, friends, chats, notifications });
