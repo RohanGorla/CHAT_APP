@@ -72,7 +72,7 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
-    switch (room[0].type) {
+    switch (room[0]?.type) {
       /* IF SINGLE CHAT */
       case "single":
         const friendId = room[0].users.filter(
@@ -92,8 +92,7 @@ function Chats() {
         );
         break;
     }
-    console.log(room[0].friendsList);
-    setFriendsList(room[0].friendsList);
+    setFriendsList(room[0]?.friendsList);
     setCurrentRoom(room[0]);
   }, [rooms]);
 
