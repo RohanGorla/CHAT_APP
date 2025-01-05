@@ -6,7 +6,7 @@ import axios from "axios";
 function FindFriends() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const { socket, friends, rooms } = useOutletContext();
+  const { socket, friends, rooms, notifications } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
@@ -19,6 +19,13 @@ function FindFriends() {
     const ids = friends.map((friend) => friend.usr_id);
     return ids;
   }, []);
+
+  const sentRequests = useMemo(() => {
+    const requestsList = notifications
+      .filter((notification) => notification.from.userId === userData.userId)
+      .map((notification) => notification.to.usr_id);
+    return requestsList;
+  }, [notifications]);
 
   /* SEND FRIEND REQUEST TO SELECTED USER */
   async function sendRequest(user) {
@@ -99,16 +106,20 @@ function FindFriends() {
               onClick={() => {
                 if (selectedUser.usr_id === userData.userId)
                   return setShowDetailsCard(false);
+                if (sentRequests.includes(selectedUser.usr_id))
+                  return setShowDetailsCard(false);
                 if (friendsIds.includes(selectedUser.usr_id))
                   return setShowConfirmRemove(true);
                 sendRequest(selectedUser);
               }}
             >
-              {selectedUser.usr_id !== userData.userId
-                ? friendsIds.includes(selectedUser.usr_id)
-                  ? `Remove fren`
-                  : `Send fren request`
-                : `You`}
+              {selectedUser.usr_id === userData.userId
+                ? `You`
+                : sentRequests.includes(selectedUser.usr_id)
+                ? `Fren request has been sent`
+                : friendsIds.includes(selectedUser.usr_id)
+                ? `Remove fren`
+                : `Send fren request`}
             </button>
           </div>
           <div
