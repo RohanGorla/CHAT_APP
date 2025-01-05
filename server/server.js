@@ -249,17 +249,26 @@ io.on("connection", async (socket) => {
       _id: id,
     });
   });
+  /* REMOVE FRIENDS */
+  socket.on("remove_friend", async ({ from, to, room }) => {
+    const removeFriend = await userInfoCollection.updateMany(
+      { usr_id: { $in: [to.usr_id, from.userId] } },
+      { $pull: { rooms: { $in: [room.roomId] } } }
+    );
+  });
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
     socket.join(payload.roomId);
     socket.emit("join_room_success");
   });
+  /* DELETE CHAT */
   socket.on("delete_chat", async ({ id }) => {
     const deleteChatResponse = await chatMessagesCollection.deleteMany({
       room: id,
     });
     socket.emit("chat_deleted", { id });
   });
+  /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
       { usr_id: userId },
@@ -284,6 +293,7 @@ io.on("connection", async (socket) => {
       io.to(friend.usr_id).emit("update_username", { userId, username });
     });
   });
+  /* UPDATE USER ID */
   socket.on("update_userid", async ({ oldUserid, newUserid, friends }) => {
     try {
       const updateUserInfo = await userInfoCollection.updateOne(
@@ -331,6 +341,7 @@ io.on("connection", async (socket) => {
         { $set: { "to.usr_id": newUserid } }
       );
   });
+  /* UPDATE EMAIL */
   socket.on("update_email", async ({ userId, newEmail, friends }) => {
     try {
       const updateUserInfo = await userInfoCollection.updateOne(
@@ -361,6 +372,7 @@ io.on("connection", async (socket) => {
         { $set: { "to.email": newEmail } }
       );
   });
+  /* UPDATE PASSWORD */
   socket.on("update_password", async ({ userId, oldPassword, newPassword }) => {
     const user = await userInfoCollection.findOne({ usr_id: userId });
     const passwordCheck = await bcrypt.compare(oldPassword, user.pass);
