@@ -6,6 +6,7 @@
   --FindFriends--Selected_User--Userid: 18px;
   --FindFriends--Selected_User--Mail: 18px;
   --FindFriends--Selected_User--Send_Request_Button: 16px;
+  --FindFriends--Selected_User_Remove_Message: 16px;
   --FindFriends_Searchbar: 16px;
   --FindFriends_User_Icon_Size: 30px;
   --FindFriends_Username: 18px;
@@ -97,13 +98,48 @@
   font-weight: 600;
   padding: 0.5em 1em;
   border-style: none;
+  border: 2px solid rgb(20, 20, 20);
   border-radius: 7px;
-  margin-top: 1.5em;
+  margin-top: 1em;
   cursor: pointer;
   &:hover {
     background-color: black;
     color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
+}
+
+.FindFriends--Selected_User--Confirm_Remove {
+  margin-top: 2em;
+}
+
+.FindFriends--Selected_User--Confirm_Remove--Message {
+  font-size: var(--FindFriends--Selected_User_Remove_Message);
+  line-height: 1.5;
+  word-spacing: 3px;
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 0.5em;
+}
+
+.FindFriends--Selected_User--Confirm_Remove--Button {
+  background-color: red;
+  font-size: var(--FindFriends--Selected_User--Send_Request_Button);
+  font-weight: 600;
+  padding: 0.5em 1em;
+  border-style: none;
+  border: 2px solid rgb(20, 20, 20);
+  border-radius: 7px;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: red;
+    border: 2px solid red;
+  }
+}
+
+.FindFriends--Selected_User--Confirm_Remove--Inactive {
+  display: none;
 }
 
 .FindFriends--Selected_User_Container--Hidden {
@@ -213,7 +249,7 @@
 
 .FindFriends_User_Card--Userid {
   font-size: var(--FindFriends_Userid);
-  color: rgb(254, 254, 254, .7);
+  color: rgb(254, 254, 254, 0.7);
 }
 
 .FindFriends--Instructions {
