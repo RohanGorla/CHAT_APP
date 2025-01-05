@@ -140,6 +140,12 @@ function User() {
       console.log(updatedNotifications);
       setNotifications(updatedNotifications);
     });
+    socket.on("remove_friend", ({ from, to, roomToRemove }) => {
+      const updatedRooms = rooms.filter(
+        (room) => room.roomId !== roomToRemove.roomId
+      );
+      setRooms(updatedRooms);
+    });
   });
 
   useEffect(() => {
