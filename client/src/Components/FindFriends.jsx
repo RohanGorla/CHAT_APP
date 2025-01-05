@@ -6,7 +6,7 @@ import axios from "axios";
 function FindFriends() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const { socket } = useOutletContext();
+  const { socket, friends } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
@@ -14,8 +14,15 @@ function FindFriends() {
   const [showDetailsCard, setShowDetailsCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
 
-  async function findUser(user) {
+  const friendsIds = useMemo(() => {
+    const ids = friends.map((friend) => friend.usr_id);
+    return ids;
+  }, []);
+
+  /* FIND USER */
+  async function sendRequest(user) {
     socket.emit("send_request", { from: userData, to: user });
+    setShowDetailsCard(false);
   }
 
   /* DEBOUNCE FUNCTION FOR SEARCHING USER */
@@ -78,11 +85,16 @@ function FindFriends() {
             <button
               className="FindFriends--Selected_User--Send_Request_Button"
               onClick={() => {
-                findUser(selectedUser);
-                setShowDetailsCard(false);
+                if (selectedUser.usr_id === userData.userId)
+                  return setShowDetailsCard(false);
+                sendRequest(selectedUser);
               }}
             >
-              Send fren request
+              {selectedUser.usr_id !== userData.userId
+                ? friendsIds.includes(selectedUser.usr_id)
+                  ? `Remove fren`
+                  : `Send fren request`
+                : `You`}
             </button>
           </div>
         </div>
@@ -132,8 +144,8 @@ function FindFriends() {
           ) : (
             <div className="FindFriends--Instructions">
               <p className="FindFriends--Instructions_Message">
-                Find your next frens using their user name or user id and send them
-                a fren request!
+                Find your next frens using their user name or user id and send
+                them a fren request!
               </p>
             </div>
           )}
