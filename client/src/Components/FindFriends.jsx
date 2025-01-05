@@ -13,13 +13,14 @@ function FindFriends() {
   const [searchResults, setSearchResults] = useState([]);
   const [showDetailsCard, setShowDetailsCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
+  const [showConfirmRemove, setShowConfirmRemove] = useState(false);
 
   const friendsIds = useMemo(() => {
     const ids = friends.map((friend) => friend.usr_id);
     return ids;
   }, []);
 
-  /* FIND USER */
+  /* SEND FRIEND REQUEST TO SELECTED USER */
   async function sendRequest(user) {
     socket.emit("send_request", { from: userData, to: user });
     setShowDetailsCard(false);
@@ -87,6 +88,8 @@ function FindFriends() {
               onClick={() => {
                 if (selectedUser.usr_id === userData.userId)
                   return setShowDetailsCard(false);
+                if (friendsIds.includes(selectedUser.usr_id))
+                  return setShowConfirmRemove(true);
                 sendRequest(selectedUser);
               }}
             >
@@ -95,6 +98,22 @@ function FindFriends() {
                   ? `Remove fren`
                   : `Send fren request`
                 : `You`}
+            </button>
+          </div>
+          <div
+            className={
+              showConfirmRemove
+                ? "FindFriends--Selected_User--Confirm_Remove"
+                : "FindFriends--Selected_User--Confirm_Remove--Inactive"
+            }
+          >
+            <i className="FindFriends--Selected_User--Confirm_Remove--Message">
+              By removing {selectedUser.usr_nm} as your fren, all your chat
+              messages will be deleted permanently and you will no longer be
+              frens!
+            </i>
+            <button className="FindFriends--Selected_User--Confirm_Remove--Button">
+              Confirm remove fren
             </button>
           </div>
         </div>
