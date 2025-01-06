@@ -1,12 +1,15 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
+import { SiTicktick } from "react-icons/si";
 
 function Notifications() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const { socket, notifications } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  /* STATE VARIABLES */
+  const [reversedNotifications, setReversedNotifications] = useState([]);
 
   /* ACCEPT FRIEND REQUEST SOCKET METHOD */
   async function acceptRequest(request) {
@@ -17,12 +20,17 @@ function Notifications() {
     socket.emit("reject_request", request);
   }
 
+  useEffect(() => {
+    const reverseNotificationList = notifications.toReversed();
+    setReversedNotifications(reverseNotificationList);
+  }, [notifications]);
+
   return (
     <div className="Notifications_Page">
       <p className="Notifications--Title">NOTIFICATIONS</p>
       <div className="Notifications_Container">
-        {notifications.length ? (
-          notifications.map((notification, index) => {
+        {reversedNotifications.length ? (
+          reversedNotifications.map((notification, index) => {
             return (
               <div key={index} className="Notifications_Card">
                 <div className="Notifications_Card--Image_Container">
@@ -30,7 +38,13 @@ function Notifications() {
                     <IoMdPerson className="Notifications_Card--Image_Icon" />
                   </div>
                 </div>
-                <div className="Notifications_Card--User_Details">
+                <div
+                  className={
+                    notification.from.userId === userData.userId
+                      ? "Notifications_Card--User_Details--Inactive"
+                      : "Notifications_Card--User_Details"
+                  }
+                >
                   <p className="Notifications_Card--Username">
                     {notification.from.username}
                   </p>
@@ -51,6 +65,18 @@ function Notifications() {
                       Reject
                     </button>
                   </div>
+                </div>
+                <div
+                  className={
+                    notification.from.userId === userData.userId
+                      ? "Notifications_Card--Sent"
+                      : "Notifications_Card--Sent--Inactive"
+                  }
+                >
+                  <p className="Notifications_Card--Sent--Message">
+                    Fren request sent to {notification.to.usr_nm}.
+                  </p>
+                  <SiTicktick className="Notifications_Card--Sent--Icon" />
                 </div>
               </div>
             );
