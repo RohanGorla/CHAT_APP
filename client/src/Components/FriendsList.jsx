@@ -117,8 +117,10 @@ function FriendsList() {
       ) : (
         <div className="Friends_List--Empty">
           <p className="Friends_List--Empty--Message">
-            Oops! Looks like your frens list is empty. Send a request to a fren
-            to show them here!
+            {friendListSearch.length
+              ? `No match found!`
+              : `Oops! Looks like your frens list is empty. Send a request to a fren
+            to show them here!`}
           </p>
         </div>
       )}
