@@ -11,6 +11,7 @@ function FindFriends() {
   /* STATE VARIABLES */
   const [user, setUser] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [searchResultsLoading, setSearchResultsLoading] = useState(false);
   const [showDetailsCard, setShowDetailsCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [showConfirmRemove, setShowConfirmRemove] = useState(false);
@@ -57,6 +58,7 @@ function FindFriends() {
         );
         console.log(response.data);
         setSearchResults(response.data);
+        setSearchResultsLoading(false);
       }, 700);
     };
   }
@@ -151,6 +153,7 @@ function FindFriends() {
             value={user}
             onChange={(e) => {
               setUser(e.target.value);
+              setSearchResultsLoading(true);
               handleSearch(e.target.value);
             }}
             autoFocus
@@ -188,8 +191,12 @@ function FindFriends() {
           ) : (
             <div className="FindFriends--Instructions">
               <p className="FindFriends--Instructions_Message">
-                Find your next frens using their user name or user id and send
-                them a fren request!
+                {user.length
+                  ? searchResultsLoading
+                    ? `Searching...`
+                    : `No match found! Try searching with a different username or user id.`
+                  : `Find your next frens using their user name or user id and send
+                them a fren request!`}
               </p>
             </div>
           )}
