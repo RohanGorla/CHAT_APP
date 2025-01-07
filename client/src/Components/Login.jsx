@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
 
 function Login() {
@@ -8,6 +9,7 @@ function Login() {
   /* STATE VARIABLES */
   const [mail, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
   const [mailError, setMailError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -69,17 +71,34 @@ function Login() {
         </div>
         <div className="Login_Form--Field">
           <label htmlFor="Login_Password">Password:</label>
-          <input
-            id="Login_Password"
-            className={passwordError ? "Login_Input--Error" : null}
-            type="password"
-            value={password}
-            required
-            placeholder="Enter your password"
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-          ></input>
+          <div className="Login_Password--Input_Container">
+            <input
+              id="Login_Password"
+              className={passwordError ? "Login_Input--Error" : null}
+              type={showPassword ? "text" : "password"}
+              value={password}
+              required
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            ></input>
+            <AiFillEye
+              className={
+                showPassword
+                  ? "Login_Password--Show"
+                  : "Login_Password--Show--Inactive"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+            />
+            <AiFillEyeInvisible
+              className={
+                showPassword
+                  ? "Login_Password--Show--Inactive"
+                  : "Login_Password--Show"
+              }
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
         <button type="submit">Login</button>
