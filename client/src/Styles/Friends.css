@@ -61,8 +61,8 @@
   color: white;
   display: block;
   width: 100%;
-  padding: .6em;
-  padding-top: .8em;
+  padding: 0.6em;
+  padding-top: 0.8em;
   border-style: none;
   border-radius: 5px;
   outline: none;
@@ -126,11 +126,27 @@
   font-size: var(--Friends_Last_Message_Time);
 }
 
+.Friend_Card--Time--Unread {
+  color: rgb(51, 214, 91);
+}
+
+.Friend_Card--Message_Container {
+  width: 100%;
+  display: flex;
+}
+
 .Friend_Card--Message {
   font-size: var(--Friends_Last_Message);
+  width: 92%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.Friend_Card--Unread_Message_Count {
+  color: rgb(51, 214, 91);
+  text-align: end;
+  width: 8%;
 }
 
 .Friends_List--Empty {
