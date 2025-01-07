@@ -82,6 +82,9 @@ function FriendsList() {
         searchRooms.map((room, index) => {
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
           const roomChats = chats.filter((chat) => chat.room === room.roomId);
+          const unreadMessages = roomChats.filter(
+            (chat) => chat.read === false && chat.usr_id !== userData.userId
+          );
           const currentDate = new Date().toLocaleDateString("en-IN");
           return (
             /* EACH FRIEND'S DISPLAY CARD */
@@ -120,7 +123,13 @@ function FriendsList() {
               <div className="Friend_Card--Details">
                 <div className="Friend_Card--Name_And_Time">
                   <p className="Friend_Card--Name">{room.name}</p>
-                  <p className="Friend_Card--Time">
+                  <p
+                    className={
+                      unreadMessages.length
+                        ? "Friend_Card--Time Friend_Card--Time--Unread"
+                        : "Friend_Card--Time"
+                    }
+                  >
                     {room.lastMessage
                       ? room.lastMessageDate === currentDate
                         ? `${
@@ -130,11 +139,20 @@ function FriendsList() {
                       : null}
                   </p>
                 </div>
-                <p className="Friend_Card--Message">
-                  {room?.lastMessage
-                    ? room.lastMessage.msg
-                    : `Say hello, to your new fren!`}
-                </p>
+                <div className="Friend_Card--Message_Container">
+                  <p className="Friend_Card--Message">
+                    {room?.lastMessage
+                      ? room.lastMessage.msg
+                      : `Say hello, to your new fren!`}
+                  </p>
+                  <span className="Friend_Card--Unread_Message_Count">
+                    {unreadMessages.length
+                      ? unreadMessages.length < 100
+                        ? unreadMessages.length
+                        : `99+`
+                      : null}
+                  </span>
+                </div>
               </div>
             </div>
           );
