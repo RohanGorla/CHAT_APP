@@ -94,7 +94,7 @@ function Chats() {
     }
     setFriendsList(room[0]?.friendsList);
     setCurrentRoom(room[0]);
-  }, [rooms]);
+  }, [id, rooms]);
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
   useEffect(() => {
