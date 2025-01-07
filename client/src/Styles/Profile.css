@@ -79,6 +79,12 @@
   margin-bottom: .5em;
 }
 
+.Profile--Edit_Credentials--Input_Container {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 .Profile--Edit_Credentials--Input {
   font-size: var(--Profile_Input);
   width: 50%;
@@ -86,6 +92,16 @@
   border-style: none;
   border-radius: 3px;
   outline: none;
+}
+
+.Profile--Edit_Credentials--Input--Show {
+  font-size: 30px;
+  color: white;
+  cursor: pointer;
+}
+
+.Profile--Edit_Credentials--Input--Show--Inactive {
+  display: none;
 }
 
 .Profile--Edit_Credential_Error {
