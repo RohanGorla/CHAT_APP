@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useOutletContext, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { FaEdit } from "react-icons/fa";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 
 function Profile() {
   /* SPECIAL VARIABLES */
@@ -19,6 +20,8 @@ function Profile() {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  const [showOldPassword, setShowOldPassword] = useState(false);
+  const [showNewPassword, setShowNewPassword] = useState(false);
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
@@ -421,14 +424,32 @@ function Profile() {
                 <label className="Profile--Edit_Credentials--Label">
                   Old password:
                 </label>
-                <input
-                  className="Profile--Edit_Credentials--Input"
-                  type="password"
-                  value={oldPassword}
-                  onChange={(e) => setOldPassword(e.target.value)}
-                  placeholder="Enter old password..."
-                  required
-                ></input>
+                <div className="Profile--Edit_Credentials--Input_Container">
+                  <input
+                    className="Profile--Edit_Credentials--Input"
+                    type={showOldPassword ? "text" : "password"}
+                    value={oldPassword}
+                    onChange={(e) => setOldPassword(e.target.value)}
+                    placeholder="Enter old password..."
+                    required
+                  ></input>
+                  <AiFillEye
+                    className={
+                      showOldPassword
+                        ? "Profile--Edit_Credentials--Input--Show"
+                        : "Profile--Edit_Credentials--Input--Show--Inactive"
+                    }
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                  />
+                  <AiFillEyeInvisible
+                    className={
+                      showOldPassword
+                        ? "Profile--Edit_Credentials--Input--Show--Inactive"
+                        : "Profile--Edit_Credentials--Input--Show"
+                    }
+                    onClick={() => setShowOldPassword(!showOldPassword)}
+                  />
+                </div>
               </div>
               <div
                 className={
@@ -445,14 +466,32 @@ function Profile() {
                 <label className="Profile--Edit_Credentials--Label">
                   New password:
                 </label>
-                <input
-                  className="Profile--Edit_Credentials--Input"
-                  type="password"
-                  value={newPassword}
-                  onChange={(e) => setNewPassword(e.target.value)}
-                  placeholder="Enter new password..."
-                  required
-                ></input>
+                <div className="Profile--Edit_Credentials--Input_Container">
+                  <input
+                    className="Profile--Edit_Credentials--Input"
+                    type={showNewPassword ? "text" : "password"}
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    placeholder="Enter new password..."
+                    required
+                  ></input>
+                  <AiFillEye
+                    className={
+                      showNewPassword
+                        ? "Profile--Edit_Credentials--Input--Show"
+                        : "Profile--Edit_Credentials--Input--Show--Inactive"
+                    }
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  />
+                  <AiFillEyeInvisible
+                    className={
+                      showNewPassword
+                        ? "Profile--Edit_Credentials--Input--Show--Inactive"
+                        : "Profile--Edit_Credentials--Input--Show"
+                    }
+                    onClick={() => setShowNewPassword(!showNewPassword)}
+                  />
+                </div>
               </div>
               <div className="Profile--Edit_Credentials--Input_Section">
                 <label className="Profile--Edit_Credentials--Label">
@@ -460,7 +499,7 @@ function Profile() {
                 </label>
                 <input
                   className="Profile--Edit_Credentials--Input"
-                  type="password"
+                  type={showNewPassword ? "text" : "password"}
                   value={confirmNewPassword}
                   onChange={(e) => setConfirmNewPassword(e.target.value)}
                   placeholder="Confirm new password..."
