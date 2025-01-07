@@ -30,13 +30,19 @@
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Login_Enter_Name_Label);
   font-weight: 600;
+  display: block;
   cursor: pointer;
+}
+
+.Login_Password--Input_Container {
+  display: flex;
+  align-items: center;
+  gap: .5em;
 }
 
 .Login_Page--Form input {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Login_Enter_Name_Input);
-  display: block;
   width: 80%;
   max-width: 300px;
   padding: 0.4em 0em 0.2em 0.3em;
@@ -44,6 +50,16 @@
   border: 2px solid black;
   margin: 0.3em 0em;
   cursor: text;
+}
+
+.Login_Password--Show {
+  font-size: 30px;
+  color: black;
+  cursor: pointer;
+}
+
+.Login_Password--Show--Inactive {
+  display: none;
 }
 
 input.Login_Input--Error {

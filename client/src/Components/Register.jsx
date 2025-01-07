@@ -146,16 +146,34 @@ function Register() {
         {/* CONFIRM USER PASSWORD */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Confirm_Password">Confirm password:</label>
-          <input
-            id="Login_Confirm_Password"
-            className={passwordError ? "Login_Input--Error" : null}
-            type="password"
-            value={confirmPassword}
-            required
-            onChange={(e) => {
-              setConfirmPassword(e.target.value);
-            }}
-          ></input>
+          <div className="Login_Password--Input_Container">
+            <input
+              id="Login_Confirm_Password"
+              className={passwordError ? "Login_Input--Error" : null}
+              type={showConfirmPassword ? "text" : "password"}
+              value={confirmPassword}
+              required
+              onChange={(e) => {
+                setConfirmPassword(e.target.value);
+              }}
+            ></input>
+            <AiFillEye
+              className={
+                showConfirmPassword
+                  ? "Login_Password--Show"
+                  : "Login_Password--Show--Inactive"
+              }
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+            <AiFillEyeInvisible
+              className={
+                showConfirmPassword
+                  ? "Login_Password--Show--Inactive"
+                  : "Login_Password--Show"
+              }
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            />
+          </div>
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
         {/* REGISTRATION FORM SUBMIT BUTTON */}
