@@ -27,6 +27,44 @@ function FriendsList() {
     setSearchRooms(filteredRooms);
   }, [friendListSearch]);
 
+  useEffect(() => {
+    searchRooms.map((room) => {
+      /* FILTER OUT THE ROOM CHATS FROM ALL CHATS */
+      const roomChats = chats.filter((chat) => chat.room === room.roomId);
+      /* SET THE LAST MESSAGE ATTRIBUTE OF THE ROOM CHAT */
+      room.lastMessage = roomChats[roomChats.length - 1];
+      /* SET THE LAST MESSAGE FULL DATE STRING FOR SORTING */
+      room.lastMessageFullDate = room?.lastMessage?.time;
+      /* SET THE LAST MESSAGE DATE AND TIME FOR DISPLAY */
+      room.lastMessageDate = new Date(
+        room.lastMessage?.time
+      ).toLocaleDateString("en-IN");
+      room.lastMessageTime = new Date(
+        room.lastMessage?.time
+      ).toLocaleTimeString("en-IN", {
+        hour: "numeric",
+        minute: "numeric",
+        hour12: true,
+      });
+    });
+    /* GET ALL THE ROOMS WITH ATLEAST ONE MESSAGE */
+    const validRooms = searchRooms.filter(
+      (room) => room.lastMessageFullDate !== undefined
+    );
+    /* SORT ALL THE VALID ROOMS ACCORDING TO THE TIME OF LAST MESSAGE */
+    validRooms.sort((room_1, room_2) => {
+      return (
+        new Date(room_2.lastMessageFullDate) -
+        new Date(room_1.lastMessageFullDate)
+      );
+    });
+    /* GET ALL ROOMS WITH NO MESSAGES */
+    const invalidRooms = searchRooms.filter(
+      (room) => room.lastMessageFullDate === undefined
+    );
+    setSearchRooms([...validRooms, ...invalidRooms]);
+  }, [chats]);
+
   return (
     <section className="Friends_List">
       {/* SEARCH FRIEND IN FRIENDS LIST */}
@@ -44,20 +82,7 @@ function FriendsList() {
         searchRooms.map((room, index) => {
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
           const roomChats = chats.filter((chat) => chat.room === room.roomId);
-          /* SET LAST MESSAGE OF THIS CHAT FROM THE ROOM CHATS */
-          const lastMessage = roomChats[roomChats.length - 1];
-          /* SET THE DISPLAY TIME OF THIS CHAT'S LAST MESSAGE */
           const currentDate = new Date().toLocaleDateString("en-IN");
-          const lastMessageDate = new Date(
-            lastMessage?.time
-          ).toLocaleDateString("en-IN");
-          const lastMessageTime = new Date(
-            lastMessage?.time
-          ).toLocaleTimeString("en-IN", {
-            hour: "numeric",
-            minute: "numeric",
-            hour12: true,
-          });
           return (
             /* EACH FRIEND'S DISPLAY CARD */
             <div
@@ -96,18 +121,18 @@ function FriendsList() {
                 <div className="Friend_Card--Name_And_Time">
                   <p className="Friend_Card--Name">{room.name}</p>
                   <p className="Friend_Card--Time">
-                    {lastMessage
-                      ? lastMessageDate === currentDate
-                        ? `${lastMessageTime.split(" ")[0]} ${lastMessageTime
-                            .split(" ")[1]
-                            .toUpperCase()}`
-                        : lastMessageDate
+                    {room.lastMessage
+                      ? room.lastMessageDate === currentDate
+                        ? `${
+                            room.lastMessageTime.split(" ")[0]
+                          } ${room.lastMessageTime.split(" ")[1].toUpperCase()}`
+                        : room.lastMessageDate
                       : null}
                   </p>
                 </div>
                 <p className="Friend_Card--Message">
-                  {lastMessage
-                    ? lastMessage.msg
+                  {room?.lastMessage
+                    ? room.lastMessage.msg
                     : `Say hello, to your new fren!`}
                 </p>
               </div>
