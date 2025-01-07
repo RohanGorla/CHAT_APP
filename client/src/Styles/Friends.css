@@ -86,7 +86,7 @@
 
 .Friend_Card--Image {
   display: flex;
-  width: 15%;
+  min-width: 15%;
   justify-content: center;
   align-items: center;
 }
@@ -107,7 +107,8 @@
 }
 
 .Friend_Card--Details {
-  width: 85%;
+  min-width: 85%;
+  padding-right: .5em;
 }
 
 .Friend_Card--Name_And_Time {
@@ -146,7 +147,7 @@
 .Friend_Card--Unread_Message_Count {
   color: rgb(51, 214, 91);
   text-align: end;
-  width: 8%;
+  min-width: 8%;
 }
 
 .Friends_List--Empty {
