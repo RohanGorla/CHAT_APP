@@ -246,8 +246,8 @@ io.on("connection", async (socket) => {
   });
   /* REJECT FRIEND REQUESTS */
   socket.on("reject_request", async (payload) => {
-    io.to(payload.to.usr_id).emit("request_rejected");
-    io.to(payload.from.userId).emit("request_rejected");
+    io.to(payload.to.usr_id).emit("request_rejected", payload);
+    io.to(payload.from.userId).emit("request_rejected", payload);
     const id = new ObjectId(payload._id);
     const deleteResponse = await notificationsCollection.deleteOne({
       _id: id,
