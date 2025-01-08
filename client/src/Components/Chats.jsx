@@ -27,6 +27,7 @@ function Chats() {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -72,6 +73,7 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
+    if (!room.length) return navigate("/user/friends");
     switch (room[0]?.type) {
       /* IF SINGLE CHAT */
       case "single":
@@ -160,8 +162,45 @@ function Chats() {
                 );
               })}
             </div>
-            <div className="Chat--Room_Information--Delete_Chat">
-              <button onClick={deleteChat}>Delete chat</button>
+            <div
+              className={
+                confirmDelete
+                  ? "Chat--Room_Information--Buttons--Inactive"
+                  : "Chat--Room_Information--Buttons"
+              }
+            >
+              <button
+                className="Chat--Room_Information--Buttons--Danger"
+                onClick={() => setConfirmDelete(true)}
+              >
+                Delete chat
+              </button>
+            </div>
+            <div
+              className={
+                confirmDelete
+                  ? "Chat--Room_Information--Confirm_Delete"
+                  : "Chat--Room_Information--Confirm_Delete--Inactive"
+              }
+            >
+              <p className="Chat--Room_Information--Confirm_Delete--Message">
+                This action will delete all the messages in this chat. Confirm
+                delete if you want to proceed.
+              </p>
+              <div className="Chat--Room_Information--Buttons">
+                <button
+                  className="Chat--Room_Information--Buttons--Cancel"
+                  onClick={() => setConfirmDelete(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="Chat--Room_Information--Buttons--Danger"
+                  onClick={deleteChat}
+                >
+                  Confirm delete
+                </button>
+              </div>
             </div>
           </div>
         </div>
