@@ -53,6 +53,16 @@ function Chats() {
     setShowRoomDetails(false);
   }
 
+  /* REMOVE FRIEND SOCKET EVENT */
+  async function removeFriend(friend) {
+    socket.emit("remove_friend", {
+      from: userData,
+      to: friend,
+      room: currentRoom,
+    });
+    return navigate("/user/friends");
+  }
+
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -75,6 +85,7 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
+    console.log("here", room);
     if (!room.length) return navigate("/user/friends");
     switch (room[0]?.type) {
       /* IF SINGLE CHAT */
