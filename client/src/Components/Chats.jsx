@@ -47,9 +47,10 @@ function Chats() {
     setMessage("");
   }
 
-  /* DELETE ALL THE CHAT MESSAGES */
+  /* DELETE ALL THE CHAT MESSAGES SOCKET EVENT */
   async function deleteChat() {
     socket.emit("delete_chat", { id });
+    setShowRoomDetails(false);
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
@@ -146,102 +147,111 @@ function Chats() {
             <div className="Chat--Room_Information--Friends_List">
               {friendsList?.map((friend, index) => {
                 return (
-                  <div key={index} className="Chat--Room_Information--Friend">
-                    <p className="Chat--Room_Information--Friend_Username">
-                      {friend.usr_nm}
-                    </p>
-                    <p className="Chat--Room_Information--Friend_Userid">
-                      {friend.usr_id}
-                    </p>
-                    <p className="Chat--Room_Information--Friend_Email">
-                      <span className="Chat--Room_Information--Friend_Email--Heading">
-                        Contact email:
-                      </span>
-                      {friend.email}
-                    </p>
+                  <div
+                    key={index}
+                    className="Chat--Room_Information--Friend_Container"
+                  >
+                    {/* ROOM FRIEND INFORMATION */}
+                    <div className="Chat--Room_Information--Friend">
+                      <p className="Chat--Room_Information--Friend_Username">
+                        {friend.usr_nm}
+                      </p>
+                      <p className="Chat--Room_Information--Friend_Userid">
+                        {friend.usr_id}
+                      </p>
+                      <p className="Chat--Room_Information--Friend_Email">
+                        <span className="Chat--Room_Information--Friend_Email--Heading">
+                          Contact email:
+                        </span>
+                        {friend.email}
+                      </p>
+                    </div>
+                    {/* ROOM CHAT DELETE OPTIONS */}
+                    <div
+                      className={
+                        confirmDelete
+                          ? "Chat--Room_Information--Buttons--Inactive"
+                          : "Chat--Room_Information--Buttons"
+                      }
+                    >
+                      <button
+                        className="Chat--Room_Information--Buttons--Danger"
+                        onClick={() => setConfirmDelete(true)}
+                      >
+                        Delete chat
+                      </button>
+                    </div>
+                    <div
+                      className={
+                        confirmDelete
+                          ? "Chat--Room_Information--Confirm_Delete"
+                          : "Chat--Room_Information--Confirm_Delete--Inactive"
+                      }
+                    >
+                      <p className="Chat--Room_Information--Confirm_Delete--Message">
+                        This action will delete all the messages in this chat.
+                        Confirm delete if you want to proceed.
+                      </p>
+                      <div className="Chat--Room_Information--Buttons">
+                        <button
+                          className="Chat--Room_Information--Buttons--Cancel"
+                          onClick={() => setConfirmDelete(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="Chat--Room_Information--Buttons--Danger"
+                          onClick={deleteChat}
+                        >
+                          Confirm delete
+                        </button>
+                      </div>
+                    </div>
+                    {/* REMOVE FRIEND OPTIONS */}
+                    <div
+                      className={
+                        confirmRemove
+                          ? "Chat--Room_Information--Buttons--Inactive"
+                          : "Chat--Room_Information--Buttons"
+                      }
+                    >
+                      <button
+                        className="Chat--Room_Information--Buttons--Danger"
+                        onClick={() => setConfirmRemove(true)}
+                      >
+                        Remove fren
+                      </button>
+                    </div>
+                    <div
+                      className={
+                        confirmRemove
+                          ? "Chat--Room_Information--Confirm_Delete"
+                          : "Chat--Room_Information--Confirm_Delete--Inactive"
+                      }
+                    >
+                      <p className="Chat--Room_Information--Confirm_Delete--Message">
+                        By removing {friend.usr_nm} as your fren, all your chat
+                        messages will be deleted permanently and you will no
+                        longer be frens!
+                      </p>
+                      <div className="Chat--Room_Information--Buttons">
+                        <button
+                          className="Chat--Room_Information--Buttons--Cancel"
+                          onClick={() => setConfirmRemove(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="Chat--Room_Information--Buttons--Danger"
+                          onClick={() => removeFriend(friend)}
+                        >
+                          Confirm remove
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 );
               })}
-            </div>
-            <div
-              className={
-                confirmDelete
-                  ? "Chat--Room_Information--Buttons--Inactive"
-                  : "Chat--Room_Information--Buttons"
-              }
-            >
-              <button
-                className="Chat--Room_Information--Buttons--Danger"
-                onClick={() => setConfirmDelete(true)}
-              >
-                Delete chat
-              </button>
-            </div>
-            <div
-              className={
-                confirmDelete
-                  ? "Chat--Room_Information--Confirm_Delete"
-                  : "Chat--Room_Information--Confirm_Delete--Inactive"
-              }
-            >
-              <p className="Chat--Room_Information--Confirm_Delete--Message">
-                This action will delete all the messages in this chat. Confirm
-                delete if you want to proceed.
-              </p>
-              <div className="Chat--Room_Information--Buttons">
-                <button
-                  className="Chat--Room_Information--Buttons--Cancel"
-                  onClick={() => setConfirmDelete(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="Chat--Room_Information--Buttons--Danger"
-                  onClick={deleteChat}
-                >
-                  Confirm delete
-                </button>
-              </div>
-            </div>
-            <div
-              className={
-                confirmRemove
-                  ? "Chat--Room_Information--Buttons--Inactive"
-                  : "Chat--Room_Information--Buttons"
-              }
-            >
-              <button
-                className="Chat--Room_Information--Buttons--Danger"
-                onClick={() => setConfirmRemove(true)}
-              >
-                Remove fren
-              </button>
-            </div>
-            <div
-              className={
-                confirmRemove
-                  ? "Chat--Room_Information--Confirm_Delete"
-                  : "Chat--Room_Information--Confirm_Delete--Inactive"
-              }
-            >
-              <p className="Chat--Room_Information--Confirm_Delete--Message">
-                By removing {currentRoom.name} as your fren, all your chat
-                messages will be deleted permanently and you will no longer be
-                frens!
-              </p>
-              <div className="Chat--Room_Information--Buttons">
-                <button
-                  className="Chat--Room_Information--Buttons--Cancel"
-                  onClick={() => setConfirmRemove(false)}
-                >
-                  Cancel
-                </button>
-                <button
-                  className="Chat--Room_Information--Buttons--Danger"
-                >
-                  Confirm remove
-                </button>
-              </div>
             </div>
           </div>
         </div>
