@@ -114,21 +114,38 @@
   display: block;
 }
 
-.Chat--Room_Information--Delete_Chat button {
+.Chat--Room_Information--Buttons button {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Room_Info_Delete_Chat);
   font-weight: 600;
-  background-color: red;
   padding: 0.5em 1.2em;
-  border-style: none;
-  border: 2px solid rgb(25, 25, 25);
   border-radius: 7px;
   cursor: pointer;
+}
+
+.Chat--Room_Information--Buttons--Danger {
+  background-color: red;
+  border: 2px solid rgb(15, 15, 15);
   &:hover {
     background-color: black;
     color: red;
     border: 2px solid red;
   }
+}
+
+.Chat--Room_Information--Buttons--Cancel {
+  background-color: white;
+  border: 2px solid rgb(15, 15, 15);
+  &:hover {
+    background-color: rgb(15, 15, 15);
+    color: white;
+    border: 2px solid white;
+  }
+}
+
+.Chat--Room_Information--Buttons--Inactive,
+.Chat--Room_Information--Confirm_Delete--Inactive {
+  display: none;
 }
 
 .Chat--Room_Information--Inactive {
@@ -391,6 +408,7 @@
   }
 
   .Chat--Message_Card {
+    max-width: 80%;
     padding: 0.6em 0.8em;
   }
 
@@ -400,5 +418,15 @@
 
   .Chat--Message_Card--Others {
     border-radius: 8px 8px 8px 0px;
+  }
+
+  .Chat--Message_Card--Message {
+    line-height: 1.5;
+    word-spacing: 2px;
+    letter-spacing: 0.5px;
+  }
+
+  .Chat--Message_Card--Time_And_Status {
+    margin-top: 0.3em;
   }
 }
