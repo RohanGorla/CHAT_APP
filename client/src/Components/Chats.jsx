@@ -28,6 +28,7 @@ function Chats() {
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [confirmRemove, setConfirmRemove] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -199,6 +200,46 @@ function Chats() {
                   onClick={deleteChat}
                 >
                   Confirm delete
+                </button>
+              </div>
+            </div>
+            <div
+              className={
+                confirmRemove
+                  ? "Chat--Room_Information--Buttons--Inactive"
+                  : "Chat--Room_Information--Buttons"
+              }
+            >
+              <button
+                className="Chat--Room_Information--Buttons--Danger"
+                onClick={() => setConfirmRemove(true)}
+              >
+                Remove fren
+              </button>
+            </div>
+            <div
+              className={
+                confirmRemove
+                  ? "Chat--Room_Information--Confirm_Delete"
+                  : "Chat--Room_Information--Confirm_Delete--Inactive"
+              }
+            >
+              <p className="Chat--Room_Information--Confirm_Delete--Message">
+                By removing {currentRoom.name} as your fren, all your chat
+                messages will be deleted permanently and you will no longer be
+                frens!
+              </p>
+              <div className="Chat--Room_Information--Buttons">
+                <button
+                  className="Chat--Room_Information--Buttons--Cancel"
+                  onClick={() => setConfirmRemove(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="Chat--Room_Information--Buttons--Danger"
+                >
+                  Confirm remove
                 </button>
               </div>
             </div>
