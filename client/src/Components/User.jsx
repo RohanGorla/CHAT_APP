@@ -162,7 +162,7 @@ function User() {
   });
 
   useEffect(() => {
-    if (!userData) return navigate("/login");
+    if (!userData) navigate("/login");
     /* SEND USER ID TO GET USER DATA ON SOCKET CONNECTION */
     socket.on("socket_connect", () => {
       socket.emit("get_user_data", { room: userData.userId });

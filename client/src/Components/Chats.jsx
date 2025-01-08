@@ -51,6 +51,7 @@ function Chats() {
   async function deleteChat() {
     socket.emit("delete_chat", { id });
     setShowRoomDetails(false);
+    setConfirmDelete(false);
   }
 
   /* REMOVE FRIEND SOCKET EVENT */
@@ -60,7 +61,6 @@ function Chats() {
       to: friend,
       room: currentRoom,
     });
-    return navigate("/user/friends");
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
@@ -85,8 +85,7 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
-    console.log("here", room);
-    if (!room.length) return navigate("/user/friends");
+    if (!room.length) navigate("/user/friends");
     switch (room[0]?.type) {
       /* IF SINGLE CHAT */
       case "single":
@@ -149,7 +148,11 @@ function Chats() {
         >
           <div className="Chat--Room_Information">
             <FaXmark
-              onClick={() => setShowRoomDetails(false)}
+              onClick={() => {
+                setShowRoomDetails(false);
+                setConfirmDelete(false);
+                setConfirmRemove(false);
+              }}
               className="Chat--Room_Information--Close"
             />
             <div className="Chat--Room_Information--Image">
@@ -180,14 +183,17 @@ function Chats() {
                     {/* ROOM CHAT DELETE OPTIONS */}
                     <div
                       className={
-                        confirmDelete
+                        confirmDelete || confirmRemove
                           ? "Chat--Room_Information--Buttons--Inactive"
                           : "Chat--Room_Information--Buttons"
                       }
                     >
                       <button
                         className="Chat--Room_Information--Buttons--Danger"
-                        onClick={() => setConfirmDelete(true)}
+                        onClick={() => {
+                          setConfirmDelete(true);
+                          setConfirmRemove(false);
+                        }}
                       >
                         Delete chat
                       </button>
@@ -221,14 +227,17 @@ function Chats() {
                     {/* REMOVE FRIEND OPTIONS */}
                     <div
                       className={
-                        confirmRemove
+                        confirmRemove || confirmDelete
                           ? "Chat--Room_Information--Buttons--Inactive"
                           : "Chat--Room_Information--Buttons"
                       }
                     >
                       <button
                         className="Chat--Room_Information--Buttons--Danger"
-                        onClick={() => setConfirmRemove(true)}
+                        onClick={() => {
+                          setConfirmRemove(true);
+                          setConfirmDelete(false);
+                        }}
                       >
                         Remove fren
                       </button>

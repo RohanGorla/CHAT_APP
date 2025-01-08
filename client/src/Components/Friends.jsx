@@ -4,12 +4,12 @@ import FriendsList from "./FriendsList";
 
 function Friends() {
   /* SPECIAL VARIABLES */
-  const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  const userData = JSON?.parse(localStorage?.getItem("ChatApp_UserInfo"));
   const navigate = useNavigate();
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
-    if (!userData) return navigate("/login");
+    if (!userData) navigate("/login");
   }, []);
 
   return (
