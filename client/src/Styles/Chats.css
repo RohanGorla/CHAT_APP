@@ -8,6 +8,7 @@
   --Chat_Room_Info_Email: 16px;
   --Chat_Room_Info_Email--Heading: 18px;
   --Chat_Room_Info_Delete_Chat: 14px;
+  --Chat_Room_Info_Confirm_Message: 16px;
   --Chat_Icon_Size: 30px;
   --Chat_Name: 18px;
   --Chat_Show_Details: 14px;
@@ -89,7 +90,7 @@
   margin-top: 4em;
 }
 
-.Chat--Room_Information--Friend {
+.Chat--Room_Information--Friend_Container {
   font-family: var(--Chat_Sub_Font);
 }
 
@@ -114,6 +115,10 @@
   display: block;
 }
 
+.Chat--Room_Information--Buttons {
+  margin-bottom: 1.5em;
+}
+
 .Chat--Room_Information--Buttons button {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Room_Info_Delete_Chat);
@@ -123,11 +128,16 @@
   cursor: pointer;
 }
 
+.Chat--Room_Information--Confirm_Delete--Message {
+  font-size: var(--Chat_Room_Info_Confirm_Message);
+  margin-bottom: 0.8em;
+}
+
 .Chat--Room_Information--Buttons--Danger {
   background-color: red;
   border: 2px solid rgb(15, 15, 15);
   &:hover {
-    background-color: black;
+    background-color: rgb(15, 15, 15);
     color: red;
     border: 2px solid red;
   }
@@ -403,8 +413,28 @@
 
 @media (max-width: 550px) {
   :root {
+    --Chat_Room_Info_Icon: 100px;
+    --Chat_Room_Info_Username: 18px;
+    --Chat_Room_Info_Userid: 16px;
+    --Chat_Room_Info_Email: 16px;
+    --Chat_Room_Info_Email--Heading: 18px;
+    --Chat_Room_Info_Delete_Chat: 14px;
+    --Chat_Room_Info_Confirm_Message: 13px;
     --Chat_Username: 12px;
     --Chat_Message: 14px;
+  }
+
+  .Chat--Room_Information--Image {
+    width: 150px;
+    height: 150px;
+  }
+
+  .Chat--Room_Information--Friends_List {
+    margin-top: 2em;
+  }
+
+  .Chat--Room_Information--Friend_Userid {
+    margin-bottom: 1em;
   }
 
   .Chat--Message_Card {
