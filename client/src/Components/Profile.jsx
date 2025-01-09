@@ -42,7 +42,7 @@ function Profile() {
     setEditUsername(false);
   }
 
-  /* CHNAGE USERID SOCKET METHOD */
+  /* CHANGE USERID SOCKET METHOD */
   async function changeUserid() {
     if (newUserid === userData.userId) {
       setErrorType("userid");
@@ -64,7 +64,11 @@ function Profile() {
       setErrorMsg("New email cannot be the same as old email!");
       return;
     }
-    socket.emit("update_email", { userId: userData.userId, newEmail, friends });
+    socket.emit("update_email", {
+      userId: userData.userId,
+      newEmail,
+      friends,
+    });
   }
 
   /* CHANGE PASSWORD SOCKET METHOD */

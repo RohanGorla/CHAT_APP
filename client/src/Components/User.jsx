@@ -28,7 +28,6 @@ function User() {
     setPopupMessage(message);
     setTimeout(() => {
       setShowPopup(false);
-      setPopupMessage("");
     }, 3000);
   }
 
@@ -83,7 +82,11 @@ function User() {
       setFriends(updatedFriends);
       /* CHANGE USERNAME IN ROOMS LIST */
       const updatedRooms = rooms.map((room) => {
-        if (room.users.includes(userId) && room.type === "single")
+        if (
+          room.users.includes(userId) &&
+          room.type === "single" &&
+          room.users[room.users.indexOf(userId)] !== userData.userId
+        )
           room.name = username;
         return room;
       });
@@ -152,7 +155,6 @@ function User() {
         }
         return notification;
       });
-      console.log(updatedNotifications);
       setNotifications(updatedNotifications);
     });
     socket.on("remove_friend", ({ from, to, roomToRemove }) => {
@@ -219,9 +221,11 @@ function User() {
   return (
     <div className="User_Page">
       {/* POP UP NOTIFICATIONS */}
-      <div className="User_PopUp">
+      <div
+        className={showPopup ? "User_PopUp User_PopUp--Active" : "User_PopUp"}
+      >
         <div className="User_PopUp_Card">
-          <p className="User_PopUp--Message">This is a pop up!</p>
+          <p className="User_PopUp--Message">{popupMessage}</p>
           <SiTicktick className="User_PopUp--Icon" />
         </div>
       </div>
