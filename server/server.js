@@ -396,7 +396,7 @@ io.on("connection", async (socket) => {
       { usr_id: userId },
       { $set: { pass: hashedPassword } }
     );
-    socket.emit("update_password_success");
+    socket.emit("update_password");
   });
 });
 

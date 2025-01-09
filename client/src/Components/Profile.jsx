@@ -121,7 +121,7 @@ function Profile() {
     });
 
     /* HANDLE UPDATE PASSWORD SUCCESS AND FAILURE */
-    socket.on("update_password_success", () => {
+    socket.on("update_password", () => {
       setEditPassword(false);
       setOldPassword("");
       setNewPassword("");

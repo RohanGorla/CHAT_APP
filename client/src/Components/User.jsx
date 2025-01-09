@@ -178,6 +178,9 @@ function User() {
       );
       setChats(updatedChats);
     });
+    socket.on("update_password", () => {
+      Popup("Password changed successfully");
+    });
   });
 
   useEffect(() => {
