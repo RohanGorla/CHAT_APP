@@ -12,6 +12,8 @@ function User() {
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupMessage, setPopupMessage] = useState("");
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -20,6 +22,15 @@ function User() {
   const [chats, setChats] = useState([]);
   const [roomChats, setRoomChats] = useState([]);
   const [usernameColor, setUsernameColor] = useState("");
+
+  function Popup(message) {
+    setShowPopup(true);
+    setPopupMessage(message);
+    setTimeout(() => {
+      setShowPopup(false);
+      setPopupMessage("");
+    }, 3000);
+  }
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
