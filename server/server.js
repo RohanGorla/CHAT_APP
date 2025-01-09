@@ -361,13 +361,11 @@ io.on("connection", async (socket) => {
         { usr_id: userId },
         { $set: { email: newEmail } }
       );
-      console.log("done");
+      socket.emit("update_email", { userId, newEmail });
       friends.forEach((friend) => {
-        socket.emit("update_email_success", { newEmail });
         io.to(friend.usr_id).emit("update_email", { userId, newEmail });
       });
     } catch (e) {
-      console.log(e);
       if (e?.keyPattern?.email === 1)
         socket.emit("update_email_failed", {
           error: "Email id has already been taken!",

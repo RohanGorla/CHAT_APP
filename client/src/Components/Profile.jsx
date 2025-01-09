@@ -107,7 +107,7 @@ function Profile() {
     });
 
     /* HANDLE UPDATE EMAIL SUCCESS AND FAILURE */
-    socket.on("update_email_success", ({ newEmail }) => {
+    socket.on("update_email", ({ newEmail }) => {
       userData.mail = newEmail;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditEmail(false);

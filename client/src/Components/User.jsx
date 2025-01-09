@@ -160,6 +160,7 @@ function User() {
         return notification;
       });
       setNotifications(updatedNotifications);
+      if (userData.userId === userId) Popup(`Email id changed to ${newEmail}`);
     });
     socket.on("remove_friend", ({ from, to, roomToRemove }) => {
       const updatedRooms = rooms.filter(

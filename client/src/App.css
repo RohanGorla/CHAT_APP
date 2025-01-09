@@ -26,7 +26,9 @@
   background-color: rgb(15, 15, 15);
   display: flex;
   align-items: center;
-  max-width: 500px;
+  gap: 2em;
+  min-width: 500px;
+  width: fit-content;
   border-style: none;
   border-radius: 10px;
   border: 2px solid white;
@@ -39,10 +41,8 @@
   font-family: var(--User_Main_Font);
   font-size: var(--User--PopUp_Fontsize);
   color: white;
-  width: 80%;
-  overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  min-width: 80%;
+  width: fit-content;
 }
 
 .User_PopUp--Icon {
