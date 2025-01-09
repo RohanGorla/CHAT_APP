@@ -6,8 +6,6 @@ import { v4 } from "uuid";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient, ObjectId } from "mongodb";
-import { access } from "fs";
-import { error } from "console";
 
 const PORT = process.env.PORT;
 
