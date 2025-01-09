@@ -107,6 +107,8 @@ function User() {
         return chat;
       });
       setChats(updatedChats);
+      /* USERNAME POPUP */
+      if (userData.userId === userId) Popup(`Username changed to ${username}`);
     });
     socket.on("update_userid", ({ oldUserid, newUserid }) => {
       /* CHANGE USERID IN FRIENDS LIST */
@@ -138,6 +140,8 @@ function User() {
         return chat;
       });
       setChats(updatedChats);
+      if (userData.userId === oldUserid)
+        Popup(`Userid changed to ${newUserid}`);
     });
     socket.on("update_email", ({ userId, newEmail }) => {
       /* CHANGE EMAIL IN FRIENDS LIST */
