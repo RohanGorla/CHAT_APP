@@ -17,6 +17,25 @@
   overflow-y: scroll;
 }
 
+.Profile_Page::-webkit-scrollbar {
+  width: 3px;
+}
+
+.Profile_Page::-webkit-scrollbar-track {
+  background: rgb(20, 20, 20);
+  border-radius: 3px;
+}
+
+.Profile_Page::-webkit-scrollbar-thumb {
+  background: rgb(20, 20, 20);
+  border-radius: 3px;
+}
+
+.Profile_Page:hover::-webkit-scrollbar-thumb {
+  background: rgb(100, 99, 99);
+  border-radius: 3px;
+}
+
 .Profile {
   background-color: rgb(20, 20, 20);
   color: white;
