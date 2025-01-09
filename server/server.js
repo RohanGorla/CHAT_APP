@@ -278,7 +278,7 @@ io.on("connection", async (socket) => {
     const deleteChatResponse = await chatMessagesCollection.deleteMany({
       room: id,
     });
-    socket.emit("chat_deleted", { id });
+    io.to(id).emit("chat_deleted", { id });
   });
   /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
