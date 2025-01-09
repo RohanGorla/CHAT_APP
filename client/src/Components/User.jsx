@@ -69,11 +69,15 @@ function User() {
       );
       setNotifications(updatedNotifications);
     });
-    socket.on("chat_deleted", ({ id }) => {
-      const updatedChat = chats.filter((message) => message.room !== id);
+    socket.on("chat_deleted", ({ from, to, room }) => {
+      const updatedChat = chats.filter(
+        (message) => message.room !== room.roomId
+      );
       setChats(updatedChat);
       /* DELETE CHAT POPUP */
-      Popup(`Chat messages deleted!`);
+      if (from.userId === userData.userId) Popup(`Chat messages deleted!`);
+      if (to.usr_id === userData.userId)
+        Popup(`${from.username} deleted the chat!`);
     });
     socket.on("update_username", ({ userId, username }) => {
       /* CHANGE USERNAME IN FRIENDS LIST */
