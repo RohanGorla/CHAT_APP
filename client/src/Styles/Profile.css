@@ -76,7 +76,7 @@
 
 .Profile--Edit_Credentials--Label {
   display: block;
-  margin-bottom: .5em;
+  margin-bottom: 0.5em;
 }
 
 .Profile--Edit_Credentials--Input_Container {
@@ -169,6 +169,7 @@
 .Profile--Logout {
   width: 100%;
   max-width: 600px;
+  padding-bottom: 4em;
   margin-inline: auto;
 }
 
@@ -186,5 +187,29 @@
     background-color: rgb(20, 20, 20);
     color: red;
     border: 2px solid red;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --Profile_User_Icon_Size: 80px;
+    --Profile_Credential: 16px;
+    --Profile_Edit_Button: 20px;
+    --Profile_Input: 14px;
+    --Profile_Edit_Credentials_Button: 14px;
+    --Profile_Logout_Button: 14px;
+  }
+
+  .Profile--Image {
+    width: 120px;
+    height: 120px;
+  }
+
+  .Profile--Details {
+    margin-top: 2em;
+  }
+
+  .Profile--Edit_Credentials--Input {
+    width: 60%;
   }
 }
