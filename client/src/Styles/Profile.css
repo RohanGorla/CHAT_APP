@@ -64,6 +64,9 @@
 .Profile--Credential {
   font-size: var(--Profile_Credential);
   width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .Profile--Show_Credential--Inactive {
@@ -195,7 +198,7 @@
     --Profile_User_Icon_Size: 80px;
     --Profile_Credential: 16px;
     --Profile_Edit_Button: 20px;
-    --Profile_Input: 14px;
+    --Profile_Input: 16px;
     --Profile_Edit_Credentials_Button: 14px;
     --Profile_Logout_Button: 14px;
   }
@@ -211,5 +214,16 @@
 
   .Profile--Edit_Credentials--Input {
     width: 60%;
+  }
+}
+
+@media (max-width: 450px) {
+
+  .Profile {
+    padding-inline: 0em;
+  }
+
+  .Profile--Edit_Credentials--Input {
+    width: 70%;
   }
 }
