@@ -4,6 +4,7 @@ import { io } from "socket.io-client";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RiSearch2Fill } from "react-icons/ri";
 import { GoBellFill } from "react-icons/go";
+import { SiTicktick } from "react-icons/si";
 
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
@@ -206,6 +207,13 @@ function User() {
 
   return (
     <div className="User_Page">
+      {/* POP UP NOTIFICATIONS */}
+      <div className="User_PopUp">
+        <div className="User_PopUp_Card">
+          <p className="User_PopUp--Message">This is a pop up!</p>
+          <SiTicktick className="User_PopUp--Icon" />
+        </div>
+      </div>
       {/* NAVBAR */}
       <nav className="User_Navbar">
         <p className="User_Appname">Frens</p>
