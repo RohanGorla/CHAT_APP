@@ -313,9 +313,9 @@ io.on("connection", async (socket) => {
         { usr_id: oldUserid },
         { $set: { usr_id: newUserid } }
       );
+      socket.join(newUserid);
+      socket.emit("update_userid", { oldUserid, newUserid });
       friends.forEach((friend) => {
-        socket.join(newUserid);
-        socket.emit("update_userid_success", { newUserid });
         io.to(friend.usr_id).emit("update_userid", { oldUserid, newUserid });
       });
     } catch (e) {

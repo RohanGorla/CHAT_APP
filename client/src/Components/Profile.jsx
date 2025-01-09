@@ -93,7 +93,7 @@ function Profile() {
 
   useEffect(() => {
     /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
-    socket.on("update_userid_success", ({ newUserid }) => {
+    socket.on("update_userid", ({ newUserid }) => {
       userData.userId = newUserid;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditUserid(false);
