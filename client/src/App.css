@@ -11,10 +11,15 @@
 
 .User_PopUp {
   position: absolute;
-  top: 80px;
+  top: -80px;
   left: 0px;
-  z-index: 3;
+  z-index: 1;
   width: 100%;
+  transition: all .7s ease-in-out;
+}
+
+.User_PopUp--Active {
+  top: 80px;
 }
 
 .User_PopUp_Card {
