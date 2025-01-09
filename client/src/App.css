@@ -15,7 +15,7 @@
   left: 0px;
   z-index: 1;
   width: 100%;
-  transition: all .7s ease-in-out;
+  transition: all 0.7s ease-in-out;
 }
 
 .User_PopUp--Active {
@@ -43,6 +43,8 @@
   color: white;
   min-width: 80%;
   width: fit-content;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
 }
 
 .User_PopUp--Icon {
@@ -107,7 +109,24 @@
 
 @media (max-width: 600px) {
   :root {
+    --User--PopUp_Fontsize: 16px;
+    --User--PopUp_Icon_Size: 20px;
     --User_Element_Fontsize: 25px;
+  }
+
+  .User_PopUp {
+    top: -50px;
+    padding-inline: 1em;
+  }
+
+  .User_PopUp--Active {
+    top: 60px;
+  }
+
+  .User_PopUp_Card {
+    gap: 1em;
+    min-width: 250px;
+    width: 100%;
   }
 
   .User_Navbar {

@@ -93,7 +93,8 @@ function Profile() {
 
   useEffect(() => {
     /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
-    socket.on("update_userid", ({ newUserid }) => {
+    socket.on("update_userid", ({ oldUserid, newUserid }) => {
+      if (userData.userId !== oldUserid) return;
       userData.userId = newUserid;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditUserid(false);
@@ -107,7 +108,8 @@ function Profile() {
     });
 
     /* HANDLE UPDATE EMAIL SUCCESS AND FAILURE */
-    socket.on("update_email", ({ newEmail }) => {
+    socket.on("update_email", ({ userId, newEmail }) => {
+      if (userData.userId !== userId) return;
       userData.mail = newEmail;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
       setEditEmail(false);
