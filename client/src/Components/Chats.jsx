@@ -48,8 +48,12 @@ function Chats() {
   }
 
   /* DELETE ALL THE CHAT MESSAGES SOCKET EVENT */
-  async function deleteChat() {
-    socket.emit("delete_chat", { id });
+  async function deleteChat(friend) {
+    socket.emit("delete_chat", {
+      from: userData,
+      to: friend,
+      room: currentRoom,
+    });
     setShowRoomDetails(false);
     setConfirmDelete(false);
   }
@@ -218,7 +222,7 @@ function Chats() {
                         </button>
                         <button
                           className="Chat--Room_Information--Buttons--Danger"
-                          onClick={deleteChat}
+                          onClick={() => deleteChat(friend)}
                         >
                           Confirm delete
                         </button>

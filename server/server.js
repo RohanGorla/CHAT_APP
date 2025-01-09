@@ -272,11 +272,11 @@ io.on("connection", async (socket) => {
     socket.emit("join_room_success");
   });
   /* DELETE CHAT */
-  socket.on("delete_chat", async ({ id }) => {
+  socket.on("delete_chat", async ({ from, to, room }) => {
     const deleteChatResponse = await chatMessagesCollection.deleteMany({
-      room: id,
+      room: room.roomId,
     });
-    io.to(id).emit("chat_deleted", { id });
+    io.to(room.roomId).emit("chat_deleted", { from, to, room });
   });
   /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
