@@ -1,9 +1,53 @@
 :root {
-  --Navbar_Main_Font: "Varela Round", sans-serif;
-  --Navbar_Element_Fontsize: 35px;
+  --User_Main_Font: "Varela Round", sans-serif;
+  --User--PopUp_Fontsize: 18px;
+  --User--PopUp_Icon_Size: 22px;
+  --User_Element_Fontsize: 35px;
+}
+
+.User_Page {
+  position: relative;
+}
+
+.User_PopUp {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  z-index: 3;
+  width: 100%;
+}
+
+.User_PopUp_Card {
+  background-color: rgb(15, 15, 15);
+  display: flex;
+  align-items: center;
+  max-width: 500px;
+  border-style: none;
+  border-radius: 10px;
+  border: 2px solid white;
+  box-shadow: 15px 0px rgb(15, 213, 15) inset;
+  padding: 1em 2em;
+  margin-inline: auto;
+}
+
+.User_PopUp--Message {
+  font-family: var(--User_Main_Font);
+  font-size: var(--User--PopUp_Fontsize);
+  color: white;
+  width: 80%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.User_PopUp--Icon {
+  font-size: var(--User--PopUp_Icon_Size);
+  color: rgb(15, 213, 15);
 }
 
 .User_Navbar {
+  position: inherit;
+  z-index: 2;
   background-color: rgb(32, 139, 58);
   height: 70px;
   display: flex;
@@ -13,8 +57,8 @@
 }
 
 .User_Appname {
-  font-family: var(--Navbar_Main_Font);
-  font-size: var(--Navbar_Element_Fontsize);
+  font-family: var(--User_Main_Font);
+  font-size: var(--User_Element_Fontsize);
   font-weight: 700;
   color: rgb(13, 6, 48);
   color: white;
@@ -34,7 +78,7 @@
 }
 
 .User_Nav_Options--Icon {
-  font-size: var(--Navbar_Element_Fontsize);
+  font-size: var(--User_Element_Fontsize);
 }
 
 .User_Outlet_Container {
@@ -43,7 +87,7 @@
 
 @media (max-width: 1000px) {
   :root {
-    --Navbar_Element_Fontsize: 30px;
+    --User_Element_Fontsize: 30px;
   }
 
   .User_Navbar {
@@ -58,7 +102,7 @@
 
 @media (max-width: 600px) {
   :root {
-    --Navbar_Element_Fontsize: 25px;
+    --User_Element_Fontsize: 25px;
   }
 
   .User_Navbar {
