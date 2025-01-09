@@ -301,6 +301,7 @@ io.on("connection", async (socket) => {
       { usr_id: userId },
       { $set: { usr_nm: username } }
     );
+    socket.emit("update_username", { userId, username });
     friends.forEach((friend) => {
       io.to(friend.usr_id).emit("update_username", { userId, username });
     });
