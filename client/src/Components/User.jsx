@@ -57,6 +57,10 @@ function User() {
     });
     socket.on("friend_request", (payload) => {
       setNotifications([...notifications, payload]);
+      if (payload.to.usr_id === userData.userId)
+        Popup(`${payload.from.username} sent a Fren request!`);
+      if (payload.from.userId === userData.userId)
+        Popup(`Fren request sent to ${payload.to.usr_nm}!`);
     });
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
