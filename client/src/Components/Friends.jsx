@@ -22,7 +22,7 @@ function Friends() {
       <section className="Friends_Chat">
         <article className="Friends_Welcome_Card">
           <p className="Friends_Welcome_Card--Title">
-            Hey there, {userData.username}👋
+            Hey there, {userData?.username}👋
           </p>
           <p className="Friends_Welcome_Card--Greeting">
             Conversations aren't just for extroverts. Select a fren and prove to
