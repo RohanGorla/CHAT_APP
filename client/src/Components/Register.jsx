@@ -77,6 +77,7 @@ function Register() {
             type="email"
             value={mail}
             required
+            placeholder="Enter your email"
             onChange={(e) => {
               setMail(e.target.value);
             }}
@@ -92,6 +93,7 @@ function Register() {
             type="text"
             value={userId}
             required
+            placeholder="Enter a unique user id"
             onChange={(e) => {
               setUserId(e.target.value);
             }}
@@ -106,6 +108,7 @@ function Register() {
             type="text"
             value={username}
             required
+            placeholder="Enter your username"
             onChange={(e) => {
               setUsername(e.target.value);
             }}
@@ -121,6 +124,7 @@ function Register() {
               type={showPassword ? "text" : "password"}
               value={password}
               required
+              placeholder="Enter your password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
@@ -153,6 +157,7 @@ function Register() {
               type={showConfirmPassword ? "text" : "password"}
               value={confirmPassword}
               required
+              placeholder="Confirm your password"
               onChange={(e) => {
                 setConfirmPassword(e.target.value);
               }}

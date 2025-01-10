@@ -78,6 +78,7 @@ function Login() {
               type={showPassword ? "text" : "password"}
               value={password}
               required
+              placeholder="Enter your password"
               onChange={(e) => {
                 setPassword(e.target.value);
               }}
