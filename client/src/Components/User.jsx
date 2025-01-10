@@ -198,46 +198,49 @@ function User() {
   });
 
   useEffect(() => {
-    if (!userData) navigate("/login");
-    /* SEND USER ID TO GET USER DATA ON SOCKET CONNECTION */
-    socket.on("socket_connect", () => {
-      socket.emit("get_user_data", { room: userData.userId });
-    });
-    /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
-    socket.on("user_data", ({ rooms, friends, chats, notifications }) => {
-      console.log(
-        "Rooms Data -> ",
-        rooms,
-        "\n\nFriends Data -> ",
-        friends,
-        "\n\nNotifications Data -> ",
-        notifications,
-        "\n\nChats Data -> ",
-        chats
-      );
-      rooms.map((room) => {
-        if (room.type === "single") {
-          const friendId = room.users.filter(
-            (user) => user !== userData.userId
-          );
-          const friend = friends.filter(
-            (friend) => friend.usr_id === friendId[0]
-          );
-          room.name = friend[0].usr_nm;
-        }
+    if (!userData) {
+      navigate("/login");
+    } else {
+      /* SEND USER ID TO GET USER DATA ON SOCKET CONNECTION */
+      socket.on("socket_connect", () => {
+        socket.emit("get_user_data", { room: userData.userId });
       });
-      setRooms(rooms);
-      setSearchRooms(rooms);
-      setFriends(friends);
-      setChats(chats);
-      setNotifications(notifications);
-    });
-    /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
-    const usernameColors = ["orange", "green", "violet", "goldenrod"];
-    const randomColor =
-      usernameColors[Math.floor(Math.random() * usernameColors.length)];
-    setUsernameColor(randomColor);
-    navigate("friends");
+      /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
+      socket.on("user_data", ({ rooms, friends, chats, notifications }) => {
+        console.log(
+          "Rooms Data -> ",
+          rooms,
+          "\n\nFriends Data -> ",
+          friends,
+          "\n\nNotifications Data -> ",
+          notifications,
+          "\n\nChats Data -> ",
+          chats
+        );
+        rooms.map((room) => {
+          if (room.type === "single") {
+            const friendId = room.users.filter(
+              (user) => user !== userData.userId
+            );
+            const friend = friends.filter(
+              (friend) => friend.usr_id === friendId[0]
+            );
+            room.name = friend[0].usr_nm;
+          }
+        });
+        setRooms(rooms);
+        setSearchRooms(rooms);
+        setFriends(friends);
+        setChats(chats);
+        setNotifications(notifications);
+      });
+      /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
+      const usernameColors = ["orange", "green", "violet", "goldenrod"];
+      const randomColor =
+        usernameColors[Math.floor(Math.random() * usernameColors.length)];
+      setUsernameColor(randomColor);
+      navigate("friends");
+    }
   }, []);
 
   return (

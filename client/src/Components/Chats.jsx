@@ -89,29 +89,32 @@ function Chats() {
   /* GET THE ROOM NAME FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
-    if (!room.length) navigate("/user/friends");
-    switch (room[0]?.type) {
-      /* IF SINGLE CHAT */
-      case "single":
-        const friendId = room[0].users.filter(
-          (user) => user !== userData.userId
-        );
-        room[0].friendsList = friends.filter(
-          (friend) => friend.usr_id === friendId[0]
-        );
-        break;
-      /* IF GROUP CHAT */
-      case "group":
-        const friendsIdList = room[0].users.filter(
-          (user) => user !== userData.userId
-        );
-        room[0].friendsList = friends.filter((friend) =>
-          friendsIdList.includes(friend.usr_id)
-        );
-        break;
+    if (!room.length) {
+      navigate("/user/friends");
+    } else {
+      switch (room[0]?.type) {
+        /* IF SINGLE CHAT */
+        case "single":
+          const friendId = room[0].users.filter(
+            (user) => user !== userData.userId
+          );
+          room[0].friendsList = friends.filter(
+            (friend) => friend.usr_id === friendId[0]
+          );
+          break;
+        /* IF GROUP CHAT */
+        case "group":
+          const friendsIdList = room[0].users.filter(
+            (user) => user !== userData.userId
+          );
+          room[0].friendsList = friends.filter((friend) =>
+            friendsIdList.includes(friend.usr_id)
+          );
+          break;
+      }
+      setFriendsList(room[0]?.friendsList);
+      setCurrentRoom(room[0]);
     }
-    setFriendsList(room[0]?.friendsList);
-    setCurrentRoom(room[0]);
   }, [id, rooms]);
 
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
