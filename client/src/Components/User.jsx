@@ -65,8 +65,12 @@ function User() {
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
     });
-    socket.on("join_room_success", () => {
+    socket.on("join_room_success", ({ from, to }) => {
       socket.emit("get_user_data", { room: userData.userId });
+      if (from.userId === userData.userId)
+        Popup(`${to.usr_nm} accepted your fren request!`);
+      if (to.usr_id === userData.userId)
+        Popup(`You are now frens with ${from.username}!`);
     });
     socket.on("request_rejected", (payload) => {
       const updatedNotifications = notifications.filter(
