@@ -143,7 +143,7 @@ function FriendsList() {
                   <p className="Friend_Card--Message">
                     {room?.lastMessage
                       ? room.lastMessage.msg
-                      : `Say hello, to your new fren!`}
+                      : `Say hello, to your fren!`}
                   </p>
                   <span className="Friend_Card--Unread_Message_Count">
                     {unreadMessages.length

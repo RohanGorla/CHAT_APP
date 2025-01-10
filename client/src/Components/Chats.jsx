@@ -367,7 +367,7 @@ function Chats() {
           ) : (
             <div className="Chat--Empty">
               <p className="Chat--Empty_Message">
-                Say hello 👋 to your new fren, {currentRoom?.name}!
+                Say hello 👋 to your fren, {currentRoom?.name}!
               </p>
               <button
                 className="Chat--Empty_Button"
