@@ -23,6 +23,7 @@ function User() {
   const [roomChats, setRoomChats] = useState([]);
   const [usernameColor, setUsernameColor] = useState("");
 
+  /* SHOW AND HIDE POPUP NOTIFICATION FUNCTION */
   function Popup(message) {
     setShowPopup(true);
     setPopupMessage(message);

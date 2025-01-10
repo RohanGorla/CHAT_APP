@@ -15,7 +15,7 @@ function App() {
 
   useEffect(() => {
     /* NAVIGTE TO LOGIN PAGE IF NOT LOGGED IN OR CHATS PAGE IF LOGGED IN */
-    if (!userData) return navigate("/login");
+    if (!userData) navigate("/login");
     navigate("/user/friends");
   }, []);
 

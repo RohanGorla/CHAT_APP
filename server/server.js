@@ -148,7 +148,7 @@ app.post("/finduser", async (req, res) => {
 
 /* WEB SOCKET CONNECTION AND EVENTS */
 io.on("connection", async (socket) => {
-  // console.log("Socket connection made...", socket.id);
+  console.log("Socket connection made...", socket.id);
   /* SEND BACK SUCCESSFUL SOCKET CONNECTION MESSAGE */
   socket.emit("socket_connect", "Connection has been made!");
   /* JOIN PERSONAL ROOM TO GET LIVE CHATS AND NOTIFICATIONS */
