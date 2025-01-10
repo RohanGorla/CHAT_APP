@@ -19,6 +19,7 @@ function FriendsList() {
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
 
+  /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
     const filteredRooms = rooms.filter((room) =>
@@ -27,6 +28,7 @@ function FriendsList() {
     setSearchRooms(filteredRooms);
   }, [friendListSearch]);
 
+  /* TO UPDATE THE LAST MESSAGE TEXT & TIME AND ALSO SORT THE FRIENDS LIST ACCORDINGLY */
   useEffect(() => {
     searchRooms.map((room) => {
       /* FILTER OUT THE ROOM CHATS FROM ALL CHATS */
@@ -64,6 +66,10 @@ function FriendsList() {
     );
     setSearchRooms([...validRooms, ...invalidRooms]);
   }, [chats]);
+
+  useEffect(() => {
+    if (!userData) navigate("/login");
+  }, []);
 
   return (
     <section className="Friends_List">

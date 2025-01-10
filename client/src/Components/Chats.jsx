@@ -137,7 +137,7 @@ function Chats() {
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
-    if (!userData) return navigate("/login");
+    if (!userData) navigate("/login");
   }, []);
 
   return (
@@ -146,6 +146,7 @@ function Chats() {
         <FriendsList />
       </section>
       <div className="Chat_Container" ref={chatContainerRef}>
+        {/* ROOM FRIENDS INFORMATION CARD */}
         <div
           className={
             showRoomDetails
@@ -282,6 +283,7 @@ function Chats() {
             </div>
           </div>
         </div>
+        {/* CHAT ROOM BASIC DETAILS */}
         <section className="Chat--Details">
           <div className="Chat--Back_Button">
             <IoMdArrowRoundBack
@@ -304,6 +306,7 @@ function Chats() {
             </div>
           </div>
         </section>
+        {/* CHAT MESSAGES CONTAINER */}
         <section className="Chat--Messages" ref={messagesRef}>
           {roomChats.length ? (
             roomChats.map((message, index) => {
@@ -385,6 +388,7 @@ function Chats() {
             </div>
           )}
         </section>
+        {/* NEW MESSAGE INPUT SECTION */}
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
             <textarea

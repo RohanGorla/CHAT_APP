@@ -9,6 +9,7 @@ import { SiTicktick } from "react-icons/si";
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
   const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
+  /* SPECIAL VARIABLES */
   const navigate = useNavigate();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
@@ -34,6 +35,7 @@ function User() {
 
   /* WEB SOCKET EVENT LISTENERS */
   useEffect(() => {
+    /* CHAT RELATED EVENTS */
     socket.on("receive_message", (payload) => {
       setChats([
         ...chats,
@@ -55,12 +57,50 @@ function User() {
       });
       setChats(updatedChat);
     });
+    socket.on("chat_deleted", ({ from, to, room }) => {
+      const updatedChat = chats.filter(
+        (message) => message.room !== room.roomId
+      );
+      setChats(updatedChat);
+      /* DELETE CHAT POPUP */
+      if (from.userId === userData.userId) Popup(`Chat messages deleted!`);
+      if (to.usr_id === userData.userId)
+        Popup(`${from.username} deleted the chat!`);
+    });
+    /* FRIENDS AND ROOMS RELATED EVENTS */
     socket.on("friend_request", (payload) => {
       setNotifications([...notifications, payload]);
       if (payload.to.usr_id === userData.userId)
         Popup(`${payload.from.username} sent a Fren request!`);
       if (payload.from.userId === userData.userId)
         Popup(`Fren request sent to ${payload.to.usr_nm}!`);
+    });
+    socket.on("remove_friend", ({ from, to, roomToRemove }) => {
+      const updatedRooms = rooms.filter(
+        (room) => room.roomId !== roomToRemove.roomId
+      );
+      setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
+      const updatedFriends = friends.filter((friend) => {
+        if (friend.usr_id !== from.userId && friend.usr_id !== to.usr_id)
+          return friend;
+      });
+      setFriends(updatedFriends);
+      const updatedChats = chats.filter(
+        (chat) => chat.room !== roomToRemove.roomId
+      );
+      setChats(updatedChats);
+      /* REMOVE FRIEND POPUP */
+      if (from.userId === userData.userId)
+        Popup(`Removed ${to.usr_nm} as fren!`);
+      if (to.usr_id === userData.userId)
+        Popup(`${from.username} removed you as fren!`);
+    });
+    socket.on("request_rejected", (payload) => {
+      const updatedNotifications = notifications.filter(
+        (notification) => notification.to.usr_id !== payload.to.usr_id
+      );
+      setNotifications(updatedNotifications);
     });
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
@@ -72,22 +112,7 @@ function User() {
       if (to.usr_id === userData.userId)
         Popup(`You are now frens with ${from.username}!`);
     });
-    socket.on("request_rejected", (payload) => {
-      const updatedNotifications = notifications.filter(
-        (notification) => notification.to.usr_id !== payload.to.usr_id
-      );
-      setNotifications(updatedNotifications);
-    });
-    socket.on("chat_deleted", ({ from, to, room }) => {
-      const updatedChat = chats.filter(
-        (message) => message.room !== room.roomId
-      );
-      setChats(updatedChat);
-      /* DELETE CHAT POPUP */
-      if (from.userId === userData.userId) Popup(`Chat messages deleted!`);
-      if (to.usr_id === userData.userId)
-        Popup(`${from.username} deleted the chat!`);
-    });
+    /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_username", ({ userId, username }) => {
       /* CHANGE USERNAME IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
@@ -178,27 +203,6 @@ function User() {
       setNotifications(updatedNotifications);
       /* CHANGE EMAIL POPUP */
       if (userData.userId === userId) Popup(`Email id changed to ${newEmail}`);
-    });
-    socket.on("remove_friend", ({ from, to, roomToRemove }) => {
-      const updatedRooms = rooms.filter(
-        (room) => room.roomId !== roomToRemove.roomId
-      );
-      setRooms(updatedRooms);
-      setSearchRooms(updatedRooms);
-      const updatedFriends = friends.filter((friend) => {
-        if (friend.usr_id !== from.userId && friend.usr_id !== to.usr_id)
-          return friend;
-      });
-      setFriends(updatedFriends);
-      const updatedChats = chats.filter(
-        (chat) => chat.room !== roomToRemove.roomId
-      );
-      setChats(updatedChats);
-      /* REMOVE FRIEND POPUP */
-      if (from.userId === userData.userId)
-        Popup(`Removed ${to.usr_nm} as fren!`);
-      if (to.usr_id === userData.userId)
-        Popup(`${from.username} removed you as fren!`);
     });
     socket.on("update_password", () => {
       Popup("Password changed successfully");

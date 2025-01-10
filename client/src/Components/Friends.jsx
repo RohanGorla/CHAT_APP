@@ -18,7 +18,7 @@ function Friends() {
       <section className="Friends_List_Container">
         <FriendsList />
       </section>
-      {/* USER GREETING CARD */}
+      {/* USER GREETING CARD (ONLY VISIBLE IN MEDIUM AND LARGE SCREENS) */}
       <section className="Friends_Chat">
         <article className="Friends_Welcome_Card">
           <p className="Friends_Welcome_Card--Title">

@@ -16,13 +16,19 @@ function Notifications() {
     socket.emit("accept_request", request);
   }
 
+  /* REJECT FRIEND REQUEST SOCKET METHOD */
   async function declineRequest(request) {
     socket.emit("reject_request", request);
   }
 
+  /* REVERSE THE NOTIFICATIONS LIST TO SHOW NEW NOTIFICATIONS ON TOP */
   useEffect(() => {
-    const reverseNotificationList = notifications.toReversed();
-    setReversedNotifications(reverseNotificationList);
+    if (!userData) {
+      navigate("/login");
+    } else {
+      const reverseNotificationList = notifications.toReversed();
+      setReversedNotifications(reverseNotificationList);
+    }
   }, [notifications]);
 
   return (

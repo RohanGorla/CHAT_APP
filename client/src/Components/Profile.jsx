@@ -92,50 +92,54 @@ function Profile() {
   }
 
   useEffect(() => {
-    /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
-    socket.on("update_userid", ({ oldUserid, newUserid }) => {
-      if (userData.userId !== oldUserid) return;
-      userData.userId = newUserid;
-      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
-      setEditUserid(false);
-      setErrorType("");
-      setErrorMsg("");
-    });
+    if (!userData) {
+      navigate("/login");
+    } else {
+      /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
+      socket.on("update_userid", ({ oldUserid, newUserid }) => {
+        if (userData.userId !== oldUserid) return;
+        userData.userId = newUserid;
+        localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+        setEditUserid(false);
+        setErrorType("");
+        setErrorMsg("");
+      });
 
-    socket.on("update_userid_failed", ({ error }) => {
-      setErrorType("userid");
-      setErrorMsg(error);
-    });
+      socket.on("update_userid_failed", ({ error }) => {
+        setErrorType("userid");
+        setErrorMsg(error);
+      });
 
-    /* HANDLE UPDATE EMAIL SUCCESS AND FAILURE */
-    socket.on("update_email", ({ userId, newEmail }) => {
-      if (userData.userId !== userId) return;
-      userData.mail = newEmail;
-      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
-      setEditEmail(false);
-      setErrorType("");
-      setErrorMsg("");
-    });
+      /* HANDLE UPDATE EMAIL SUCCESS AND FAILURE */
+      socket.on("update_email", ({ userId, newEmail }) => {
+        if (userData.userId !== userId) return;
+        userData.mail = newEmail;
+        localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+        setEditEmail(false);
+        setErrorType("");
+        setErrorMsg("");
+      });
 
-    socket.on("update_email_failed", ({ error }) => {
-      setErrorType("email");
-      setErrorMsg(error);
-    });
+      socket.on("update_email_failed", ({ error }) => {
+        setErrorType("email");
+        setErrorMsg(error);
+      });
 
-    /* HANDLE UPDATE PASSWORD SUCCESS AND FAILURE */
-    socket.on("update_password", () => {
-      setEditPassword(false);
-      setOldPassword("");
-      setNewPassword("");
-      setConfirmNewPassword("");
-      setErrorType("");
-      setErrorMsg("");
-    });
+      /* HANDLE UPDATE PASSWORD SUCCESS AND FAILURE */
+      socket.on("update_password", () => {
+        setEditPassword(false);
+        setOldPassword("");
+        setNewPassword("");
+        setConfirmNewPassword("");
+        setErrorType("");
+        setErrorMsg("");
+      });
 
-    socket.on("update_password_failed", ({ error }) => {
-      setErrorType("oldpassword");
-      setErrorMsg(error);
-    });
+      socket.on("update_password_failed", ({ error }) => {
+        setErrorType("oldpassword");
+        setErrorMsg(error);
+      });
+    }
   }, []);
 
   return (

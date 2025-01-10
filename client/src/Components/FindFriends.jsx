@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import axios from "axios";
@@ -16,11 +16,13 @@ function FindFriends() {
   const [selectedUser, setSelectedUser] = useState({});
   const [showConfirmRemove, setShowConfirmRemove] = useState(false);
 
+  /* FRIENDS IDS LISTS */
   const friendsIds = useMemo(() => {
     const ids = friends.map((friend) => friend.usr_id);
     return ids;
   }, []);
 
+  /* GET ALL FRIEND REQUEST THE USER HAS SENT TO OTHERS */
   const sentRequests = useMemo(() => {
     const requestsList = notifications
       .filter((notification) => notification.from.userId === userData.userId)
@@ -45,6 +47,10 @@ function FindFriends() {
     setShowDetailsCard(false);
   }
 
+  useEffect(() => {
+    if (!userData) navigate("/login");
+  }, []);
+
   /* DEBOUNCE FUNCTION FOR SEARCHING USER */
   function debounce() {
     let timeout;
@@ -67,6 +73,7 @@ function FindFriends() {
 
   return (
     <div className="FindFriends_Page">
+      {/* CARD TO SHOW SELECTED USER'S DETAILS AND OPTIONS */}
       <div
         className={
           showDetailsCard
@@ -146,6 +153,7 @@ function FindFriends() {
         </div>
       </div>
       <div className="FindFriends_Container">
+        {/* SEARCH BAR TO FIND NEW FRIENDS */}
         <section className="FindFriends--SearchBar">
           <input
             className="FindFriends--SearchBar_Input"
@@ -160,6 +168,7 @@ function FindFriends() {
             placeholder="Search username/user ID"
           ></input>
         </section>
+        {/* LIST OF USERS WHO MATCH THE SEARCH */}
         <section className="FindFriends--Search_Results">
           {searchResults.length ? (
             searchResults.map((user, index) => {
