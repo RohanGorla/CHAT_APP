@@ -235,8 +235,16 @@ io.on("connection", async (socket) => {
       type: "single",
     };
     const roomsResponse = await roomsCollection.insertOne(roomRecord);
-    io.to(payload.to.usr_id).emit("join_room", { roomId });
-    io.to(payload.from.userId).emit("join_room", { roomId });
+    io.to(payload.to.usr_id).emit("join_room", {
+      from: payload.from,
+      to: payload.to,
+      roomId,
+    });
+    io.to(payload.from.userId).emit("join_room", {
+      from: payload.from,
+      to: payload.to,
+      roomId,
+    });
     const id = new ObjectId(payload._id);
     const deleteResponse = await notificationsCollection.deleteOne({
       _id: id,
@@ -269,7 +277,7 @@ io.on("connection", async (socket) => {
   /* JOIN ROOMS */
   socket.on("join_room", async (payload) => {
     socket.join(payload.roomId);
-    socket.emit("join_room_success");
+    socket.emit("join_room_success", payload);
   });
   /* DELETE CHAT */
   socket.on("delete_chat", async ({ from, to, room }) => {
