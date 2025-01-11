@@ -7,6 +7,7 @@
   --Notifications_Userid: 16px;
   --Notifications_Buttons: 14px;
   --Notifications_Card--Sent--Message: 18px;
+  --Notifications_Card--Sent--Icon: 25px;
   --Notifications_Empty: 20px;
 }
 
@@ -124,6 +125,7 @@
 }
 
 .Notifications_Card--Sent {
+  width: 85%;
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -131,11 +133,13 @@
 
 .Notifications_Card--Sent--Message {
   font-size: var(--Notifications_Card--Sent--Message);
+  min-width: 80%;
 }
 
 .Notifications_Card--Sent--Icon {
-  font-size: 25px;
+  font-size: var(--Notifications_Card--Sent--Icon);
   color: rgb(51, 214, 91);
+  min-width: 20%;
 }
 
 .Notifications_Card--Sent--Inactive {
@@ -172,6 +176,8 @@
     --Notifications_Username: 16px;
     --Notifications_Userid: 14px;
     --Notifications_Buttons: 12px;
+    --Notifications_Card--Sent--Message: 14px;
+    --Notifications_Card--Sent--Icon: 20px;
     --Notifications_Empty: 16px;
   }
 
