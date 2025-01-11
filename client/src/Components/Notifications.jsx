@@ -108,6 +108,20 @@ function Notifications() {
                       }
                     />
                   </div>
+                  <div
+                    className={
+                      notification.type === "Reject"
+                        ? "Notifications_Card--Reject--Options"
+                        : "Notifications_Card--Reject--Options--Inactive"
+                    }
+                  >
+                    <button className="Notifications_Card--Reject--Options--Ok">
+                      Ok
+                    </button>
+                    <button className="Notifications_Card--Reject--Options--Resend">
+                      Re-send
+                    </button>
+                  </div>
                 </div>
               </div>
             );
