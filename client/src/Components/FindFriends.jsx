@@ -32,7 +32,7 @@ function FindFriends() {
 
   /* SEND FRIEND REQUEST TO SELECTED USER */
   async function sendRequest(user) {
-    socket.emit("send_request", { from: userData, to: user });
+    socket.emit("send_request", { from: userData, to: user, type: "Request" });
     setShowDetailsCard(false);
   }
 

@@ -217,7 +217,12 @@ io.on("connection", async (socket) => {
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
-    const record = { from: payload.from, to: payload.to, type: "Request" };
+    const record = {
+      from: payload.from,
+      to: payload.to,
+      type: payload.type,
+      seen: false,
+    };
     const response = await notificationsCollection.insertOne(record);
     socket.to(payload.to.usr_id).emit("friend_request", record);
     socket.emit("friend_request", record);
