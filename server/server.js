@@ -270,6 +270,13 @@ io.on("connection", async (socket) => {
       seen: false,
     });
   });
+  /* DELETE FRIEND REQUESTS */
+  socket.on("delete_request", async (payload) => {
+    const id = new ObjectId(payload._id);
+    const deleteResponse = await notificationsCollection.deleteOne({
+      _id: id,
+    });
+  });
   /* REMOVE FRIENDS */
   socket.on("remove_friend", async ({ from, to, room }) => {
     const removeFriend = await userInfoCollection.updateMany(
