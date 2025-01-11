@@ -104,6 +104,12 @@ function User() {
         return setNotifications(updatedNotifications);
       setNotifications([...updatedNotifications, newNotification]);
     });
+    socket.on("request_deleted", (payload) => {
+      const updatedNotifications = notifications.filter(
+        (notification) => notification._id !== payload._id
+      );
+      setNotifications(updatedNotifications);
+    });
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
     });
