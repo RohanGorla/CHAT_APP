@@ -98,7 +98,7 @@ function User() {
     });
     socket.on("request_rejected", (payload) => {
       const updatedNotifications = notifications.filter(
-        (notification) => notification.to.usr_id !== payload.to.usr_id
+        (notification) => notification._id !== payload._id
       );
       setNotifications(updatedNotifications);
     });
@@ -208,6 +208,14 @@ function User() {
       Popup("Password changed successfully");
     });
   });
+
+  /* GET THE NEW NOTIFICATIONS */
+  useEffect(() => {
+    const newNotifications = notifications.filter(
+      (notification) => !notification.seen
+    );
+    console.log(newNotifications);
+  }, [notifications]);
 
   useEffect(() => {
     if (!userData) {
