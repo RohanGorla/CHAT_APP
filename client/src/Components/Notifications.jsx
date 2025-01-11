@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { SiTicktick } from "react-icons/si";
+import { MdCancel } from "react-icons/md";
+import { GiCancel } from "react-icons/gi";
 
 function Notifications() {
   /* SPECIAL VARIABLES */
@@ -44,6 +46,7 @@ function Notifications() {
                     <IoMdPerson className="Notifications_Card--Image_Icon" />
                   </div>
                 </div>
+                {/* NOTIFICATION DETAILS (SHOWN WHEN YOU RECEIVE A REQUEST) */}
                 <div
                   className={
                     notification.from.userId === userData.userId
@@ -72,6 +75,7 @@ function Notifications() {
                     </button>
                   </div>
                 </div>
+                {/* NOTIFICATION SENT/REJECTED (SHOWN WHEN YOU SEND A REQUEST) */}
                 <div
                   className={
                     notification.from.userId === userData.userId
@@ -79,10 +83,31 @@ function Notifications() {
                       : "Notifications_Card--Sent--Inactive"
                   }
                 >
-                  <p className="Notifications_Card--Sent--Message">
-                    Fren request sent to {notification.to.usr_nm}.
-                  </p>
-                  <SiTicktick className="Notifications_Card--Sent--Icon" />
+                  <div className="Notifications_Card--Sent--Details">
+                    <p className="Notifications_Card--Sent--Message">
+                      {notification.type === "Request"
+                        ? `Fren request sent to ${notification.to.usr_nm}.`
+                        : notification.type === "Reject"
+                        ? `Fren request rejected by ${notification.to.usr_nm}.`
+                        : null}
+                    </p>
+                    {/* WHEN REQUEST IS SENT */}
+                    <SiTicktick
+                      className={
+                        notification.type === "Request"
+                          ? "Notifications_Card--Sent--Icon"
+                          : "Notifications_Card--Sent--Icon--Inactive"
+                      }
+                    />
+                    {/* SHOWN WHEN REQUEST IS REJECTED */}
+                    <GiCancel
+                      className={
+                        notification.type === "Reject"
+                          ? "Notifications_Card--Reject--Icon"
+                          : "Notifications_Card--Reject--Icon--Inactive"
+                      }
+                    />
+                  </div>
                 </div>
               </div>
             );
