@@ -23,6 +23,11 @@ function Notifications() {
     socket.emit("reject_request", request);
   }
 
+  /* DELETE FRIEND REQUEST SOCKET METHOD */
+  async function deleteRequest(request) {
+    socket.emit("delete_request", request);
+  }
+
   /* REVERSE THE NOTIFICATIONS LIST TO SHOW NEW NOTIFICATIONS ON TOP */
   useEffect(() => {
     if (!userData) {
@@ -115,7 +120,10 @@ function Notifications() {
                         : "Notifications_Card--Reject--Options--Inactive"
                     }
                   >
-                    <button className="Notifications_Card--Reject--Options--Ok">
+                    <button
+                      className="Notifications_Card--Reject--Options--Ok"
+                      onClick={() => deleteRequest(notification)}
+                    >
                       Ok
                     </button>
                     <button className="Notifications_Card--Reject--Options--Resend">
