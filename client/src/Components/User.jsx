@@ -5,6 +5,7 @@ import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RiSearch2Fill } from "react-icons/ri";
 import { GoBellFill } from "react-icons/go";
 import { SiTicktick } from "react-icons/si";
+import { GiCancel } from "react-icons/gi";
 
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
@@ -15,6 +16,7 @@ function User() {
   /* STATE VARIABLES */
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [popupType, setPopupType] = useState("");
   const [notifications, setNotifications] = useState([]);
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
@@ -25,9 +27,10 @@ function User() {
   const [usernameColor, setUsernameColor] = useState("");
 
   /* SHOW AND HIDE POPUP NOTIFICATION FUNCTION */
-  function Popup(message) {
+  function Popup(message, type) {
     setShowPopup(true);
     setPopupMessage(message);
+    setPopupType(type);
     setTimeout(() => {
       setShowPopup(false);
     }, 3000);
@@ -63,17 +66,18 @@ function User() {
       );
       setChats(updatedChat);
       /* DELETE CHAT POPUP */
-      if (from.userId === userData.userId) Popup(`Chat messages deleted!`);
+      if (from.userId === userData.userId)
+        Popup(`Chat messages deleted!`, "Good");
       if (to.usr_id === userData.userId)
-        Popup(`${from.username} deleted the chat!`);
+        Popup(`${from.username} deleted the chat!`, "Bad");
     });
     /* FRIENDS AND ROOMS RELATED EVENTS */
     socket.on("friend_request", (payload) => {
       setNotifications([...notifications, payload]);
       if (payload.to.usr_id === userData.userId)
-        Popup(`${payload.from.username} sent a Fren request!`);
+        Popup(`${payload.from.username} sent a Fren request!`, "Good");
       if (payload.from.userId === userData.userId)
-        Popup(`Fren request sent to ${payload.to.usr_nm}!`);
+        Popup(`Fren request sent to ${payload.to.usr_nm}!`, "Good");
     });
     socket.on("remove_friend", ({ from, to, roomToRemove }) => {
       const updatedRooms = rooms.filter(
@@ -92,9 +96,9 @@ function User() {
       setChats(updatedChats);
       /* REMOVE FRIEND POPUP */
       if (from.userId === userData.userId)
-        Popup(`Removed ${to.usr_nm} as fren!`);
+        Popup(`Removed ${to.usr_nm} as fren!`, "Good");
       if (to.usr_id === userData.userId)
-        Popup(`${from.username} removed you as fren!`);
+        Popup(`${from.username} removed you as fren!`, "Bad");
     });
     socket.on("request_rejected", ({ oldNotification, newNotification }) => {
       const updatedNotifications = notifications.filter(
@@ -104,7 +108,10 @@ function User() {
         return setNotifications(updatedNotifications);
       setNotifications([...updatedNotifications, newNotification]);
       if (oldNotification.from.userId === userData.userId)
-        Popup(`${oldNotification.to.usr_nm} rejected your fren request!`);
+        Popup(
+          `${oldNotification.to.usr_nm} rejected your fren request!`,
+          "Bad"
+        );
     });
     socket.on("request_deleted", (payload) => {
       const updatedNotifications = notifications.filter(
@@ -118,9 +125,9 @@ function User() {
     socket.on("join_room_success", ({ from, to }) => {
       socket.emit("get_user_data", { room: userData.userId });
       if (from.userId === userData.userId)
-        Popup(`${to.usr_nm} accepted your fren request!`);
+        Popup(`${to.usr_nm} accepted your fren request!`, "Good");
       if (to.usr_id === userData.userId)
-        Popup(`You are now frens with ${from.username}!`);
+        Popup(`You are now frens with ${from.username}!`, "Good");
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_username", ({ userId, username }) => {
@@ -158,7 +165,8 @@ function User() {
       });
       setChats(updatedChats);
       /* CHANGE USERNAME POPUP */
-      if (userData.userId === userId) Popup(`Username changed to ${username}`);
+      if (userData.userId === userId)
+        Popup(`Username changed to ${username}`, "Good");
     });
     socket.on("update_userid", ({ oldUserid, newUserid }) => {
       /* CHANGE USERID IN FRIENDS LIST */
@@ -192,7 +200,7 @@ function User() {
       setChats(updatedChats);
       /* CHANGE USER ID POPUP */
       if (userData.userId === oldUserid)
-        Popup(`Userid changed to ${newUserid}`);
+        Popup(`Userid changed to ${newUserid}`, "Good");
     });
     socket.on("update_email", ({ userId, newEmail }) => {
       /* CHANGE EMAIL IN FRIENDS LIST */
@@ -212,10 +220,11 @@ function User() {
       });
       setNotifications(updatedNotifications);
       /* CHANGE EMAIL POPUP */
-      if (userData.userId === userId) Popup(`Email id changed to ${newEmail}`);
+      if (userData.userId === userId)
+        Popup(`Email id changed to ${newEmail}`, "Good");
     });
     socket.on("update_password", () => {
-      Popup("Password changed successfully");
+      Popup("Password changed successfully", "Good");
     });
   });
 
@@ -279,9 +288,28 @@ function User() {
       <div
         className={showPopup ? "User_PopUp User_PopUp--Active" : "User_PopUp"}
       >
-        <div className="User_PopUp_Card">
+        <div
+          className={
+            popupType === "Good"
+              ? "User_PopUp_Card User_PopUp_Card--Good"
+              : "User_PopUp_Card User_PopUp_Card--Bad"
+          }
+        >
           <p className="User_PopUp--Message">{popupMessage}</p>
-          <SiTicktick className="User_PopUp--Icon" />
+          <SiTicktick
+            className={
+              popupType === "Good"
+                ? "User_PopUp--Icon User_PopUp--Icon--Good"
+                : "User_PopUp--Icon--Inactive"
+            }
+          />
+          <GiCancel
+            className={
+              popupType === "Bad"
+                ? "User_PopUp--Icon User_PopUp--Icon--Bad"
+                : "User_PopUp--Icon--Inactive"
+            }
+          />
         </div>
       </div>
       {/* NAVBAR */}
