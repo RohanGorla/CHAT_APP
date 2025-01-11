@@ -120,10 +120,6 @@
   }
 }
 
-.Notifications_Card--User_Details--Inactive {
-  display: none;
-}
-
 .Notifications_Card--Sent {
   width: 85%;
 }
@@ -172,6 +168,8 @@
   }
 }
 
+.Notifications_Card--Inactive,
+.Notifications_Card--User_Details--Inactive,
 .Notifications_Card--Sent--Inactive,
 .Notifications_Card--Sent--Icon--Inactive,
 .Notifications_Card--Reject--Icon--Inactive,

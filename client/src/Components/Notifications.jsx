@@ -33,7 +33,14 @@ function Notifications() {
     if (!userData) {
       navigate("/login");
     } else {
-      const reverseNotificationList = notifications.toReversed();
+      const validNotifications = notifications.filter(
+        (notification) =>
+          !(
+            notification.to.usr_id === userData.userId &&
+            notification.type === "Reject"
+          )
+      );
+      const reverseNotificationList = validNotifications.toReversed();
       setReversedNotifications(reverseNotificationList);
     }
   }, [notifications]);
@@ -45,7 +52,15 @@ function Notifications() {
         {reversedNotifications.length ? (
           reversedNotifications.map((notification, index) => {
             return (
-              <div key={index} className="Notifications_Card">
+              <div
+                key={index}
+                className={
+                  notification.to.usr_id === userData.userId &&
+                  notification.type === "Reject"
+                    ? "Notifications_Card--Inactive"
+                    : "Notifications_Card"
+                }
+              >
                 <div className="Notifications_Card--Image_Container">
                   <div className="Notifications_Card--Image_Icon_Container">
                     <IoMdPerson className="Notifications_Card--Image_Icon" />
