@@ -13,10 +13,12 @@ function Login() {
   const [passwordError, setPasswordError] = useState(false);
   const [mailError, setMailError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   /* CHECK USER CREDENTIALS API */
   async function checkUser(e) {
     e.preventDefault();
+    setSubmitted(true);
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/checkuser`,
       {
@@ -39,6 +41,7 @@ function Login() {
           break;
       }
       setErrorMessage(response.data.errorMsg);
+      setSubmitted(false);
       return;
     }
 
@@ -63,9 +66,7 @@ function Login() {
             value={mail}
             required
             placeholder="Enter your email"
-            onChange={(e) => {
-              setMail(e.target.value);
-            }}
+            onChange={(e) => setMail(e.target.value)}
           ></input>
           <p>{mailError ? errorMessage : ""}</p>
         </div>
@@ -79,9 +80,7 @@ function Login() {
               value={password}
               required
               placeholder="Enter your password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             ></input>
             <AiFillEye
               className={
@@ -102,7 +101,9 @@ function Login() {
           </div>
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
-        <button type="submit">Login</button>
+        <button type="submit" disabled={submitted}>
+          Login
+        </button>
         <p className="Login--Toggle">
           New user?{" "}
           <span

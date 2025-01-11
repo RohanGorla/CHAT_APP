@@ -18,15 +18,18 @@ function Register() {
   const [mailError, setMailError] = useState(false);
   const [userIdError, setUserIdError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitted, setSubmitted] = useState(false);
 
   /* REGISTER A NEW USER API */
   async function registerUser(e) {
     e.preventDefault();
+    setSubmitted(true);
     /* CHECK IF PASSWORD AND CONFIRM PASSWORD MATCH */
     if (password !== confirmPassword) {
       setMailError(false);
       setUserIdError(false);
       setPasswordError(true);
+      setSubmitted(false);
       setErrorMessage("Passwords donot match!");
       return;
     }
@@ -54,6 +57,7 @@ function Register() {
           break;
       }
       setErrorMessage(response.data.errorMsg);
+      setSubmitted(false);
       return;
     }
     /* REGISTER SUCCESS */
@@ -73,14 +77,12 @@ function Register() {
           <label htmlFor="Login_Mail">Email address:</label>
           <input
             id="Login_Mail"
-            className={mailError ? "Login_Input--Error" : null}
+            className={mailError ? "Login_Input--Error" : ""}
             type="email"
             value={mail}
             required
             placeholder="Enter your email"
-            onChange={(e) => {
-              setMail(e.target.value);
-            }}
+            onChange={(e) => setMail(e.target.value)}
           ></input>
           <p>{mailError ? errorMessage : ""}</p>
         </div>
@@ -89,14 +91,12 @@ function Register() {
           <label htmlFor="Login_UserId">User Id:</label>
           <input
             id="Login_UserId"
-            className={userIdError ? "Login_Input--Error" : null}
+            className={userIdError ? "Login_Input--Error" : ""}
             type="text"
             value={userId}
             required
             placeholder="Enter a unique user id"
-            onChange={(e) => {
-              setUserId(e.target.value);
-            }}
+            onChange={(e) => setUserId(e.target.value)}
           ></input>
           <p>{userIdError ? errorMessage : ""}</p>
         </div>
@@ -109,9 +109,7 @@ function Register() {
             value={username}
             required
             placeholder="Enter your username"
-            onChange={(e) => {
-              setUsername(e.target.value);
-            }}
+            onChange={(e) => setUsername(e.target.value)}
           ></input>
         </div>
         {/* USER PASSWORD FOR AUTHENTICATION */}
@@ -120,14 +118,12 @@ function Register() {
           <div className="Login_Password--Input_Container">
             <input
               id="Login_Password"
-              className={passwordError ? "Login_Input--Error" : null}
+              className={passwordError ? "Login_Input--Error" : ""}
               type={showPassword ? "text" : "password"}
               value={password}
               required
               placeholder="Enter your password"
-              onChange={(e) => {
-                setPassword(e.target.value);
-              }}
+              onChange={(e) => setPassword(e.target.value)}
             ></input>
             <AiFillEye
               className={
@@ -153,14 +149,12 @@ function Register() {
           <div className="Login_Password--Input_Container">
             <input
               id="Login_Confirm_Password"
-              className={passwordError ? "Login_Input--Error" : null}
+              className={passwordError ? "Login_Input--Error" : ""}
               type={showConfirmPassword ? "text" : "password"}
               value={confirmPassword}
               required
               placeholder="Confirm your password"
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             ></input>
             <AiFillEye
               className={
@@ -182,7 +176,9 @@ function Register() {
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
         {/* REGISTRATION FORM SUBMIT BUTTON */}
-        <button type="submit">Sign up</button>
+        <button type="submit" disabled={submitted}>
+          Sign up
+        </button>
         <p className="Login--Toggle">
           Already have an account?{" "}
           <span
