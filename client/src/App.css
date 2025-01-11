@@ -32,9 +32,16 @@
   border-style: none;
   border-radius: 10px;
   border: 2px solid white;
-  box-shadow: 15px 0px rgb(15, 213, 15) inset;
   padding: 1em 2em;
   margin-inline: auto;
+}
+
+.User_PopUp_Card--Good {
+  box-shadow: 15px 0px rgb(15, 213, 15) inset;
+}
+
+.User_PopUp_Card--Bad {
+  box-shadow: 15px 0px rgb(213, 15, 15) inset;
 }
 
 .User_PopUp--Message {
@@ -49,7 +56,18 @@
 
 .User_PopUp--Icon {
   font-size: var(--User--PopUp_Icon_Size);
+}
+
+.User_PopUp--Icon--Good {
   color: rgb(15, 213, 15);
+}
+
+.User_PopUp--Icon--Bad {
+  color: rgb(213, 15, 15);
+}
+
+.User_PopUp--Icon--Inactive {
+  display: none;
 }
 
 .User_Navbar {
