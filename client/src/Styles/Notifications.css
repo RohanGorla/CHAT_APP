@@ -126,6 +126,9 @@
 
 .Notifications_Card--Sent {
   width: 85%;
+}
+
+.Notifications_Card--Sent--Details {
   display: flex;
   align-items: center;
   gap: 0.5em;
@@ -142,7 +145,37 @@
   min-width: 20%;
 }
 
-.Notifications_Card--Sent--Inactive {
+.Notifications_Card--Reject--Icon {
+  font-size: var(--Notifications_Card--Sent--Icon);
+  color: rgb(255, 0, 0);
+  min-width: 20%;
+}
+
+.Notifications_Card--Reject--Options {
+  margin-top: 0.3em;
+}
+
+.Notifications_Card--Reject--Options button {
+  font-family: var(--Notifications_Sub_Font);
+  font-size: var(--Notifications_Buttons);
+  font-weight: 600;
+  background-color: rgb(112, 224, 0);
+  padding: 0.3em 0.7em;
+  border-radius: 5px;
+  border: 2px solid black;
+  margin-right: 1em;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
+  }
+}
+
+.Notifications_Card--Sent--Inactive,
+.Notifications_Card--Sent--Icon--Inactive,
+.Notifications_Card--Reject--Icon--Inactive,
+.Notifications_Card--Reject--Options--Inactive {
   display: none;
 }
 
