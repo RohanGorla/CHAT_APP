@@ -103,6 +103,8 @@ function User() {
       if (oldNotification.to.usr_id === userData.userId)
         return setNotifications(updatedNotifications);
       setNotifications([...updatedNotifications, newNotification]);
+      if (oldNotification.from.userId === userData.userId)
+        Popup(`${oldNotification.to.usr_nm} rejected your fren request!`);
     });
     socket.on("request_deleted", (payload) => {
       const updatedNotifications = notifications.filter(
