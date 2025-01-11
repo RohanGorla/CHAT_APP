@@ -271,8 +271,8 @@ io.on("connection", async (socket) => {
       newNotificationRecord
     );
     io.to(payload.from.userId).emit("request_rejected", {
-      oldNotif: payload,
-      newNotif: newNotificationRecord,
+      oldNotification: payload,
+      newNotification: newNotificationRecord,
     });
     io.to(payload.to.usr_id).emit("request_rejected", {
       oldNotification: payload,
@@ -285,6 +285,8 @@ io.on("connection", async (socket) => {
     const deleteResponse = await notificationsCollection.deleteOne({
       _id: id,
     });
+    io.to(payload.to.usr_id).emit("request_deleted", payload);
+    io.to(payload.from.userId).emit("request_deleted", payload);
   });
   /* REMOVE FRIENDS */
   socket.on("remove_friend", async ({ from, to, room }) => {
