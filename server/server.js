@@ -263,6 +263,12 @@ io.on("connection", async (socket) => {
     const deleteResponse = await notificationsCollection.deleteOne({
       _id: id,
     });
+    const rejectNotification = await notificationsCollection.insertOne({
+      from: payload.from,
+      to: payload.to,
+      type: "Reject",
+      seen: false,
+    });
   });
   /* REMOVE FRIENDS */
   socket.on("remove_friend", async ({ from, to, room }) => {
