@@ -275,8 +275,8 @@ io.on("connection", async (socket) => {
       newNotif: newNotificationRecord,
     });
     io.to(payload.to.usr_id).emit("request_rejected", {
-      oldNotif: payload,
-      newNotif: newNotificationRecord,
+      oldNotification: payload,
+      newNotification: newNotificationRecord,
     });
   });
   /* DELETE FRIEND REQUESTS */

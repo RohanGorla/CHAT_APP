@@ -96,11 +96,13 @@ function User() {
       if (to.usr_id === userData.userId)
         Popup(`${from.username} removed you as fren!`);
     });
-    socket.on("request_rejected", (payload) => {
+    socket.on("request_rejected", ({ oldNotification, newNotification }) => {
       const updatedNotifications = notifications.filter(
-        (notification) => notification._id !== payload._id
+        (notification) => notification._id !== oldNotification._id
       );
-      setNotifications(updatedNotifications);
+      if (oldNotification.to.usr_id === userData.userId)
+        return setNotifications(updatedNotifications);
+      setNotifications([...updatedNotifications, newNotification]);
     });
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
