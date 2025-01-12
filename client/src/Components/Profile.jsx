@@ -32,6 +32,11 @@ function Profile() {
       setErrorMsg("New username cannot be the same as old username!");
       return;
     }
+    if (!newUsername.length) {
+      setErrorType("username");
+      setErrorMsg("Username cannot be empty!");
+      return;
+    }
     socket.emit("update_username", {
       username: newUsername,
       userId: userData.userId,
@@ -47,6 +52,11 @@ function Profile() {
     if (newUserid === userData.userId) {
       setErrorType("userid");
       setErrorMsg("New userid cannot be the same as old userid!");
+      return;
+    }
+    if (!newUserid.length) {
+      setErrorType("userid");
+      setErrorMsg("Userid cannot be empty!");
       return;
     }
     socket.emit("update_userid", {

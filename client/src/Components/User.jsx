@@ -265,16 +265,6 @@ function User() {
       });
       /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
       socket.on("user_data", ({ rooms, friends, chats, notifications }) => {
-        console.log(
-          "Rooms Data -> ",
-          rooms,
-          "\n\nFriends Data -> ",
-          friends,
-          "\n\nNotifications Data -> ",
-          notifications,
-          "\n\nChats Data -> ",
-          chats
-        );
         rooms.map((room) => {
           if (room.type === "single") {
             const friendId = room.users.filter(
@@ -292,12 +282,6 @@ function User() {
         setChats(chats);
         setNotifications(notifications);
       });
-      /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
-      const usernameColors = ["orange", "green", "violet", "goldenrod"];
-      const randomColor =
-        usernameColors[Math.floor(Math.random() * usernameColors.length)];
-      setUsernameColor(randomColor);
-      navigate("friends");
     }
   }, []);
 
