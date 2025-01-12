@@ -23,9 +23,19 @@ function Notifications() {
     socket.emit("reject_request", request);
   }
 
-  /* DELETE FRIEND REQUEST SOCKET METHOD */
+  /* DELETE REJECTED FRIEND REQUEST SOCKET METHOD */
   async function deleteRequest(request) {
     socket.emit("delete_request", request);
+  }
+
+  /* RESEND REJECTED FRIEND REQUEST SOCKET METHOD */
+  async function resendRequest(request) {
+    socket.emit("send_request", {
+      from: userData,
+      to: request.to,
+      type: "Request",
+    });
+    setShowDetailsCard(false);
   }
 
   /* REVERSE THE NOTIFICATIONS LIST TO SHOW NEW NOTIFICATIONS ON TOP */
@@ -141,7 +151,10 @@ function Notifications() {
                     >
                       Ok
                     </button>
-                    <button className="Notifications_Card--Reject--Options--Resend">
+                    <button
+                      className="Notifications_Card--Reject--Options--Resend"
+                      onClick={() => resendRequest(notification)}
+                    >
                       Re-send
                     </button>
                   </div>
