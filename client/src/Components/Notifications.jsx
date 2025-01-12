@@ -35,7 +35,6 @@ function Notifications() {
       to: request.to,
       type: "Request",
     });
-    setShowDetailsCard(false);
   }
 
   /* REVERSE THE NOTIFICATIONS LIST TO SHOW NEW NOTIFICATIONS ON TOP */

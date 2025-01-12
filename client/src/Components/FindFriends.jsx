@@ -20,7 +20,7 @@ function FindFriends() {
   const friendsIds = useMemo(() => {
     const ids = friends.map((friend) => friend.usr_id);
     return ids;
-  }, []);
+  }, [friends]);
 
   /* GET ALL FRIEND REQUEST THE USER HAS SENT TO OTHERS */
   const sentRequests = useMemo(() => {
@@ -49,6 +49,7 @@ function FindFriends() {
     });
     socket.emit("remove_friend", { from: userData, to: user, room: room[0] });
     setShowDetailsCard(false);
+    setShowConfirmRemove(false);
   }
 
   useEffect(() => {
