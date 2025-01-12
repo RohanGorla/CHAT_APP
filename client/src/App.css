@@ -94,6 +94,21 @@
   gap: 1em;
 }
 
+.User_Nav_Options--Navlink {
+  position: relative;
+}
+
+.User_Nav_Options--Alert {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  color: rgb(213, 15, 15);
+}
+
+.User_Nav_Options--Alert--Inactive {
+  display: none;
+}
+
 .User_Nav_Options--Active {
   color: rgb(46, 46, 58);
 }
