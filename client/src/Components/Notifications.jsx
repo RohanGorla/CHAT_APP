@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { SiTicktick } from "react-icons/si";
-import { MdCancel } from "react-icons/md";
 import { GiCancel } from "react-icons/gi";
 
 function Notifications() {

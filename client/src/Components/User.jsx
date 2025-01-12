@@ -3,7 +3,7 @@ import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { io } from "socket.io-client";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RiSearch2Fill } from "react-icons/ri";
-import { GoBellFill } from "react-icons/go";
+import { GoBellFill, GoDotFill } from "react-icons/go";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
 
@@ -18,6 +18,7 @@ function User() {
   const [popupMessage, setPopupMessage] = useState("");
   const [popupType, setPopupType] = useState("");
   const [notifications, setNotifications] = useState([]);
+  const [newNotifications, setNewNotifications] = useState([]);
   const [friends, setFriends] = useState([]);
   const [rooms, setRooms] = useState([]);
   const [searchRooms, setSearchRooms] = useState([]);
@@ -237,10 +238,21 @@ function User() {
 
   /* GET THE NEW NOTIFICATIONS */
   useEffect(() => {
-    const newNotifications = notifications.filter(
-      (notification) => !notification.seen
-    );
-    console.log(newNotifications);
+    const newNotifications = notifications.filter((notification) => {
+      if (
+        notification.to.usr_id === userData.userId &&
+        !notification.seen &&
+        notification.type !== "Reject"
+      )
+        return notification;
+      if (
+        notification.from.userId === userData.userId &&
+        !notification.seen &&
+        notification.type === "Reject"
+      )
+        return notification;
+    });
+    setNewNotifications(newNotifications);
   }, [notifications]);
 
   useEffect(() => {
@@ -323,46 +335,61 @@ function User() {
       <nav className="User_Navbar">
         <p className="User_Appname">Frens</p>
         <div className="User_Nav_Options">
-          <NavLink
-            to="/user/friends"
-            className={({ isActive }) =>
-              isActive
-                ? "User_Nav_Options--Active"
-                : "User_Nav_Options--Inactive"
-            }
-          >
-            <IoIosChatboxes className="User_Nav_Options--Icon" />
-          </NavLink>
-          <NavLink
-            to="/user/findfriends"
-            className={({ isActive }) =>
-              isActive
-                ? "User_Nav_Options--Active"
-                : "User_Nav_Options--Inactive"
-            }
-          >
-            <RiSearch2Fill className="User_Nav_Options--Icon" />
-          </NavLink>
-          <NavLink
-            to="/user/notifications"
-            className={({ isActive }) =>
-              isActive
-                ? "User_Nav_Options--Active"
-                : "User_Nav_Options--Inactive"
-            }
-          >
-            <GoBellFill className="User_Nav_Options--Icon" />
-          </NavLink>
-          <NavLink
-            to="/user/profile"
-            className={({ isActive }) =>
-              isActive
-                ? "User_Nav_Options--Active"
-                : "User_Nav_Options--Inactive"
-            }
-          >
-            <IoMdPerson className="User_Nav_Options--Icon" />
-          </NavLink>
+          <div className="User_Nav_Options--Navlink">
+            <NavLink
+              to="/user/friends"
+              className={({ isActive }) =>
+                isActive
+                  ? "User_Nav_Options--Active"
+                  : "User_Nav_Options--Inactive"
+              }
+            >
+              <IoIosChatboxes className="User_Nav_Options--Icon" />
+            </NavLink>
+          </div>
+          <div className="User_Nav_Options--Navlink">
+            <NavLink
+              to="/user/findfriends"
+              className={({ isActive }) =>
+                isActive
+                  ? "User_Nav_Options--Active"
+                  : "User_Nav_Options--Inactive"
+              }
+            >
+              <RiSearch2Fill className="User_Nav_Options--Icon" />
+            </NavLink>
+          </div>
+          <div className="User_Nav_Options--Navlink">
+            <GoDotFill
+              className={
+                newNotifications.length
+                  ? "User_Nav_Options--Alert"
+                  : "User_Nav_Options--Alert--Inactive"
+              }
+            />
+            <NavLink
+              to="/user/notifications"
+              className={({ isActive }) =>
+                isActive
+                  ? "User_Nav_Options--Active"
+                  : "User_Nav_Options--Inactive"
+              }
+            >
+              <GoBellFill className="User_Nav_Options--Icon" />
+            </NavLink>
+          </div>
+          <div className="User_Nav_Options--Navlink">
+            <NavLink
+              to="/user/profile"
+              className={({ isActive }) =>
+                isActive
+                  ? "User_Nav_Options--Active"
+                  : "User_Nav_Options--Inactive"
+              }
+            >
+              <IoMdPerson className="User_Nav_Options--Icon" />
+            </NavLink>
+          </div>
         </div>
       </nav>
       {/* RENDER OUTLET ELEMENTS */}
