@@ -96,7 +96,10 @@ function FindFriends() {
           <div className="FindFriends--Selected_User--Back_Button">
             <IoMdArrowRoundBack
               className="FindFriends--Selected_User--Back_Button--Icon"
-              onClick={() => setShowDetailsCard(false)}
+              onClick={() => {
+                setShowDetailsCard(false);
+                setShowConfirmRemove(false);
+              }}
             />
           </div>
           <div className="FindFriends--Selected_User--Image">
@@ -148,7 +151,13 @@ function FindFriends() {
               frens!
             </i>
             <button
-              className="FindFriends--Selected_User--Confirm_Remove--Button"
+              className="FindFriends--Selected_User--Confirm_Remove--Cancel"
+              onClick={() => setShowConfirmRemove(false)}
+            >
+              Cancel
+            </button>
+            <button
+              className="FindFriends--Selected_User--Confirm_Remove--Confirm"
               onClick={() => removeFriend(selectedUser)}
             >
               Confirm remove fren
