@@ -217,6 +217,12 @@ io.on("connection", async (socket) => {
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
+    const deleteResponse = await notificationsCollection.deleteOne({
+      $and: [
+        { "to.usr_id": payload.to.usr_id },
+        { "from.userId": payload.from.userId },
+      ],
+    });
     const record = {
       from: payload.from,
       to: payload.to,
