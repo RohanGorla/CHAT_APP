@@ -70,6 +70,8 @@ function Register() {
 
   return (
     <div className="Login_Page">
+      {/* WELCOME MESSAGE */}
+      <p className="Login_Page--Welcome_Message">Welcome to frens!</p>
       {/* USER REGISTER FORM */}
       <form className="Login_Page--Form" onSubmit={registerUser}>
         {/* USER EMAIL */}
@@ -179,6 +181,7 @@ function Register() {
         <button type="submit" disabled={submitted}>
           Sign up
         </button>
+        {/* NAVIGATE TO LOGIN PAGE */}
         <p className="Login--Toggle">
           Already have an account?{" "}
           <span

@@ -56,7 +56,11 @@ function Login() {
 
   return (
     <div className="Login_Page">
+      {/* WELCOME MESSAGE */}
+      <p className="Login_Page--Welcome_Message">Welcome to frens!</p>
+      {/* LOGIN FORM */}
       <form className="Login_Page--Form" onSubmit={checkUser}>
+        {/* LOGIN EMAIL */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Usermail">Email:</label>
           <input
@@ -70,6 +74,7 @@ function Login() {
           ></input>
           <p>{mailError ? errorMessage : ""}</p>
         </div>
+        {/* LOGIN PASSWORD */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Password">Password:</label>
           <div className="Login_Password--Input_Container">
@@ -101,9 +106,11 @@ function Login() {
           </div>
           <p>{passwordError ? errorMessage : ""}</p>
         </div>
+        {/* LOGIN BUTTON */}
         <button type="submit" disabled={submitted}>
           Login
         </button>
+        {/* NAVIGATE TO REGISTER PAGE */}
         <p className="Login--Toggle">
           New user?{" "}
           <span
