@@ -73,7 +73,14 @@ function User() {
     });
     /* FRIENDS AND ROOMS RELATED EVENTS */
     socket.on("friend_request", (payload) => {
-      setNotifications([...notifications, payload]);
+      const updatedNotifications = notifications.filter(
+        (notification) =>
+          !(
+            notification.from.userId === payload.from.userId &&
+            notification.to.usr_id === payload.to.usr_id
+          )
+      );
+      setNotifications([...updatedNotifications, payload]);
       if (payload.to.usr_id === userData.userId)
         Popup(`${payload.from.username} sent a Fren request!`, "Good");
       if (payload.from.userId === userData.userId)
