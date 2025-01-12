@@ -25,7 +25,11 @@ function FindFriends() {
   /* GET ALL FRIEND REQUEST THE USER HAS SENT TO OTHERS */
   const sentRequests = useMemo(() => {
     const requestsList = notifications
-      .filter((notification) => notification.from.userId === userData.userId)
+      .filter(
+        (notification) =>
+          notification.from.userId === userData.userId &&
+          notification.type !== "Reject"
+      )
       .map((notification) => notification.to.usr_id);
     return requestsList;
   }, [notifications]);
@@ -62,7 +66,6 @@ function FindFriends() {
           `${import.meta.env.VITE_SERVER_URL}/finduser`,
           { user: searchInput }
         );
-        console.log(response.data);
         setSearchResults(response.data);
         setSearchResultsLoading(false);
       }, 700);
