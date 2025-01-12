@@ -380,6 +380,7 @@ function Chats() {
                     message: `Hello, ${currentRoom?.name}`,
                     id,
                     time: new Date(),
+                    read: false,
                   });
                 }}
               >
