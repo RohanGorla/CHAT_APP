@@ -37,6 +37,7 @@ function Chats() {
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
     e?.preventDefault();
+    if (!message.length) return;
     socket.emit("send_message", {
       userData,
       message,
