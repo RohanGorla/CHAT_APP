@@ -246,6 +246,10 @@ io.on("connection", async (socket) => {
       type: "single",
     };
     const roomsResponse = await roomsCollection.insertOne(roomRecord);
+    const id = new ObjectId(payload._id);
+    const deleteResponse = await notificationsCollection.deleteOne({
+      _id: id,
+    });
     io.to(payload.to.usr_id).emit("join_room", {
       from: payload.from,
       to: payload.to,
@@ -255,10 +259,6 @@ io.on("connection", async (socket) => {
       from: payload.from,
       to: payload.to,
       roomId,
-    });
-    const id = new ObjectId(payload._id);
-    const deleteResponse = await notificationsCollection.deleteOne({
-      _id: id,
     });
   });
   /* REJECT FRIEND REQUESTS */

@@ -38,6 +38,7 @@ function User() {
   }
 
   /* WEB SOCKET EVENT LISTENERS */
+  /* FOR THESE EVENTS WE HAVE NO DEPENDANCY ARRAY BECAUSE WE UPDATE THE STATE VARIABLES LIVE */
   useEffect(() => {
     /* CHAT RELATED EVENTS */
     socket.on("receive_message", (payload) => {
@@ -227,6 +228,8 @@ function User() {
   });
 
   /* ADD A NEW FRIEND AND JOIN ROOM SOCKET EVENTS */
+  /* HERE WE SPECIFY AN EMPTY DEPENDANCY ARRAY BECAUSE WE ARE NOT UPDATING STATE VARIABLES
+     HERE WE ONLY WANT TO MOUNT THESE EVENTS WHEN COMPONENT MOUNTS */
   useEffect(() => {
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
