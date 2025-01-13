@@ -72,7 +72,7 @@ function User() {
       if (to.usr_id === userData.userId)
         Popup(`${from.username} deleted the chat!`, "Bad");
     });
-    /* FRIENDS AND ROOMS RELATED EVENTS */
+    /* FRIEND REQUESTS RELATED EVENTS */
     socket.on("friend_request", (payload) => {
       const updatedNotifications = notifications.filter(
         (notification) =>
@@ -126,16 +126,6 @@ function User() {
         (notification) => notification._id !== payload._id
       );
       setNotifications(updatedNotifications);
-    });
-    socket.on("join_room", (payload) => {
-      socket.emit("join_room", payload);
-    });
-    socket.on("join_room_success", ({ from, to }) => {
-      socket.emit("get_user_data", { room: userData.userId });
-      if (from.userId === userData.userId)
-        Popup(`${to.usr_nm} accepted your fren request!`, "Good");
-      if (to.usr_id === userData.userId)
-        Popup(`You are now frens with ${from.username}!`, "Good");
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_username", ({ userId, username }) => {
@@ -233,6 +223,20 @@ function User() {
     });
     socket.on("update_password", () => {
       Popup("Password changed successfully", "Good");
+    });
+  });
+
+  /* ADD A NEW FRIEND AND JOIN ROOM SOCKET EVENTS */
+  useEffect(() => {
+    socket.on("join_room", (payload) => {
+      socket.emit("join_room", payload);
+    });
+    socket.on("join_room_success", ({ from, to }) => {
+      socket.emit("get_user_data", { room: userData.userId });
+      if (from.userId === userData.userId)
+        Popup(`${to.usr_nm} accepted your fren request!`, "Good");
+      if (to.usr_id === userData.userId)
+        Popup(`You are now frens with ${from.username}!`, "Good");
     });
   }, []);
 
