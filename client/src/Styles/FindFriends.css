@@ -285,6 +285,7 @@
     --FindFriends--Selected_User--Userid: 16px;
     --FindFriends--Selected_User--Mail: 16px;
     --FindFriends--Selected_User--Send_Request_Button: 14px;
+    --FindFriends--Selected_User_Remove_Message: 14px;
   }
 
   .FindFriends--Selected_User {
@@ -307,7 +308,8 @@
     --FindFriends--Selected_User--Username: 18px;
     --FindFriends--Selected_User--Userid: 14px;
     --FindFriends--Selected_User--Mail: 14px;
-    --FindFriends--Selected_User--Send_Request_Button: 12px;
+    --FindFriends--Selected_User--Send_Request_Button: 14px;
+    --FindFriends--Selected_User_Remove_Message: 12px;
     --FindFriends_Username: 16px;
     --FindFriends_Userid: 14px;
     --FindFriends_Instructions: 16px;

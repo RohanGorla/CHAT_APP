@@ -366,9 +366,6 @@
   align-items: center;
   border-style: none;
   cursor: pointer;
-  &:hover {
-    color: rgb(16, 226, 69);
-  }
 }
 
 @media (max-width: 1200px) {
