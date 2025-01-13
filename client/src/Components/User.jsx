@@ -234,7 +234,7 @@ function User() {
     socket.on("update_password", () => {
       Popup("Password changed successfully", "Good");
     });
-  });
+  }, []);
 
   /* GET THE NEW NOTIFICATIONS */
   useEffect(() => {
