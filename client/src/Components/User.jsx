@@ -282,6 +282,7 @@ function User() {
         setChats(chats);
         setNotifications(notifications);
       });
+      navigate("/user/friends");
     }
   }, []);
 
