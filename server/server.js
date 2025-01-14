@@ -6,6 +6,12 @@ import { v4 } from "uuid";
 import { createServer } from "http";
 import { Server } from "socket.io";
 import { MongoClient, ObjectId } from "mongodb";
+import {
+  S3Client,
+  PutObjectCommand,
+  GetObjectCommand,
+} from "@aws-sdk/client-s3";
+import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const PORT = process.env.PORT;
 
@@ -34,6 +40,12 @@ const userInfoCollection = db.collection("ChatApp_UserInfo");
 const roomsCollection = db.collection("ChatApp_Rooms");
 const chatMessagesCollection = db.collection("ChatApp_Chats");
 const notificationsCollection = db.collection("ChatApp_Notifications");
+
+/* CONNECTING TO AWS S3 BUCKET */
+const bucketName = process.env.BUCKET_NAME;
+const bucketRegion = process.env.BUCKET_REGION;
+const accessKey = process.env.ACCESS_KEY;
+const secretKey = process.env.SECRET_KEY;
 
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
