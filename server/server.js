@@ -47,6 +47,14 @@ const bucketRegion = process.env.BUCKET_REGION;
 const accessKey = process.env.ACCESS_KEY;
 const secretKey = process.env.SECRET_KEY;
 
+const s3 = new S3Client({
+  region: bucketRegion,
+  credentials: {
+    accessKeyId: accessKey,
+    secretAccessKey: secretKey,
+  },
+});
+
 /* BASIC SERVER ROUTE TO ENSURE CONNECTION IN POSTMAN */
 app.get("/", (req, res) => {
   res.json("Connected...");
