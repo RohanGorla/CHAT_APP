@@ -157,10 +157,13 @@ function Profile() {
       <div className="Profile">
         {/* PROFILE PICTURE/ICON */}
         <div className="Profile--Image">
-          {/* <IoMdPerson className="Profile--Image--Icon" /> */}
-          <div className="Profile--Image_Frame">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIEd2zxEc_4IQ1jHyniHLECu15zRjkHTBJzA&s"></img>
-          </div>
+          {userData.imageTag ? (
+            <div className="Profile--Image_Frame">
+              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIEd2zxEc_4IQ1jHyniHLECu15zRjkHTBJzA&s"></img>
+            </div>
+          ) : (
+            <IoMdPerson className="Profile--Image--Icon" />
+          )}
           <FaCamera className="Profile--Image_Edit--Icon" />
         </div>
         {/* PROFILE DETAILS */}

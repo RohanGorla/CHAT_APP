@@ -86,6 +86,10 @@
   bottom: 0px;
   right: 0px;
   font-size: var(--Profile--Image_Edit--Icon);
+  cursor: pointer;
+  &:hover {
+    color: rgb(16, 226, 69);
+  }
 }
 
 .Profile--Details {
