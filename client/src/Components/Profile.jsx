@@ -164,7 +164,14 @@ function Profile() {
           ) : (
             <IoMdPerson className="Profile--Image--Icon" />
           )}
-          <FaCamera className="Profile--Image_Edit--Icon" />
+          <label htmlFor="Profile--Image_Select">
+            <FaCamera className="Profile--Image_Edit--Icon" />
+          </label>
+          <input
+            id="Profile--Image_Select"
+            type="file"
+            accept="image/*"
+          ></input>
         </div>
         {/* PROFILE DETAILS */}
         <div className="Profile--Details">

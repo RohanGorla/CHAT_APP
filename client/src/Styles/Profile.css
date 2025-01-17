@@ -81,6 +81,10 @@
   font-size: var(--Profile_User_Icon_Size);
 }
 
+#Profile--Image_Select {
+  display: none;
+}
+
 .Profile--Image_Edit--Icon {
   position: absolute;
   bottom: 0px;
