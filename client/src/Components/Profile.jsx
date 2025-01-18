@@ -48,7 +48,8 @@ function Profile() {
       `${import.meta.env.VITE_SERVER_URL}/generateputurl`,
       {
         contentType: profilePicture.type,
-        key: userData.userId,
+        newKey: userData.userId,
+        oldKey: userData?.imageTag,
       }
     );
     /* SEND THE PICTURE TO S3 USING THE PUT URL */
