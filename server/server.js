@@ -147,6 +147,13 @@ app.post("/registeruser", async (req, res) => {
   }
 });
 
+/* CHANGE USER PROFILE PICTURE */
+app.post("/getputurl", async (req, res) => {
+  const key = `ChatApp_ProfilePictures/${req.body.key}-${Date.now()}.${
+    req.body.contentType.split("/")[1]
+  }`;
+});
+
 /* FIND USER */
 app.post("/finduser", async (req, res) => {
   const searchString = req.body.user;
