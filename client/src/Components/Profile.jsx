@@ -29,24 +29,25 @@ function Profile() {
   const [errorMsg, setErrorMsg] = useState("");
 
   /* CHANGE PROFILE PICTURE SOCKET METHOD */
-  async function changeProfilePicture(file) {
-    if (!file) return;
+  async function changeProfilePicture() {
+    if (!profilePicture) return;
     const getPutUrlResponse = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/getputurl`,
       {
-        contentType: file.type,
+        contentType: profilePicture.type,
         key: userData.userId,
       }
     );
     let putRequestResponse = await axios.put(
       getPutUrlResponse.data.url,
-      file,
+      profilePicture,
       {
         headers: {
-          "Content-Type": file.type,
+          "Content-Type": profilePicture.type,
         },
       }
     );
+    setConfirmProfilePicture(false);
   }
 
   /* CHANGE USERNAME SOCKET METHOD */
@@ -192,10 +193,16 @@ function Profile() {
           <p className="Profile--Confirm_Profile_Picture--Message">
             Set the selected image as your profile picture?
           </p>
-          <button className="Profile--Confirm_Profile_Picture--Confirm_Button">
+          <button
+            className="Profile--Confirm_Profile_Picture--Confirm_Button"
+            onClick={changeProfilePicture}
+          >
             Confirm
           </button>
-          <button className="Profile--Confirm_Profile_Picture--Cancel_Button">
+          <button
+            className="Profile--Confirm_Profile_Picture--Cancel_Button"
+            onClick={() => setConfirmProfilePicture(false)}
+          >
             Cancel
           </button>
         </div>
