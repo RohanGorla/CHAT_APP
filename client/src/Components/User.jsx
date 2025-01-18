@@ -136,6 +136,17 @@ function User() {
         return friend;
       });
       setFriends(updatedFriends);
+      /* CHANGE PROFILE PICTURE IN ROOMS LIST */
+      const updatedRooms = rooms.map((room) => {
+        if (
+          room.users.includes(userId) &&
+          room.type === "single" &&
+          room.users[room.users.indexOf(userId)] !== userData.userId
+        )
+          room.imageTag = key;
+        return room;
+      });
+      setRooms(updatedRooms);
     });
     socket.on("update_username", ({ userId, username }) => {
       /* CHANGE USERNAME IN FRIENDS LIST */
