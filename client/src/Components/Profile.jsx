@@ -17,7 +17,7 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
   const [confirmProfilePicture, setConfirmProfilePicture] = useState(false);
-  const [getUrl, setGetUrl] = useState("");
+  const [imageUrl, setImageUrl] = useState("");
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
   const [newEmail, setNewEmail] = useState(userData?.mail);
@@ -31,27 +31,29 @@ function Profile() {
 
   /* GET PROFILE PICTURE GET URL FUNCTION */
   async function getSignedUrl(key) {
-    const getGetUrlResponse = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/getsignedgeturl`,
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
       {
         key,
       }
     );
-    setGetUrl(getGetUrlResponse.data.url);
+    setImageUrl(generateGetUrlResponse.data.url);
   }
 
   /* CHANGE PROFILE PICTURE SOCKET METHOD */
   async function changeProfilePicture() {
     if (!profilePicture) return;
-    const getPutUrlResponse = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/getsignedputurl`,
+    /* GENERATE A PUT URL */
+    const generatePutUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generateputurl`,
       {
         contentType: profilePicture.type,
         key: userData.userId,
       }
     );
+    /* SEND THE PICTURE TO S3 USING THE PUT URL */
     const putRequestResponse = await axios.put(
-      getPutUrlResponse.data.url,
+      generatePutUrlResponse.data.url,
       profilePicture,
       {
         headers: {
@@ -60,14 +62,17 @@ function Profile() {
       }
     );
     if (putRequestResponse.status === 200) {
-      userData.imageTag = getPutUrlResponse.data.key;
+      /* UPDATE THE USERDATA TO SET THE NEW IMAGETAG ATTRIBUTE */
+      userData.imageTag = generatePutUrlResponse.data.key;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      /* SOCKET METHOD TO UPDATE THE PROFILE PICTURE */
       socket.emit("update_profile_picture", {
         userId: userData.userId,
-        key: getPutUrlResponse.data.key,
+        key: generatePutUrlResponse.data.key,
         friends,
       });
-      getSignedUrl(getPutUrlResponse.data.key);
+      /* GET THE SIGNED URL FOR THE RECENTLY UPDATED PROFILE PICTURE */
+      getSignedUrl(generatePutUrlResponse.data.key);
       setConfirmProfilePicture(false);
     }
   }
@@ -237,7 +242,7 @@ function Profile() {
         <div className="Profile--Image">
           {userData.imageTag ? (
             <div className="Profile--Image_Frame">
-              <img src={getUrl}></img>
+              <img src={imageUrl}></img>
             </div>
           ) : (
             <IoMdPerson className="Profile--Image--Icon" />

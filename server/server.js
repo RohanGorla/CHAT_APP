@@ -147,8 +147,8 @@ app.post("/registeruser", async (req, res) => {
   }
 });
 
-/* CHANGE USER PROFILE PICTURE */
-app.post("/getsignedputurl", async (req, res) => {
+/* GENERATE THE PROFILE PICTURE GET AND PUT SIGNED URLS */
+app.post("/generateputurl", async (req, res) => {
   const key = `ChatApp_ProfilePictures/${req.body.key}-${Date.now()}.${
     req.body.contentType.split("/")[1]
   }`;
@@ -162,7 +162,7 @@ app.post("/getsignedputurl", async (req, res) => {
   if (url) return res.send({ url, key });
 });
 
-app.post("/getsignedgeturl", async (req, res) => {
+app.post("/generategeturl", async (req, res) => {
   const getObjectParams = {
     Bucket: bucketName,
     Key: req.body.key,
