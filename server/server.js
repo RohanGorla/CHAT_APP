@@ -356,6 +356,16 @@ io.on("connection", async (socket) => {
     });
     io.to(room.roomId).emit("chat_deleted", { from, to, room });
   });
+  /* UPDATE PROFILE PICTURE */
+  socket.on("update_profile_picture", async ({ userId, key, friends }) => {
+    const updateProfilePicture = await userInfoCollection.updateOne(
+      {
+        usr_id: userId,
+      },
+      { $set: { imageTag: key } }
+    );
+    console.log(updateProfilePicture);
+  });
   /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
