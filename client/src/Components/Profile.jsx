@@ -37,6 +37,11 @@ function Profile() {
         key: userData.userId,
       }
     );
+    let putRequestResponse = await axios.put(getPutUrlResponse.data.url, file, {
+      headers: {
+        "Content-Type": file.type,
+      },
+    });
   }
 
   /* CHANGE USERNAME SOCKET METHOD */
