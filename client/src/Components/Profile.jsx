@@ -16,6 +16,7 @@ function Profile() {
   const [editEmail, setEditEmail] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
+  const [confirmProfilePicture, setConfirmProfilePicture] = useState(false);
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
   const [newEmail, setNewEmail] = useState(userData?.mail);
@@ -37,11 +38,15 @@ function Profile() {
         key: userData.userId,
       }
     );
-    let putRequestResponse = await axios.put(getPutUrlResponse.data.url, file, {
-      headers: {
-        "Content-Type": file.type,
-      },
-    });
+    let putRequestResponse = await axios.put(
+      getPutUrlResponse.data.url,
+      file,
+      {
+        headers: {
+          "Content-Type": file.type,
+        },
+      }
+    );
   }
 
   /* CHANGE USERNAME SOCKET METHOD */
@@ -173,6 +178,28 @@ function Profile() {
 
   return (
     <div className="Profile_Page">
+      <div
+        className={
+          confirmProfilePicture
+            ? "Profile--Confirm_Profile_Picture--Container"
+            : "Profile--Confirm_Profile_Picture--Inactive"
+        }
+      >
+        <div className="Profile--Confirm_Profile_Picture">
+          <p className="Profile--Confirm_Profile_Picture--Heading">
+            CONFIRM PROFILE PICTURE
+          </p>
+          <p className="Profile--Confirm_Profile_Picture--Message">
+            Set the selected image as your profile picture?
+          </p>
+          <button className="Profile--Confirm_Profile_Picture--Confirm_Button">
+            Confirm
+          </button>
+          <button className="Profile--Confirm_Profile_Picture--Cancel_Button">
+            Cancel
+          </button>
+        </div>
+      </div>
       <div className="Profile">
         {/* PROFILE PICTURE/ICON */}
         <div className="Profile--Image">
@@ -190,7 +217,10 @@ function Profile() {
             id="Profile--Image_Select"
             type="file"
             accept="image/*"
-            onChange={(e) => changeProfilePicture(e.target.files[0])}
+            onChange={(e) => {
+              setProfilePicture(e.target.files[0]);
+              setConfirmProfilePicture(true);
+            }}
           ></input>
         </div>
         {/* PROFILE DETAILS */}
