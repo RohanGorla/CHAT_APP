@@ -148,7 +148,7 @@ app.post("/registeruser", async (req, res) => {
 });
 
 /* CHANGE USER PROFILE PICTURE */
-app.post("/getputurl", async (req, res) => {
+app.post("/getsignedputurl", async (req, res) => {
   const key = `ChatApp_ProfilePictures/${req.body.key}-${Date.now()}.${
     req.body.contentType.split("/")[1]
   }`;
@@ -160,6 +160,16 @@ app.post("/getputurl", async (req, res) => {
   const command = new PutObjectCommand(params);
   const url = await getSignedUrl(s3, command);
   if (url) return res.send({ url, key });
+});
+
+app.post("/getsignedgeturl", async (req, res) => {
+  const getObjectParams = {
+    Bucket: bucketName,
+    Key: req.body.key,
+  };
+  const command = new GetObjectCommand(getObjectParams);
+  const url = await getSignedUrl(s3, command, { expiresIn: 60 });
+  res.send({ url });
 });
 
 /* FIND USER */
