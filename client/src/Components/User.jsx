@@ -147,6 +147,16 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      /* CHANGE USERNAME IN NOTIFICATIONS */
+      const updatedNotifications = notifications.map((notification) => {
+        if (notification.to.usr_id === userId) {
+          notification.to.imageTag = key;
+        } else if (notification.from.userId === userId) {
+          notification.from.imageTag = key;
+        }
+        return notification;
+      });
+      setNotifications(updatedNotifications);
       /* CHANGE PROFILE PICTURE POPUP */
       if (userData.userId === userId) Popup(`Updated profile picture!`, "Good");
     });
