@@ -17,6 +17,7 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [profilePicture, setProfilePicture] = useState("");
   const [confirmProfilePicture, setConfirmProfilePicture] = useState(false);
+  const [getUrl, setGetUrl] = useState("");
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
   const [newEmail, setNewEmail] = useState(userData?.mail);
@@ -28,11 +29,22 @@ function Profile() {
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function getSignedUrl(key) {
+    const getGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/getsignedgeturl`,
+      {
+        key,
+      }
+    );
+    setGetUrl(getGetUrlResponse.data.url);
+  }
+
   /* CHANGE PROFILE PICTURE SOCKET METHOD */
   async function changeProfilePicture() {
     if (!profilePicture) return;
     const getPutUrlResponse = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/getputurl`,
+      `${import.meta.env.VITE_SERVER_URL}/getsignedputurl`,
       {
         contentType: profilePicture.type,
         key: userData.userId,
@@ -139,6 +151,9 @@ function Profile() {
     if (!userData) {
       navigate("/login");
     } else {
+      /* GET THE SIGNED GET URL TO DISPLAY THE PROFILE PICTURE */
+      getSignedUrl(userData.imageTag);
+
       /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
       socket.on("update_userid", ({ oldUserid, newUserid }) => {
         if (userData.userId !== oldUserid) return;
@@ -221,7 +236,7 @@ function Profile() {
         <div className="Profile--Image">
           {userData.imageTag ? (
             <div className="Profile--Image_Frame">
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIEd2zxEc_4IQ1jHyniHLECu15zRjkHTBJzA&s"></img>
+              <img src={getUrl}></img>
             </div>
           ) : (
             <IoMdPerson className="Profile--Image--Icon" />
