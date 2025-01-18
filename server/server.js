@@ -152,6 +152,14 @@ app.post("/getputurl", async (req, res) => {
   const key = `ChatApp_ProfilePictures/${req.body.key}-${Date.now()}.${
     req.body.contentType.split("/")[1]
   }`;
+  const params = {
+    Bucket: bucketName,
+    Key: key,
+    ContentType: req.body.contentType,
+  };
+  const command = new PutObjectCommand(params);
+  const url = await getSignedUrl(s3, command);
+  if (url) return res.send({ url });
 });
 
 /* FIND USER */
