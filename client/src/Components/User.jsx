@@ -129,6 +129,14 @@ function User() {
       setNotifications(updatedNotifications);
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
+    socket.on("update_profile_picture", ({ userId, key }) => {
+      /* CHANGE PROFILE PICTURE IN FRIENDS LIST */
+      const updatedFriends = friends.map((friend) => {
+        if (friend.usr_id === userId) friend.imageTag = key;
+        return friend;
+      });
+      setFriends(updatedFriends);
+    });
     socket.on("update_username", ({ userId, username }) => {
       /* CHANGE USERNAME IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
