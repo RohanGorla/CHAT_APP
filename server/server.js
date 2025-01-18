@@ -10,6 +10,7 @@ import {
   S3Client,
   PutObjectCommand,
   GetObjectCommand,
+  DeleteObjectCommand,
 } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
@@ -149,7 +150,15 @@ app.post("/registeruser", async (req, res) => {
 
 /* GENERATE THE PROFILE PICTURE GET AND PUT SIGNED URLS */
 app.post("/generateputurl", async (req, res) => {
-  const key = `ChatApp_ProfilePictures/${req.body.key}-${Date.now()}.${
+  if (req.body.oldKey) {
+    const params = {
+      Bucket: bucketName,
+      Key: req.body.oldKey,
+    };
+    const command = new DeleteObjectCommand(params);
+    const deleteOldPictureResponse = await s3.send(command);
+  }
+  const key = `ChatApp_ProfilePictures/${req.body.newKey}-${Date.now()}.${
     req.body.contentType.split("/")[1]
   }`;
   const params = {

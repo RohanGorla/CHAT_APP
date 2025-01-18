@@ -30,7 +30,7 @@ function Profile() {
   const [errorMsg, setErrorMsg] = useState("");
 
   /* GET PROFILE PICTURE GET URL FUNCTION */
-  async function getSignedUrl(key) {
+  async function generateGetUrl(key) {
     const generateGetUrlResponse = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
       {
@@ -73,7 +73,7 @@ function Profile() {
         friends,
       });
       /* GET THE SIGNED URL FOR THE RECENTLY UPDATED PROFILE PICTURE */
-      getSignedUrl(generatePutUrlResponse.data.key);
+      generateGetUrl(generatePutUrlResponse.data.key);
     }
   }
 
@@ -158,7 +158,7 @@ function Profile() {
       navigate("/login");
     } else {
       /* GET THE SIGNED GET URL TO DISPLAY THE PROFILE PICTURE */
-      if (userData.imageTag) getSignedUrl(userData.imageTag);
+      if (userData.imageTag) generateGetUrl(userData.imageTag);
 
       /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
       socket.on("update_userid", ({ oldUserid, newUserid }) => {
