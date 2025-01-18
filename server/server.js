@@ -365,6 +365,15 @@ io.on("connection", async (socket) => {
       { $set: { imageTag: key } }
     );
     console.log(updateProfilePicture);
+    if (updateProfilePicture.acknowledged) {
+      socket.emit("update_profile_picture", { userId, key });
+      friends.forEach((friend) => {
+        io.to(friend.usr_id).emit("update_profile_picture", {
+          userId,
+          key,
+        });
+      });
+    }
   });
   /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
