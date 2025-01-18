@@ -3,6 +3,7 @@ import { useOutletContext, useNavigate } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { FaEdit, FaCamera } from "react-icons/fa";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import axios from "axios";
 
 function Profile() {
   /* SPECIAL VARIABLES */
@@ -14,6 +15,7 @@ function Profile() {
   const [editUserid, setEditUserid] = useState(false);
   const [editEmail, setEditEmail] = useState(false);
   const [editPassword, setEditPassword] = useState(false);
+  const [profilePicture, setProfilePicture] = useState("");
   const [newUsername, setNewUsername] = useState(userData?.username);
   const [newUserid, setNewUserid] = useState(userData?.userId);
   const [newEmail, setNewEmail] = useState(userData?.mail);
@@ -24,6 +26,18 @@ function Profile() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+
+  /* CHANGE PROFILE PICTURE SOCKET METHOD */
+  async function changeProfilePicture(file) {
+    if (!file) return;
+    const getPutUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/getputurl`,
+      {
+        contentType: file.type,
+        key: userData.userId,
+      }
+    );
+  }
 
   /* CHANGE USERNAME SOCKET METHOD */
   async function changeUsername() {
@@ -171,6 +185,7 @@ function Profile() {
             id="Profile--Image_Select"
             type="file"
             accept="image/*"
+            onChange={(e) => changeProfilePicture(e.target.files[0])}
           ></input>
         </div>
         {/* PROFILE DETAILS */}
