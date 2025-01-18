@@ -174,7 +174,7 @@ app.post("/finduser", async (req, res) => {
         ],
       },
       {
-        projection: { usr_nm: 1, usr_id: 1, email: 1 },
+        projection: { _id: 0, pass: 0 },
       }
     )
     .toArray();
@@ -358,22 +358,32 @@ io.on("connection", async (socket) => {
   });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
-    const updateProfilePicture = await userInfoCollection.updateOne(
+    const updateUserInfo = await userInfoCollection.updateOne(
       {
         usr_id: userId,
       },
       { $set: { imageTag: key } }
     );
-    console.log(updateProfilePicture);
-    if (updateProfilePicture.acknowledged) {
-      socket.emit("update_profile_picture", { userId, key });
-      friends.forEach((friend) => {
-        io.to(friend.usr_id).emit("update_profile_picture", {
-          userId,
-          key,
-        });
+    const updateSentNotifications = await notificationsCollection.updateMany(
+      {
+        "from.userId": userId,
+      },
+      { $set: { "from.imageTag": key } }
+    );
+    const updateReceivedNotifications =
+      await notificationsCollection.updateMany(
+        {
+          "to.usr_id": userId,
+        },
+        { $set: { "to.imageTag": key } }
+      );
+    socket.emit("update_profile_picture", { userId, key });
+    friends.forEach((friend) => {
+      io.to(friend.usr_id).emit("update_profile_picture", {
+        userId,
+        key,
       });
-    }
+    });
   });
   /* UPDATE USERNAME */
   socket.on("update_username", async ({ userId, username, friends }) => {
