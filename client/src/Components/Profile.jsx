@@ -67,6 +67,7 @@ function Profile() {
         key: getPutUrlResponse.data.key,
         friends,
       });
+      getSignedUrl(getPutUrlResponse.data.key);
       setConfirmProfilePicture(false);
     }
   }
