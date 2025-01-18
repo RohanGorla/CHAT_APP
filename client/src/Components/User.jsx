@@ -147,6 +147,8 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      /* CHANGE PROFILE PICTURE POPUP */
+      if (userData.userId === userId) Popup(`Updated profile picture!`, "Good");
     });
     socket.on("update_username", ({ userId, username }) => {
       /* CHANGE USERNAME IN FRIENDS LIST */
