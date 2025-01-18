@@ -159,7 +159,7 @@ app.post("/getputurl", async (req, res) => {
   };
   const command = new PutObjectCommand(params);
   const url = await getSignedUrl(s3, command);
-  if (url) return res.send({ url });
+  if (url) return res.send({ url, key });
 });
 
 /* FIND USER */
