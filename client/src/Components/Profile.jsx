@@ -41,7 +41,7 @@ function Profile() {
   }
 
   /* CHANGE PROFILE PICTURE SOCKET METHOD */
-  async function changeProfilePicture() {
+  async function uploadProfilePicture() {
     if (!profilePicture) return;
     /* GENERATE A PUT URL */
     const generatePutUrlResponse = await axios.post(
@@ -73,7 +73,6 @@ function Profile() {
       });
       /* GET THE SIGNED URL FOR THE RECENTLY UPDATED PROFILE PICTURE */
       getSignedUrl(generatePutUrlResponse.data.key);
-      setConfirmProfilePicture(false);
     }
   }
 
@@ -158,7 +157,7 @@ function Profile() {
       navigate("/login");
     } else {
       /* GET THE SIGNED GET URL TO DISPLAY THE PROFILE PICTURE */
-      getSignedUrl(userData.imageTag);
+      if (userData.imageTag) getSignedUrl(userData.imageTag);
 
       /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
       socket.on("update_userid", ({ oldUserid, newUserid }) => {
@@ -225,7 +224,10 @@ function Profile() {
           </p>
           <button
             className="Profile--Confirm_Profile_Picture--Confirm_Button"
-            onClick={changeProfilePicture}
+            onClick={() => {
+              setConfirmProfilePicture(false);
+              uploadProfilePicture();
+            }}
           >
             Confirm
           </button>
