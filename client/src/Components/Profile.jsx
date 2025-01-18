@@ -47,7 +47,11 @@ function Profile() {
         },
       }
     );
-    setConfirmProfilePicture(false);
+    if (putRequestResponse.status === 200) {
+      userData.imageTag = getPutUrlResponse.data.key;
+      localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      setConfirmProfilePicture(false);
+    }
   }
 
   /* CHANGE USERNAME SOCKET METHOD */
