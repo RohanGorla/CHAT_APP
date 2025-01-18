@@ -38,7 +38,7 @@ function Profile() {
         key: userData.userId,
       }
     );
-    let putRequestResponse = await axios.put(
+    const putRequestResponse = await axios.put(
       getPutUrlResponse.data.url,
       profilePicture,
       {
@@ -50,6 +50,11 @@ function Profile() {
     if (putRequestResponse.status === 200) {
       userData.imageTag = getPutUrlResponse.data.key;
       localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+      socket.emit("update_profile_picture", {
+        userId: userData.userId,
+        key: getPutUrlResponse.data.key,
+        friends,
+      });
       setConfirmProfilePicture(false);
     }
   }
