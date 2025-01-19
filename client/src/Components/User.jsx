@@ -165,6 +165,7 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
       /* CHANGE USERNAME IN NOTIFICATIONS */
       const updatedNotifications = notifications.map((notification) => {
         if (notification.to.usr_id === userId) {
@@ -196,6 +197,7 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
       /* CHANGE USERNAME IN NOTIFICATIONS */
       const updatedNotifications = notifications.map((notification) => {
         if (notification.to.usr_id === userId) {
@@ -230,6 +232,7 @@ function User() {
         return room;
       });
       setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
       /* CHANGE USERID IN NOTIFICATIONS */
       const updatedNotifications = notifications.map((notification) => {
         if (notification.to.usr_id === oldUserid) {
