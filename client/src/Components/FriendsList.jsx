@@ -158,7 +158,13 @@ function FriendsList() {
               {/* USER/GROUP DISPLAY PICTURE */}
               <div className="Friend_Card--Image">
                 <div className="Friend_Card--Image_Icon_Container">
-                  <IoMdPerson className="Friend_Card--Image_Icon" />
+                  {room.imageUrl ? (
+                    <div className="Friend_Card--Image_Frame">
+                      <img src={room.imageUrl}></img>
+                    </div>
+                  ) : (
+                    <IoMdPerson className="Friend_Card--Image_Icon" />
+                  )}
                 </div>
               </div>
               {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
