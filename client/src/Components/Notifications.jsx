@@ -102,7 +102,13 @@ function Notifications() {
               >
                 <div className="Notifications_Card--Image_Container">
                   <div className="Notifications_Card--Image_Icon_Container">
-                    <IoMdPerson className="Notifications_Card--Image_Icon" />
+                    {notification.imageUrl ? (
+                      <div className="Notifications_Card--Image_Frame">
+                        <img src={notification.imageUrl}></img>
+                      </div>
+                    ) : (
+                      <IoMdPerson className="Notifications_Card--Image_Icon" />
+                    )}
                   </div>
                 </div>
                 {/* NOTIFICATION DETAILS (SHOWN WHEN YOU RECEIVE A REQUEST) */}
