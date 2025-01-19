@@ -27,6 +27,17 @@ function User() {
   const [roomChats, setRoomChats] = useState([]);
   const [usernameColor, setUsernameColor] = useState("");
 
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    return generateGetUrlResponse.data.url;
+  }
+
   /* SHOW AND HIDE POPUP NOTIFICATION FUNCTION */
   function Popup(message, type) {
     setShowPopup(true);
@@ -302,24 +313,27 @@ function User() {
         socket.emit("get_user_data", { room: userData.userId });
       });
       /* GET ALL USER ROOMS, FRIENDS LIST AND NOTIFICATIONS */
-      socket.on("user_data", ({ rooms, friends, chats, notifications }) => {
-        rooms.map((room) => {
-          if (room.type === "single") {
-            const friendId = room.users.filter(
-              (user) => user !== userData.userId
-            );
-            const friend = friends.filter(
-              (friend) => friend.usr_id === friendId[0]
-            );
-            room.name = friend[0].usr_nm;
-          }
-        });
-        setRooms(rooms);
-        setSearchRooms(rooms);
-        setFriends(friends);
-        setChats(chats);
-        setNotifications(notifications);
-      });
+      socket.on(
+        "user_data",
+        async ({ rooms, friends, chats, notifications }) => {
+          rooms.map((room) => {
+            if (room.type === "single") {
+              const friendId = room.users.filter(
+                (user) => user !== userData.userId
+              );
+              const friend = friends.filter(
+                (friend) => friend.usr_id === friendId[0]
+              );
+              room.name = friend[0].usr_nm;
+            }
+          });
+          setRooms(rooms);
+          setSearchRooms(rooms);
+          setFriends(friends);
+          setChats(chats);
+          setNotifications(notifications);
+        }
+      );
       navigate("/user/friends");
     }
   }, []);

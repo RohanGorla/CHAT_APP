@@ -228,7 +228,7 @@ io.on("connection", async (socket) => {
           usr_id: { $ne: personalRoomId },
         },
         {
-          projection: { usr_nm: 1, usr_id: 1, email: 1, _id: 0 },
+          projection: { _id: 0, rooms: 0, rooms: 0 },
         }
       )
       .toArray();
