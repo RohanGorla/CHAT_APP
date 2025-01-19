@@ -19,6 +19,17 @@ function FriendsList() {
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
 
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    return generateGetUrlResponse.data.url;
+  }
+
   /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
