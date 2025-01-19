@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
+import axios from "axios";
 
 function FriendsList() {
   /* SPECIAL VARIABLES */
@@ -42,11 +43,25 @@ function FriendsList() {
 
   /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
   useEffect(() => {
-    if (!friendListSearch.length) return setSearchRooms(rooms);
-    const filteredRooms = rooms.filter((room) =>
-      room.name.toLowerCase().startsWith(friendListSearch.toLowerCase())
-    );
-    setSearchRooms(filteredRooms);
+    if (!friendListSearch.length) {
+      setSearchRooms(rooms);
+    } else {
+      const filteredRooms = rooms.filter((room) =>
+        room.name.toLowerCase().startsWith(friendListSearch.toLowerCase())
+      );
+      for (let i = 0; i < filteredRooms.length; i++) {
+        (async function () {
+          if (filteredRooms[i].imageUrl) {
+            const urlValid = await checkUrlValidity(filteredRooms[i].imageUrl);
+            if (!urlValid)
+              filteredRooms[i].imageUrl = await generateGetUrl(
+                filteredRooms[i].imageTag
+              );
+          }
+        })();
+      }
+      setSearchRooms(filteredRooms);
+    }
   }, [friendListSearch]);
 
   /* TO UPDATE THE LAST MESSAGE TEXT & TIME AND ALSO SORT THE FRIENDS LIST ACCORDINGLY */
@@ -86,7 +101,7 @@ function FriendsList() {
       (room) => room.lastMessageFullDate === undefined
     );
     setSearchRooms([...validRooms, ...invalidRooms]);
-  }, [chats]);
+  }, [chats, rooms]);
 
   useEffect(() => {
     if (!userData) navigate("/login");
