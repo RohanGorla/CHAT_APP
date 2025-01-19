@@ -219,7 +219,13 @@ function FindFriends() {
                 >
                   <div className="FindFriends_User_Card--Image">
                     <div className="FindFriends_User_Card--Image_Icon_Container">
-                      <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
+                      {user.imageUrl ? (
+                        <div className="FindFriends_User_Card--Image_Frame">
+                          <img src={user.imageUrl}></img>
+                        </div>
+                      ) : (
+                        <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
+                      )}
                     </div>
                   </div>
                   <div className="FindFriends_User_Card--Details">
