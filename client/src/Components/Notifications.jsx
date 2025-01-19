@@ -3,6 +3,7 @@ import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
+import axios from "axios";
 
 function Notifications() {
   /* SPECIAL VARIABLES */
@@ -34,6 +35,17 @@ function Notifications() {
       to: request.to,
       type: "Request",
     });
+  }
+
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    return generateGetUrlResponse.data.url;
   }
 
   /* REVERSE THE NOTIFICATIONS LIST TO SHOW NEW NOTIFICATIONS ON TOP */

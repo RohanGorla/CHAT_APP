@@ -193,7 +193,7 @@ app.post("/finduser", async (req, res) => {
         ],
       },
       {
-        projection: { _id: 0, pass: 0 },
+        projection: { _id: 0, rooms: 0, pass: 0 },
       }
     )
     .toArray();
