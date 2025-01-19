@@ -121,7 +121,13 @@ function FindFriends() {
           </div>
           <div className="FindFriends--Selected_User--Image">
             <div className="FindFriends--Selected_User--Image_Icon_Container">
-              <IoMdPerson className="FindFriends--Selected_User--Image_Icon" />
+              {selectedUser.imageUrl ? (
+                <div className="FindFriends--Selected_User--Image_Frame">
+                  <img src={selectedUser.imageUrl}></img>
+                </div>
+              ) : (
+                <IoMdPerson className="FindFriends--Selected_User--Image_Icon" />
+              )}
             </div>
           </div>
           <div className="FindFriends--Selected_User--Details">
