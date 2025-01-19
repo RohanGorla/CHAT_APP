@@ -30,6 +30,16 @@ function FriendsList() {
     return generateGetUrlResponse.data.url;
   }
 
+  /* CHECK THE VALIDITY OF SIGNED URL */
+  async function checkUrlValidity(url) {
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
   useEffect(() => {
     if (!friendListSearch.length) return setSearchRooms(rooms);
