@@ -108,12 +108,19 @@ function Chats() {
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
   }, [message]);
 
-  /* GET THE ROOM NAME FROM THE ROOM ID */
+  /* GET THE ROOM INFORMATION FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
     if (!room.length) {
       navigate("/user/friends");
     } else {
+      (async function () {
+        if (currentRoom.imageUrl) {
+          const urlValid = await checkUrlValidity(currentRoom.imageUrl);
+          if (!urlValid)
+            currentRoom.imageUrl = await generateGetUrl(currentRoom.imageTag);
+        }
+      })();
       switch (room[0]?.type) {
         /* IF SINGLE CHAT */
         case "single":
