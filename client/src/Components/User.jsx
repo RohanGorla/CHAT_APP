@@ -316,6 +316,10 @@ function User() {
       socket.on(
         "user_data",
         async ({ rooms, friends, chats, notifications }) => {
+          for (let i = 0; i < friends.length; i++) {
+            if (friends[i].imageTag)
+              friends[i].imageUrl = await generateGetUrl(friends[i].imageTag);
+          }
           rooms.map((room) => {
             if (room.type === "single") {
               const friendId = room.users.filter(
@@ -325,11 +329,9 @@ function User() {
                 (friend) => friend.usr_id === friendId[0]
               );
               room.name = friend[0].usr_nm;
+              if (friend[0].imageUrl) room.imageUrl = friend[0].imageUrl;
             }
           });
-          for (let i = 0; i < friends.length; i++) {
-            friends[i].imageUrl = await generateGetUrl(friends[i].imageTag);
-          }
           setRooms(rooms);
           setSearchRooms(rooms);
           setFriends(friends);
