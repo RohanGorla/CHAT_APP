@@ -61,7 +61,26 @@ function Notifications() {
           )
       );
       const reverseNotificationList = validNotifications.toReversed();
-      setReversedNotifications(reverseNotificationList);
+      async function getImageUrls() {
+        for (let i = 0; i < reverseNotificationList.length; i++) {
+          if (
+            reverseNotificationList[i].to.usr_id === userData.userId &&
+            reverseNotificationList[i].from.imageTag
+          )
+            reverseNotificationList[i].imageUrl = await generateGetUrl(
+              reverseNotificationList[i].from.imageTag
+            );
+          if (
+            reverseNotificationList[i].from.userId === userData.userId &&
+            reverseNotificationList[i].to.imageTag
+          )
+            reverseNotificationList[i].imageUrl = await generateGetUrl(
+              reverseNotificationList[i].to.imageTag
+            );
+        }
+        setReversedNotifications(reverseNotificationList);
+      }
+      getImageUrls();
     }
   }, [notifications]);
 
