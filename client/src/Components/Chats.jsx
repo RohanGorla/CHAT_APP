@@ -329,7 +329,13 @@ function Chats() {
           </div>
           <div className="Chat--Image">
             <div className="Chat--Image_Icon_Container">
-              <IoMdPerson className="Chat--Image_Icon" />
+              {currentRoom.imageUrl ? (
+                <div className="Chat--Image_Frame">
+                  <img src={currentRoom.imageUrl}></img>
+                </div>
+              ) : (
+                <IoMdPerson className="Chat--Image_Icon" />
+              )}
             </div>
           </div>
           <div className="Chat--Room_Details">
