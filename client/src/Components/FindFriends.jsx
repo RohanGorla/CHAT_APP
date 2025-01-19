@@ -52,9 +52,16 @@ function FindFriends() {
     setShowConfirmRemove(false);
   }
 
-  useEffect(() => {
-    if (!userData) navigate("/login");
-  }, []);
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    return generateGetUrlResponse.data.url;
+  }
 
   /* DEBOUNCE FUNCTION FOR SEARCHING USER */
   function debounce() {
@@ -74,6 +81,10 @@ function FindFriends() {
   }
   /* USE THE CLOSURE RETURNED BY DEBOUNCE */
   const handleSearch = useMemo(() => debounce(), []);
+
+  useEffect(() => {
+    if (!userData) navigate("/login");
+  }, []);
 
   return (
     <div className="FindFriends_Page">
