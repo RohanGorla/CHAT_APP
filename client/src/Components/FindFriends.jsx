@@ -74,6 +74,12 @@ function FindFriends() {
           `${import.meta.env.VITE_SERVER_URL}/finduser`,
           { user: searchInput }
         );
+        for (let i = 0; i < response.data.length; i++) {
+          if (response.data[i].imageTag)
+            response.data[i].imageUrl = await generateGetUrl(
+              response.data[i].imageTag
+            );
+        }
         setSearchResults(response.data);
         setSearchResultsLoading(false);
       }, 700);
