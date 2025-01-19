@@ -6,6 +6,7 @@ import { RiSearch2Fill } from "react-icons/ri";
 import { GoBellFill, GoDotFill } from "react-icons/go";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
+import axios from "axios";
 
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
@@ -140,10 +141,14 @@ function User() {
       setNotifications(updatedNotifications);
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
-    socket.on("update_profile_picture", ({ userId, key }) => {
+    socket.on("update_profile_picture", async ({ userId, key }) => {
+      const imageUrl = await generateGetUrl(key);
       /* CHANGE PROFILE PICTURE IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
-        if (friend.usr_id === userId) friend.imageTag = key;
+        if (friend.usr_id === userId) {
+          friend.imageTag = key;
+          friend.imageUrl = imageUrl;
+        }
         return friend;
       });
       setFriends(updatedFriends);
@@ -153,8 +158,10 @@ function User() {
           room.users.includes(userId) &&
           room.type === "single" &&
           room.users[room.users.indexOf(userId)] !== userData.userId
-        )
+        ) {
           room.imageTag = key;
+          room.imageUrl = imageUrl;
+        }
         return room;
       });
       setRooms(updatedRooms);
@@ -329,7 +336,10 @@ function User() {
                 (friend) => friend.usr_id === friendId[0]
               );
               room.name = friend[0].usr_nm;
-              if (friend[0].imageUrl) room.imageUrl = friend[0].imageUrl;
+              if (friend[0].imageUrl) {
+                room.imageTag = friend[0].imageTag;
+                room.imageUrl = friend[0].imageUrl;
+              }
             }
           });
           setRooms(rooms);
