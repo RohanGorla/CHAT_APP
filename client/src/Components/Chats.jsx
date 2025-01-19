@@ -34,6 +34,27 @@ function Chats() {
   const textAreaContainerRef = useRef(null);
   const textAreaRef = useRef(null);
 
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    return generateGetUrlResponse.data.url;
+  }
+
+  /* CHECK THE VALIDITY OF SIGNED URL */
+  async function checkUrlValidity(url) {
+    try {
+      const response = await axios.get(url);
+      if (response.status === 200) return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
     e?.preventDefault();
