@@ -177,7 +177,7 @@ app.post("/generategeturl", async (req, res) => {
     Key: req.body.key,
   };
   const command = new GetObjectCommand(getObjectParams);
-  const url = await getSignedUrl(s3, command, { expiresIn: 60 });
+  const url = await getSignedUrl(s3, command, { expiresIn: 86400 });
   res.send({ url });
 });
 

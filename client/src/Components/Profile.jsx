@@ -29,6 +29,16 @@ function Profile() {
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
+  /* CHECK THE VALIDITY OF SIGNED URL */
+  async function checkUrlValidity() {
+    try {
+      const response = await axios.get(userData.imageUrl);
+      if (response.status === 200) setImageUrl(userData.imageUrl);
+    } catch (e) {
+      generateGetUrl(userData.imageTag);
+    }
+  }
+
   /* GET PROFILE PICTURE GET URL FUNCTION */
   async function generateGetUrl(key) {
     const generateGetUrlResponse = await axios.post(
@@ -38,6 +48,8 @@ function Profile() {
       }
     );
     setImageUrl(generateGetUrlResponse.data.url);
+    userData.imageUrl = generateGetUrlResponse.data.url;
+    localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
   }
 
   /* CHANGE PROFILE PICTURE SOCKET METHOD */
@@ -157,9 +169,6 @@ function Profile() {
     if (!userData) {
       navigate("/login");
     } else {
-      /* GET THE SIGNED GET URL TO DISPLAY THE PROFILE PICTURE */
-      if (userData.imageTag) generateGetUrl(userData.imageTag);
-
       /* HANDLE UPDATE USERID SUCCESS AND FAILURE */
       socket.on("update_userid", ({ oldUserid, newUserid }) => {
         if (userData.userId !== oldUserid) return;
@@ -204,6 +213,13 @@ function Profile() {
         setErrorType("oldpassword");
         setErrorMsg(error);
       });
+
+      /* CHECK IMAGE URL VALIDITY IF EXISTS OR GENERATE A NEW SIGNED URL */
+      if (userData.imageUrl) {
+        checkUrlValidity();
+      } else {
+        generateGetUrl(userData.imageTag);
+      }
     }
   }, []);
 
