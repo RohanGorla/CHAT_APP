@@ -5,6 +5,7 @@ import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
 import FriendsList from "./FriendsList";
+import axios from "axios";
 
 function Chats() {
   /* SPECIAL VARIABLES */
@@ -193,7 +194,13 @@ function Chats() {
               className="Chat--Room_Information--Close"
             />
             <div className="Chat--Room_Information--Image">
-              <IoMdPerson className="Chat--Room_Information--Image--Icon" />
+              {currentRoom.imageUrl ? (
+                <div className="Chat--Room_Information--Image_Frame">
+                  <img src={currentRoom.imageUrl}></img>
+                </div>
+              ) : (
+                <IoMdPerson className="Chat--Room_Information--Image--Icon" />
+              )}
             </div>
             <div className="Chat--Room_Information--Friends_List">
               {friendsList?.map((friend, index) => {
