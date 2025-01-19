@@ -327,6 +327,9 @@ function User() {
               room.name = friend[0].usr_nm;
             }
           });
+          for (let i = 0; i < friends.length; i++) {
+            friends[i].imageUrl = await generateGetUrl(friends[i].imageTag);
+          }
           setRooms(rooms);
           setSearchRooms(rooms);
           setFriends(friends);
