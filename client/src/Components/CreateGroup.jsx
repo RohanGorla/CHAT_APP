@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
+import { SiTicktick } from "react-icons/si";
 
 function CreateGroup() {
   /* SPECIAL VARIABLES */
@@ -60,12 +61,17 @@ function CreateGroup() {
                     </div>
                   </div>
                   <div className="CreateGroup--Friends_List--Friend_Details">
-                    <p className="CreateGroup--Friends_List--Friend_Username">
-                      {friend.usr_nm}
-                    </p>
-                    <p className="CreateGroup--Friends_List--Friend_Userid">
-                      {friend.usr_id}
-                    </p>
+                    <div className="CreateGroup--Friends_List--Friend_Details--Name_And_Id">
+                      <p className="CreateGroup--Friends_List--Friend_Username">
+                        {friend.usr_nm}
+                      </p>
+                      <p className="CreateGroup--Friends_List--Friend_Userid">
+                        {friend.usr_id}
+                      </p>
+                    </div>
+                    <div className="CreateGroup--Friends_List--Friend_Details--Selected">
+                      <SiTicktick className="CreateGroup--Friends_List--Friend_Details--Selected_Icon" />
+                    </div>
                   </div>
                 </div>
               );

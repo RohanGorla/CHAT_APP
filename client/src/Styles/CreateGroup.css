@@ -7,6 +7,7 @@
   --CreateGroup--Friends_List_Icon: 30px;
   --CreateGroup--Friends_List_Username: 16px;
   --CreateGroup--Friends_List_Userid: 14px;
+  --CreateGroup--Friends_Selected_Icon: 25px
 }
 
 .CreateGroup_Page {
@@ -159,17 +160,35 @@
 }
 
 .CreateGroup--Friends_List--Friend_Details {
-  min-width: 88%;
   font-family: var(--CreateGroup_Main_Font);
+  min-width: 88%;
+  display: flex;
+  align-items: center;
+}
+
+.CreateGroup--Friends_List--Friend_Details--Name_And_Id {
+  min-width: 80%;
 }
 
 .CreateGroup--Friends_List--Friend_Username {
   font-size: var(--CreateGroup--Friends_List_Username);
   font-weight: 600;
-  margin-bottom: .1em;
+  margin-bottom: 0.1em;
 }
 
 .CreateGroup--Friends_List--Friend_Userid {
-    font-size: var(--CreateGroup--Friends_List_Userid);
-    color: rgb(256, 256, 256, .6);
+  font-size: var(--CreateGroup--Friends_List_Userid);
+  color: rgb(256, 256, 256, 0.6);
+}
+
+.CreateGroup--Friends_List--Friend_Details--Selected {
+  min-width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CreateGroup--Friends_List--Friend_Details--Selected_Icon {
+  font-size: var(--CreateGroup--Friends_Selected_Icon);
+  color: rgb(112, 224, 0);
 }
