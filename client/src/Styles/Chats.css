@@ -123,6 +123,10 @@
   margin-bottom: 2em;
 }
 
+.Chat--Room_Information--Friend_Email--Inactive {
+  display: none;
+}
+
 .Chat--Room_Information--Friend_Email--Heading {
   font-size: var(--Chat_Room_Info_Email--Heading);
   font-weight: 600;

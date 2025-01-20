@@ -39,12 +39,15 @@ function Chats() {
   async function sendMessage(e) {
     e?.preventDefault();
     if (!message.length) return;
+    let read;
+    if (currentRoom.type === "single") read = false;
+    else read = [userData.userId];
     socket.emit("send_message", {
       userData,
       message,
       id,
       time: new Date(),
-      read: false,
+      read,
     });
     setMessage("");
   }
@@ -106,12 +109,7 @@ function Chats() {
           break;
         /* IF GROUP CHAT */
         case "group":
-          const friendsIdList = room[0].users.filter(
-            (user) => user !== userData.userId
-          );
-          room[0].friendsList = friends.filter((friend) =>
-            friendsIdList.includes(friend.usr_id)
-          );
+          room[0].friendsList = room[0].members;
           break;
       }
       setFriendsList(room[0]?.friendsList);
@@ -189,7 +187,13 @@ function Chats() {
                       <p className="Chat--Room_Information--Friend_Userid">
                         {friend.usr_id}
                       </p>
-                      <p className="Chat--Room_Information--Friend_Email">
+                      <p
+                        className={
+                          currentRoom.type === "single"
+                            ? "Chat--Room_Information--Friend_Email"
+                            : "Chat--Room_Information--Friend_Email--Inactive"
+                        }
+                      >
                         <span className="Chat--Room_Information--Friend_Email--Heading">
                           Contact email:
                         </span>
@@ -199,9 +203,11 @@ function Chats() {
                     {/* ROOM CHAT DELETE OPTIONS */}
                     <div
                       className={
-                        confirmDelete || confirmRemove
-                          ? "Chat--Room_Information--Buttons--Inactive"
-                          : "Chat--Room_Information--Buttons"
+                        currentRoom.type === "single"
+                          ? confirmDelete || confirmRemove
+                            ? "Chat--Room_Information--Buttons--Inactive"
+                            : "Chat--Room_Information--Buttons"
+                          : "Chat--Room_Information--Buttons--Inactive"
                       }
                     >
                       <button
@@ -243,9 +249,11 @@ function Chats() {
                     {/* REMOVE FRIEND OPTIONS */}
                     <div
                       className={
-                        confirmRemove || confirmDelete
-                          ? "Chat--Room_Information--Buttons--Inactive"
-                          : "Chat--Room_Information--Buttons"
+                        currentRoom.type === "single"
+                          ? confirmDelete || confirmRemove
+                            ? "Chat--Room_Information--Buttons--Inactive"
+                            : "Chat--Room_Information--Buttons"
+                          : "Chat--Room_Information--Buttons--Inactive"
                       }
                     >
                       <button
@@ -399,7 +407,7 @@ function Chats() {
                     read = false;
                   } else {
                     msg = `Hello, frens`;
-                    read = [];
+                    read = [userData.userId];
                   }
                   socket.emit("send_message", {
                     userData,
