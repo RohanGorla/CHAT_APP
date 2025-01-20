@@ -93,6 +93,7 @@ app.post("/checkuser", async (req, res) => {
     userId: emailRecords[0].usr_id,
     username: emailRecords[0].usr_nm,
   };
+  if (emailRecords[0].imageTag) userData.imageTag = emailRecords[0].imageTag;
   return res.send({ access: true, userData });
 });
 
