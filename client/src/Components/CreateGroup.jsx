@@ -37,6 +37,31 @@ function CreateGroup() {
               placeholder="Search your frens list"
             ></input>
           </div>
+          <div className="CreateGroup--Select_Friends--Friends_List">
+            {friends.map((friend, index) => {
+              return (
+                <div key={index} className="CreateGroup--Friends_List--Friend">
+                  <div className="CreateGroup--Friends_List--Friend_Image">
+                    {friend.imageUrl ? (
+                      <div className="CreateGroup--Friends_List--Friend_Image_Frame">
+                        <img src={friend.imageUrl}></img>
+                      </div>
+                    ) : (
+                      <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
+                    )}
+                  </div>
+                  <div className="CreateGroup--Friends_List--Friend_Details">
+                    <p className="CreateGroup--Friends_List--Friend_Username">
+                      {friend.usr_nm}
+                    </p>
+                    <p className="CreateGroup--Friends_List--Friend_Userid">
+                      {friend.usr_id}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </section>
       </div>
     </div>
