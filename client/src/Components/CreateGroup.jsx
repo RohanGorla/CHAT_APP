@@ -36,6 +36,7 @@ function CreateGroup() {
         </section>
         <section className="CreateGroup--Select_Friends">
           <div className="CreateGroup--Select_Friends--Search">
+            <p className="CreateGroup--Select_Friends--Heading">Select frens</p>
             <input
               type="text"
               value={friendListSearch}
