@@ -9,9 +9,21 @@ function CreateGroup() {
   const { friends } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLE */
+  const [sortedFriends, setSortedFriends] = useState(friends);
   const [groupName, setGroupName] = useState("");
   const [friendListSearch, setFriendListSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
+
+  /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS */
+  useEffect(() => {
+    const selectedList = friends.filter((friend) =>
+      selectedFriends.includes(friend.usr_id)
+    );
+    const notSelectedList = friends.filter(
+      (friend) => !selectedFriends.includes(friend.usr_id)
+    );
+    setSortedFriends([...selectedList, ...notSelectedList]);
+  }, [selectedFriends]);
 
   return (
     <div className="CreateGroup_Page">
@@ -47,7 +59,7 @@ function CreateGroup() {
             ></input>
           </div>
           <div className="CreateGroup--Select_Friends--Friends_List">
-            {friends.map((friend, index) => {
+            {sortedFriends.map((friend, index) => {
               return (
                 <div
                   key={index}
