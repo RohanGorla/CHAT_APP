@@ -12,7 +12,7 @@
   --Chat_Icon_Size: 30px;
   --Chat_Name: 18px;
   --Chat_Show_Details: 14px;
-  --Chat_Username: 16px;
+  --Chat_Userid: 16px;
   --Chat_Message: 18px;
 }
 
@@ -287,13 +287,13 @@
   font-family: var(--Chat_Sub_Font);
 }
 
-.Chat--Message_Card--Username {
-  font-size: var(--Chat_Username);
+.Chat--Message_Card--Userid {
+  font-size: var(--Chat_Userid);
   font-weight: 600;
   margin-bottom: 0.3em;
 }
 
-.Chat--Message_Card--Username--Inactive {
+.Chat--Message_Card--Userid--Inactive {
   display: none;
 }
 

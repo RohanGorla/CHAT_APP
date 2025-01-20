@@ -347,13 +347,15 @@ function Chats() {
                 >
                   <p
                     className={
-                      userData?.userId === message.usr_id
-                        ? "Chat--Message_Card--Username--Inactive"
-                        : "Chat--Message_Card--Username"
+                      currentRoom.type === "group"
+                        ? userData?.userId === message.usr_id
+                          ? "Chat--Message_Card--Userid--Inactive"
+                          : "Chat--Message_Card--Userid"
+                        : "Chat--Message_Card--Userid--Inactive"
                     }
-                    style={{ color: usernameColor }}
+                    // style={{ color: usernameColor }}
                   >
-                    {message.usr_nm}
+                    {message.usr_id}
                   </p>
                   <p className="Chat--Message_Card--Message">{message.msg}</p>
                   <div className="Chat--Message_Card--Time_And_Status">
@@ -384,17 +386,27 @@ function Chats() {
           ) : (
             <div className="Chat--Empty">
               <p className="Chat--Empty_Message">
-                Say hello 👋 to your fren, {currentRoom?.name}!
+                {currentRoom.type === "single"
+                  ? `Say hello 👋 to your fren, ${currentRoom?.name}!`
+                  : `Say hello 👋 to your frens!`}
               </p>
               <button
                 className="Chat--Empty_Button"
                 onClick={() => {
+                  let msg, read;
+                  if (currentRoom.type === "single") {
+                    msg = `Hello, ${currentRoom?.name}`;
+                    read = false;
+                  } else {
+                    msg = `Hello, frens`;
+                    read = [];
+                  }
                   socket.emit("send_message", {
                     userData,
-                    message: `Hello, ${currentRoom?.name}`,
+                    message: msg,
                     id,
                     time: new Date(),
-                    read: false,
+                    read,
                   });
                 }}
               >

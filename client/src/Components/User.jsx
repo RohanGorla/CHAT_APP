@@ -362,7 +362,7 @@ function User() {
                   rooms[i].users.includes(friend.usr_id)
                 );
                 rooms[i].members = groupMembers;
-                if (rooms[i].imageTag)
+                if (rooms[i]?.imageTag)
                   rooms[i].imageUrl = await generateGetUrl(rooms[i].imageTag);
                 break;
 
