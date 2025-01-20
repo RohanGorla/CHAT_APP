@@ -6,13 +6,22 @@ import { SiTicktick } from "react-icons/si";
 function CreateGroup() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const { friends } = useOutletContext();
+  const { socket, friends } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLE */
   const [sortedFriends, setSortedFriends] = useState(friends);
   const [groupName, setGroupName] = useState("");
   const [friendListSearch, setFriendListSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
+
+  async function createGroup() {
+    socket.emit("create_group", {
+      groupName,
+      friends: [...selectedFriends, userData.userId],
+      createdBy: { usr_nm: userData.username, usr_id: userData.userId },
+    });
+    navigate("/user/friends");
+  }
 
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS */
   useEffect(() => {
@@ -44,6 +53,7 @@ function CreateGroup() {
                 ? "CreateGroup--Group_Details--Create"
                 : "CreateGroup--Group_Details--Create--Inactive"
             }
+            onClick={createGroup}
           >
             Create Group
           </button>

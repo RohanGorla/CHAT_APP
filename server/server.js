@@ -229,7 +229,7 @@ io.on("connection", async (socket) => {
           usr_id: { $ne: personalRoomId },
         },
         {
-          projection: { _id: 0, rooms: 0, rooms: 0 },
+          projection: { _id: 0, rooms: 0, pass: 0 },
         }
       )
       .toArray();
