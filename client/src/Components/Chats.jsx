@@ -181,24 +181,49 @@ function Chats() {
                   >
                     {/* ROOM FRIEND INFORMATION */}
                     <div className="Chat--Room_Information--Friend">
-                      <p className="Chat--Room_Information--Friend_Username">
-                        {friend.usr_nm}
-                      </p>
-                      <p className="Chat--Room_Information--Friend_Userid">
-                        {friend.usr_id}
-                      </p>
-                      <p
+                      <div
                         className={
-                          currentRoom.type === "single"
-                            ? "Chat--Room_Information--Friend_Email"
-                            : "Chat--Room_Information--Friend_Email--Inactive"
+                          currentRoom.type === "group"
+                            ? "Chat--Room_Information--Friend--Image_Container"
+                            : "Chat--Room_Information--Friend--Image_Container--Inactive"
                         }
                       >
-                        <span className="Chat--Room_Information--Friend_Email--Heading">
-                          Contact email:
-                        </span>
-                        {friend.email}
-                      </p>
+                        <div className="Chat--Room_Information--Friend--Image">
+                          {friend.imageUrl ? (
+                            <div className="Chat--Room_Information--Friend--Image_Frame">
+                              <img src={friend.imageUrl}></img>
+                            </div>
+                          ) : (
+                            <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
+                          )}
+                        </div>
+                      </div>
+                      <div
+                        className={
+                          currentRoom.type === "group"
+                            ? "Chat--Room_Information--Friend--Details"
+                            : ""
+                        }
+                      >
+                        <p className="Chat--Room_Information--Friend_Username">
+                          {friend.usr_nm}
+                        </p>
+                        <p className="Chat--Room_Information--Friend_Userid">
+                          {friend.usr_id}
+                        </p>
+                        <p
+                          className={
+                            currentRoom.type === "single"
+                              ? "Chat--Room_Information--Friend_Email"
+                              : "Chat--Room_Information--Friend_Email--Inactive"
+                          }
+                        >
+                          <span className="Chat--Room_Information--Friend_Email--Heading">
+                            Contact email:
+                          </span>
+                          {friend.email}
+                        </p>
+                      </div>
                     </div>
                     {/* ROOM CHAT DELETE OPTIONS */}
                     <div
