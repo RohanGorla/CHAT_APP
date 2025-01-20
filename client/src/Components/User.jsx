@@ -283,6 +283,7 @@ function User() {
   /* HERE WE SPECIFY AN EMPTY DEPENDANCY ARRAY BECAUSE WE ARE NOT UPDATING STATE VARIABLES
      HERE WE ONLY WANT TO MOUNT THESE EVENTS WHEN COMPONENT MOUNTS */
   useEffect(() => {
+    /* JOIN SINGLE ROOM SOCKET EVENTS */
     socket.on("join_room", (payload) => {
       socket.emit("join_room", payload);
     });
@@ -292,6 +293,10 @@ function User() {
         Popup(`${to.usr_nm} accepted your fren request!`, "Good");
       if (to.usr_id === userData.userId)
         Popup(`You are now frens with ${from.username}!`, "Good");
+    });
+    /* JOIN GROUP ROOM SOCKET EVENTS */
+    socket.on("join_group", (payload) => {
+      socket.emit("join_group", payload);
     });
   }, []);
 

@@ -376,7 +376,7 @@ io.on("connection", async (socket) => {
     });
     io.to(room.roomId).emit("chat_deleted", { from, to, room });
   });
-  /* CREATE NEW GROUP */
+  /* CREATE GROUP */
   socket.on("create_group", async ({ groupName, friends, createdBy }) => {
     const roomId = v4();
     const response = await userInfoCollection.updateMany(
@@ -393,6 +393,11 @@ io.on("connection", async (socket) => {
     friends.forEach((friend) =>
       io.to(friend).emit("join_group", { groupName, roomId, createdBy })
     );
+  });
+  /* JOIN GROUP */
+  socket.on("join_group", async (payload) => {
+    socket.join(payload.roomId);
+    socket.emit("join_group_success", payload);
   });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
