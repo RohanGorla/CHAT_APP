@@ -48,14 +48,16 @@ function CreateGroup() {
             {friends.map((friend, index) => {
               return (
                 <div key={index} className="CreateGroup--Friends_List--Friend">
-                  <div className="CreateGroup--Friends_List--Friend_Image">
-                    {friend.imageUrl ? (
-                      <div className="CreateGroup--Friends_List--Friend_Image_Frame">
-                        <img src={friend.imageUrl}></img>
-                      </div>
-                    ) : (
-                      <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
-                    )}
+                  <div className="CreateGroup--Friends_List--Friend_Image_Container">
+                    <div className="CreateGroup--Friends_List--Friend_Image">
+                      {friend.imageUrl ? (
+                        <div className="CreateGroup--Friends_List--Friend_Image_Frame">
+                          <img src={friend.imageUrl}></img>
+                        </div>
+                      ) : (
+                        <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
+                      )}
+                    </div>
                   </div>
                   <div className="CreateGroup--Friends_List--Friend_Details">
                     <p className="CreateGroup--Friends_List--Friend_Username">
