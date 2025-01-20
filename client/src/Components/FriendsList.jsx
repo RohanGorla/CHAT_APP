@@ -99,7 +99,7 @@ function FriendsList() {
           onChange={(e) => {
             setFriendListSearch(e.target.value);
           }}
-          placeholder="Search friend list..."
+          placeholder="Search your frens list..."
         ></input>
       </search>
       {searchRooms.length ? (

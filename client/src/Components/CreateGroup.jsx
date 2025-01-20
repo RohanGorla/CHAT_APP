@@ -9,6 +9,7 @@ function CreateGroup() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLE */
   const [groupName, setGroupName] = useState("");
+  const [friendListSearch, setFriendListSearch] = useState("");
 
   return (
     <div className="CreateGroup_Page">
@@ -26,6 +27,16 @@ function CreateGroup() {
           <button className="CreateGroup--Group_Details--Create">
             Create Group
           </button>
+        </section>
+        <section className="CreateGroup--Select_Friends">
+          <div className="CreateGroup--Select_Friends--Search">
+            <input
+              type="text"
+              value={friendListSearch}
+              onChange={(e) => setFriendListSearch(e.target.value)}
+              placeholder="Search your frens list"
+            ></input>
+          </div>
         </section>
       </div>
     </div>
