@@ -3,6 +3,7 @@
   --Chat_Sub_Font: "Varela Round", sans-serif;
   --Chat_Room_Info_Close: 20px;
   --Chat_Room_Info_Icon: 170px;
+  --Chat_Room_Info_Friend_Icon: 30px;
   --Chat_Room_Info_Username: 18px;
   --Chat_Room_Info_Userid: 16px;
   --Chat_Room_Info_Email: 16px;
@@ -106,6 +107,56 @@
 
 .Chat--Room_Information--Friend_Container {
   font-family: var(--Chat_Sub_Font);
+  margin-block: 1.5em;
+}
+
+.Chat--Room_Information--Friend {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.Chat--Room_Information--Friend--Image_Container {
+  display: flex;
+  width: 15%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chat--Room_Information--Friend--Image_Container--Inactive {
+  display: none;
+}
+
+.Chat--Room_Information--Friend--Image {
+  background-color: rgb(20, 33, 61);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.Chat--Room_Information--Friend--Image_Frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  mask: radial-gradient(circle, black 22.5px, transparent 22.6px);
+}
+
+.Chat--Room_Information--Friend--Image_Frame img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.Chat--Room_Information--Friend--Icon {
+  font-size: var(--Chat_Room_Info_Friend_Icon);
+}
+
+.Chat--Room_Information--Friend--Details {
+  min-width: 85%;
 }
 
 .Chat--Room_Information--Friend_Username {
@@ -115,12 +166,11 @@
 
 .Chat--Room_Information--Friend_Userid {
   font-size: var(--Chat_Room_Info_Userid);
-  margin-bottom: 1.5em;
 }
 
 .Chat--Room_Information--Friend_Email {
   font-size: var(--Chat_Room_Info_Email);
-  margin-bottom: 2em;
+  margin-block: 1em 2em;
 }
 
 .Chat--Room_Information--Friend_Email--Inactive {
