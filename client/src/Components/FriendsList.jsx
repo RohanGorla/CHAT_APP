@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
+import { MdGroupAdd } from "react-icons/md";
 import axios from "axios";
 
 function FriendsList() {
@@ -86,6 +87,10 @@ function FriendsList() {
 
   return (
     <section className="Friends_List">
+      {/* CREATE A NEW FRIENDS GROUP */}
+      <div className="Friends_List--New_Group">
+        <MdGroupAdd className="Friends_List--New_Group--Icon" />
+      </div>
       {/* SEARCH FRIEND IN FRIENDS LIST */}
       <search className="Friends_List--Search">
         <input

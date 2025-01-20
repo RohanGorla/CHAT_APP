@@ -1,6 +1,7 @@
 :root {
   --Friends_Main_Font: "Inter", sans-serif;
   --Friends_Sub_Font: "Varela Round", sans-serif;
+  --Friends_Group_Icon_Size: 22px;
   --Friends_User_Icon_Size: 30px;
   --Friends_Chat_Name: 18px;
   --Friends_Last_Message: 16px;
@@ -26,6 +27,7 @@
 }
 
 .Friends_List {
+  position: relative;
   background-color: rgb(20, 33, 61);
   font-family: var(--Friends_Main_Font);
   overflow-y: scroll;
@@ -50,6 +52,32 @@
 
 .Friends_List:hover::-webkit-scrollbar-thumb {
   background: rgb(100, 99, 99);
+}
+
+.Friends_List--New_Group {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  z-index: 1;
+  background-color: rgb(51, 214, 91);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    .Friends_List--New_Group--Icon {
+      color: rgb(51, 214, 91);
+    }
+  }
+}
+
+.Friends_List--New_Group--Icon {
+  font-size: var(--Friends_Group_Icon_Size);
+  color: black;
 }
 
 .Friends_List--Search {
@@ -122,7 +150,7 @@
 
 .Friend_Card--Details {
   min-width: 85%;
-  padding-right: .5em;
+  padding-right: 0.5em;
 }
 
 .Friend_Card--Name_And_Time {
