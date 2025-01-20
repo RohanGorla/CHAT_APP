@@ -16,7 +16,7 @@ function CreateGroup() {
       <div className="CreateGroup_Container">
         <section className="CreateGroup--Group_Details">
           <p className="CreateGroup--Group_Details--Heading">
-            Create a frens group
+            Create new frens group
           </p>
           <input
             type="text"
@@ -24,7 +24,13 @@ function CreateGroup() {
             onChange={(e) => setGroupName(e.target.value)}
             placeholder="Enter group name..."
           ></input>
-          <button className="CreateGroup--Group_Details--Create">
+          <button
+            className={
+              groupName.length
+                ? "CreateGroup--Group_Details--Create"
+                : "CreateGroup--Group_Details--Create--Inactive"
+            }
+          >
             Create Group
           </button>
         </section>
