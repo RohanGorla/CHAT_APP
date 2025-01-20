@@ -88,7 +88,10 @@ function FriendsList() {
   return (
     <section className="Friends_List">
       {/* CREATE A NEW FRIENDS GROUP */}
-      <div className="Friends_List--New_Group" onClick={()=>navigate("/user/creategroup")}>
+      <div
+        className="Friends_List--New_Group"
+        onClick={() => navigate("/user/creategroup")}
+      >
         <MdGroupAdd className="Friends_List--New_Group--Icon" />
       </div>
       {/* SEARCH FRIEND IN FRIENDS LIST */}
@@ -173,7 +176,9 @@ function FriendsList() {
                   <p className="Friend_Card--Message">
                     {room?.lastMessage
                       ? room.lastMessage.msg
-                      : `Say hello, to your fren!`}
+                      : room.type === "single"
+                      ? `Say hello, to your fren!`
+                      : `Say hello, to your frens!`}
                   </p>
                   <span className="Friend_Card--Unread_Message_Count">
                     {unreadMessages.length

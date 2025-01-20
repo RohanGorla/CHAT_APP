@@ -341,21 +341,35 @@ function User() {
             if (friends[i].imageTag)
               friends[i].imageUrl = await generateGetUrl(friends[i].imageTag);
           }
-          rooms.map((room) => {
-            if (room.type === "single") {
-              const friendId = room.users.filter(
-                (user) => user !== userData.userId
-              );
-              const friend = friends.filter(
-                (friend) => friend.usr_id === friendId[0]
-              );
-              room.name = friend[0].usr_nm;
-              if (friend[0].imageUrl) {
-                room.imageTag = friend[0].imageTag;
-                room.imageUrl = friend[0].imageUrl;
-              }
+          for (let i = 0; i < rooms.length; i++) {
+            switch (rooms[i].type) {
+              case "single":
+                const friendId = rooms[i].users.filter(
+                  (user) => user !== userData.userId
+                );
+                const friend = friends.filter(
+                  (friend) => friend.usr_id === friendId[0]
+                );
+                rooms[i].name = friend[0].usr_nm;
+                if (friend[0].imageUrl) {
+                  rooms[i].imageTag = friend[0].imageTag;
+                  rooms[i].imageUrl = friend[0].imageUrl;
+                }
+                break;
+
+              case "group":
+                const groupMembers = friends.filter((friend) =>
+                  rooms[i].users.includes(friend.usr_id)
+                );
+                rooms[i].members = groupMembers;
+                if (rooms[i].imageTag)
+                  rooms[i].imageUrl = await generateGetUrl(rooms[i].imageTag);
+                break;
+
+              default:
+                break;
             }
-          });
+          }
           setRooms(rooms);
           setSearchRooms(rooms);
           setFriends(friends);
