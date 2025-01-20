@@ -11,6 +11,7 @@ function CreateGroup() {
   /* STATE VARIABLE */
   const [groupName, setGroupName] = useState("");
   const [friendListSearch, setFriendListSearch] = useState("");
+  const [selectedFriends, setSelectedFriends] = useState([]);
 
   return (
     <div className="CreateGroup_Page">
@@ -48,7 +49,20 @@ function CreateGroup() {
           <div className="CreateGroup--Select_Friends--Friends_List">
             {friends.map((friend, index) => {
               return (
-                <div key={index} className="CreateGroup--Friends_List--Friend">
+                <div
+                  key={index}
+                  className="CreateGroup--Friends_List--Friend"
+                  onClick={() => {
+                    if (selectedFriends.includes(friend.usr_id)) {
+                      const updatedList = selectedFriends.filter(
+                        (id) => id !== friend.usr_id
+                      );
+                      setSelectedFriends(updatedList);
+                    } else {
+                      setSelectedFriends([...selectedFriends, friend.usr_id]);
+                    }
+                  }}
+                >
                   <div className="CreateGroup--Friends_List--Friend_Image_Container">
                     <div className="CreateGroup--Friends_List--Friend_Image">
                       {friend.imageUrl ? (
@@ -69,7 +83,13 @@ function CreateGroup() {
                         {friend.usr_id}
                       </p>
                     </div>
-                    <div className="CreateGroup--Friends_List--Friend_Details--Selected">
+                    <div
+                      className={
+                        selectedFriends.includes(friend.usr_id)
+                          ? "CreateGroup--Friends_List--Friend_Details--Selected"
+                          : "Inactive"
+                      }
+                    >
                       <SiTicktick className="CreateGroup--Friends_List--Friend_Details--Selected_Icon" />
                     </div>
                   </div>

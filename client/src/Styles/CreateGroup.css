@@ -7,7 +7,7 @@
   --CreateGroup--Friends_List_Icon: 30px;
   --CreateGroup--Friends_List_Username: 16px;
   --CreateGroup--Friends_List_Userid: 14px;
-  --CreateGroup--Friends_Selected_Icon: 25px
+  --CreateGroup--Friends_Selected_Icon: 25px;
 }
 
 .CreateGroup_Page {
@@ -122,6 +122,7 @@
   border-style: none;
   border-radius: 5px;
   margin: 1em 0em;
+  cursor: pointer;
 }
 
 .CreateGroup--Friends_List--Friend_Image_Container {
@@ -191,4 +192,8 @@
 .CreateGroup--Friends_List--Friend_Details--Selected_Icon {
   font-size: var(--CreateGroup--Friends_Selected_Icon);
   color: rgb(112, 224, 0);
+}
+
+.Inactive {
+  display: none;
 }
