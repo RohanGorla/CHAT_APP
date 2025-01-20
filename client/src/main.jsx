@@ -12,6 +12,7 @@ import Login from "./Components/Login.jsx";
 import Register from "./Components/Register.jsx";
 import User from "./Components/User.jsx";
 import Friends from "./Components/Friends.jsx";
+import CreateGroup from "./Components/CreateGroup.jsx";
 import Chats from "./Components/Chats.jsx";
 import Notifications from "./Components/Notifications.jsx";
 import FindFriends from "./Components/FindFriends.jsx";
@@ -26,6 +27,7 @@ const router = createBrowserRouter(
         <Route path="register" element={<Register />} />
         <Route path="user" element={<User />}>
           <Route path="friends" element={<Friends />} />
+          <Route path="creategroup" element={<CreateGroup />} />
           <Route path="chats/:id" element={<Chats />} />
           <Route path="notifications" element={<Notifications />} />
           <Route path="findfriends" element={<FindFriends />} />

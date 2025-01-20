@@ -88,7 +88,7 @@ function FriendsList() {
   return (
     <section className="Friends_List">
       {/* CREATE A NEW FRIENDS GROUP */}
-      <div className="Friends_List--New_Group">
+      <div className="Friends_List--New_Group" onClick={()=>navigate("/user/creategroup")}>
         <MdGroupAdd className="Friends_List--New_Group--Icon" />
       </div>
       {/* SEARCH FRIEND IN FRIENDS LIST */}
