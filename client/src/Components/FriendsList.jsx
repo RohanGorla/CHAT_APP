@@ -20,53 +20,9 @@ function FriendsList() {
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
 
-  /* GET PROFILE PICTURE GET URL FUNCTION */
-  async function generateGetUrl(key) {
-    const generateGetUrlResponse = await axios.post(
-      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
-      {
-        key,
-      }
-    );
-    return generateGetUrlResponse.data.url;
-  }
-
-  /* CHECK THE VALIDITY OF SIGNED URL */
-  async function checkUrlValidity(url) {
-    try {
-      const response = await axios.get(url);
-      if (response.status === 200) return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
-  useEffect(() => {
-    if (!friendListSearch.length) {
-      setSearchRooms(rooms);
-    } else {
-      const filteredRooms = rooms.filter((room) =>
-        room.name.toLowerCase().startsWith(friendListSearch.toLowerCase())
-      );
-      for (let i = 0; i < filteredRooms.length; i++) {
-        (async function () {
-          if (filteredRooms[i].imageUrl) {
-            const urlValid = await checkUrlValidity(filteredRooms[i].imageUrl);
-            if (!urlValid)
-              filteredRooms[i].imageUrl = await generateGetUrl(
-                filteredRooms[i].imageTag
-              );
-          }
-        })();
-      }
-      setSearchRooms(filteredRooms);
-    }
-  }, [friendListSearch]);
-
-  /* TO UPDATE THE LAST MESSAGE TEXT & TIME AND ALSO SORT THE FRIENDS LIST ACCORDINGLY */
-  useEffect(() => {
-    searchRooms.map((room) => {
+  /* SORT THE CHATS ACCORDING TO RECENT MESSAGE RECEIVED OR SENT */
+  function sortChats(rooms) {
+    rooms.map((room) => {
       /* FILTER OUT THE ROOM CHATS FROM ALL CHATS */
       const roomChats = chats.filter((chat) => chat.room === room.roomId);
       /* SET THE LAST MESSAGE ATTRIBUTE OF THE ROOM CHAT */
@@ -86,7 +42,7 @@ function FriendsList() {
       });
     });
     /* GET ALL THE ROOMS WITH ATLEAST ONE MESSAGE */
-    const validRooms = searchRooms.filter(
+    const validRooms = rooms.filter(
       (room) => room.lastMessageFullDate !== undefined
     );
     /* SORT ALL THE VALID ROOMS ACCORDING TO THE TIME OF LAST MESSAGE */
@@ -97,10 +53,31 @@ function FriendsList() {
       );
     });
     /* GET ALL ROOMS WITH NO MESSAGES */
-    const invalidRooms = searchRooms.filter(
+    const invalidRooms = rooms.filter(
       (room) => room.lastMessageFullDate === undefined
     );
-    setSearchRooms([...validRooms, ...invalidRooms]);
+    /* RETURN THE SORTED ROOMS LIST */
+    return [...validRooms, ...invalidRooms];
+  }
+
+  /* TO FIND THE FRIEND FROM FRIENDS LIST USING SEARCH STRING */
+  useEffect(() => {
+    if (!friendListSearch.length) {
+      const sortedRooms = sortChats(rooms);
+      setSearchRooms(sortedRooms);
+    } else {
+      const filteredRooms = rooms.filter((room) =>
+        room.name.toLowerCase().startsWith(friendListSearch.toLowerCase())
+      );
+      const sortedRooms = sortChats(filteredRooms);
+      setSearchRooms(sortedRooms);
+    }
+  }, [friendListSearch]);
+
+  /* TO UPDATE THE LAST MESSAGE TEXT & TIME AND ALSO SORT THE FRIENDS LIST ACCORDINGLY */
+  useEffect(() => {
+    const sortedRooms = sortChats(searchRooms);
+    setSearchRooms(sortedRooms);
   }, [chats, rooms]);
 
   useEffect(() => {
