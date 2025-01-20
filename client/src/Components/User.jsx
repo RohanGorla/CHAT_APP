@@ -298,6 +298,12 @@ function User() {
     socket.on("join_group", (payload) => {
       socket.emit("join_group", payload);
     });
+    socket.on("join_group_success", ({ groupName, createdBy }) => {
+      socket.emit("get_user_data", { room: userData.userId });
+      if (createdBy.usr_id === userData.userId)
+        Popup(`${groupName} has been created!`, "Good");
+      else Popup(`${createdBy.usr_nm} added you in ${groupName}`, "Good");
+    });
   }, []);
 
   /* GET THE NEW NOTIFICATIONS */
