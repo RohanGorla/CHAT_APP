@@ -376,6 +376,24 @@ io.on("connection", async (socket) => {
     });
     io.to(room.roomId).emit("chat_deleted", { from, to, room });
   });
+  /* CREATE NEW GROUP */
+  socket.on("create_group", async ({ groupName, friends, createdBy }) => {
+    const roomId = v4();
+    const response = await userInfoCollection.updateMany(
+      { usr_id: { $in: friends } },
+      { $push: { rooms: roomId } }
+    );
+    const roomRecord = {
+      roomId: roomId,
+      name: groupName,
+      users: friends,
+      type: "group",
+    };
+    const roomsResponse = await roomsCollection.insertOne(roomRecord);
+    friends.forEach((friend) =>
+      io.to(friend).emit("join_group", { groupName, roomId, createdBy })
+    );
+  });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
