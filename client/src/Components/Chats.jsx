@@ -392,6 +392,20 @@ function Chats() {
                 messages in this group, and you will no longer be part of the
                 group. Do you want to proceed?
               </p>
+              <div className="Chat--Room_Information--Buttons">
+                <button
+                  className="Chat--Room_Information--Buttons--Cancel"
+                  onClick={() => setConfirmExit(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="Chat--Room_Information--Buttons--Danger"
+                  onClick={exitGroup}
+                >
+                  Confirm exit
+                </button>
+              </div>
             </div>
           </div>
         </div>
