@@ -405,6 +405,13 @@ io.on("connection", async (socket) => {
     socket.join(payload.roomId);
     socket.emit("join_group_success", payload);
   });
+  /* EXIT GROUP */
+  socket.on("exit_group", async ({ id, user, name }) => {
+    const updateUserInfoCollection = await userInfoCollection.updateOne(
+      { usr_id: user.userId },
+      { $pull: { rooms: id } }
+    );
+  });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
