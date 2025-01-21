@@ -29,6 +29,8 @@ function Chats() {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
+  const [editRoomname, setEditRoomname] = useState(true);
+  const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [confirmExit, setConfirmExit] = useState(false);
@@ -246,13 +248,38 @@ function Chats() {
               }
             >
               <div className="Chat--Room_Information--Edit_Room_Name">
-                <div className="Chat--Room_Information--Edit_Room_Name--Display">
+                <div
+                  className={
+                    editRoomname
+                      ? "Chat--Room_Information--Edit_Room_Name--Inactive"
+                      : "Chat--Room_Information--Edit_Room_Name--Display"
+                  }
+                >
                   <p className="Chat--Room_Information--Edit_Room_Name--Name">
                     {currentRoom.name}
                   </p>
                   <div className="Chat--Room_Information--Edit_Room_Name--Edit_Icon_Container">
-                    <FaEdit className="Chat--Room_Information--Edit_Room_Name--Edit_Icon" />
+                    <FaEdit
+                      className="Chat--Room_Information--Edit_Room_Name--Edit_Icon"
+                      onClick={() => setEditRoomname(true)}
+                    />
                   </div>
+                </div>
+                <div
+                  className={
+                    editRoomname
+                      ? "Chat--Room_Information--Edit_Room_Name--Input"
+                      : "Chat--Room_Information--Edit_Room_Name--Inactive"
+                  }
+                >
+                  <input
+                    type="text"
+                    value={newRoomname}
+                    onChange={(e) => {
+                      setNewRoomname(e.target.value);
+                    }}
+                    placeholder="Enter group name..."
+                  ></input>
                 </div>
               </div>
               <div className="Chat--Room_Information--Edit_Room_Users">
