@@ -210,6 +210,27 @@ function Chats() {
               )}
             </div>
             <div className="Chat--Room_Information--Friends_List">
+              <div
+                className={
+                  currentRoom.type === "group"
+                    ? "Chat--Room_Information--Friend_Container"
+                    : "Chat--Room_Information--Friend_Container--Inactive"
+                }
+              >
+                <div className="Chat--Room_Information--Friend--Group">
+                  <div className="Chat--Room_Information--Friend--Image_Container">
+                    <div className="Chat--Room_Information--Friend--Image">
+                      {userData.imageUrl ? (
+                        <div className="Chat--Room_Information--Friend--Image_Frame">
+                          <img src={userData.imageUrl}></img>
+                        </div>
+                      ) : (
+                        <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
               {friendsList?.map((friend, index) => {
                 return (
                   <div
