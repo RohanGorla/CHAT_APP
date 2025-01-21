@@ -157,6 +157,23 @@ function User() {
         setRooms(updatedRooms);
         setSearchRooms(updatedRooms);
         Popup(`You left ${name}!`, "Good");
+      } else {
+        const updatedRooms = rooms.map((room) => {
+          if (room.roomId === id) {
+            const updatedUsers = room.users.filter(
+              (groupUser) => groupUser !== user.userId
+            );
+            room.users = updatedUsers;
+            const updatedMembers = room.members.filter(
+              (member) => member.usr_id !== user.userId
+            );
+            room.members = updatedMembers;
+          }
+          return room;
+        });
+        setRooms(updatedRooms);
+        setSearchRooms(updatedRooms);
+        Popup(`${user.username} left ${name}!`, "Bad");
       }
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
