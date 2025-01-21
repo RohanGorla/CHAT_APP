@@ -150,6 +150,15 @@ function User() {
       );
       setNotifications(updatedNotifications);
     });
+    /* GROUP RELATED EVENTS */
+    socket.on("exit_group_success", ({ id, user, name }) => {
+      if (user.userId === userData.userId) {
+        const updatedRooms = rooms.filter((room) => room.roomId !== id);
+        setRooms(updatedRooms);
+        setSearchRooms(updatedRooms);
+        Popup(`You left ${name}!`, "Good");
+      }
+    });
     /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_profile_picture", async ({ userId, key }) => {
       const imageUrl = await generateGetUrl(key);
