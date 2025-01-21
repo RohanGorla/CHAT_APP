@@ -30,6 +30,7 @@ function Chats() {
   const [showRoomDetails, setShowRoomDetails] = useState(false);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(false);
+  const [confirmExit, setConfirmExit] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -354,6 +355,25 @@ function Chats() {
                   </div>
                 );
               })}
+            </div>
+            {/* EXIT GROUP OPTIONS */}
+            <div
+              className={
+                currentRoom.type === "group"
+                  ? confirmExit
+                    ? "Chat--Room_Information--Buttons--Inactive"
+                    : "Chat--Room_Information--Buttons"
+                  : "Chat--Room_Information--Buttons--Inactive"
+              }
+            >
+              <button
+                className="Chat--Room_Information--Buttons--Danger"
+                onClick={() => {
+                  setConfirmExit(true);
+                }}
+              >
+                Exit group
+              </button>
             </div>
           </div>
         </div>
