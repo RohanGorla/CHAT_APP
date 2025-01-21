@@ -109,9 +109,15 @@ function FriendsList() {
         searchRooms.map((room, index) => {
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
           const roomChats = chats.filter((chat) => chat.room === room.roomId);
-          const unreadMessages = roomChats.filter(
-            (chat) => chat.read === false && chat.usr_id !== userData.userId
-          );
+          let unreadMessages;
+          if (room.type === "single")
+            unreadMessages = roomChats.filter(
+              (chat) => chat.read === false && chat.usr_id !== userData.userId
+            );
+          else
+            unreadMessages = roomChats.filter(
+              (chat) => !chat.read.includes(userData.userId)
+            );
           const currentDate = new Date().toLocaleDateString("en-IN");
           return (
             /* EACH FRIEND'S DISPLAY CARD */
