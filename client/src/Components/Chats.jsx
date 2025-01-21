@@ -97,7 +97,9 @@ function Chats() {
 
   /* EXIT GROUP SOCKET EVENT */
   async function exitGroup() {
+    socket.emit("exit_group", { id, user: userData, name: currentRoom.name });
     setConfirmExit(false);
+    navigate("/user/friends");
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
