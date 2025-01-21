@@ -5,6 +5,7 @@
   --Chat_Room_Info_Icon: 170px;
   --Chat_Room_Info_Room_Name: 20px;
   --Chat_Room_Info_Edit_Icon: 22px;
+  --Chat_Room_Info_Edit_Room_Name: 16px;
   --Chat_Room_Info_Friend_Icon: 30px;
   --Chat_Room_Info_Username: 18px;
   --Chat_Room_Info_Userid: 16px;
@@ -117,6 +118,10 @@
   border-radius: 5px;
 }
 
+.Chat--Room_Information--Edit_Room_Name--Inactive {
+  display: none;
+}
+
 .Chat--Room_Information--Edit_Room_Name--Name {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Room_Info_Room_Name);
@@ -140,6 +145,25 @@
   &:hover {
     color: rgb(16, 226, 69);
   }
+}
+
+.Chat--Room_Information--Edit_Room_Name--Input {
+  margin-bottom: 1.5em;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Input input {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Edit_Room_Name);
+  border-style: none;
+  width: 100%;
+  padding: 0.3em;
+  border-radius: 4px;
+  margin-bottom: 0.5em;
+  outline: none;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Inactive {
+  display: none;
 }
 
 .Chat--Room_Information--Edit_Room_Users {
