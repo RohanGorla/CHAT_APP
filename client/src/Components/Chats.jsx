@@ -36,6 +36,28 @@ function Chats() {
   const textAreaContainerRef = useRef(null);
   const textAreaRef = useRef(null);
 
+  /* GET PROFILE PICTURE GET URL FUNCTION */
+  async function generateGetUrl(key) {
+    const generateGetUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generategeturl`,
+      {
+        key,
+      }
+    );
+    userData.imageUrl = generateGetUrlResponse.data.url;
+    localStorage.setItem("ChatApp_UserInfo", JSON.stringify(userData));
+  }
+
+  /* CHECK THE VALIDITY OF SIGNED URL */
+  async function checkUrlValidity() {
+    try {
+      const response = await axios.get(userData.imageUrl);
+      if (response.status === 200) return;
+    } catch (e) {
+      generateGetUrl(userData.imageTag);
+    }
+  }
+
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   async function sendMessage(e) {
     e?.preventDefault();
@@ -175,6 +197,10 @@ function Chats() {
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) navigate("/login");
+    else {
+      /* CHECK IMAGE URL VALIDITY IF EXISTS OR GENERATE A NEW SIGNED URL */
+      if (userData.imageUrl && currentRoom.type === "group") checkUrlValidity();
+    }
   }, []);
 
   return (
