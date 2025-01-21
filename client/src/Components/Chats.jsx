@@ -120,18 +120,31 @@ function Chats() {
   /* FILTER OUT THE MESSAGES OF THE PRESENT CHAT FROM ALL CHAT MESSAGES ON SENDING/RECEIVING MESSAGE */
   useEffect(() => {
     let count = 0;
-    const roomChats = chats.filter((message) => {
-      if (
-        !message.read &&
-        message.usr_id !== userData?.userId &&
-        message.room === id
-      )
-        count += 1;
-      if (message.room === id) return message;
-    });
-    setRoomChats(roomChats);
-    if (count > 0) setUnreadMessages(true);
-    else setUnreadMessages(false);
+    if (currentRoom.type === "single") {
+      const roomChats = chats.filter((message) => {
+        if (
+          !message.read &&
+          message.usr_id !== userData?.userId &&
+          message.room === id
+        )
+          count += 1;
+        if (message.room === id) return message;
+      });
+      setRoomChats(roomChats);
+      if (count > 0) setUnreadMessages(true);
+      else setUnreadMessages(false);
+    } else {
+      const roomChats = chats.filter((message) => {
+        if (message.room === id) {
+          const readStatus = currentRoom.users.every((id) =>
+            message.read.includes(id)
+          );
+          if (!readStatus && message.usr_id !== userData?.userId) count += 1;
+          return message;
+        }
+      });
+      setRoomChats(roomChats);
+    }
   }, [id, chats]);
 
   /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
