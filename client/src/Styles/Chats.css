@@ -3,12 +3,14 @@
   --Chat_Sub_Font: "Varela Round", sans-serif;
   --Chat_Room_Info_Close: 20px;
   --Chat_Room_Info_Icon: 170px;
+  --Chat_Room_Info_Room_Name: 20px;
+  --Chat_Room_Info_Edit_Icon: 22px;
   --Chat_Room_Info_Friend_Icon: 30px;
   --Chat_Room_Info_Username: 18px;
   --Chat_Room_Info_Userid: 16px;
   --Chat_Room_Info_Email: 16px;
   --Chat_Room_Info_Email--Heading: 18px;
-  --Chat_Room_Info_Delete_Chat: 14px;
+  --Chat_Room_Info_Button: 14px;
   --Chat_Room_Info_Confirm_Message: 16px;
   --Chat_Icon_Size: 30px;
   --Chat_Name: 18px;
@@ -102,8 +104,50 @@
   font-size: var(--Chat_Room_Info_Icon);
 }
 
+.Chat--Room_Information--Edit_Room {
+  margin-top: 2em;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Display {
+  background-color: rgb(25, 25, 25);
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Name {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Room_Name);
+  font-weight: 600;
+  letter-spacing: 1px;
+  min-width: 90%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Edit_Icon_Container {
+  min-width: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Edit_Icon {
+  font-size: var(--Chat_Room_Info_Edit_Icon);
+  cursor: pointer;
+  &:hover {
+    color: rgb(16, 226, 69);
+  }
+}
+
+.Chat--Room_Information--Edit_Room--Inactive {
+  display: none;
+}
+
 .Chat--Room_Information--Friends_List {
-  margin-top: 4em;
+  margin-top: 2em;
 }
 
 .Chat--Room_Information--Friend_Container {
@@ -199,7 +243,7 @@
 
 .Chat--Room_Information--Buttons button {
   font-family: var(--Chat_Sub_Font);
-  font-size: var(--Chat_Room_Info_Delete_Chat);
+  font-size: var(--Chat_Room_Info_Button);
   font-weight: 600;
   padding: 0.5em 1.2em;
   border-radius: 7px;
@@ -512,7 +556,7 @@
     --Chat_Room_Info_Userid: 16px;
     --Chat_Room_Info_Email: 16px;
     --Chat_Room_Info_Email--Heading: 18px;
-    --Chat_Room_Info_Delete_Chat: 14px;
+    --Chat_Room_Info_Button: 14px;
     --Chat_Room_Info_Confirm_Message: 13px;
     --Chat_Username: 12px;
     --Chat_Message: 14px;
