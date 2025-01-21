@@ -66,10 +66,20 @@ function User() {
         },
       ]);
     });
-    socket.on("message_read_updated", ({ id, userData }) => {
+    socket.on("message_read_updated", ({ id, userData, type }) => {
       const updatedChat = chats.filter((message) => {
-        if (message.room === id && message.usr_id !== userData.userId)
+        if (
+          type === "single" &&
+          message.room === id &&
+          message.usr_id !== userData.userId
+        )
           message.read = true;
+        if (
+          type === "group" &&
+          message.room === id &&
+          !message.read.includes(userData.userId)
+        )
+          message.read.push(userData.userId);
         return message;
       });
       setChats(updatedChat);
