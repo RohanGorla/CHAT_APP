@@ -263,12 +263,18 @@ io.on("connection", async (socket) => {
     io.to(payload.id).emit("receive_message", payload);
   });
   /* UPDATE THE MESSAGE READ STATUS */
-  socket.on("update_message_read", async ({ id, userData }) => {
-    await chatMessagesCollection.updateMany(
-      { $and: [{ room: id }, { usr_id: { $ne: userData.userId } }] },
-      { $set: { read: true } }
-    );
-    io.to(id).emit("message_read_updated", { id, userData });
+  socket.on("update_message_read", async ({ id, userData, type }) => {
+    if (type === "single")
+      await chatMessagesCollection.updateMany(
+        { $and: [{ room: id }, { usr_id: { $ne: userData.userId } }] },
+        { $set: { read: true } }
+      );
+    else
+      await chatMessagesCollection.updateMany(
+        { $and: [{ room: id }, { read: { $ne: userData.userId } }] },
+        { $addToSet: { read: userData.userId } }
+      );
+    io.to(id).emit("message_read_updated", { id, userData, type });
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
