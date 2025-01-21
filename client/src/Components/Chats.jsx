@@ -133,13 +133,19 @@ function Chats() {
       setRoomChats(roomChats);
       if (count > 0) setUnreadMessages(true);
       else setUnreadMessages(false);
-    } else {
+    }
+    if (currentRoom.type === "group") {
       const roomChats = chats.filter((message) => {
         if (message.room === id) {
           const readStatus = currentRoom.users.every((id) =>
             message.read.includes(id)
           );
-          if (!readStatus && message.usr_id !== userData?.userId) count += 1;
+          if (
+            !readStatus &&
+            message.usr_id !== userData?.userId &&
+            !message.read.includes(userData.userId)
+          )
+            count += 1;
           return message;
         }
       });
