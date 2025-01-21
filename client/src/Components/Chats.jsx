@@ -4,6 +4,7 @@ import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
+import { FaEdit } from "react-icons/fa";
 import FriendsList from "./FriendsList";
 import axios from "axios";
 
@@ -236,6 +237,24 @@ function Chats() {
               ) : (
                 <IoMdPerson className="Chat--Room_Information--Image--Icon" />
               )}
+            </div>
+            <div
+              className={
+                currentRoom.type === "group"
+                  ? "Chat--Room_Information--Edit_Room"
+                  : "Chat--Room_Information--Edit_Room--Inactive"
+              }
+            >
+              <div className="Chat--Room_Information--Edit_Room_Name">
+                <div className="Chat--Room_Information--Edit_Room_Name--Display">
+                  <p className="Chat--Room_Information--Edit_Room_Name--Name">
+                    {currentRoom.name}
+                  </p>
+                  <div className="Chat--Room_Information--Edit_Room_Name--Edit_Icon_Container">
+                    <FaEdit className="Chat--Room_Information--Edit_Room_Name--Edit_Icon" />
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="Chat--Room_Information--Friends_List">
               <div
