@@ -73,6 +73,11 @@ function Chats() {
     });
   }
 
+  /* EXIT GROUP SOCKET EVENT */
+  async function exitGroup() {
+    setConfirmExit(false);
+  }
+
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -374,6 +379,19 @@ function Chats() {
               >
                 Exit group
               </button>
+            </div>
+            <div
+              className={
+                confirmExit
+                  ? "Chat--Room_Information--Confirm_Delete"
+                  : "Chat--Room_Information--Confirm_Delete--Inactive"
+              }
+            >
+              <p className="Chat--Room_Information--Confirm_Delete--Message">
+                By exiting this group, you will no longer be able to send or see
+                messages in this group, and you will no longer be part of the
+                group. Do you want to proceed?
+              </p>
             </div>
           </div>
         </div>
