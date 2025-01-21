@@ -121,13 +121,18 @@ function Chats() {
   useEffect(() => {
     let count = 0;
     const roomChats = chats.filter((message) => {
-      if (!message.read && message.usr_id !== userData?.userId) count += 1;
+      if (
+        !message.read &&
+        message.usr_id !== userData?.userId &&
+        message.room === id
+      )
+        count += 1;
       if (message.room === id) return message;
     });
     setRoomChats(roomChats);
-    if (count > 0) return setUnreadMessages(true);
-    setUnreadMessages(false);
-  }, [chats]);
+    if (count > 0) setUnreadMessages(true);
+    else setUnreadMessages(false);
+  }, [id, chats]);
 
   /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
   useEffect(() => {
@@ -179,8 +184,9 @@ function Chats() {
                     key={index}
                     className="Chat--Room_Information--Friend_Container"
                   >
-                    {/* ROOM FRIEND INFORMATION */}
+                    {/* ROOM FRIENDS INFORMATION */}
                     <div className="Chat--Room_Information--Friend">
+                      {/* SHOW FRIENDS IMAGES IN GROUP TYPE ROOM */}
                       <div
                         className={
                           currentRoom.type === "group"
@@ -198,6 +204,7 @@ function Chats() {
                           )}
                         </div>
                       </div>
+                      {/* SHOW FRIENDS DETAILS */}
                       <div
                         className={
                           currentRoom.type === "group"
