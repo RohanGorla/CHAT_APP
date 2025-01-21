@@ -110,6 +110,10 @@
   margin-block: 1.5em;
 }
 
+.Chat--Room_Information--Friend_Container--Inactive {
+  display: none;
+}
+
 .Chat--Room_Information--Friend {
   display: flex;
   align-items: center;

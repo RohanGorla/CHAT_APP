@@ -217,7 +217,7 @@ function Chats() {
                     : "Chat--Room_Information--Friend_Container--Inactive"
                 }
               >
-                <div className="Chat--Room_Information--Friend--Group">
+                <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
                   <div className="Chat--Room_Information--Friend--Image_Container">
                     <div className="Chat--Room_Information--Friend--Image">
                       {userData.imageUrl ? (
@@ -228,6 +228,14 @@ function Chats() {
                         <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
                       )}
                     </div>
+                  </div>
+                  <div className="Chat--Room_Information--Friend--Details">
+                    <p className="Chat--Room_Information--Friend_Username">
+                      {userData.username} (You)
+                    </p>
+                    <p className="Chat--Room_Information--Friend_Userid">
+                      {userData.userId}
+                    </p>
                   </div>
                 </div>
               </div>
