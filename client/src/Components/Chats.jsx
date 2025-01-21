@@ -280,6 +280,14 @@ function Chats() {
                     }}
                     placeholder="Enter group name..."
                   ></input>
+                  <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
+                    <button className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel">
+                      Cancel
+                    </button>
+                    <button className="Chat--Room_Information--Edit_Room_Name--Buttons--Done">
+                      Done
+                    </button>
+                  </div>
                 </div>
               </div>
               <div className="Chat--Room_Information--Edit_Room_Users">
