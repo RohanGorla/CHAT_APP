@@ -144,13 +144,20 @@ function Chats() {
         }
       });
       setRoomChats(roomChats);
+      if (count > 0) setUnreadMessages(true);
+      else setUnreadMessages(false);
     }
   }, [id, chats]);
 
   /* SCROLL TO THE BOTTOM/LATEST MESSAGE */
   useEffect(() => {
     messagesRef.current.scrollTop = messagesRef.current.scrollHeight;
-    if (unreadMessages) socket.emit("update_message_read", { id, userData });
+    if (unreadMessages)
+      socket.emit("update_message_read", {
+        id,
+        userData,
+        type: currentRoom.type,
+      });
   }, [roomChats]);
 
   useEffect(() => {
