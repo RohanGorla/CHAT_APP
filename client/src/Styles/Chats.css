@@ -111,12 +111,15 @@
 }
 
 .Chat--Room_Information--Friend {
-  background-color: rgb(25, 25, 25);
   display: flex;
   align-items: center;
   width: 100%;
+}
+
+.Chat--Room_Information--Friend--Group {
+  background-color: rgb(25, 25, 25);
   padding: 0.5em;
-  border-radius: 5px
+  border-radius: 5px;
 }
 
 .Chat--Room_Information--Friend--Image_Container {
