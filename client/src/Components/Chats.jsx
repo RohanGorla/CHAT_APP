@@ -255,6 +255,11 @@ function Chats() {
                   </div>
                 </div>
               </div>
+              <div className="Chat--Room_Information--Edit_Room_Users">
+                <button className="Chat--Room_Information--Edit_Room_Users--Button">
+                  Add frens
+                </button>
+              </div>
             </div>
             <div className="Chat--Room_Information--Friends_List">
               <div
