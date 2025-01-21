@@ -411,6 +411,11 @@ io.on("connection", async (socket) => {
       { usr_id: user.userId },
       { $pull: { rooms: id } }
     );
+    const updateRoomCollection = await roomsCollection.updateOne(
+      { roomId: id },
+      { $pull: { users: user.userId } }
+    );
+    io.to(id).emit("exit_group_success", { id, user, name });
   });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
