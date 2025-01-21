@@ -29,7 +29,7 @@ function Chats() {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
-  const [editRoomname, setEditRoomname] = useState(true);
+  const [editRoomname, setEditRoomname] = useState(false);
   const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(false);
@@ -281,7 +281,10 @@ function Chats() {
                     placeholder="Enter group name..."
                   ></input>
                   <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
-                    <button className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel">
+                    <button
+                      className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel"
+                      onClick={() => setEditRoomname(false)}
+                    >
                       Cancel
                     </button>
                     <button className="Chat--Room_Information--Edit_Room_Name--Buttons--Done">

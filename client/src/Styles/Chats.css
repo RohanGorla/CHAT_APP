@@ -109,13 +109,16 @@
   margin-top: 2em;
 }
 
-.Chat--Room_Information--Edit_Room_Name--Display {
+.Chat--Room_Information--Edit_Room_Name {
   background-color: rgb(25, 25, 25);
+  padding: 1em;
+  border-radius: 5px;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Display {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: 1em;
-  border-radius: 5px;
 }
 
 .Chat--Room_Information--Edit_Room_Name--Inactive {
@@ -147,10 +150,6 @@
   }
 }
 
-.Chat--Room_Information--Edit_Room_Name--Input {
-  margin-bottom: 1.5em;
-}
-
 .Chat--Room_Information--Edit_Room_Name--Input input {
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Room_Info_Edit_Room_Name);
@@ -160,6 +159,10 @@
   border-radius: 4px;
   margin-bottom: 0.5em;
   outline: none;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Buttons {
+  margin-top: 0.4em;
 }
 
 .Chat--Room_Information--Edit_Room_Name--Buttons button {
