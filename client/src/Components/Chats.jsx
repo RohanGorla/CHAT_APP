@@ -389,6 +389,12 @@ function Chats() {
                   hour12: true,
                 }
               );
+              let readByAll = false;
+              if (currentRoom.type === "group") {
+                readByAll = currentRoom.users.every((id) =>
+                  message.read.includes(id)
+                );
+              }
               return (
                 <div
                   key={index}
@@ -425,7 +431,11 @@ function Chats() {
                       <GoDotFill
                         className={
                           message.usr_id === userData.userId
-                            ? message.read
+                            ? currentRoom.type === "single"
+                              ? message.read
+                                ? "Chat--Message_Card--Read_Status--True"
+                                : "Chat--Message_Card--Read_Status--False"
+                              : readByAll
                               ? "Chat--Message_Card--Read_Status--True"
                               : "Chat--Message_Card--Read_Status--False"
                             : "Chat--Message_Card--Read_Status--Inactive"
