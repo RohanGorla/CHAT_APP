@@ -269,7 +269,7 @@ io.on("connection", async (socket) => {
         { $and: [{ room: id }, { usr_id: { $ne: userData.userId } }] },
         { $set: { read: true } }
       );
-    else
+    if (type === "group")
       await chatMessagesCollection.updateMany(
         { $and: [{ room: id }, { read: { $ne: userData.userId } }] },
         { $addToSet: { read: userData.userId } }
