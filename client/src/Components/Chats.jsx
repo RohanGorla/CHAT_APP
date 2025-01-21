@@ -217,7 +217,13 @@ function Chats() {
                     className="Chat--Room_Information--Friend_Container"
                   >
                     {/* ROOM FRIENDS INFORMATION */}
-                    <div className="Chat--Room_Information--Friend">
+                    <div
+                      className={
+                        currentRoom.type === "single"
+                          ? "Chat--Room_Information--Friend"
+                          : "Chat--Room_Information--Friend Chat--Room_Information--Friend--Group"
+                      }
+                    >
                       {/* SHOW FRIENDS IMAGES IN GROUP TYPE ROOM */}
                       <div
                         className={
