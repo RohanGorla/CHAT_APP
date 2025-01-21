@@ -162,6 +162,36 @@
   outline: none;
 }
 
+.Chat--Room_Information--Edit_Room_Name--Buttons button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Button);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Buttons--Cancel {
+  background-color: white;
+  margin-right: 1em;
+  border: 2px solid rgb(15, 15, 15);
+  &:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+  }
+}
+
+.Chat--Room_Information--Edit_Room_Name--Buttons--Done {
+  background-color: rgb(16, 226, 69);
+  border: 2px solid rgb(15, 15, 15);
+  &:hover {
+    background-color: black;
+    color: rgb(16, 226, 69);
+    border: 2px solid rgb(16, 226, 69);
+  }
+}
+
 .Chat--Room_Information--Edit_Room_Name--Inactive {
   display: none;
 }
