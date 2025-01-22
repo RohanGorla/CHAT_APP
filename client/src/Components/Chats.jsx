@@ -234,6 +234,7 @@ function Chats() {
           }
         >
           <div className="Chat--Room_Information">
+            {/* CLOSE ROOM INFORMATION SECTION OPTION */}
             <FaXmark
               onClick={() => {
                 setShowRoomDetails(false);
@@ -242,11 +243,17 @@ function Chats() {
               }}
               className="Chat--Room_Information--Close"
             />
+            {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
             <div className="Chat--Room_Information--Add_Friends_Container">
               <div className="Chat--Room_Information--Add_Friends">
-                <p>Add frens</p>
+                <p className="Chat--Room_Information--Add_Friends--Heading">
+                  Add frens
+                </p>
                 <div className="Chat--Room_Information--Add_Friends--Search">
-                  <input></input>
+                  <input
+                    type="text"
+                    placeholder="Search your frens list..."
+                  ></input>
                 </div>
                 <div className="Chat--Room_Information--Add_Friends--Friends_List">
                   <div className="Chat--Room_Information--Add_Friends--Friend_Card">
@@ -263,6 +270,7 @@ function Chats() {
                 </div>
               </div>
             </div>
+            {/* ROOM INFORMATION */}
             <div className="Chat--Room_Information--Image">
               {currentRoom.imageUrl ? (
                 <div className="Chat--Room_Information--Image_Frame">

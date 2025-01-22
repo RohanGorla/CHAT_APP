@@ -65,7 +65,7 @@ function CreateGroup() {
               type="text"
               value={friendListSearch}
               onChange={(e) => setFriendListSearch(e.target.value)}
-              placeholder="Search your frens list"
+              placeholder="Search your frens list..."
             ></input>
           </div>
           <div className="CreateGroup--Select_Friends--Friends_List">
