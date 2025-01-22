@@ -5,6 +5,7 @@ import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
 import { FaEdit } from "react-icons/fa";
+import { SiTicktick } from "react-icons/si";
 import FriendsList from "./FriendsList";
 import axios from "axios";
 
@@ -281,6 +282,19 @@ function Chats() {
                       <div
                         key={index}
                         className="Chat--Room_Information--Add_Friends--Friend_Card"
+                        onClick={() => {
+                          if (selectedFriends.includes(friend.usr_id)) {
+                            const updatedList = selectedFriends.filter(
+                              (id) => id !== friend.usr_id
+                            );
+                            setSelectedFriends(updatedList);
+                          } else {
+                            setSelectedFriends([
+                              ...selectedFriends,
+                              friend.usr_id,
+                            ]);
+                          }
+                        }}
                       >
                         <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
                           <div className="Chat--Room_Information--Add_Friends--Friend_Image">
@@ -294,12 +308,23 @@ function Chats() {
                           </div>
                         </div>
                         <div className="Chat--Room_Information--Add_Friends--Friend_Details">
-                          <p className="Chat--Room_Information--Add_Friends--Friend_Username">
-                            {friend.usr_nm}
-                          </p>
-                          <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
-                            {friend.usr_id}
-                          </p>
+                          <div className="Chat--Room_Information--Add_Friends--Name_And_Id">
+                            <p className="Chat--Room_Information--Add_Friends--Friend_Username">
+                              {friend.usr_nm}
+                            </p>
+                            <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
+                              {friend.usr_id}
+                            </p>
+                          </div>
+                          <div
+                            className={
+                              selectedFriends.includes(friend.usr_id)
+                                ? "Chat--Room_Information--Add_Friends--Selected"
+                                : "Chat--Room_Information--Add_Friends--Selected--Inactive"
+                            }
+                          >
+                            <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
+                          </div>
                         </div>
                       </div>
                     );
