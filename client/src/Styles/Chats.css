@@ -91,12 +91,13 @@
   border-radius: 10px;
 }
 
-.Chat--Room_Information--Add_Friends--Heading {
-  font-size: var(--Chat_Room_Info_Add_Friends_Heading);
+.Chat--Room_Information--Add_Friends--Search {
+  height: 80px;
 }
 
-.Chat--Room_Information--Add_Friends--Search {
-  margin-block: 1em;
+.Chat--Room_Information--Add_Friends--Heading {
+  font-size: var(--Chat_Room_Info_Add_Friends_Heading);
+  margin-bottom: 0.5em;
 }
 
 .Chat--Room_Information--Add_Friends--Search input {
@@ -110,6 +111,11 @@
   border-radius: 4px;
   margin-bottom: 0.7em;
   outline: none;
+}
+
+.Chat--Room_Information--Add_Friends--Friends_List {
+  height: calc(100% - 80px);
+  padding-block: 1em;
 }
 
 .Chat--Room_Information--Image {

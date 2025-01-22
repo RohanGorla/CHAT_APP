@@ -248,10 +248,10 @@ function Chats() {
             {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
             <div className="Chat--Room_Information--Add_Friends_Container">
               <div className="Chat--Room_Information--Add_Friends">
-                <p className="Chat--Room_Information--Add_Friends--Heading">
-                  Add frens
-                </p>
                 <div className="Chat--Room_Information--Add_Friends--Search">
+                  <p className="Chat--Room_Information--Add_Friends--Heading">
+                    Add frens
+                  </p>
                   <input
                     type="text"
                     placeholder="Search your frens list..."
