@@ -176,6 +176,15 @@ function User() {
         Popup(`${user.username} left ${name}!`, "Bad");
       }
     });
+    socket.on("group_name_updated", ({ id, oldRoomname, newRoomname }) => {
+      const updatedRooms = rooms.map((room) => {
+        if (room.roomId === id) room.name = newRoomname;
+        return room;
+      });
+      setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
+      Popup(`${oldRoomname} is now ${newRoomname}`, "Good");
+    });
     /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_profile_picture", async ({ userId, key }) => {
       const imageUrl = await generateGetUrl(key);
