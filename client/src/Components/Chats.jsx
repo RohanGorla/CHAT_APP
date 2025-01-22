@@ -105,6 +105,17 @@ function Chats() {
     navigate("/user/friends");
   }
 
+  /* UPDATE ROOM NAME SOCKET EVENT */
+  async function updateGroupName() {
+    if (newRoomname.length)
+      socket.emit("update_group_name", {
+        id,
+        oldRoomname: currentRoom.name,
+        newRoomname,
+      });
+    setEditRoomname(false);
+  }
+
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -287,7 +298,10 @@ function Chats() {
                     >
                       Cancel
                     </button>
-                    <button className="Chat--Room_Information--Edit_Room_Name--Buttons--Done">
+                    <button
+                      className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
+                      onClick={updateGroupName}
+                    >
                       Done
                     </button>
                   </div>
