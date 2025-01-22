@@ -4,6 +4,7 @@
   --Chat_Room_Info_Close: 20px;
   --Chat_Room_Info_Add_Friends_Heading: 20px;
   --Chat_Room_Info_Add_Friends_Search: 16px;
+  --Chat_Room_Info_Add_Friends_Friend_Icon: 30px;
   --Chat_Room_Info_Icon: 170px;
   --Chat_Room_Info_Room_Name: 20px;
   --Chat_Room_Info_Edit_Icon: 22px;
@@ -116,6 +117,53 @@
 .Chat--Room_Information--Add_Friends--Friends_List {
   height: calc(100% - 80px);
   padding-block: 1em;
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Card {
+  background-color: rgb(15, 15, 15);
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.5em;
+  border-style: none;
+  border-radius: 5px;
+  margin: 1em 0em;
+  cursor: pointer;
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Image_Container {
+  display: flex;
+  min-width: 12%;
+  justify-content: center;
+  align-items: center;
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Image {
+  background-color: rgb(20, 33, 61);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Image_Frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  mask: radial-gradient(circle, black 22.5px, transparent 22.6px);
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Image_Frame img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+.Chat--Room_Information--Add_Friends--Friend_Icon {
+  font-size: var(--Chat_Room_Info_Add_Friends_Friend_Icon);
 }
 
 .Chat--Room_Information--Image {
