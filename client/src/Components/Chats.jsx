@@ -35,7 +35,8 @@ function Chats() {
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [confirmExit, setConfirmExit] = useState(false);
   const [addFriends, setAddFriends] = useState(false);
-  const [addFriendsList, setAddFriendsList] = useState(friends);
+  const [addFriendsList, setAddFriendsList] = useState([]);
+  const [selectedFriends, setSelectedFriends] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -211,6 +212,23 @@ function Chats() {
         type: currentRoom.type,
       });
   }, [roomChats]);
+
+  /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
+  useEffect(() => {
+    /* FILTER OUT USERS FROM FRIENDS LIST WHO ARE NOT ALREADY INCLUDED IN THE GROUP */
+    if (currentRoom.type === "group") {
+      const updatedFriends = friends.filter(
+        (friend) => !currentRoom.users.includes(friend.usr_id)
+      );
+      const selectedList = updatedFriends.filter((friend) =>
+        selectedFriends.includes(friend.usr_id)
+      );
+      const notSelectedList = updatedFriends.filter(
+        (friend) => !selectedFriends.includes(friend.usr_id)
+      );
+      setAddFriendsList([...selectedList, ...notSelectedList]);
+    }
+  }, [selectedFriends]);
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
