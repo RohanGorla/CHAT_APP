@@ -266,7 +266,13 @@ function Chats() {
                       >
                         <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
                           <div className="Chat--Room_Information--Add_Friends--Friend_Image">
-                            <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                            {friend.imageUrl ? (
+                              <div className="Chat--Room_Information--Add_Friends--Friend_Image_Frame">
+                                <img src={friend.imageUrl}></img>
+                              </div>
+                            ) : (
+                              <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                            )}
                           </div>
                         </div>
                         <div className="Chat--Room_Information--Add_Friends--Friend_Details">
