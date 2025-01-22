@@ -417,6 +417,16 @@ io.on("connection", async (socket) => {
     );
     io.to(id).emit("exit_group_success", { id, user, name });
   });
+  /* UPDATE GROUP NAME */
+  socket.on("update_group_name", async ({ id, oldRoomname, newRoomname }) => {
+    const updateRoomName = await roomsCollection.updateOne(
+      { roomId: id },
+      {
+        $set: { name: newRoomname },
+      }
+    );
+    io.to(id).emit("group_name_updated", { id, oldRoomname, newRoomname });
+  });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
