@@ -116,7 +116,12 @@
 
 .Chat--Room_Information--Add_Friends--Friends_List {
   height: calc(100% - 80px);
+  overflow-y: scroll;
   padding-block: 1em;
+}
+
+.Chat--Room_Information--Add_Friends--Friends_List::-webkit-scrollbar {
+  width: 0px;
 }
 
 .Chat--Room_Information--Add_Friends--Friend_Card {
