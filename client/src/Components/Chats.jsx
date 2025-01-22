@@ -34,6 +34,8 @@ function Chats() {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [confirmExit, setConfirmExit] = useState(false);
+  const [addFriends, setAddFriends] = useState(false);
+  const [addFriendsList, setAddFriendsList] = useState(friends);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -256,17 +258,28 @@ function Chats() {
                   ></input>
                 </div>
                 <div className="Chat--Room_Information--Add_Friends--Friends_List">
-                  <div className="Chat--Room_Information--Add_Friends--Friend_Card">
-                    <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
-                      <div className="Chat--Room_Information--Add_Friends--Friend_Image">
-                        <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                  {addFriendsList.map((friend, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="Chat--Room_Information--Add_Friends--Friend_Card"
+                      >
+                        <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
+                          <div className="Chat--Room_Information--Add_Friends--Friend_Image">
+                            <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                          </div>
+                        </div>
+                        <div className="Chat--Room_Information--Add_Friends--Friend_Details">
+                          <p className="Chat--Room_Information--Add_Friends--Friend_Username">
+                            {friend.usr_nm}
+                          </p>
+                          <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
+                            {friend.usr_id}
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                    <div className="Chat--Room_Information--Add_Friends--Friend_Details">
-                      <p className="Chat--Room_Information--Add_Friends--Friend_Username"></p>
-                      <p className="Chat--Room_Information--Add_Friends--Friend_UserId"></p>
-                    </div>
-                  </div>
+                    );
+                  })}
                 </div>
               </div>
             </div>
