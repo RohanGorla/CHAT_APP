@@ -242,6 +242,14 @@ function Chats() {
               }}
               className="Chat--Room_Information--Close"
             />
+            <div className="Chat--Room_Information--Add_Friends_Container">
+              <div className="Chat--Room_Information--Add_Friends">
+                <p>Add frens</p>
+                <div className="Chat--Room_Information--Add_Friends--Search">
+                  <input></input>
+                </div>
+              </div>
+            </div>
             <div className="Chat--Room_Information--Image">
               {currentRoom.imageUrl ? (
                 <div className="Chat--Room_Information--Image_Frame">
