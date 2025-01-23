@@ -95,6 +95,10 @@
   border-radius: 10px;
 }
 
+.Chat--Room_Information--Add_Friends_Container--Inactive {
+  display: none;
+}
+
 .Chat--Room_Information--Add_Friends--Search {
   height: 80px;
 }

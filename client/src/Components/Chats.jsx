@@ -265,7 +265,20 @@ function Chats() {
               className="Chat--Room_Information--Close"
             />
             {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
-            <div className="Chat--Room_Information--Add_Friends_Container">
+            <div
+              className={
+                addFriends
+                  ? "Chat--Room_Information--Add_Friends_Container"
+                  : "Chat--Room_Information--Add_Friends_Container--Inactive"
+              }
+            >
+              <FaXmark
+                onClick={() => {
+                  setAddFriends(false);
+                  setSelectedFriends([]);
+                }}
+                className="Chat--Room_Information--Close"
+              />
               <div className="Chat--Room_Information--Add_Friends">
                 <div className="Chat--Room_Information--Add_Friends--Search">
                   <p className="Chat--Room_Information--Add_Friends--Heading">
@@ -399,7 +412,10 @@ function Chats() {
                 </div>
               </div>
               <div className="Chat--Room_Information--Edit_Room_Users">
-                <button className="Chat--Room_Information--Edit_Room_Users--Button">
+                <button
+                  className="Chat--Room_Information--Edit_Room_Users--Button"
+                  onClick={() => setAddFriends(true)}
+                >
                   Add frens
                 </button>
               </div>
