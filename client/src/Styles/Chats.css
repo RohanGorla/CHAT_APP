@@ -99,19 +99,48 @@
   display: none;
 }
 
-.Chat--Room_Information--Add_Friends--Search {
+.Chat--Room_Information--Add_Friends--Header {
   height: 80px;
+  padding-top: 1em;
 }
 
-.Chat--Room_Information--Add_Friends--Heading {
-  font-size: var(--Chat_Room_Info_Add_Friends_Heading);
+.Chat--Room_Information--Add_Friends--Header--Heading_And_Button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin-bottom: 0.5em;
+}
+
+.Chat--Room_Information--Add_Friends--Header_Heading {
+  font-size: var(--Chat_Room_Info_Add_Friends_Heading);
+}
+
+.Chat--Room_Information--Add_Friends--Header_Button {
+  margin-right: 2em;
+}
+
+.Chat--Room_Information--Add_Friends--Header_Button button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Button);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.Chat--Room_Information--Add_Friends--Header_Button--Done {
+  background-color: rgb(16, 226, 69);
+  border: 2px solid rgb(15, 15, 15);
+  &:hover {
+    background-color: black;
+    color: rgb(16, 226, 69);
+    border: 2px solid rgb(16, 226, 69);
+  }
 }
 
 .Chat--Room_Information--Add_Friends--Search input {
   font-family: var(--Chat_Main_Font);
   font-size: var(--Chat_Room_Info_Add_Friends_Search);
-  display: block;
   width: 100%;
   padding: 0.2em;
   padding-top: 0.3em;
