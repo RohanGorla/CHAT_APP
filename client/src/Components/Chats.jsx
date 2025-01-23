@@ -280,14 +280,23 @@ function Chats() {
                 className="Chat--Room_Information--Close"
               />
               <div className="Chat--Room_Information--Add_Friends">
-                <div className="Chat--Room_Information--Add_Friends--Search">
-                  <p className="Chat--Room_Information--Add_Friends--Heading">
-                    Add frens
-                  </p>
-                  <input
-                    type="text"
-                    placeholder="Search your frens list..."
-                  ></input>
+                <div className="Chat--Room_Information--Add_Friends--Header">
+                  <div className="Chat--Room_Information--Add_Friends--Header--Heading_And_Button">
+                    <p className="Chat--Room_Information--Add_Friends--Header_Heading">
+                      Add frens
+                    </p>
+                    <div className="Chat--Room_Information--Add_Friends--Header_Button">
+                      <button className="Chat--Room_Information--Add_Friends--Header_Button--Done">
+                        Done
+                      </button>
+                    </div>
+                  </div>
+                  <div className="Chat--Room_Information--Add_Friends--Search">
+                    <input
+                      type="text"
+                      placeholder="Search your frens list..."
+                    ></input>
+                  </div>
                 </div>
                 <div className="Chat--Room_Information--Add_Friends--Friends_List">
                   {addFriendsList.map((friend, index) => {
