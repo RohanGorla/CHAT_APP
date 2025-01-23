@@ -66,7 +66,7 @@ function Chats() {
   }
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
-  async function sendMessage(e) {
+  function sendMessage(e) {
     e?.preventDefault();
     if (!message.length) return;
     let read;
@@ -83,7 +83,7 @@ function Chats() {
   }
 
   /* DELETE ALL THE CHAT MESSAGES SOCKET EVENT */
-  async function deleteChat(friend) {
+  function deleteChat(friend) {
     socket.emit("delete_chat", {
       from: userData,
       to: friend,
@@ -94,7 +94,7 @@ function Chats() {
   }
 
   /* REMOVE FRIEND SOCKET EVENT */
-  async function removeFriend(friend) {
+  function removeFriend(friend) {
     socket.emit("remove_friend", {
       from: userData,
       to: friend,
@@ -103,14 +103,14 @@ function Chats() {
   }
 
   /* EXIT GROUP SOCKET EVENT */
-  async function exitGroup() {
+  function exitGroup() {
     socket.emit("exit_group", { id, user: userData, name: currentRoom.name });
     setConfirmExit(false);
     navigate("/user/friends");
   }
 
   /* UPDATE ROOM NAME SOCKET EVENT */
-  async function updateGroupName() {
+  function updateGroupName() {
     if (newRoomname.length)
       socket.emit("update_group_name", {
         id,
@@ -118,6 +118,12 @@ function Chats() {
         newRoomname,
       });
     setEditRoomname(false);
+  }
+
+  /* ADD FRIENDS TO THE GROUP SOCKET EVENT */
+  function addFriends() {
+    if (!selectedFriends.length) return;
+    socket.emit("add_group_members", { id, members: selectedFriends });
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
@@ -286,7 +292,14 @@ function Chats() {
                       Add frens
                     </p>
                     <div className="Chat--Room_Information--Add_Friends--Header_Button">
-                      <button className="Chat--Room_Information--Add_Friends--Header_Button--Done">
+                      <button
+                        className={
+                          selectedFriends.length
+                            ? "Chat--Room_Information--Add_Friends--Header_Button--Done"
+                            : "Chat--Room_Information--Add_Friends--Header_Button--Done--Inactive"
+                        }
+                        onClick={addFriends}
+                      >
                         Done
                       </button>
                     </div>

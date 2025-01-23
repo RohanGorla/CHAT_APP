@@ -124,18 +124,23 @@
   font-size: var(--Chat_Room_Info_Button);
   font-weight: 600;
   padding: 0.5em 1.2em;
+  border-style: none;
+  border: 2px solid rgb(35, 35, 35);
   border-radius: 7px;
-  cursor: pointer;
 }
 
 .Chat--Room_Information--Add_Friends--Header_Button--Done {
-  background-color: rgb(16, 226, 69);
-  border: 2px solid rgb(15, 15, 15);
+  background-color: rgb(112, 224, 0);
+  cursor: pointer;
   &:hover {
     background-color: black;
-    color: rgb(16, 226, 69);
-    border: 2px solid rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
+}
+
+.Chat--Room_Information--Add_Friends--Header_Button--Done--Inactive {
+  background-color: rgb(112, 224, 0, 0.5);
 }
 
 .Chat--Room_Information--Add_Friends--Search input {
