@@ -427,6 +427,14 @@ io.on("connection", async (socket) => {
     );
     io.to(id).emit("group_name_updated", { id, oldRoomname, newRoomname });
   });
+  /* ADD GROUP MEMBERS */
+  socket.on("add_group_members", async ({ id, name, members }) => {
+    const updateRoomsCollection = await roomsCollection.updateOne(
+      { roomId: id },
+      { $push: { users: { $each: members } } }
+    );
+    io.to(id).emit("group_members_added", { id, name });
+  });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(

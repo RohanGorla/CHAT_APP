@@ -123,7 +123,11 @@ function Chats() {
   /* ADD FRIENDS TO THE GROUP SOCKET EVENT */
   function addFriends() {
     if (!selectedFriends.length) return;
-    socket.emit("add_group_members", { id, members: selectedFriends });
+    socket.emit("add_group_members", {
+      id,
+      name: currentRoom.name,
+      members: selectedFriends,
+    });
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
