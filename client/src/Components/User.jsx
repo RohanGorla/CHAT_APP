@@ -349,6 +349,10 @@ function User() {
         Popup(`${groupName} has been created!`, "Good");
       else Popup(`${createdBy.usr_nm} added you in ${groupName}`, "Good");
     });
+    socket.on("group_members_added", ({ groupName }) => {
+      socket.emit("get_user_data", { room: userData.userId });
+      Popup(`New members have been added to ${groupName}!`, "Good");
+    });
   }, []);
 
   /* GET THE NEW NOTIFICATIONS */
