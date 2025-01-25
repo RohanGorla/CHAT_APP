@@ -121,13 +121,16 @@ function Chats() {
   }
 
   /* ADD FRIENDS TO THE GROUP SOCKET EVENT */
-  function addFriends() {
+  function addGroupMembers() {
     if (!selectedFriends.length) return;
     socket.emit("add_group_members", {
       id,
-      name: currentRoom.name,
+      groupName: currentRoom.name,
       members: selectedFriends,
+      addedBy: { usr_nm: userData.username, usr_id: userData.userId },
     });
+    setShowRoomDetails(false);
+    setAddFriends(false);
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
@@ -302,7 +305,7 @@ function Chats() {
                             ? "Chat--Room_Information--Add_Friends--Header_Button--Done"
                             : "Chat--Room_Information--Add_Friends--Header_Button--Done--Inactive"
                         }
-                        onClick={addFriends}
+                        onClick={addGroupMembers}
                       >
                         Done
                       </button>
