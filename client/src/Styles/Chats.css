@@ -71,6 +71,16 @@
   margin-inline: auto;
 }
 
+.Chat--Room_Information--Inner_Container {
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+.Chat--Room_Information--Inner_Container::-webkit-scrollbar {
+  width: 0px;
+}
+
 .Chat--Room_Information--Close {
   position: absolute;
   font-size: var(--Chat_Room_Info_Close);

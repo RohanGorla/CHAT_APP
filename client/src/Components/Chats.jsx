@@ -268,418 +268,420 @@ function Chats() {
           }
         >
           <div className="Chat--Room_Information">
-            {/* CLOSE ROOM INFORMATION SECTION OPTION */}
-            <FaXmark
-              onClick={() => {
-                setShowRoomDetails(false);
-                setConfirmDelete(false);
-                setConfirmRemove(false);
-              }}
-              className="Chat--Room_Information--Close"
-            />
-            {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
-            <div
-              className={
-                addFriends
-                  ? "Chat--Room_Information--Add_Friends_Container"
-                  : "Chat--Room_Information--Add_Friends_Container--Inactive"
-              }
-            >
+            <div className="Chat--Room_Information--Inner_Container">
+              {/* CLOSE ROOM INFORMATION SECTION OPTION */}
               <FaXmark
                 onClick={() => {
-                  setAddFriends(false);
-                  setSelectedFriends([]);
+                  setShowRoomDetails(false);
+                  setConfirmDelete(false);
+                  setConfirmRemove(false);
                 }}
                 className="Chat--Room_Information--Close"
               />
-              <div className="Chat--Room_Information--Add_Friends">
-                <div className="Chat--Room_Information--Add_Friends--Header">
-                  <div className="Chat--Room_Information--Add_Friends--Header--Heading_And_Button">
-                    <p className="Chat--Room_Information--Add_Friends--Header_Heading">
-                      Add frens
+              {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
+              <div
+                className={
+                  addFriends
+                    ? "Chat--Room_Information--Add_Friends_Container"
+                    : "Chat--Room_Information--Add_Friends_Container--Inactive"
+                }
+              >
+                <FaXmark
+                  onClick={() => {
+                    setAddFriends(false);
+                    setSelectedFriends([]);
+                  }}
+                  className="Chat--Room_Information--Close"
+                />
+                <div className="Chat--Room_Information--Add_Friends">
+                  <div className="Chat--Room_Information--Add_Friends--Header">
+                    <div className="Chat--Room_Information--Add_Friends--Header--Heading_And_Button">
+                      <p className="Chat--Room_Information--Add_Friends--Header_Heading">
+                        Add frens
+                      </p>
+                      <div className="Chat--Room_Information--Add_Friends--Header_Button">
+                        <button
+                          className={
+                            selectedFriends.length
+                              ? "Chat--Room_Information--Add_Friends--Header_Button--Done"
+                              : "Chat--Room_Information--Add_Friends--Header_Button--Done--Inactive"
+                          }
+                          onClick={addGroupMembers}
+                        >
+                          Done
+                        </button>
+                      </div>
+                    </div>
+                    <div className="Chat--Room_Information--Add_Friends--Search">
+                      <input
+                        type="text"
+                        placeholder="Search your frens list..."
+                      ></input>
+                    </div>
+                  </div>
+                  <div className="Chat--Room_Information--Add_Friends--Friends_List">
+                    {addFriendsList.map((friend, index) => {
+                      return (
+                        <div
+                          key={index}
+                          className="Chat--Room_Information--Add_Friends--Friend_Card"
+                          onClick={() => {
+                            if (selectedFriends.includes(friend.usr_id)) {
+                              const updatedList = selectedFriends.filter(
+                                (id) => id !== friend.usr_id
+                              );
+                              setSelectedFriends(updatedList);
+                            } else {
+                              setSelectedFriends([
+                                ...selectedFriends,
+                                friend.usr_id,
+                              ]);
+                            }
+                          }}
+                        >
+                          <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
+                            <div className="Chat--Room_Information--Add_Friends--Friend_Image">
+                              {friend.imageUrl ? (
+                                <div className="Chat--Room_Information--Add_Friends--Friend_Image_Frame">
+                                  <img src={friend.imageUrl}></img>
+                                </div>
+                              ) : (
+                                <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                              )}
+                            </div>
+                          </div>
+                          <div className="Chat--Room_Information--Add_Friends--Friend_Details">
+                            <div className="Chat--Room_Information--Add_Friends--Name_And_Id">
+                              <p className="Chat--Room_Information--Add_Friends--Friend_Username">
+                                {friend.usr_nm}
+                              </p>
+                              <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
+                                {friend.usr_id}
+                              </p>
+                            </div>
+                            <div
+                              className={
+                                selectedFriends.includes(friend.usr_id)
+                                  ? "Chat--Room_Information--Add_Friends--Selected"
+                                  : "Chat--Room_Information--Add_Friends--Selected--Inactive"
+                              }
+                            >
+                              <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+              {/* ROOM INFORMATION */}
+              <div className="Chat--Room_Information--Image">
+                {currentRoom.imageUrl ? (
+                  <div className="Chat--Room_Information--Image_Frame">
+                    <img src={currentRoom.imageUrl}></img>
+                  </div>
+                ) : (
+                  <IoMdPerson className="Chat--Room_Information--Image--Icon" />
+                )}
+              </div>
+              <div
+                className={
+                  currentRoom.type === "group"
+                    ? "Chat--Room_Information--Edit_Room"
+                    : "Chat--Room_Information--Edit_Room--Inactive"
+                }
+              >
+                <div className="Chat--Room_Information--Edit_Room_Name">
+                  <div
+                    className={
+                      editRoomname
+                        ? "Chat--Room_Information--Edit_Room_Name--Inactive"
+                        : "Chat--Room_Information--Edit_Room_Name--Display"
+                    }
+                  >
+                    <p className="Chat--Room_Information--Edit_Room_Name--Name">
+                      {currentRoom.name}
                     </p>
-                    <div className="Chat--Room_Information--Add_Friends--Header_Button">
+                    <div className="Chat--Room_Information--Edit_Room_Name--Edit_Icon_Container">
+                      <FaEdit
+                        className="Chat--Room_Information--Edit_Room_Name--Edit_Icon"
+                        onClick={() => setEditRoomname(true)}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={
+                      editRoomname
+                        ? "Chat--Room_Information--Edit_Room_Name--Input"
+                        : "Chat--Room_Information--Edit_Room_Name--Inactive"
+                    }
+                  >
+                    <input
+                      type="text"
+                      value={newRoomname}
+                      onChange={(e) => {
+                        setNewRoomname(e.target.value);
+                      }}
+                      placeholder="Enter group name..."
+                    ></input>
+                    <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
                       <button
-                        className={
-                          selectedFriends.length
-                            ? "Chat--Room_Information--Add_Friends--Header_Button--Done"
-                            : "Chat--Room_Information--Add_Friends--Header_Button--Done--Inactive"
-                        }
-                        onClick={addGroupMembers}
+                        className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel"
+                        onClick={() => setEditRoomname(false)}
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
+                        onClick={updateGroupName}
                       >
                         Done
                       </button>
                     </div>
                   </div>
-                  <div className="Chat--Room_Information--Add_Friends--Search">
-                    <input
-                      type="text"
-                      placeholder="Search your frens list..."
-                    ></input>
+                </div>
+                <div className="Chat--Room_Information--Edit_Room_Users">
+                  <button
+                    className="Chat--Room_Information--Edit_Room_Users--Button"
+                    onClick={() => setAddFriends(true)}
+                  >
+                    Add frens
+                  </button>
+                </div>
+              </div>
+              <div className="Chat--Room_Information--Friends_List">
+                <div
+                  className={
+                    currentRoom.type === "group"
+                      ? "Chat--Room_Information--Friend_Container"
+                      : "Chat--Room_Information--Friend_Container--Inactive"
+                  }
+                >
+                  <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
+                    <div className="Chat--Room_Information--Friend--Image_Container">
+                      <div className="Chat--Room_Information--Friend--Image">
+                        {userData.imageUrl ? (
+                          <div className="Chat--Room_Information--Friend--Image_Frame">
+                            <img src={userData.imageUrl}></img>
+                          </div>
+                        ) : (
+                          <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
+                        )}
+                      </div>
+                    </div>
+                    <div className="Chat--Room_Information--Friend--Details">
+                      <p className="Chat--Room_Information--Friend_Username">
+                        {userData.username} (You)
+                      </p>
+                      <p className="Chat--Room_Information--Friend_Userid">
+                        {userData.userId}
+                      </p>
+                    </div>
                   </div>
                 </div>
-                <div className="Chat--Room_Information--Add_Friends--Friends_List">
-                  {addFriendsList.map((friend, index) => {
-                    return (
+                {friendsList?.map((friend, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className="Chat--Room_Information--Friend_Container"
+                    >
+                      {/* ROOM FRIENDS INFORMATION */}
                       <div
-                        key={index}
-                        className="Chat--Room_Information--Add_Friends--Friend_Card"
-                        onClick={() => {
-                          if (selectedFriends.includes(friend.usr_id)) {
-                            const updatedList = selectedFriends.filter(
-                              (id) => id !== friend.usr_id
-                            );
-                            setSelectedFriends(updatedList);
-                          } else {
-                            setSelectedFriends([
-                              ...selectedFriends,
-                              friend.usr_id,
-                            ]);
-                          }
-                        }}
+                        className={
+                          currentRoom.type === "single"
+                            ? "Chat--Room_Information--Friend"
+                            : "Chat--Room_Information--Friend Chat--Room_Information--Friend--Group"
+                        }
                       >
-                        <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
-                          <div className="Chat--Room_Information--Add_Friends--Friend_Image">
+                        {/* SHOW FRIENDS IMAGES IN GROUP TYPE ROOM */}
+                        <div
+                          className={
+                            currentRoom.type === "group"
+                              ? "Chat--Room_Information--Friend--Image_Container"
+                              : "Chat--Room_Information--Friend--Image_Container--Inactive"
+                          }
+                        >
+                          <div className="Chat--Room_Information--Friend--Image">
                             {friend.imageUrl ? (
-                              <div className="Chat--Room_Information--Add_Friends--Friend_Image_Frame">
+                              <div className="Chat--Room_Information--Friend--Image_Frame">
                                 <img src={friend.imageUrl}></img>
                               </div>
                             ) : (
-                              <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                              <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
                             )}
                           </div>
                         </div>
-                        <div className="Chat--Room_Information--Add_Friends--Friend_Details">
-                          <div className="Chat--Room_Information--Add_Friends--Name_And_Id">
-                            <p className="Chat--Room_Information--Add_Friends--Friend_Username">
-                              {friend.usr_nm}
-                            </p>
-                            <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
-                              {friend.usr_id}
-                            </p>
-                          </div>
-                          <div
+                        {/* SHOW FRIENDS DETAILS */}
+                        <div
+                          className={
+                            currentRoom.type === "group"
+                              ? "Chat--Room_Information--Friend--Details"
+                              : ""
+                          }
+                        >
+                          <p className="Chat--Room_Information--Friend_Username">
+                            {friend.usr_nm}
+                          </p>
+                          <p className="Chat--Room_Information--Friend_Userid">
+                            {friend.usr_id}
+                          </p>
+                          <p
                             className={
-                              selectedFriends.includes(friend.usr_id)
-                                ? "Chat--Room_Information--Add_Friends--Selected"
-                                : "Chat--Room_Information--Add_Friends--Selected--Inactive"
+                              currentRoom.type === "single"
+                                ? "Chat--Room_Information--Friend_Email"
+                                : "Chat--Room_Information--Friend_Email--Inactive"
                             }
                           >
-                            <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
-                          </div>
+                            <span className="Chat--Room_Information--Friend_Email--Heading">
+                              Contact email:
+                            </span>
+                            {friend.email}
+                          </p>
                         </div>
                       </div>
-                    );
-                  })}
-                </div>
+                      {/* ROOM CHAT DELETE OPTIONS */}
+                      <div
+                        className={
+                          currentRoom.type === "single"
+                            ? confirmDelete || confirmRemove
+                              ? "Chat--Room_Information--Buttons--Inactive"
+                              : "Chat--Room_Information--Buttons"
+                            : "Chat--Room_Information--Buttons--Inactive"
+                        }
+                      >
+                        <button
+                          className="Chat--Room_Information--Buttons--Danger"
+                          onClick={() => {
+                            setConfirmDelete(true);
+                            setConfirmRemove(false);
+                          }}
+                        >
+                          Delete chat
+                        </button>
+                      </div>
+                      <div
+                        className={
+                          confirmDelete
+                            ? "Chat--Room_Information--Confirm_Delete"
+                            : "Chat--Room_Information--Confirm_Delete--Inactive"
+                        }
+                      >
+                        <p className="Chat--Room_Information--Confirm_Delete--Message">
+                          This action will delete all the messages in this chat.
+                          Confirm delete if you want to proceed.
+                        </p>
+                        <div className="Chat--Room_Information--Buttons">
+                          <button
+                            className="Chat--Room_Information--Buttons--Cancel"
+                            onClick={() => setConfirmDelete(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="Chat--Room_Information--Buttons--Danger"
+                            onClick={() => deleteChat(friend)}
+                          >
+                            Confirm delete
+                          </button>
+                        </div>
+                      </div>
+                      {/* REMOVE FRIEND OPTIONS */}
+                      <div
+                        className={
+                          currentRoom.type === "single"
+                            ? confirmDelete || confirmRemove
+                              ? "Chat--Room_Information--Buttons--Inactive"
+                              : "Chat--Room_Information--Buttons"
+                            : "Chat--Room_Information--Buttons--Inactive"
+                        }
+                      >
+                        <button
+                          className="Chat--Room_Information--Buttons--Danger"
+                          onClick={() => {
+                            setConfirmRemove(true);
+                            setConfirmDelete(false);
+                          }}
+                        >
+                          Remove fren
+                        </button>
+                      </div>
+                      <div
+                        className={
+                          confirmRemove
+                            ? "Chat--Room_Information--Confirm_Delete"
+                            : "Chat--Room_Information--Confirm_Delete--Inactive"
+                        }
+                      >
+                        <p className="Chat--Room_Information--Confirm_Delete--Message">
+                          By removing {friend.usr_nm} as your fren, all your
+                          chat messages will be deleted permanently and you will
+                          no longer be frens!
+                        </p>
+                        <div className="Chat--Room_Information--Buttons">
+                          <button
+                            className="Chat--Room_Information--Buttons--Cancel"
+                            onClick={() => setConfirmRemove(false)}
+                          >
+                            Cancel
+                          </button>
+                          <button
+                            className="Chat--Room_Information--Buttons--Danger"
+                            onClick={() => removeFriend(friend)}
+                          >
+                            Confirm remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            </div>
-            {/* ROOM INFORMATION */}
-            <div className="Chat--Room_Information--Image">
-              {currentRoom.imageUrl ? (
-                <div className="Chat--Room_Information--Image_Frame">
-                  <img src={currentRoom.imageUrl}></img>
-                </div>
-              ) : (
-                <IoMdPerson className="Chat--Room_Information--Image--Icon" />
-              )}
-            </div>
-            <div
-              className={
-                currentRoom.type === "group"
-                  ? "Chat--Room_Information--Edit_Room"
-                  : "Chat--Room_Information--Edit_Room--Inactive"
-              }
-            >
-              <div className="Chat--Room_Information--Edit_Room_Name">
-                <div
-                  className={
-                    editRoomname
-                      ? "Chat--Room_Information--Edit_Room_Name--Inactive"
-                      : "Chat--Room_Information--Edit_Room_Name--Display"
-                  }
-                >
-                  <p className="Chat--Room_Information--Edit_Room_Name--Name">
-                    {currentRoom.name}
-                  </p>
-                  <div className="Chat--Room_Information--Edit_Room_Name--Edit_Icon_Container">
-                    <FaEdit
-                      className="Chat--Room_Information--Edit_Room_Name--Edit_Icon"
-                      onClick={() => setEditRoomname(true)}
-                    />
-                  </div>
-                </div>
-                <div
-                  className={
-                    editRoomname
-                      ? "Chat--Room_Information--Edit_Room_Name--Input"
-                      : "Chat--Room_Information--Edit_Room_Name--Inactive"
-                  }
-                >
-                  <input
-                    type="text"
-                    value={newRoomname}
-                    onChange={(e) => {
-                      setNewRoomname(e.target.value);
-                    }}
-                    placeholder="Enter group name..."
-                  ></input>
-                  <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
-                    <button
-                      className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel"
-                      onClick={() => setEditRoomname(false)}
-                    >
-                      Cancel
-                    </button>
-                    <button
-                      className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
-                      onClick={updateGroupName}
-                    >
-                      Done
-                    </button>
-                  </div>
-                </div>
-              </div>
-              <div className="Chat--Room_Information--Edit_Room_Users">
-                <button
-                  className="Chat--Room_Information--Edit_Room_Users--Button"
-                  onClick={() => setAddFriends(true)}
-                >
-                  Add frens
-                </button>
-              </div>
-            </div>
-            <div className="Chat--Room_Information--Friends_List">
+              {/* EXIT GROUP OPTIONS */}
               <div
                 className={
                   currentRoom.type === "group"
-                    ? "Chat--Room_Information--Friend_Container"
-                    : "Chat--Room_Information--Friend_Container--Inactive"
+                    ? confirmExit
+                      ? "Chat--Room_Information--Buttons--Inactive"
+                      : "Chat--Room_Information--Buttons"
+                    : "Chat--Room_Information--Buttons--Inactive"
                 }
               >
-                <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
-                  <div className="Chat--Room_Information--Friend--Image_Container">
-                    <div className="Chat--Room_Information--Friend--Image">
-                      {userData.imageUrl ? (
-                        <div className="Chat--Room_Information--Friend--Image_Frame">
-                          <img src={userData.imageUrl}></img>
-                        </div>
-                      ) : (
-                        <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="Chat--Room_Information--Friend--Details">
-                    <p className="Chat--Room_Information--Friend_Username">
-                      {userData.username} (You)
-                    </p>
-                    <p className="Chat--Room_Information--Friend_Userid">
-                      {userData.userId}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              {friendsList?.map((friend, index) => {
-                return (
-                  <div
-                    key={index}
-                    className="Chat--Room_Information--Friend_Container"
-                  >
-                    {/* ROOM FRIENDS INFORMATION */}
-                    <div
-                      className={
-                        currentRoom.type === "single"
-                          ? "Chat--Room_Information--Friend"
-                          : "Chat--Room_Information--Friend Chat--Room_Information--Friend--Group"
-                      }
-                    >
-                      {/* SHOW FRIENDS IMAGES IN GROUP TYPE ROOM */}
-                      <div
-                        className={
-                          currentRoom.type === "group"
-                            ? "Chat--Room_Information--Friend--Image_Container"
-                            : "Chat--Room_Information--Friend--Image_Container--Inactive"
-                        }
-                      >
-                        <div className="Chat--Room_Information--Friend--Image">
-                          {friend.imageUrl ? (
-                            <div className="Chat--Room_Information--Friend--Image_Frame">
-                              <img src={friend.imageUrl}></img>
-                            </div>
-                          ) : (
-                            <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
-                          )}
-                        </div>
-                      </div>
-                      {/* SHOW FRIENDS DETAILS */}
-                      <div
-                        className={
-                          currentRoom.type === "group"
-                            ? "Chat--Room_Information--Friend--Details"
-                            : ""
-                        }
-                      >
-                        <p className="Chat--Room_Information--Friend_Username">
-                          {friend.usr_nm}
-                        </p>
-                        <p className="Chat--Room_Information--Friend_Userid">
-                          {friend.usr_id}
-                        </p>
-                        <p
-                          className={
-                            currentRoom.type === "single"
-                              ? "Chat--Room_Information--Friend_Email"
-                              : "Chat--Room_Information--Friend_Email--Inactive"
-                          }
-                        >
-                          <span className="Chat--Room_Information--Friend_Email--Heading">
-                            Contact email:
-                          </span>
-                          {friend.email}
-                        </p>
-                      </div>
-                    </div>
-                    {/* ROOM CHAT DELETE OPTIONS */}
-                    <div
-                      className={
-                        currentRoom.type === "single"
-                          ? confirmDelete || confirmRemove
-                            ? "Chat--Room_Information--Buttons--Inactive"
-                            : "Chat--Room_Information--Buttons"
-                          : "Chat--Room_Information--Buttons--Inactive"
-                      }
-                    >
-                      <button
-                        className="Chat--Room_Information--Buttons--Danger"
-                        onClick={() => {
-                          setConfirmDelete(true);
-                          setConfirmRemove(false);
-                        }}
-                      >
-                        Delete chat
-                      </button>
-                    </div>
-                    <div
-                      className={
-                        confirmDelete
-                          ? "Chat--Room_Information--Confirm_Delete"
-                          : "Chat--Room_Information--Confirm_Delete--Inactive"
-                      }
-                    >
-                      <p className="Chat--Room_Information--Confirm_Delete--Message">
-                        This action will delete all the messages in this chat.
-                        Confirm delete if you want to proceed.
-                      </p>
-                      <div className="Chat--Room_Information--Buttons">
-                        <button
-                          className="Chat--Room_Information--Buttons--Cancel"
-                          onClick={() => setConfirmDelete(false)}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="Chat--Room_Information--Buttons--Danger"
-                          onClick={() => deleteChat(friend)}
-                        >
-                          Confirm delete
-                        </button>
-                      </div>
-                    </div>
-                    {/* REMOVE FRIEND OPTIONS */}
-                    <div
-                      className={
-                        currentRoom.type === "single"
-                          ? confirmDelete || confirmRemove
-                            ? "Chat--Room_Information--Buttons--Inactive"
-                            : "Chat--Room_Information--Buttons"
-                          : "Chat--Room_Information--Buttons--Inactive"
-                      }
-                    >
-                      <button
-                        className="Chat--Room_Information--Buttons--Danger"
-                        onClick={() => {
-                          setConfirmRemove(true);
-                          setConfirmDelete(false);
-                        }}
-                      >
-                        Remove fren
-                      </button>
-                    </div>
-                    <div
-                      className={
-                        confirmRemove
-                          ? "Chat--Room_Information--Confirm_Delete"
-                          : "Chat--Room_Information--Confirm_Delete--Inactive"
-                      }
-                    >
-                      <p className="Chat--Room_Information--Confirm_Delete--Message">
-                        By removing {friend.usr_nm} as your fren, all your chat
-                        messages will be deleted permanently and you will no
-                        longer be frens!
-                      </p>
-                      <div className="Chat--Room_Information--Buttons">
-                        <button
-                          className="Chat--Room_Information--Buttons--Cancel"
-                          onClick={() => setConfirmRemove(false)}
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          className="Chat--Room_Information--Buttons--Danger"
-                          onClick={() => removeFriend(friend)}
-                        >
-                          Confirm remove
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                );
-              })}
-            </div>
-            {/* EXIT GROUP OPTIONS */}
-            <div
-              className={
-                currentRoom.type === "group"
-                  ? confirmExit
-                    ? "Chat--Room_Information--Buttons--Inactive"
-                    : "Chat--Room_Information--Buttons"
-                  : "Chat--Room_Information--Buttons--Inactive"
-              }
-            >
-              <button
-                className="Chat--Room_Information--Buttons--Danger"
-                onClick={() => {
-                  setConfirmExit(true);
-                }}
-              >
-                Exit group
-              </button>
-            </div>
-            <div
-              className={
-                confirmExit
-                  ? "Chat--Room_Information--Confirm_Delete"
-                  : "Chat--Room_Information--Confirm_Delete--Inactive"
-              }
-            >
-              <p className="Chat--Room_Information--Confirm_Delete--Message">
-                By exiting this group, you will no longer be able to send or see
-                messages in this group, and you will no longer be part of the
-                group. Do you want to proceed?
-              </p>
-              <div className="Chat--Room_Information--Buttons">
-                <button
-                  className="Chat--Room_Information--Buttons--Cancel"
-                  onClick={() => setConfirmExit(false)}
-                >
-                  Cancel
-                </button>
                 <button
                   className="Chat--Room_Information--Buttons--Danger"
-                  onClick={exitGroup}
+                  onClick={() => {
+                    setConfirmExit(true);
+                  }}
                 >
-                  Confirm exit
+                  Exit group
                 </button>
+              </div>
+              <div
+                className={
+                  confirmExit
+                    ? "Chat--Room_Information--Confirm_Delete"
+                    : "Chat--Room_Information--Confirm_Delete--Inactive"
+                }
+              >
+                <p className="Chat--Room_Information--Confirm_Delete--Message">
+                  By exiting this group, you will no longer be able to send or
+                  see messages in this group, and you will no longer be part of
+                  the group. Do you want to proceed?
+                </p>
+                <div className="Chat--Room_Information--Buttons">
+                  <button
+                    className="Chat--Room_Information--Buttons--Cancel"
+                    onClick={() => setConfirmExit(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    className="Chat--Room_Information--Buttons--Danger"
+                    onClick={exitGroup}
+                  >
+                    Confirm exit
+                  </button>
+                </div>
               </div>
             </div>
           </div>
