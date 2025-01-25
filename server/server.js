@@ -442,6 +442,13 @@ io.on("connection", async (socket) => {
         { $push: { rooms: id } }
       );
       io.to(id).emit("group_members_added", { groupName });
+      members.forEach((member) => {
+        io.to(member).emit("join_group", {
+          groupName,
+          roomId: id,
+          createdBy: addedBy,
+        });
+      });
     }
   );
   /* UPDATE PROFILE PICTURE */
