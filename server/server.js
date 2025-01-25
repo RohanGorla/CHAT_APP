@@ -435,6 +435,12 @@ io.on("connection", async (socket) => {
         { roomId: id },
         { $push: { users: { $each: members } } }
       );
+      const updateUserInfo = await userInfoCollection.updateMany(
+        {
+          usr_id: { $in: members },
+        },
+        { $push: { rooms: id } }
+      );
     }
   );
   /* UPDATE PROFILE PICTURE */
