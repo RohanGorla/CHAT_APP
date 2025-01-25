@@ -441,6 +441,7 @@ io.on("connection", async (socket) => {
         },
         { $push: { rooms: id } }
       );
+      io.to(id).emit("group_members_added", { groupName });
     }
   );
   /* UPDATE PROFILE PICTURE */
