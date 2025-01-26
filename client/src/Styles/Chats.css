@@ -109,6 +109,11 @@
   display: none;
 }
 
+.Chat--Room_Information--Add_Friends {
+  height: 100%;
+  width: 100%;
+}
+
 .Chat--Room_Information--Add_Friends--Header {
   height: 80px;
   padding-top: 1em;
