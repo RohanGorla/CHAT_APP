@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { SiTicktick } from "react-icons/si";
+import { FaXmark } from "react-icons/fa6";
 
 function CreateGroup() {
   /* SPECIAL VARIABLES */
@@ -56,6 +57,10 @@ function CreateGroup() {
   return (
     <div className="CreateGroup_Page">
       <div className="CreateGroup_Container">
+        <FaXmark
+          onClick={() => navigate("/user/friends")}
+          className="CreateGroup--Close"
+        />
         <section className="CreateGroup--Group_Details">
           <p className="CreateGroup--Group_Details--Heading">
             Create new frens group
