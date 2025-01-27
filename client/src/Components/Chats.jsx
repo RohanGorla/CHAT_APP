@@ -37,6 +37,7 @@ function Chats() {
   const [confirmExit, setConfirmExit] = useState(false);
   const [addFriends, setAddFriends] = useState(false);
   const [addFriendsList, setAddFriendsList] = useState([]);
+  const [addFriendsSearch, setAddFriendsSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
@@ -131,6 +132,22 @@ function Chats() {
     });
     setShowRoomDetails(false);
     setAddFriends(false);
+  }
+
+  /* FUNCTION TO SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
+  function sortFriendsList(list) {
+    /* FILTER OUT USERS FROM FRIENDS LIST WHO ARE NOT ALREADY INCLUDED IN THE GROUP */
+    const notIncludedFriends = list.filter(
+      (friend) => !currentRoom.users.includes(friend.usr_id)
+    );
+    /* FILTER 'NOT INCLUDED FRIENDS LIST' BASED ON SELECTED STATUS */
+    const selectedList = notIncludedFriends.filter((friend) =>
+      selectedFriends.includes(friend.usr_id)
+    );
+    const notSelectedList = notIncludedFriends.filter(
+      (friend) => !selectedFriends.includes(friend.usr_id)
+    );
+    setAddFriendsList([...selectedList, ...notSelectedList]);
   }
 
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
@@ -229,19 +246,7 @@ function Chats() {
 
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
   useEffect(() => {
-    /* FILTER OUT USERS FROM FRIENDS LIST WHO ARE NOT ALREADY INCLUDED IN THE GROUP */
-    if (currentRoom.type === "group") {
-      const updatedFriends = friends.filter(
-        (friend) => !currentRoom.users.includes(friend.usr_id)
-      );
-      const selectedList = updatedFriends.filter((friend) =>
-        selectedFriends.includes(friend.usr_id)
-      );
-      const notSelectedList = updatedFriends.filter(
-        (friend) => !selectedFriends.includes(friend.usr_id)
-      );
-      setAddFriendsList([...selectedList, ...notSelectedList]);
-    }
+    if (currentRoom.type === "group") sortFriendsList(friends);
   }, [selectedFriends]);
 
   useEffect(() => {
