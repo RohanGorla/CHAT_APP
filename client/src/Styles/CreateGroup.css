@@ -2,7 +2,7 @@
   --CreateGroup_Main_Font: "Inter", sans-serif;
   --CreateGroup_Sub_Font: "Varela Round", sans-serif;
   --CreateGroup--Close: 20px;
-  --CreateGrou--Heading: 20px;
+  --CreateGroup--Heading: 20px;
   --CreateGroup--Input: 16px;
   --CreateGroup--Create_Button: 14px;
   --CreateGroup--Friends_List_Icon: 30px;
@@ -41,7 +41,6 @@
 }
 
 .CreateGroup--Group_Details {
-  background-color: rgb(256, 0, 0, 0.4);
   width: 100%;
   height: 120px;
   padding: 0.5em;
@@ -49,7 +48,7 @@
 
 .CreateGroup--Group_Details--Heading {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGrou--Heading);
+  font-size: var(--CreateGroup--Heading);
   font-weight: 600;
   margin-bottom: 0.5em;
 }
@@ -92,7 +91,6 @@
 }
 
 .CreateGroup--Select_Friends {
-  background-color: rgb(0, 0, 256, 0.4);
   width: 100%;
   height: calc(100% - 120px);
 }
@@ -105,7 +103,7 @@
 
 .CreateGroup--Select_Friends--Heading {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGrou--Heading);
+  font-size: var(--CreateGroup--Heading);
   font-weight: 600;
   margin-bottom: 0.3em;
 }
@@ -142,8 +140,11 @@
   padding: 0.5em;
   border-style: none;
   border-radius: 5px;
-  margin-block: 1em;
   cursor: pointer;
+}
+
+.CreateGroup--Friends_List--Friend + .CreateGroup--Friends_List--Friend {
+  margin-top: 1em;
 }
 
 .CreateGroup--Friends_List--Friend_Image_Container {
@@ -246,7 +247,45 @@
     height: calc(100% - 110px);
   }
 
-  .CreateGroup--Friends_List--Friend {
-    margin-block: 0.5em;
+  .CreateGroup--Friends_List--Friend + .CreateGroup--Friends_List--Friend {
+    margin-top: 0.5em;
+  }
+}
+
+@media (max-width: 600px) {
+  :root {
+    --CreateGroup--Heading: 16px;
+    --CreateGroup--Input: 15px;
+    --CreateGroup--Create_Button: 12px;
+    --CreateGroup--Friends_Selected_Icon: 20px;
+  }
+
+  .CreateGroup_Page {
+    padding-block: 0em;
+  }
+
+  .CreateGroup_Container {
+    padding-block: 0em;
+  }
+
+  .CreateGroup--Group_Details {
+    height: 100px;
+  }
+
+  .CreateGroup--Select_Friends {
+    height: calc(100% - 100px);
+    padding-top: 0.5em;
+  }
+
+  .CreateGroup--Friends_List--Friend + .CreateGroup--Friends_List--Friend {
+    margin-top: 0.5em;
+  }
+
+  .CreateGroup--Friends_List--Friend_Image_Container {
+    min-width: 15%;
+  }
+
+  .CreateGroup--Friends_List--Friend_Details {
+    min-width: 85%;
   }
 }
