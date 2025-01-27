@@ -2,8 +2,8 @@
   --CreateGroup_Main_Font: "Inter", sans-serif;
   --CreateGroup_Sub_Font: "Varela Round", sans-serif;
   --CreateGroup--Close: 20px;
-  --CreateGroup--Group_Details--Heading: 20px;
-  --CreateGroup--Group_Name_Input: 16px;
+  --CreateGrou--Heading: 20px;
+  --CreateGroup--Input: 16px;
   --CreateGroup--Create_Button: 14px;
   --CreateGroup--Friends_List_Icon: 30px;
   --CreateGroup--Friends_List_Username: 16px;
@@ -41,6 +41,7 @@
 }
 
 .CreateGroup--Group_Details {
+  background-color: rgb(256, 0, 0, 0.4);
   width: 100%;
   height: 120px;
   padding: 0.5em;
@@ -48,14 +49,14 @@
 
 .CreateGroup--Group_Details--Heading {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGroup--Group_Details--Heading);
+  font-size: var(--CreateGrou--Heading);
   font-weight: 600;
   margin-bottom: 0.5em;
 }
 
 .CreateGroup--Group_Details input {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGroup--Group_Name_Input);
+  font-size: var(--CreateGroup--Input);
   display: block;
   width: 100%;
   padding: 0.2em;
@@ -91,6 +92,7 @@
 }
 
 .CreateGroup--Select_Friends {
+  background-color: rgb(0, 0, 256, 0.4);
   width: 100%;
   height: calc(100% - 120px);
 }
@@ -103,14 +105,14 @@
 
 .CreateGroup--Select_Friends--Heading {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGroup--Group_Details--Heading);
+  font-size: var(--CreateGrou--Heading);
   font-weight: 600;
   margin-bottom: 0.3em;
 }
 
 .CreateGroup--Select_Friends--Search input {
   font-family: var(--CreateGroup_Main_Font);
-  font-size: var(--CreateGroup--Group_Name_Input);
+  font-size: var(--CreateGroup--Input);
   display: block;
   width: 100%;
   padding: 0.2em;
@@ -215,4 +217,29 @@
 
 .Inactive {
   display: none;
+}
+
+@media (max-width: 1000px) {
+  :root {
+    --CreateGroup--Heading: 18px;
+    --CreateGroup--Input: 15px;
+    --CreateGroup--Create_Button: 13px;
+  }
+
+  .CreateGroup--Group_Details {
+    height: 110px;
+  }
+
+  .CreateGroup--Group_Details input {
+    margin-bottom: 0.5em;
+  }
+
+  .CreateGroup--Group_Details--Heading {
+    margin-bottom: 0.5em;
+  }
+
+  .CreateGroup--Select_Friends {
+    height: calc(100% - 110px);
+  }
+
 }
