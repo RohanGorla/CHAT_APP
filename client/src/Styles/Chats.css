@@ -829,6 +829,8 @@
     --Chat_Room_Info_Icon: 100px;
     --Chat_Room_Info_Username: 16px;
     --Chat_Room_Info_Userid: 14px;
+    --Chat_Room_Info_Email: 14px;
+    --Chat_Room_Info_Email--Heading: 16px;
     --Chat_Room_Info_Button: 14px;
     --Chat_Room_Info_Confirm_Message: 13px;
     --Chat_Userid: 12px;
@@ -877,6 +879,14 @@
 
   .Chat--Room_Information--Friend--Details {
     min-width: 80%;
+  }
+
+  .Chat--Room_Information--Friend_Email {
+    margin-block: 1.5em 2em;
+  }
+
+  .Chat--Room_Information--Buttons {
+    margin-bottom: 1em;
   }
 
   .Chat--Message_Card {
