@@ -132,6 +132,7 @@ function Chats() {
     });
     setShowRoomDetails(false);
     setAddFriends(false);
+    setSelectedFriends([]);
   }
 
   /* FUNCTION TO SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
