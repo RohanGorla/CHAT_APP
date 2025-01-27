@@ -809,6 +809,13 @@
 
 @media (max-width: 800px) {
   :root {
+    --Chat_Room_Info_Add_Friends_Heading: 18px;
+    --Chat_Room_Info_Add_Friends_Search: 14px;
+    --Chat_Room_Info_Add_Friends_Selected_Icon: 23px;
+    --Chat_Room_Info_Icon: 170px;
+    --Chat_Room_Info_Room_Name: 18px;
+    --Chat_Room_Info_Edit_Icon: 20px;
+    --Chat_Room_Info_Edit_Room_Name: 16px;
     --Chat_Name: 17px;
     --Chat_Show_Details: 13px;
     --Chat_Username: 14px;
