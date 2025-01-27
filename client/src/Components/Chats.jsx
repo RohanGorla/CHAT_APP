@@ -244,6 +244,22 @@ function Chats() {
       });
   }, [roomChats]);
 
+  /* SORT THE ADD FRIENDS SECTION FRIENDS LIST BASED ON SEARCH INPUT */
+  useEffect(() => {
+    if (addFriendsSearch.length) {
+      const filteredFriends = friends.filter(
+        (friend) =>
+          friend.usr_nm
+            .toLowerCase()
+            .startsWith(addFriendsSearch.toLowerCase()) ||
+          friend.usr_id.toLowerCase().startsWith(addFriendsSearch.toLowerCase())
+      );
+      sortFriendsList(filteredFriends);
+    } else {
+      sortFriendsList(friends);
+    }
+  }, [addFriendsSearch]);
+
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
   useEffect(() => {
     if (currentRoom.type === "group") sortFriendsList(friends);
@@ -320,6 +336,8 @@ function Chats() {
                     <div className="Chat--Room_Information--Add_Friends--Search">
                       <input
                         type="text"
+                        value={addFriendsSearch}
+                        onChange={(e) => setAddFriendsSearch(e.target.value)}
                         placeholder="Search your frens list..."
                       ></input>
                     </div>
@@ -342,6 +360,7 @@ function Chats() {
                                 friend.usr_id,
                               ]);
                             }
+                            setAddFriendsSearch("");
                           }}
                         >
                           <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
