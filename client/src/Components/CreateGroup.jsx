@@ -23,6 +23,17 @@ function CreateGroup() {
     navigate("/user/friends");
   }
 
+  /* FUNCTION TO SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS */
+  function sortFriendsList(list) {
+    const selectedList = list.filter((friend) =>
+      selectedFriends.includes(friend.usr_id)
+    );
+    const notSelectedList = list.filter(
+      (friend) => !selectedFriends.includes(friend.usr_id)
+    );
+    setSortedFriends([...selectedList, ...notSelectedList]);
+  }
+
   /* FILTER THE FRIENDS LIST BASED ON SEARCH INPUT */
   useEffect(() => {
     if (friendListSearch.length) {
@@ -33,22 +44,14 @@ function CreateGroup() {
             .startsWith(friendListSearch.toLowerCase()) ||
           friend.usr_id.toLowerCase().startsWith(friendListSearch.toLowerCase())
       );
-      setSortedFriends(filteredFriends);
+      sortFriendsList(filteredFriends);
     } else {
-      setSortedFriends(friends);
+      sortFriendsList(friends);
     }
   }, [friendListSearch]);
 
-  /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS */
-  useEffect(() => {
-    const selectedList = friends.filter((friend) =>
-      selectedFriends.includes(friend.usr_id)
-    );
-    const notSelectedList = friends.filter(
-      (friend) => !selectedFriends.includes(friend.usr_id)
-    );
-    setSortedFriends([...selectedList, ...notSelectedList]);
-  }, [selectedFriends]);
+  /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS WHEN EVER SELECTED FRIENDS LIST CHANGES */
+  useEffect(() => sortFriendsList(friends), [selectedFriends]);
 
   return (
     <div className="CreateGroup_Page">
