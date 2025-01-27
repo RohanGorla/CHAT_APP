@@ -142,7 +142,7 @@
   padding: 0.5em;
   border-style: none;
   border-radius: 5px;
-  margin: 1em 0em;
+  margin-block: 1em;
   cursor: pointer;
 }
 
@@ -224,6 +224,10 @@
     --CreateGroup--Heading: 18px;
     --CreateGroup--Input: 15px;
     --CreateGroup--Create_Button: 13px;
+    --CreateGroup--Friends_List_Icon: 30px;
+    --CreateGroup--Friends_List_Username: 15px;
+    --CreateGroup--Friends_List_Userid: 13px;
+    --CreateGroup--Friends_Selected_Icon: 23px;
   }
 
   .CreateGroup--Group_Details {
@@ -242,4 +246,7 @@
     height: calc(100% - 110px);
   }
 
+  .CreateGroup--Friends_List--Friend {
+    margin-block: 0.5em;
+  }
 }
