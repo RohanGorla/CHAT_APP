@@ -417,7 +417,8 @@
   margin-top: 2em;
 }
 
-.Chat--Room_Information--Friend_Container {
+.Chat--Room_Information--Friend_Container
+  + .Chat--Room_Information--Friend_Container {
   margin-block: 1.5em;
 }
 
@@ -773,7 +774,7 @@
 
 @media (max-width: 1200px) {
   :root {
-    --Chat_Username: 16px;
+    --Chat_Userid: 16px;
     --Chat_Message: 18px;
   }
 
@@ -810,7 +811,7 @@
 @media (max-width: 800px) {
   :root {
     --Chat_Room_Info_Add_Friends_Heading: 18px;
-    --Chat_Room_Info_Add_Friends_Search: 14px;
+    --Chat_Room_Info_Add_Friends_Search: 16px;
     --Chat_Room_Info_Add_Friends_Selected_Icon: 23px;
     --Chat_Room_Info_Icon: 170px;
     --Chat_Room_Info_Room_Name: 18px;
@@ -818,7 +819,7 @@
     --Chat_Room_Info_Edit_Room_Name: 16px;
     --Chat_Name: 17px;
     --Chat_Show_Details: 13px;
-    --Chat_Username: 14px;
+    --Chat_Userid: 14px;
     --Chat_Message: 16px;
   }
 }
@@ -826,14 +827,21 @@
 @media (max-width: 550px) {
   :root {
     --Chat_Room_Info_Icon: 100px;
-    --Chat_Room_Info_Username: 18px;
-    --Chat_Room_Info_Userid: 16px;
-    --Chat_Room_Info_Email: 16px;
-    --Chat_Room_Info_Email--Heading: 18px;
+    --Chat_Room_Info_Username: 16px;
+    --Chat_Room_Info_Userid: 14px;
     --Chat_Room_Info_Button: 14px;
     --Chat_Room_Info_Confirm_Message: 13px;
-    --Chat_Username: 12px;
+    --Chat_Userid: 12px;
     --Chat_Message: 14px;
+  }
+
+  .Chat--Room_Information_Container {
+    padding: 0.3em;
+  }
+
+  .Chat--Room_Information {
+    padding: 2em 1em;
+    border-radius: 10px;
   }
 
   .Chat--Room_Information--Image {
@@ -841,12 +849,34 @@
     height: 150px;
   }
 
+  .Chat--Room_Information--Image_Frame {
+    mask: radial-gradient(circle, black 75px, transparent 76px);
+  }
+
+  .Chat--Room_Information--Edit_Room {
+    margin-top: 3em;
+  }
+
+  .Chat--Room_Information--Edit_Room_Name {
+    padding: 1.2em 1em;
+    border-radius: 5px;
+  }
+
   .Chat--Room_Information--Friends_List {
     margin-top: 2em;
   }
 
-  .Chat--Room_Information--Friend_Userid {
-    margin-bottom: 1em;
+  .Chat--Room_Information--Friend_Container
+    + .Chat--Room_Information--Friend_Container {
+    margin-block: 0.75em;
+  }
+
+  .Chat--Room_Information--Friend--Image_Container {
+    width: 20%;
+  }
+
+  .Chat--Room_Information--Friend--Details {
+    min-width: 80%;
   }
 
   .Chat--Message_Card {
