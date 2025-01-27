@@ -258,7 +258,7 @@ function Chats() {
     } else {
       sortFriendsList(friends);
     }
-  }, [addFriendsSearch]);
+  }, [addFriendsSearch, rooms]);
 
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
   useEffect(() => {
