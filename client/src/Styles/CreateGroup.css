@@ -111,6 +111,11 @@
   width: 100%;
   height: calc(100% - 70px);
   padding: 0.5em;
+  overflow-y: scroll;
+}
+
+.CreateGroup--Select_Friends--Friends_List::-webkit-scrollbar {
+  width: 0px;
 }
 
 .CreateGroup--Friends_List--Friend {
