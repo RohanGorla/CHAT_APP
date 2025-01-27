@@ -1,6 +1,7 @@
 :root {
   --CreateGroup_Main_Font: "Inter", sans-serif;
   --CreateGroup_Sub_Font: "Varela Round", sans-serif;
+  --CreateGroup--Close: 20px;
   --CreateGroup--Group_Details--Heading: 20px;
   --CreateGroup--Group_Name_Input: 16px;
   --CreateGroup--Create_Button: 14px;
@@ -19,11 +20,24 @@
 }
 
 .CreateGroup_Container {
+  position: relative;
   background-color: rgb(35, 35, 35);
   max-width: 600px;
   height: 100%;
+  padding-block: 0.5em;
   border-radius: 8px;
   margin-inline: auto;
+}
+
+.CreateGroup--Close {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  font-size: var(--CreateGroup--Close);
+  cursor: pointer;
+  &:hover {
+    color: red;
+  }
 }
 
 .CreateGroup--Group_Details {
