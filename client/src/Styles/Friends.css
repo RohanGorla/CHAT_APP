@@ -265,6 +265,10 @@
     width: 40px;
   }
 
+  .Friend_Card--Image_Frame {
+    mask: radial-gradient(circle, black 20px, transparent 21px);
+  }
+
   .Friends_Chat {
     width: 80%;
     padding: 0.5em;
@@ -307,6 +311,10 @@
     width: 45px;
   }
 
+  .Friend_Card--Image_Frame {
+    mask: radial-gradient(circle, black 22.5px, transparent 22.6px);
+  }
+
   .Friends_Chat {
     display: none;
     width: 0%;
@@ -328,5 +336,9 @@
   .Friend_Card--Image_Icon_Container {
     height: 40px;
     width: 40px;
+  }
+
+  .Friend_Card--Image_Frame {
+    mask: radial-gradient(circle, black 20px, transparent 21px);
   }
 }
