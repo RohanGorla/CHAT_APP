@@ -23,6 +23,22 @@ function CreateGroup() {
     navigate("/user/friends");
   }
 
+  /* FILTER THE FRIENDS LIST BASED ON SEARCH INPUT */
+  useEffect(() => {
+    if (friendListSearch.length) {
+      const filteredFriends = friends.filter(
+        (friend) =>
+          friend.usr_nm
+            .toLowerCase()
+            .startsWith(friendListSearch.toLowerCase()) ||
+          friend.usr_id.toLowerCase().startsWith(friendListSearch.toLowerCase())
+      );
+      setSortedFriends(filteredFriends);
+    } else {
+      setSortedFriends(friends);
+    }
+  }, [friendListSearch]);
+
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS */
   useEffect(() => {
     const selectedList = friends.filter((friend) =>
@@ -83,6 +99,7 @@ function CreateGroup() {
                     } else {
                       setSelectedFriends([...selectedFriends, friend.usr_id]);
                     }
+                    setFriendListSearch("");
                   }}
                 >
                   <div className="CreateGroup--Friends_List--Friend_Image_Container">
