@@ -31,6 +31,7 @@ function Chats() {
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
   const [groupPicture, setGroupPicture] = useState("");
+  const [confirmGroupPicture, setConfirmGroupPicture] = useState(true);
   const [editRoomname, setEditRoomname] = useState(false);
   const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -291,6 +292,36 @@ function Chats() {
           }
         >
           <div className="Chat--Room_Information">
+            <div
+              className={
+                confirmGroupPicture
+                  ? "Chat--Room_Information_Confirm_Picture--Container"
+                  : "Chat--Room_Information_Confirm_Picture--Inactive"
+              }
+            >
+              <div className="Chat--Room_Information_Confirm_Picture">
+                <p className="Chat--Room_Information_Confirm_Picture--Heading">
+                  CONFIRM GROUP PICTURE
+                </p>
+                <p className="Chat--Room_Information_Confirm_Picture--Message">
+                  Set the selected image as group picture?
+                </p>
+                <button
+                  className="Chat--Room_Information_Confirm_Picture--Cancel_Button"
+                  onClick={() => setConfirmGroupPicture(false)}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="Chat--Room_Information_Confirm_Picture--Confirm_Button"
+                  onClick={() => {
+                    setConfirmGroupPicture(false);
+                  }}
+                >
+                  Confirm
+                </button>
+              </div>
+            </div>
             <div className="Chat--Room_Information--Inner_Container">
               {/* CLOSE ROOM INFORMATION SECTION OPTION */}
               <FaXmark
@@ -419,9 +450,11 @@ function Chats() {
                   accept="image/*"
                   onChange={(e) => {
                     setGroupPicture(e.target.files[0]);
+                    setConfirmGroupPicture(true);
                   }}
                 ></input>
               </div>
+              {/* ROOM FRIENDS LIST */}
               <div
                 className={
                   currentRoom.type === "group"
