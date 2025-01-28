@@ -124,6 +124,16 @@ function Chats() {
         oldKey: currentRoom?.imageTag,
       }
     );
+    /* SEND THE PICTURE TO S3 USING THE PUT URL */
+    const putRequestResponse = await axios.put(
+      generatePutUrlResponse.data.url,
+      profilePicture,
+      {
+        headers: {
+          "Content-Type": profilePicture.type,
+        },
+      }
+    );
   }
 
   /* UPDATE ROOM NAME SOCKET EVENT */
