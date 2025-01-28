@@ -9,6 +9,7 @@
   --Chat_Room_Info_Add_Friends_UserId: 14px;
   --Chat_Room_Info_Add_Friends_Selected_Icon: 25px;
   --Chat_Room_Info_Icon: 170px;
+  --Chat_Room_Info_Confirm_Group_Picture: 18px;
   --Chat_Room_Info_Room_Name: 20px;
   --Chat_Room_Info_Edit_Icon: 22px;
   --Chat_Room_Info_Edit_Room_Name: 16px;
@@ -70,6 +71,78 @@
   padding: 2em;
   border-radius: 10px;
   margin-inline: auto;
+}
+
+.Chat--Room_Information_Confirm_Picture--Container {
+  background-color: rgb(0, 0, 0, 0.9);
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 6;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 10px;
+}
+
+.Chat--Room_Information_Confirm_Picture {
+  background-color: rgb(20, 20, 20);
+  font-family: var(--Chat_Main_Font);
+  color: white;
+  width: 95%;
+  max-width: 500px;
+  padding: 2em;
+  border-radius: 7px;
+}
+
+.Chat--Room_Information_Confirm_Picture--Heading {
+  font-size: var(--Chat_Room_Info_Confirm_Group_Picture);
+  font-weight: 600;
+  text-align: center;
+  word-spacing: 5px;
+  scale: 1.2;
+}
+
+.Chat--Room_Information_Confirm_Picture--Message {
+  font-size: var(--Chat_Room_Info_Confirm_Group_Picture);
+  margin-block: 1.5em 1em;
+}
+
+.Chat--Room_Information_Confirm_Picture button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Button);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border-style: none;
+  border: 2px solid rgb(25, 25, 25);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.Chat--Room_Information_Confirm_Picture--Confirm_Button {
+  background-color: rgb(112, 224, 0);
+  margin-right: 0.7em;
+  &:hover {
+    background-color: rgb(25, 25, 25);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
+  }
+}
+
+.Chat--Room_Information_Confirm_Picture--Cancel_Button {
+  background-color: white;
+  margin-right: 0.7em;
+  &:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+  }
+}
+
+.Chat--Room_Information_Confirm_Picture--Inactive {
+  display: none;
 }
 
 .Chat--Room_Information--Inner_Container {
@@ -856,6 +929,7 @@
     --Chat_Room_Info_Add_Friends_UserId: 14px;
     --Chat_Room_Info_Add_Friends_Selected_Icon: 25px;
     --Chat_Room_Info_Icon: 100px;
+    --Chat_Room_Info_Confirm_Group_Picture: 16px;
     --Chat_Room_Info_Username: 16px;
     --Chat_Room_Info_Userid: 14px;
     --Chat_Room_Info_Email: 14px;
