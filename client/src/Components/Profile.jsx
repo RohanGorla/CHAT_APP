@@ -217,7 +217,7 @@ function Profile() {
       /* CHECK IMAGE URL VALIDITY IF EXISTS OR GENERATE A NEW SIGNED URL */
       if (userData.imageUrl) {
         checkUrlValidity();
-      } else {
+      } else if (userData.imageTag) {
         generateGetUrl(userData.imageTag);
       }
     }
