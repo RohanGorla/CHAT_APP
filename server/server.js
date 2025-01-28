@@ -416,6 +416,7 @@ io.on("connection", async (socket) => {
       { $pull: { users: user.userId } }
     );
     io.to(id).emit("exit_group_success", { id, user, name });
+    socket.leave(id);
   });
   /* UPDATE GROUP NAME */
   socket.on("update_group_name", async ({ id, oldRoomname, newRoomname }) => {
