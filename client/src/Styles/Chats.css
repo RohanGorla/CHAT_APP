@@ -271,6 +271,7 @@
 }
 
 .Chat--Room_Information--Image {
+  position: relative;
   background-color: rgb(20, 33, 61);
   display: flex;
   justify-content: center;
@@ -297,6 +298,21 @@
 
 .Chat--Room_Information--Image--Icon {
   font-size: var(--Chat_Room_Info_Icon);
+}
+
+.Chat--Room_Information--Image_Edit--Icon {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  font-size: var(--Chat_Room_Info_Edit_Icon);
+  cursor: pointer;
+  &:hover {
+    color: rgb(16, 226, 69);
+  }
+}
+
+#Chat--Room_Information--Image_Select {
+  display: none;
 }
 
 .Chat--Room_Information--Edit_Room {
