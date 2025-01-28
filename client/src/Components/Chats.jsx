@@ -134,6 +134,14 @@ function Chats() {
         },
       }
     );
+    if (putRequestResponse.status === 200) {
+      /* SOCKET METHOD TO UPDATE THE PROFILE PICTURE */
+      socket.emit("update_group_picture", {
+        id,
+        key: generatePutUrlResponse.data.key,
+        groupName: currentRoom.name,
+      });
+    }
   }
 
   /* UPDATE ROOM NAME SOCKET EVENT */
