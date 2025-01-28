@@ -112,6 +112,20 @@ function Chats() {
     navigate("/user/friends");
   }
 
+  /* UPLOAD GROUP PICTURE */
+  async function uploadGroupPicture() {
+    if (!groupPicture) return;
+    /* GENERATE PUT URL FROM S3 */
+    const generatePutUrlResponse = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/generateputurl`,
+      {
+        contentType: groupPicture.type,
+        newKey: currentRoom.roomId,
+        oldKey: currentRoom?.imageTag,
+      }
+    );
+  }
+
   /* UPDATE ROOM NAME SOCKET EVENT */
   function updateGroupName() {
     if (newRoomname.length)
