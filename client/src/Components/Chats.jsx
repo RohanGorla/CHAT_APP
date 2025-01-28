@@ -30,6 +30,7 @@ function Chats() {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
+  const [groupPicture, setGroupPicture] = useState("")
   const [editRoomname, setEditRoomname] = useState(false);
   const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -409,6 +410,14 @@ function Chats() {
                 ) : (
                   <IoMdPerson className="Chat--Room_Information--Image--Icon" />
                 )}
+                <input
+                  id="Chat--Room_Information--Image_Select"
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => {
+                    setGroupPicture(e.target.files[0]);
+                  }}
+                ></input>
               </div>
               <div
                 className={
