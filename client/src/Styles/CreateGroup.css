@@ -264,8 +264,14 @@
     padding-block: 0em;
   }
 
+  .CreateGroup--Close {
+    top: 10px;
+    right: 10px;
+  }
+
   .CreateGroup_Container {
-    padding-block: 0em;
+    padding-block: 1em;
+    border-radius: 0px;
   }
 
   .CreateGroup--Group_Details {

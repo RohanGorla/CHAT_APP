@@ -129,6 +129,7 @@
 
 .Chat--Room_Information--Add_Friends--Header_Heading {
   font-size: var(--Chat_Room_Info_Add_Friends_Heading);
+  font-weight: 600;
 }
 
 .Chat--Room_Information--Add_Friends--Header_Button {
