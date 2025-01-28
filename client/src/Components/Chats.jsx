@@ -4,7 +4,7 @@ import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaCamera } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import FriendsList from "./FriendsList";
 import axios from "axios";
@@ -30,7 +30,7 @@ function Chats() {
   const [unreadMessages, setUnreadMessages] = useState(false);
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
-  const [groupPicture, setGroupPicture] = useState("")
+  const [groupPicture, setGroupPicture] = useState("");
   const [editRoomname, setEditRoomname] = useState(false);
   const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -410,6 +410,9 @@ function Chats() {
                 ) : (
                   <IoMdPerson className="Chat--Room_Information--Image--Icon" />
                 )}
+                <label htmlFor="Chat--Room_Information--Image_Select">
+                  <FaCamera className="Chat--Room_Information--Image_Edit--Icon" />
+                </label>
                 <input
                   id="Chat--Room_Information--Image_Select"
                   type="file"
