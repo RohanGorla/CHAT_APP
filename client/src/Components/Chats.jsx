@@ -146,13 +146,13 @@ function Chats() {
 
   /* UPDATE ROOM NAME SOCKET EVENT */
   function updateGroupName() {
-    if (newRoomname.length)
+    if (newRoomname.length && newRoomname !== currentRoom.name)
       socket.emit("update_group_name", {
         id,
         oldRoomname: currentRoom.name,
         newRoomname,
       });
-    setEditRoomname(false);
+    if (newRoomname.length) setEditRoomname(false);
   }
 
   /* ADD FRIENDS TO THE GROUP SOCKET EVENT */
@@ -539,14 +539,18 @@ function Chats() {
                           Cancel
                         </button>
                         <button
-                          className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
+                          className={
+                            newRoomname?.length
+                              ? "Chat--Room_Information--Edit_Room_Name--Buttons--Done"
+                              : "Chat--Room_Information--Edit_Room_Name--Buttons--Done--Inactive"
+                          }
                           onClick={updateGroupName}
                         >
                           Done
                         </button>
                       </div>
                       <div className="Chat--Room_Information--Edit_Room_Name--Character_Count">
-                        {newRoomname.length}/100
+                        {newRoomname?.length}/100
                       </div>
                     </div>
                   </div>
