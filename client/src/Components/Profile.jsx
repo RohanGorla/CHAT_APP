@@ -322,12 +322,20 @@ function Profile() {
                 <label className="Profile--Edit_Credentials--Label">
                   Username:
                 </label>
-                <input
-                  className="Profile--Edit_Credentials--Input"
-                  value={newUsername}
-                  onChange={(e) => setNewUsername(e.target.value)}
-                  placeholder="Enter username..."
-                ></input>
+                <div className="Profile--Edit_Credentials--Input_And_Character_Count">
+                  <input
+                    className="Profile--Edit_Credentials--Input"
+                    value={newUsername}
+                    onChange={(e) => {
+                      if (e.target.value.length <= 30)
+                        setNewUsername(e.target.value);
+                    }}
+                    placeholder="Enter username..."
+                  ></input>
+                  <p className="Profile--Edit_Credentials--Character_Count">
+                    {newUsername.length}/30
+                  </p>
+                </div>
               </div>
               <div
                 className={
