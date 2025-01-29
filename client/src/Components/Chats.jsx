@@ -324,6 +324,7 @@ function Chats() {
           }
         >
           <div className="Chat--Room_Information">
+            {/* CONFIRM UPLOAD/UPDATE GROUP PICTURE - MESSAGE BOX */}
             <div
               className={
                 confirmGroupPicture
@@ -619,8 +620,8 @@ function Chats() {
                         <div
                           className={
                             currentRoom.type === "group"
-                              ? "Chat--Room_Information--Friend--Details"
-                              : ""
+                              ? "Chat--Room_Information--Friend--Details--Group"
+                              : "Chat--Room_Information--Friend--Details--Single"
                           }
                         >
                           <p className="Chat--Room_Information--Friend_Username">
@@ -629,18 +630,20 @@ function Chats() {
                           <p className="Chat--Room_Information--Friend_Userid">
                             {friend.usr_id}
                           </p>
-                          <p
+                          <div
                             className={
                               currentRoom.type === "single"
-                                ? "Chat--Room_Information--Friend_Email"
+                                ? "Chat--Room_Information--Friend_Email_Container"
                                 : "Chat--Room_Information--Friend_Email--Inactive"
                             }
                           >
-                            <span className="Chat--Room_Information--Friend_Email--Heading">
+                            <p className="Chat--Room_Information--Friend_Email--Heading">
                               Contact email:
-                            </span>
-                            {friend.email}
-                          </p>
+                            </p>
+                            <p className="Chat--Room_Information--Friend_Email">
+                              {friend.email}
+                            </p>
+                          </div>
                         </div>
                       </div>
                       {/* ROOM CHAT DELETE OPTIONS */}
@@ -809,13 +812,13 @@ function Chats() {
             </div>
           </div>
           <div className="Chat--Room_Details">
-            <div className="Chat--Name">{currentRoom?.name}</div>
-            <div
+            <p className="Chat--Name">{currentRoom?.name}</p>
+            <p
               className="Chat--Show_Details"
               onClick={() => setShowRoomDetails(true)}
             >
               Show details
-            </div>
+            </p>
           </div>
         </section>
         {/* CHAT MESSAGES CONTAINER */}
