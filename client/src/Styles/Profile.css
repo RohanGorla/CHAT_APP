@@ -210,6 +210,11 @@
   gap: 1em;
 }
 
+.Profile--Edit_Credentials--Input_And_Character_Count {
+  display: flex;
+  align-items: center;
+}
+
 .Profile--Edit_Credentials--Input {
   font-size: var(--Profile_Input);
   width: 50%;
@@ -217,6 +222,13 @@
   border-style: none;
   border-radius: 3px;
   outline: none;
+}
+
+.Profile--Edit_Credentials--Character_Count {
+  font-family: var(--Profile_Sub_Font);
+  font-size: var(--Profile_Input);
+  color: rgb(150, 150, 150);
+  margin-left: 1em;
 }
 
 .Profile--Edit_Credentials--Input--Show {
