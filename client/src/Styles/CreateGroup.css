@@ -196,12 +196,20 @@
 .CreateGroup--Friends_List--Friend_Username {
   font-size: var(--CreateGroup--Friends_List_Username);
   font-weight: 600;
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 0.1em;
 }
 
 .CreateGroup--Friends_List--Friend_Userid {
   font-size: var(--CreateGroup--Friends_List_Userid);
   color: rgb(256, 256, 256, 0.6);
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .CreateGroup--Friends_List--Friend_Details--Selected {
