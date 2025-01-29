@@ -31,7 +31,7 @@ function Chats() {
   const [friendsList, setFriendsList] = useState([]);
   const [showRoomDetails, setShowRoomDetails] = useState(false);
   const [groupPicture, setGroupPicture] = useState("");
-  const [confirmGroupPicture, setConfirmGroupPicture] = useState(true);
+  const [confirmGroupPicture, setConfirmGroupPicture] = useState(false);
   const [editRoomname, setEditRoomname] = useState(false);
   const [newRoomname, setNewRoomname] = useState(currentRoom.name);
   const [confirmDelete, setConfirmDelete] = useState(false);
@@ -127,10 +127,10 @@ function Chats() {
     /* SEND THE PICTURE TO S3 USING THE PUT URL */
     const putRequestResponse = await axios.put(
       generatePutUrlResponse.data.url,
-      profilePicture,
+      groupPicture,
       {
         headers: {
-          "Content-Type": profilePicture.type,
+          "Content-Type": groupPicture.type,
         },
       }
     );
@@ -348,6 +348,7 @@ function Chats() {
                   className="Chat--Room_Information_Confirm_Picture--Confirm_Button"
                   onClick={() => {
                     setConfirmGroupPicture(false);
+                    uploadGroupPicture();
                   }}
                 >
                   Confirm
