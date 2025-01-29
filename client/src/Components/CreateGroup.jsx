@@ -16,6 +16,7 @@ function CreateGroup() {
   const [selectedFriends, setSelectedFriends] = useState([]);
 
   async function createGroup() {
+    if (!groupName.length || !selectedFriends.length) return;
     socket.emit("create_group", {
       groupName,
       friends: [...selectedFriends, userData.userId],
@@ -73,7 +74,7 @@ function CreateGroup() {
           ></input>
           <button
             className={
-              groupName.length
+              groupName.length && selectedFriends.length
                 ? "CreateGroup--Group_Details--Create"
                 : "CreateGroup--Group_Details--Create--Inactive"
             }
