@@ -424,7 +424,13 @@ io.on("connection", async (socket) => {
       { roomId: id },
       { $set: { imageTag: key } }
     );
-    io.to(id).emit("group_picture_updated", { id, key, groupName });
+    const getObjectParams = {
+      Bucket: bucketName,
+      Key: key,
+    };
+    const command = new GetObjectCommand(getObjectParams);
+    const url = await getSignedUrl(s3, command, { expiresIn: 86400 });
+    io.to(id).emit("group_picture_updated", { id, key, groupName, url });
   });
   /* UPDATE GROUP NAME */
   socket.on("update_group_name", async ({ id, oldRoomname, newRoomname }) => {
