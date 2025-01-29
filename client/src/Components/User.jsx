@@ -46,6 +46,9 @@ function User() {
     setPopupType(type);
     setTimeout(() => {
       setShowPopup(false);
+      setTimeout(() => {
+        setPopupMessage("");
+      }, 700);
     }, 3000);
   }
 

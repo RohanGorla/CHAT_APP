@@ -28,6 +28,7 @@
   align-items: center;
   gap: 2em;
   min-width: 500px;
+  max-width: 800px;
   width: fit-content;
   border-style: none;
   border-radius: 10px;
@@ -50,7 +51,11 @@
   color: white;
   min-width: 80%;
   width: fit-content;
-  overflow-x: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
   text-overflow: ellipsis;
 }
 
