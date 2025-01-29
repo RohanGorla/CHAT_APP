@@ -176,15 +176,15 @@ function User() {
         Popup(`${user.username} left ${name}!`, "Bad");
       }
     });
-    socket.on("group_picture_updated", async ({ id, key, groupName, url }) => {
-      const imageUrl = await generateGetUrl(key);
-      const updatedRooms = rooms.map((room) => {
-        if (room.roomId === id) {
-          room.imageTag = key;
-          room.imageUrl = imageUrl;
+    socket.on("group_picture_updated", async ({ id, key, groupName }) => {
+      const updatedRooms = [];
+      for (let i = 0; i < rooms.length; i++) {
+        if (rooms[i].roomId === id) {
+          rooms[i].imageTag = key;
+          rooms[i].imageUrl = await generateGetUrl(key);
         }
-        return room;
-      });
+        updatedRooms.push(rooms[i]);
+      }
       setRooms(updatedRooms);
       setSearchRooms(updatedRooms);
       Popup(`${groupName} group picture updated!`, "Good");
