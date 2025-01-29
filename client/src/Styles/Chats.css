@@ -319,12 +319,20 @@
 .Chat--Room_Information--Add_Friends--Friend_Username {
   font-size: var(--Chat_Room_Info_Add_Friends_Username);
   font-weight: 600;
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 0.1em;
 }
 
 .Chat--Room_Information--Add_Friends--Friend_UserId {
   font-size: var(--Chat_Room_Info_Add_Friends_UserId);
   color: rgb(256, 256, 256, 0.6);
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Chat--Room_Information--Add_Friends--Selected {
@@ -534,7 +542,7 @@
 
 .Chat--Room_Information--Friend--Image_Container {
   display: flex;
-  width: 15%;
+  min-width: 15%;
   justify-content: center;
   align-items: center;
 }
@@ -571,21 +579,33 @@
   font-size: var(--Chat_Room_Info_Friend_Icon);
 }
 
-.Chat--Room_Information--Friend--Details {
+.Chat--Room_Information--Friend--Details--Group {
   min-width: 85%;
+}
+
+.Chat--Room_Information--Friend--Details--Single {
+  min-width: 100%;
 }
 
 .Chat--Room_Information--Friend_Username {
   font-size: var(--Chat_Room_Info_Username);
   margin-bottom: 0.1em;
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Chat--Room_Information--Friend_Userid {
   font-size: var(--Chat_Room_Info_Userid);
+  color: rgb(256, 256, 256, 0.6);
+  min-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.Chat--Room_Information--Friend_Email {
-  font-size: var(--Chat_Room_Info_Email);
+.Chat--Room_Information--Friend_Email_Container {
   margin-block: 1em 2em;
 }
 
@@ -596,7 +616,14 @@
 .Chat--Room_Information--Friend_Email--Heading {
   font-size: var(--Chat_Room_Info_Email--Heading);
   font-weight: 600;
-  display: block;
+}
+
+.Chat--Room_Information--Friend_Email {
+  font-size: var(--Chat_Room_Info_Email);
+  width: 90%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Chat--Room_Information--Buttons {
@@ -660,13 +687,14 @@
 
 .Chat--Back_Button {
   display: none;
+  width: 0px;
 }
 
 .Chat--Image {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-inline: 0.5em 1em;
+  width: 70px;
 }
 
 .Chat--Image_Icon_Container {
@@ -698,13 +726,22 @@
   color: white;
 }
 
+.Chat--Room_Details {
+  width: calc(100% - 70px);
+}
+
 .Chat--Name {
   font-family: var(--Chat_Main_Font);
   font-size: var(--Chat_Name);
+  width: 70%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 0.3em;
 }
 
 .Chat--Show_Details {
+  width: fit-content;
   font-family: var(--Chat_Main_Font);
   font-size: var(--Chat_Show_Details);
   cursor: pointer;
@@ -868,6 +905,12 @@
   cursor: pointer;
 }
 
+@media (max-width: 1570px) {
+  .Chat_Container {
+    width: calc(100% - 400px);
+  }
+}
+
 @media (max-width: 1200px) {
   :root {
     --Chat_Userid: 16px;
@@ -883,11 +926,18 @@
   }
 
   .Chat--Back_Button {
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
   }
 
   .Chat--Back_Button--Icon {
     font-size: 25px;
+  }
+
+  .Chat--Room_Details {
+    width: calc(100% - 100px);
   }
 
   .Chat--Message_Card {
@@ -1006,16 +1056,32 @@
     width: 20%;
   }
 
-  .Chat--Room_Information--Friend--Details {
+  .Chat--Room_Information--Friend--Details--Group {
     min-width: 80%;
   }
 
-  .Chat--Room_Information--Friend_Email {
+  .Chat--Room_Information--Friend_Email_Container {
     margin-block: 1.5em 2em;
   }
 
   .Chat--Room_Information--Buttons {
     margin-bottom: 1em;
+  }
+
+  .Chat--Back_Button {
+    width: 30px;
+  }
+
+  .Chat--Image {
+    width: 60px;
+  }
+
+  .Chat--Room_Details {
+    width: calc(100% - 90px);
+  }
+
+  .Chat--Name {
+    width: 95%;
   }
 
   .Chat--Message_Card {
