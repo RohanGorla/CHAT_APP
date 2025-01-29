@@ -146,13 +146,13 @@ function Chats() {
 
   /* UPDATE ROOM NAME SOCKET EVENT */
   function updateGroupName() {
-    if (newRoomname.length && newRoomname !== currentRoom.name)
-      socket.emit("update_group_name", {
-        id,
-        oldRoomname: currentRoom.name,
-        newRoomname,
-      });
-    if (newRoomname.length) setEditRoomname(false);
+    if (!newRoomname.length || newRoomname == currentRoom.name) return;
+    socket.emit("update_group_name", {
+      id,
+      oldRoomname: currentRoom.name,
+      newRoomname,
+    });
+    setEditRoomname(false);
   }
 
   /* ADD FRIENDS TO THE GROUP SOCKET EVENT */
