@@ -162,11 +162,17 @@
 
 .Friend_Card--Name {
   font-size: var(--Friends_Chat_Name);
+  min-width: 78%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin-bottom: 0.3em;
 }
 
 .Friend_Card--Time {
   font-size: var(--Friends_Last_Message_Time);
+  text-align: end;
+  min-width: 22%;
 }
 
 .Friend_Card--Time--Unread {
@@ -180,7 +186,7 @@
 
 .Friend_Card--Message {
   font-size: var(--Friends_Last_Message);
-  width: 92%;
+  min-width: 92%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
