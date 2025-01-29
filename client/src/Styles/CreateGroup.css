@@ -66,6 +66,18 @@
   outline: none;
 }
 
+.CreateGroup--Group_Details--Create_Button_And_Character_Count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.CreateGroup--Group_Details--Character_Count {
+  font-family: var(--CreateGroup_Sub_Font);
+  font-size: var(--CreateGroup--Input);
+  color: rgb(256, 256, 256, 0.6);
+}
+
 .CreateGroup--Group_Details button {
   font-family: var(--CreateGroup_Sub_Font);
   font-size: var(--CreateGroup--Create_Button);

@@ -69,19 +69,26 @@ function CreateGroup() {
           <input
             type="text"
             value={groupName}
-            onChange={(e) => setGroupName(e.target.value)}
+            onChange={(e) => {
+              if (e.target.value.length <= 100) setGroupName(e.target.value);
+            }}
             placeholder="Enter group name..."
           ></input>
-          <button
-            className={
-              groupName.length && selectedFriends.length
-                ? "CreateGroup--Group_Details--Create"
-                : "CreateGroup--Group_Details--Create--Inactive"
-            }
-            onClick={createGroup}
-          >
-            Create Group
-          </button>
+          <div className="CreateGroup--Group_Details--Create_Button_And_Character_Count">
+            <button
+              className={
+                groupName.length && selectedFriends.length
+                  ? "CreateGroup--Group_Details--Create"
+                  : "CreateGroup--Group_Details--Create--Inactive"
+              }
+              onClick={createGroup}
+            >
+              Create Group
+            </button>
+            <p className="CreateGroup--Group_Details--Character_Count">
+              {groupName.length}/100
+            </p>
+          </div>
         </section>
         <section className="CreateGroup--Select_Friends">
           <div className="CreateGroup--Select_Friends--Search">
