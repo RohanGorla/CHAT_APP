@@ -97,11 +97,17 @@
 .Notifications_Card--Username {
   font-size: var(--Notifications_Username);
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Notifications_Card--Userid {
   font-size: var(--Notifications_Userid);
   color: rgb(254, 254, 254, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   margin: 0.2em 0em 0.7em 0em;
 }
 
@@ -147,6 +153,9 @@
 .Notifications_Card--Sent--Message {
   font-size: var(--Notifications_Card--Sent--Message);
   min-width: 80%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Notifications_Card--Sent--Icon {
