@@ -452,8 +452,17 @@
   outline: none;
 }
 
-.Chat--Room_Information--Edit_Room_Name--Buttons {
+.Chat--Room_Information--Edit_Room_Name--Buttons_And_Character_Count {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 0.4em;
+}
+
+.Chat--Room_Information--Edit_Room_Name--Character_Count {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Edit_Room_Name);
+  color: rgb(256, 256, 256, 0.6);
 }
 
 .Chat--Room_Information--Edit_Room_Name--Buttons button {

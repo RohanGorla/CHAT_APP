@@ -525,23 +525,29 @@ function Chats() {
                       type="text"
                       value={newRoomname}
                       onChange={(e) => {
-                        setNewRoomname(e.target.value);
+                        if (e.target.value.length <= 100)
+                          setNewRoomname(e.target.value);
                       }}
                       placeholder="Enter group name..."
                     ></input>
-                    <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
-                      <button
-                        className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel"
-                        onClick={() => setEditRoomname(false)}
-                      >
-                        Cancel
-                      </button>
-                      <button
-                        className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
-                        onClick={updateGroupName}
-                      >
-                        Done
-                      </button>
+                    <div className="Chat--Room_Information--Edit_Room_Name--Buttons_And_Character_Count">
+                      <div className="Chat--Room_Information--Edit_Room_Name--Buttons">
+                        <button
+                          className="Chat--Room_Information--Edit_Room_Name--Buttons--Cancel"
+                          onClick={() => setEditRoomname(false)}
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          className="Chat--Room_Information--Edit_Room_Name--Buttons--Done"
+                          onClick={updateGroupName}
+                        >
+                          Done
+                        </button>
+                      </div>
+                      <div className="Chat--Room_Information--Edit_Room_Name--Character_Count">
+                        {newRoomname.length}/100
+                      </div>
                     </div>
                   </div>
                 </div>
