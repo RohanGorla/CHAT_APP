@@ -487,11 +487,18 @@ io.on("connection", async (socket) => {
         },
         { $set: { "to.imageTag": key } }
       );
-    socket.emit("update_profile_picture", { userId, key });
+    const getObjectParams = {
+      Bucket: bucketName,
+      Key: key,
+    };
+    const command = new GetObjectCommand(getObjectParams);
+    const url = await getSignedUrl(s3, command, { expiresIn: 86400 });
+    socket.emit("update_profile_picture", { userId, key, url });
     friends.forEach((friend) => {
       io.to(friend.usr_id).emit("update_profile_picture", {
         userId,
         key,
+        url,
       });
     });
   });
