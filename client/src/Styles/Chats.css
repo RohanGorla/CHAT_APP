@@ -800,6 +800,9 @@
   font-size: var(--Chat_Userid);
   font-weight: 600;
   margin-bottom: 0.3em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .Chat--Message_Card--Userid--Inactive {
