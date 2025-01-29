@@ -198,13 +198,12 @@ function User() {
       Popup(`${oldRoomname} is now ${newRoomname}`, "Good");
     });
     /* UPDATE CREDENTIAL RELATED EVENTS */
-    socket.on("update_profile_picture", async ({ userId, key }) => {
-      const imageUrl = await generateGetUrl(key);
+    socket.on("update_profile_picture", async ({ userId, key, url }) => {
       /* CHANGE PROFILE PICTURE IN FRIENDS LIST */
       const updatedFriends = friends.map((friend) => {
         if (friend.usr_id === userId) {
           friend.imageTag = key;
-          friend.imageUrl = imageUrl;
+          friend.imageUrl = url;
         }
         return friend;
       });
@@ -217,7 +216,7 @@ function User() {
           room.users[room.users.indexOf(userId)] !== userData.userId
         ) {
           room.imageTag = key;
-          room.imageUrl = imageUrl;
+          room.imageUrl = url;
         }
         return room;
       });
