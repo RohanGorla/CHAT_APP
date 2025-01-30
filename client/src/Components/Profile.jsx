@@ -229,7 +229,7 @@ function Profile() {
         className={
           confirmProfilePicture
             ? "Profile--Confirm_Profile_Picture--Container"
-            : "Profile--Confirm_Profile_Picture--Inactive"
+            : "Inactive"
         }
       >
         <div className="Profile--Confirm_Profile_Picture">
@@ -285,11 +285,7 @@ function Profile() {
           <div className="Profile--Credential_Container">
             {/* SHOW USERNAME */}
             <div
-              className={
-                editUsername
-                  ? "Profile--Show_Credential--Inactive"
-                  : "Profile--Show_Credential"
-              }
+              className={editUsername ? "Inactive" : "Profile--Show_Credential"}
             >
               <p className="Profile--Credential">{userData.username}</p>
               <div className="Profile--Edit_Credential_Button">
@@ -313,9 +309,7 @@ function Profile() {
             {/* EDIT USERNAME */}
             <div
               className={
-                editUsername
-                  ? "Profile--Edit_Credentials"
-                  : "Profile--Edit_Credentials--Inactive"
+                editUsername ? "Profile--Edit_Credentials" : "Inactive"
               }
             >
               <div className="Profile--Edit_Credentials--Input_Section">
@@ -341,7 +335,7 @@ function Profile() {
                 className={
                   errorType === "username"
                     ? "Profile--Edit_Credential_Error"
-                    : "Profile--Edit_Credential_Error--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Profile--Edit_Credential_Error--Message">
@@ -372,11 +366,7 @@ function Profile() {
           <div className="Profile--Credential_Container">
             {/* SHOW USERID */}
             <div
-              className={
-                editUserid
-                  ? "Profile--Show_Credential--Inactive"
-                  : "Profile--Show_Credential"
-              }
+              className={editUserid ? "Inactive" : "Profile--Show_Credential"}
             >
               <p className="Profile--Credential">{userData.userId}</p>
               <div className="Profile--Edit_Credential_Button">
@@ -399,11 +389,7 @@ function Profile() {
             </div>
             {/* EDIT USERID */}
             <div
-              className={
-                editUserid
-                  ? "Profile--Edit_Credentials"
-                  : "Profile--Edit_Credentials--Inactive"
-              }
+              className={editUserid ? "Profile--Edit_Credentials" : "Inactive"}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
                 <label className="Profile--Edit_Credentials--Label">
@@ -422,7 +408,7 @@ function Profile() {
                 className={
                   errorType === "userid"
                     ? "Profile--Edit_Credential_Error"
-                    : "Profile--Edit_Credential_Error--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Profile--Edit_Credential_Error--Message">
@@ -453,11 +439,7 @@ function Profile() {
           <div className="Profile--Credential_Container">
             {/* SHOW EMAIL */}
             <div
-              className={
-                editEmail
-                  ? "Profile--Show_Credential--Inactive"
-                  : "Profile--Show_Credential"
-              }
+              className={editEmail ? "Inactive" : "Profile--Show_Credential"}
             >
               <p className="Profile--Credential">{userData.mail}</p>
               <div className="Profile--Edit_Credential_Button">
@@ -480,11 +462,7 @@ function Profile() {
             </div>
             {/* EDIT EMAIL */}
             <form
-              className={
-                editEmail
-                  ? "Profile--Edit_Credentials"
-                  : "Profile--Edit_Credentials--Inactive"
-              }
+              className={editEmail ? "Profile--Edit_Credentials" : "Inactive"}
               onSubmit={changeEmail}
             >
               <div className="Profile--Edit_Credentials--Input_Section">
@@ -504,7 +482,7 @@ function Profile() {
                 className={
                   errorType === "email"
                     ? "Profile--Edit_Credential_Error"
-                    : "Profile--Edit_Credential_Error--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Profile--Edit_Credential_Error--Message">
@@ -536,11 +514,7 @@ function Profile() {
           <div className="Profile--Credential_Container">
             {/* SHOW PASSWORD */}
             <div
-              className={
-                editPassword
-                  ? "Profile--Show_Credential--Inactive"
-                  : "Profile--Show_Credential"
-              }
+              className={editPassword ? "Inactive" : "Profile--Show_Credential"}
             >
               <p className="Profile--Credential">********</p>
               <div className="Profile--Edit_Credential_Button">
@@ -562,9 +536,7 @@ function Profile() {
             {/* EDIT PASSWORD */}
             <form
               className={
-                editPassword
-                  ? "Profile--Edit_Credentials"
-                  : "Profile--Edit_Credentials--Inactive"
+                editPassword ? "Profile--Edit_Credentials" : "Inactive"
               }
               onSubmit={changePassword}
             >
@@ -585,14 +557,14 @@ function Profile() {
                     className={
                       showOldPassword
                         ? "Profile--Edit_Credentials--Input--Show"
-                        : "Profile--Edit_Credentials--Input--Show--Inactive"
+                        : "Inactive"
                     }
                     onClick={() => setShowOldPassword(!showOldPassword)}
                   />
                   <AiFillEyeInvisible
                     className={
                       showOldPassword
-                        ? "Profile--Edit_Credentials--Input--Show--Inactive"
+                        ? "Inactive"
                         : "Profile--Edit_Credentials--Input--Show"
                     }
                     onClick={() => setShowOldPassword(!showOldPassword)}
@@ -603,7 +575,7 @@ function Profile() {
                 className={
                   errorType === "oldpassword"
                     ? "Profile--Edit_Credential_Error"
-                    : "Profile--Edit_Credential_Error--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Profile--Edit_Credential_Error--Message">
@@ -627,14 +599,14 @@ function Profile() {
                     className={
                       showNewPassword
                         ? "Profile--Edit_Credentials--Input--Show"
-                        : "Profile--Edit_Credentials--Input--Show--Inactive"
+                        : "Inactive"
                     }
                     onClick={() => setShowNewPassword(!showNewPassword)}
                   />
                   <AiFillEyeInvisible
                     className={
                       showNewPassword
-                        ? "Profile--Edit_Credentials--Input--Show--Inactive"
+                        ? "Inactive"
                         : "Profile--Edit_Credentials--Input--Show"
                     }
                     onClick={() => setShowNewPassword(!showNewPassword)}
@@ -658,7 +630,7 @@ function Profile() {
                 className={
                   errorType === "newpassword"
                     ? "Profile--Edit_Credential_Error"
-                    : "Profile--Edit_Credential_Error--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Profile--Edit_Credential_Error--Message">

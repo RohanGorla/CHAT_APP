@@ -105,10 +105,6 @@
   }
 }
 
-.Profile--Confirm_Profile_Picture--Inactive {
-  display: none;
-}
-
 .Profile {
   background-color: rgb(20, 20, 20);
   color: white;
@@ -191,10 +187,6 @@
   text-overflow: ellipsis;
 }
 
-.Profile--Show_Credential--Inactive {
-  display: none;
-}
-
 .Profile--Edit_Credentials--Input_Section {
   margin-bottom: 1em;
 }
@@ -237,20 +229,12 @@
   cursor: pointer;
 }
 
-.Profile--Edit_Credentials--Input--Show--Inactive {
-  display: none;
-}
-
 .Profile--Edit_Credential_Error {
   margin-block: 0.3em 0.8em;
 }
 
 .Profile--Edit_Credential_Error--Message {
   color: rgb(249, 47, 47);
-}
-
-.Profile--Edit_Credential_Error--Inactive {
-  display: none;
 }
 
 .Profile--Edit_Credentials--Buttons button {
@@ -297,10 +281,6 @@
   &:hover {
     color: rgb(16, 226, 69);
   }
-}
-
-.Profile--Edit_Credentials--Inactive {
-  display: none;
 }
 
 .Profile--Logout {
