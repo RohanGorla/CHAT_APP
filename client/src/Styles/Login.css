@@ -57,6 +57,10 @@
   margin-left: 0.5em;
 }
 
+.Login_Form--Field--Character_Count--Inactive {
+  display: none;
+}
+
 .Login_Password--Input_Container {
   display: flex;
   align-items: center;

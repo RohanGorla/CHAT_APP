@@ -12,6 +12,7 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [usernameActive, setUsernameActive] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
@@ -115,8 +116,16 @@ function Register() {
               onChange={(e) => {
                 if (e.target.value.length <= 30) setUsername(e.target.value);
               }}
+              onFocus={() => setUsernameActive(true)}
+              onBlur={() => setUsernameActive(false)}
             ></input>
-            <span className="Login_Form--Field--Character_Count">
+            <span
+              className={
+                usernameActive
+                  ? "Login_Form--Field--Character_Count"
+                  : "Login_Form--Field--Character_Count--Inactive"
+              }
+            >
               {username.length}/30
             </span>
           </div>
