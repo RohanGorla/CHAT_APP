@@ -105,14 +105,21 @@ function Register() {
         {/* DISPLAY NAME OF THE USER IN THE APP */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Username">Username:</label>
-          <input
-            id="Login_Username"
-            type="text"
-            value={username}
-            required
-            placeholder="Enter your username"
-            onChange={(e) => setUsername(e.target.value)}
-          ></input>
+          <div className="Login_Form--Field--Input_And_Character_Count">
+            <input
+              id="Login_Username"
+              type="text"
+              value={username}
+              required
+              placeholder="Enter your username"
+              onChange={(e) => {
+                if (e.target.value.length <= 30) setUsername(e.target.value);
+              }}
+            ></input>
+            <span className="Login_Form--Field--Character_Count">
+              {username.length}/30
+            </span>
+          </div>
         </div>
         {/* USER PASSWORD FOR AUTHENTICATION */}
         <div className="Login_Form--Field">
