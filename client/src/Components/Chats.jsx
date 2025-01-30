@@ -318,9 +318,7 @@ function Chats() {
         {/* ROOM FRIENDS INFORMATION CARD */}
         <div
           className={
-            showRoomDetails
-              ? "Chat--Room_Information_Container"
-              : "Chat--Room_Information--Inactive"
+            showRoomDetails ? "Chat--Room_Information_Container" : "Inactive"
           }
         >
           <div className="Chat--Room_Information">
@@ -329,7 +327,7 @@ function Chats() {
               className={
                 confirmGroupPicture
                   ? "Chat--Room_Information_Confirm_Picture--Container"
-                  : "Chat--Room_Information_Confirm_Picture--Inactive"
+                  : "Inactive"
               }
             >
               <div className="Chat--Room_Information_Confirm_Picture">
@@ -371,7 +369,7 @@ function Chats() {
                 className={
                   addFriends
                     ? "Chat--Room_Information--Add_Friends_Container"
-                    : "Chat--Room_Information--Add_Friends_Container--Inactive"
+                    : "Inactive"
                 }
               >
                 <FaXmark
@@ -454,7 +452,7 @@ function Chats() {
                               className={
                                 selectedFriends.includes(friend.usr_id)
                                   ? "Chat--Room_Information--Add_Friends--Selected"
-                                  : "Chat--Room_Information--Add_Friends--Selected--Inactive"
+                                  : "Inactive"
                               }
                             >
                               <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
@@ -493,14 +491,14 @@ function Chats() {
                 className={
                   currentRoom.type === "group"
                     ? "Chat--Room_Information--Edit_Room"
-                    : "Chat--Room_Information--Edit_Room--Inactive"
+                    : "Inactive"
                 }
               >
                 <div className="Chat--Room_Information--Edit_Room_Name">
                   <div
                     className={
                       editRoomname
-                        ? "Chat--Room_Information--Edit_Room_Name--Inactive"
+                        ? "Inactive"
                         : "Chat--Room_Information--Edit_Room_Name--Display"
                     }
                   >
@@ -518,7 +516,7 @@ function Chats() {
                     className={
                       editRoomname
                         ? "Chat--Room_Information--Edit_Room_Name--Input"
-                        : "Chat--Room_Information--Edit_Room_Name--Inactive"
+                        : "Inactive"
                     }
                   >
                     <input
@@ -569,7 +567,7 @@ function Chats() {
                   className={
                     currentRoom.type === "group"
                       ? "Chat--Room_Information--Friend_Container"
-                      : "Chat--Room_Information--Friend_Container--Inactive"
+                      : "Inactive"
                   }
                 >
                   <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
@@ -613,7 +611,7 @@ function Chats() {
                           className={
                             currentRoom.type === "group"
                               ? "Chat--Room_Information--Friend--Image_Container"
-                              : "Chat--Room_Information--Friend--Image_Container--Inactive"
+                              : "Inactive"
                           }
                         >
                           <div className="Chat--Room_Information--Friend--Image">
@@ -644,7 +642,7 @@ function Chats() {
                             className={
                               currentRoom.type === "single"
                                 ? "Chat--Room_Information--Friend_Email_Container"
-                                : "Chat--Room_Information--Friend_Email--Inactive"
+                                : "Inactive"
                             }
                           >
                             <p className="Chat--Room_Information--Friend_Email--Heading">
@@ -661,9 +659,9 @@ function Chats() {
                         className={
                           currentRoom.type === "single"
                             ? confirmDelete || confirmRemove
-                              ? "Chat--Room_Information--Buttons--Inactive"
+                              ? "Inactive"
                               : "Chat--Room_Information--Buttons"
-                            : "Chat--Room_Information--Buttons--Inactive"
+                            : "Inactive"
                         }
                       >
                         <button
@@ -680,7 +678,7 @@ function Chats() {
                         className={
                           confirmDelete
                             ? "Chat--Room_Information--Confirm_Delete"
-                            : "Chat--Room_Information--Confirm_Delete--Inactive"
+                            : "Inactive"
                         }
                       >
                         <p className="Chat--Room_Information--Confirm_Delete--Message">
@@ -707,9 +705,9 @@ function Chats() {
                         className={
                           currentRoom.type === "single"
                             ? confirmDelete || confirmRemove
-                              ? "Chat--Room_Information--Buttons--Inactive"
+                              ? "Inactive"
                               : "Chat--Room_Information--Buttons"
-                            : "Chat--Room_Information--Buttons--Inactive"
+                            : "Inactive"
                         }
                       >
                         <button
@@ -726,7 +724,7 @@ function Chats() {
                         className={
                           confirmRemove
                             ? "Chat--Room_Information--Confirm_Delete"
-                            : "Chat--Room_Information--Confirm_Delete--Inactive"
+                            : "Inactive"
                         }
                       >
                         <p className="Chat--Room_Information--Confirm_Delete--Message">
@@ -758,9 +756,9 @@ function Chats() {
                 className={
                   currentRoom.type === "group"
                     ? confirmExit
-                      ? "Chat--Room_Information--Buttons--Inactive"
+                      ? "Inactive"
                       : "Chat--Room_Information--Buttons"
-                    : "Chat--Room_Information--Buttons--Inactive"
+                    : "Inactive"
                 }
               >
                 <button
@@ -776,7 +774,7 @@ function Chats() {
                 className={
                   confirmExit
                     ? "Chat--Room_Information--Confirm_Delete"
-                    : "Chat--Room_Information--Confirm_Delete--Inactive"
+                    : "Inactive"
                 }
               >
                 <p className="Chat--Room_Information--Confirm_Delete--Message">
@@ -866,9 +864,9 @@ function Chats() {
                     className={
                       currentRoom.type === "group"
                         ? userData?.userId === message.usr_id
-                          ? "Chat--Message_Card--Userid--Inactive"
+                          ? "Inactive"
                           : "Chat--Message_Card--Userid"
-                        : "Chat--Message_Card--Userid--Inactive"
+                        : "Inactive"
                     }
                     // style={{ color: usernameColor }}
                   >
@@ -896,7 +894,7 @@ function Chats() {
                               : readByAll
                               ? "Chat--Message_Card--Read_Status--True"
                               : "Chat--Message_Card--Read_Status--False"
-                            : "Chat--Message_Card--Read_Status--Inactive"
+                            : "Inactive"
                         }
                       />
                     </div>
