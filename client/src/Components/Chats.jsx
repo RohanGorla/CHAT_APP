@@ -786,7 +786,7 @@ function Chats() {
                       {/* ROOM CHAT CONFIRM DELETE OPTIONS FOR SINGLE TYPE ROOM */}
                       <div
                         className={
-                          confirmDelete
+                          currentRoom.type === "single" && confirmDelete
                             ? "Chat--Room_Information--Confirm_Delete"
                             : "Inactive"
                         }
@@ -908,6 +908,25 @@ function Chats() {
                     Confirm exit
                   </button>
                 </div>
+              </div>
+              {/* DELETE GROUP OPTIONS - AVAILABLE ONLY TO THE GROUP CREATOR */}
+              <div
+                className={
+                  currentRoom.type === "group"
+                    ? confirmDelete
+                      ? "Inactive"
+                      : "Chat--Room_Information--Buttons"
+                    : "Inactive"
+                }
+              >
+                <button
+                  className="Chat--Room_Information--Buttons--Danger"
+                  onClick={() => {
+                    setConfirmDelete(true);
+                  }}
+                >
+                  Delete group
+                </button>
               </div>
             </div>
           </div>
