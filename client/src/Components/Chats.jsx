@@ -229,6 +229,11 @@ function Chats() {
       }
       setFriendsList(room[0]?.friendsList);
       setCurrentRoom(room[0]);
+      setShowRoomDetails(false);
+      setConfirmDelete(false);
+      setConfirmRemove(false);
+      setConfirmDeleteGroup(false);
+      setConfirmExit(false);
     }
   }, [id, rooms]);
 
