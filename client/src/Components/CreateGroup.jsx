@@ -14,6 +14,7 @@ function CreateGroup() {
   const [groupName, setGroupName] = useState("");
   const [friendListSearch, setFriendListSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
+  const [loadedImages, setLoadedImages] = useState([]);
 
   async function createGroup() {
     if (!groupName.length || !selectedFriends.length) return;
@@ -121,9 +122,32 @@ function CreateGroup() {
                   <div className="CreateGroup--Friends_List--Friend_Image_Container">
                     <div className="CreateGroup--Friends_List--Friend_Image">
                       {friend.imageUrl ? (
-                        <div className="CreateGroup--Friends_List--Friend_Image_Frame">
-                          <img src={friend.imageUrl}></img>
-                        </div>
+                        <>
+                          <div
+                            className={
+                              loadedImages.includes(friend.imageTag)
+                                ? "CreateGroup--Friends_List--Friend_Image_Frame"
+                                : "Inactive"
+                            }
+                          >
+                            <img
+                              src={friend.imageUrl}
+                              onLoad={() =>
+                                setLoadedImages((prev) => [
+                                  ...prev,
+                                  friend.imageTag,
+                                ])
+                              }
+                            ></img>
+                          </div>
+                          <IoMdPerson
+                            className={
+                              loadedImages.includes(friend.imageTag)
+                                ? "Inactive"
+                                : "CreateGroup--Friends_List--Friend_Icon"
+                            }
+                          />
+                        </>
                       ) : (
                         <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
                       )}
