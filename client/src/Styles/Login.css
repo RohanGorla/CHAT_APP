@@ -85,10 +85,6 @@
   cursor: pointer;
 }
 
-.Login_Password--Show--Inactive {
-  display: none;
-}
-
 input.Login_Input--Error {
   background-color: rgb(245, 120, 120);
   border: 2px solid red;

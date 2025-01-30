@@ -88,19 +88,11 @@ function Login() {
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <AiFillEye
-              className={
-                showPassword
-                  ? "Login_Password--Show"
-                  : "Login_Password--Show--Inactive"
-              }
+              className={showPassword ? "Login_Password--Show" : "Inactive"}
               onClick={() => setShowPassword(!showPassword)}
             />
             <AiFillEyeInvisible
-              className={
-                showPassword
-                  ? "Login_Password--Show--Inactive"
-                  : "Login_Password--Show"
-              }
+              className={showPassword ? "Inactive" : "Login_Password--Show"}
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
