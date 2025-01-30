@@ -16,6 +16,7 @@ function CreateGroup() {
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [loadedImages, setLoadedImages] = useState([]);
 
+  /* CREATE GROUP SOCKET EVENT */
   async function createGroup() {
     if (!groupName.length || !selectedFriends.length) return;
     socket.emit("create_group", {
@@ -59,10 +60,12 @@ function CreateGroup() {
   return (
     <div className="CreateGroup_Page">
       <div className="CreateGroup_Container">
+        {/* CLOSE CREATE GROUP PAGE */}
         <FaXmark
           onClick={() => navigate("/user/friends")}
           className="CreateGroup--Close"
         />
+        {/* GROUP NAME INPUT SECTION */}
         <section className="CreateGroup--Group_Details">
           <p className="CreateGroup--Group_Details--Heading">
             Create new frens group
@@ -91,7 +94,9 @@ function CreateGroup() {
             </p>
           </div>
         </section>
+        {/* SELECT FRIENDS TO INCLUDE IN THE GROUP */}
         <section className="CreateGroup--Select_Friends">
+          {/* SEARCH FOR SPECIFIC FRIENDS IN THE FRIENDS LIST */}
           <div className="CreateGroup--Select_Friends--Search">
             <p className="CreateGroup--Select_Friends--Heading">Select frens</p>
             <input
@@ -101,6 +106,7 @@ function CreateGroup() {
               placeholder="Search your frens list..."
             ></input>
           </div>
+          {/* FRIENDS LIST */}
           <div className="CreateGroup--Select_Friends--Friends_List">
             {sortedFriends.map((friend, index) => {
               return (

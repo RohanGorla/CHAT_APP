@@ -166,6 +166,7 @@ function Profile() {
     });
   }
 
+  /* SOCKET EVENT LISTENERS */
   useEffect(() => {
     if (!userData) {
       navigate("/login");
@@ -226,6 +227,7 @@ function Profile() {
 
   return (
     <div className="Profile_Page">
+      {/* CONFIRM PROFILE PICTURE CARD */}
       <div
         className={
           confirmProfilePicture
@@ -258,8 +260,9 @@ function Profile() {
         </div>
       </div>
       <div className="Profile">
-        {/* PROFILE PICTURE/ICON */}
+        {/* PROFILE PICTURE DISPLAY AND SELECTER */}
         <div className="Profile--Image">
+          {/* PROFILE PICTURE */}
           {userData.imageTag ? (
             <>
               <div
@@ -274,6 +277,7 @@ function Profile() {
           ) : (
             <IoMdPerson className="Profile--Image--Icon" />
           )}
+          {/* PROFILE PICTURE SELECTER */}
           <label htmlFor="Profile--Image_Select">
             <FaCamera className="Profile--Image_Edit--Icon" />
           </label>

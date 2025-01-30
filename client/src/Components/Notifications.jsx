@@ -54,6 +54,7 @@ function Notifications() {
     if (!userData) {
       navigate("/login");
     } else {
+      /* FILTER OUT FRIEND REQUESTS ALREADY REJECTED BY US */
       const validNotifications = notifications.filter(
         (notification) =>
           !(
@@ -61,7 +62,9 @@ function Notifications() {
             notification.type === "Reject"
           )
       );
+      /* REVERSE THEM TO SORT THEM BY DATE */
       const reverseNotificationList = validNotifications.toReversed();
+      /* GET THE IMAGE URLS OF THE USERS IN SEARCH RESULTS */
       async function getImageUrls() {
         for (let i = 0; i < reverseNotificationList.length; i++) {
           if (
@@ -95,6 +98,7 @@ function Notifications() {
     <div className="Notifications_Page">
       <p className="Notifications--Title">NOTIFICATIONS</p>
       <div className="Notifications_Container">
+        {/* NOTIFICATIONS LIST */}
         {reversedNotifications.length ? (
           reversedNotifications.map((notification, index) => {
             return (
@@ -107,6 +111,7 @@ function Notifications() {
                     : "Notifications_Card"
                 }
               >
+                {/* NOTIFICATION - IMAGE OF THE USER */}
                 <div className="Notifications_Card--Image_Container">
                   <div className="Notifications_Card--Image_Icon_Container">
                     {notification.imageUrl ? (

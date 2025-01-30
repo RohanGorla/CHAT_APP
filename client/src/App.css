@@ -71,10 +71,6 @@
   color: rgb(213, 15, 15);
 }
 
-.User_PopUp--Icon--Inactive {
-  display: none;
-}
-
 .User_Navbar {
   position: inherit;
   z-index: 20;

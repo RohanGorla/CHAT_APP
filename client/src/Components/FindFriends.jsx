@@ -109,6 +109,7 @@ function FindFriends() {
           className="FindFriends--Selected_User"
           onClick={(e) => e.stopPropagation()}
         >
+          {/* CLOSE SELECTED USER CARD */}
           <div className="FindFriends--Selected_User--Back_Button">
             <IoMdArrowRoundBack
               className="FindFriends--Selected_User--Back_Button--Icon"
@@ -118,6 +119,7 @@ function FindFriends() {
               }}
             />
           </div>
+          {/* SELECTED USER IMAGE */}
           <div className="FindFriends--Selected_User--Image">
             <div className="FindFriends--Selected_User--Image_Icon_Container">
               {selectedUser.imageUrl ? (
@@ -152,6 +154,7 @@ function FindFriends() {
               )}
             </div>
           </div>
+          {/* SELECTED USER DETAILS */}
           <div className="FindFriends--Selected_User--Details">
             <p className="FindFriends--Selected_User--Username">
               {selectedUser.usr_nm}
@@ -162,6 +165,7 @@ function FindFriends() {
             <p className="FindFriends--Selected_User--Mail">
               {selectedUser.email}
             </p>
+            {/* SELECTED USER BUTTON AND IT'S FUNCTION BASED ON WHETHER THE USER IS - YOU/ALREADY YOUR FRIEND OR NOT */}
             <button
               className="FindFriends--Selected_User--Send_Request_Button"
               onClick={() => {
@@ -183,6 +187,7 @@ function FindFriends() {
                 : `Send fren request`}
             </button>
           </div>
+          {/* SELECTED USER - REMOVE FRIEND IF SELECTED USER IS ALREADY A FRIEND */}
           <div
             className={
               showConfirmRemove

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { IoMdPerson } from "react-icons/io";
 import { MdGroupAdd } from "react-icons/md";
-import axios from "axios";
 
 function FriendsList() {
   /* SPECIAL VARIABLES */
@@ -22,7 +21,7 @@ function FriendsList() {
   const [friendListSearch, setFriendListSearch] = useState("");
   const [loadedImages, setLoadedImages] = useState([]);
 
-  /* SORT THE CHATS ACCORDING TO RECENT MESSAGE RECEIVED OR SENT */
+  /* SORT THE CHATS ACCORDING TO MOST RECENT MESSAGE RECEIVED OR SENT */
   function sortChats(rooms) {
     rooms.map((room) => {
       /* FILTER OUT THE ROOM CHATS FROM ALL CHATS */
@@ -106,6 +105,7 @@ function FriendsList() {
           placeholder="Search your frens list..."
         ></input>
       </search>
+      {/* FRIENDS AND GROUPS LIST */}
       {searchRooms.length ? (
         searchRooms.map((room, index) => {
           /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */

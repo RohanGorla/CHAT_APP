@@ -312,10 +312,11 @@ function Chats() {
 
   return (
     <div className="Chat_Page">
+      {/* FRIENDS LIST */}
       <section className="Chat_Friends_List_Container">
         <FriendsList />
       </section>
-      <div className="Chat_Container" ref={chatContainerRef}>
+      <section className="Chat_Container" ref={chatContainerRef}>
         {/* ROOM FRIENDS INFORMATION CARD */}
         <div
           className={
@@ -355,8 +356,9 @@ function Chats() {
                 </button>
               </div>
             </div>
+            {/* ROOM INFORMATION SCROLLABLE SECTION */}
             <div className="Chat--Room_Information--Inner_Container">
-              {/* CLOSE ROOM INFORMATION SECTION OPTION */}
+              {/* CLOSE ROOM INFORMATION */}
               <FaXmark
                 onClick={() => {
                   setShowRoomDetails(false);
@@ -365,7 +367,7 @@ function Chats() {
                 }}
                 className="Chat--Room_Information--Close"
               />
-              {/* ADD FRIENDS TO GROUP TYPE ROOM SECTION */}
+              {/* ADD FRIENDS TO GROUP TYPE ROOM */}
               <div
                 className={
                   addFriends
@@ -373,6 +375,7 @@ function Chats() {
                     : "Inactive"
                 }
               >
+                {/* CLOSE ADD FRIENDS */}
                 <FaXmark
                   onClick={() => {
                     setAddFriends(false);
@@ -381,7 +384,9 @@ function Chats() {
                   className="Chat--Room_Information--Close"
                 />
                 <div className="Chat--Room_Information--Add_Friends">
+                  {/* ADD FRIENDS - HEADER SECTION */}
                   <div className="Chat--Room_Information--Add_Friends--Header">
+                    {/* ADD FRIENDS - HEADING AND DONE BUTTON */}
                     <div className="Chat--Room_Information--Add_Friends--Header--Heading_And_Button">
                       <p className="Chat--Room_Information--Add_Friends--Header_Heading">
                         Add frens
@@ -399,6 +404,7 @@ function Chats() {
                         </button>
                       </div>
                     </div>
+                    {/* ADD FRIENDS - FRIENDS LIST SEARCH */}
                     <div className="Chat--Room_Information--Add_Friends--Search">
                       <input
                         type="text"
@@ -408,6 +414,7 @@ function Chats() {
                       ></input>
                     </div>
                   </div>
+                  {/* ADD FRIENDS - FRIENDS LIST */}
                   <div className="Chat--Room_Information--Add_Friends--Friends_List">
                     {addFriendsList.map((friend, index) => {
                       return (
@@ -488,8 +495,9 @@ function Chats() {
                   </div>
                 </div>
               </div>
-              {/* ROOM INFORMATION */}
+              {/* ROOM INFORMATION - IMAGE DISPLAY AND SELECTION */}
               <div className="Chat--Room_Information--Image">
+                {/* ROOM INFORMATION - IMAGE/ICON */}
                 {currentRoom.imageUrl ? (
                   <>
                     <div
@@ -520,6 +528,7 @@ function Chats() {
                 ) : (
                   <IoMdPerson className="Chat--Room_Information--Image--Icon" />
                 )}
+                {/* ROOM INFORMATION - IMAGE SELECTOR */}
                 <label htmlFor="Chat--Room_Information--Image_Select">
                   <FaCamera className="Chat--Room_Information--Image_Edit--Icon" />
                 </label>
@@ -533,7 +542,7 @@ function Chats() {
                   }}
                 ></input>
               </div>
-              {/* ROOM FRIENDS LIST */}
+              {/* ROOM INFORMATION - GROUP TYPE ROOM HEADER */}
               <div
                 className={
                   currentRoom.type === "group"
@@ -541,7 +550,9 @@ function Chats() {
                     : "Inactive"
                 }
               >
+                {/* ROOM INFORMATION - GROUP NAME DISPLAY AND EDIT */}
                 <div className="Chat--Room_Information--Edit_Room_Name">
+                  {/* ROOM INFORMATION - GROUP NAME DISPLAY */}
                   <div
                     className={
                       editRoomname
@@ -559,6 +570,7 @@ function Chats() {
                       />
                     </div>
                   </div>
+                  {/* ROOM INFORMATION - GROUP NAME EDIT */}
                   <div
                     className={
                       editRoomname
@@ -600,6 +612,7 @@ function Chats() {
                     </div>
                   </div>
                 </div>
+                {/* ROOM INFORMATION - BUTTON TO OPEN ADD FRIENDS SECTION */}
                 <div className="Chat--Room_Information--Edit_Room_Users">
                   <button
                     className="Chat--Room_Information--Edit_Room_Users--Button"
@@ -609,7 +622,9 @@ function Chats() {
                   </button>
                 </div>
               </div>
+              {/* ROOM INFORMATION - FRIENDS LIST */}
               <div className="Chat--Room_Information--Friends_List">
+                {/* FRIENDS LIST - OWN CARD - FOR GROUP TYPE ROOM */}
                 <div
                   className={
                     currentRoom.type === "group"
@@ -662,6 +677,7 @@ function Chats() {
                     </div>
                   </div>
                 </div>
+                {/* FRIENDS LIST - FRIENDS CARDS LIST */}
                 {friendsList?.map((friend, index) => {
                   return (
                     <div
@@ -676,7 +692,7 @@ function Chats() {
                             : "Chat--Room_Information--Friend Chat--Room_Information--Friend--Group"
                         }
                       >
-                        {/* SHOW FRIENDS IMAGES IN GROUP TYPE ROOM */}
+                        {/* SHOW FRIENDS IMAGES ONLY IN GROUP TYPE ROOM */}
                         <div
                           className={
                             currentRoom.type === "group"
@@ -747,7 +763,7 @@ function Chats() {
                           </div>
                         </div>
                       </div>
-                      {/* ROOM CHAT DELETE OPTIONS */}
+                      {/* ROOM CHAT DELETE OPTIONS FOR SINGLE TYPE ROOM */}
                       <div
                         className={
                           currentRoom.type === "single"
@@ -767,6 +783,7 @@ function Chats() {
                           Delete chat
                         </button>
                       </div>
+                      {/* ROOM CHAT CONFIRM DELETE OPTIONS FOR SINGLE TYPE ROOM */}
                       <div
                         className={
                           confirmDelete
@@ -793,7 +810,7 @@ function Chats() {
                           </button>
                         </div>
                       </div>
-                      {/* REMOVE FRIEND OPTIONS */}
+                      {/* REMOVE FRIEND OPTIONS FOR SINGLE TYPE ROOM */}
                       <div
                         className={
                           currentRoom.type === "single"
@@ -813,6 +830,7 @@ function Chats() {
                           Remove fren
                         </button>
                       </div>
+                      {/* CONFIRM REMOVE FRIEND OPTIONS FOR SINGLE TYPE ROOM */}
                       <div
                         className={
                           confirmRemove
@@ -844,7 +862,7 @@ function Chats() {
                   );
                 })}
               </div>
-              {/* EXIT GROUP OPTIONS */}
+              {/* EXIT GROUP OPTIONS FOR GROUP TYPE ROOM */}
               <div
                 className={
                   currentRoom.type === "group"
@@ -863,6 +881,7 @@ function Chats() {
                   Exit group
                 </button>
               </div>
+              {/* CONFIRM EXIT GROUP OPTIONS FOR GROUP TYPE ROOM */}
               <div
                 className={
                   confirmExit
@@ -895,12 +914,14 @@ function Chats() {
         </div>
         {/* CHAT ROOM BASIC DETAILS */}
         <section className="Chat--Details">
+          {/* CHAT - NAVIGATE BACK TO FRIENDS PAGE */}
           <div className="Chat--Back_Button">
             <IoMdArrowRoundBack
               className="Chat--Back_Button--Icon"
               onClick={() => navigate("/user/friends")}
             />
           </div>
+          {/* CHAT - IMAGE */}
           <div className="Chat--Image">
             <div className="Chat--Image_Icon_Container">
               {currentRoom.imageUrl ? (
@@ -935,6 +956,7 @@ function Chats() {
               )}
             </div>
           </div>
+          {/* CHAT - FRIEND/GROUP NAME AND SHOW ROOM INFORMATION OPTION */}
           <div className="Chat--Room_Details">
             <p className="Chat--Name">{currentRoom?.name}</p>
             <p
@@ -947,6 +969,7 @@ function Chats() {
         </section>
         {/* CHAT MESSAGES CONTAINER */}
         <section className="Chat--Messages" ref={messagesRef}>
+          {/* CHAT - MESSAGE CARD */}
           {roomChats.length ? (
             roomChats.map((message, index) => {
               const currentDate = new Date().toLocaleDateString("en-IN");
@@ -1050,7 +1073,7 @@ function Chats() {
             </div>
           )}
         </section>
-        {/* NEW MESSAGE INPUT SECTION */}
+        {/* NEW MESSAGE TYPING SECTION */}
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
             <textarea
@@ -1067,7 +1090,7 @@ function Chats() {
             </button>
           </form>
         </section>
-      </div>
+      </section>
     </div>
   );
 }

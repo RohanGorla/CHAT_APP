@@ -388,6 +388,7 @@ function User() {
     setNewNotifications(newNotifications);
   }, [notifications]);
 
+  /* CREATE A SOCKET CONNECTION AND GET USER DATA */
   useEffect(() => {
     if (!userData) {
       navigate("/login");
@@ -462,14 +463,14 @@ function User() {
             className={
               popupType === "Good"
                 ? "User_PopUp--Icon User_PopUp--Icon--Good"
-                : "User_PopUp--Icon--Inactive"
+                : "Inactive"
             }
           />
           <GiCancel
             className={
               popupType === "Bad"
                 ? "User_PopUp--Icon User_PopUp--Icon--Bad"
-                : "User_PopUp--Icon--Inactive"
+                : "Inactive"
             }
           />
         </div>
@@ -478,6 +479,7 @@ function User() {
       <nav className="User_Navbar">
         <p className="User_Appname">Frens</p>
         <div className="User_Nav_Options">
+          {/* NAVBAR CHATS ICON */}
           <div className="User_Nav_Options--Navlink">
             <NavLink
               to="/user/friends"
@@ -490,6 +492,7 @@ function User() {
               <IoIosChatboxes className="User_Nav_Options--Icon" />
             </NavLink>
           </div>
+          {/* NAVBAR FIND FRIENDS ICON */}
           <div className="User_Nav_Options--Navlink">
             <NavLink
               to="/user/findfriends"
@@ -502,12 +505,11 @@ function User() {
               <RiSearch2Fill className="User_Nav_Options--Icon" />
             </NavLink>
           </div>
+          {/* NAVBAR NOTIFICATIONS ICON */}
           <div className="User_Nav_Options--Navlink">
             <GoDotFill
               className={
-                newNotifications.length
-                  ? "User_Nav_Options--Alert"
-                  : "Inactive"
+                newNotifications.length ? "User_Nav_Options--Alert" : "Inactive"
               }
             />
             <NavLink
@@ -521,6 +523,7 @@ function User() {
               <GoBellFill className="User_Nav_Options--Icon" />
             </NavLink>
           </div>
+          {/* NAVBAR PROFILE ICON */}
           <div className="User_Nav_Options--Navlink">
             <NavLink
               to="/user/profile"
