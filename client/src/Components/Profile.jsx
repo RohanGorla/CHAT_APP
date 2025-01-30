@@ -28,6 +28,7 @@ function Profile() {
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [errorType, setErrorType] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
 
   /* CHECK THE VALIDITY OF SIGNED URL */
   async function checkUrlValidity() {
@@ -260,9 +261,16 @@ function Profile() {
         {/* PROFILE PICTURE/ICON */}
         <div className="Profile--Image">
           {userData.imageTag ? (
-            <div className="Profile--Image_Frame">
-              <img src={imageUrl}></img>
-            </div>
+            <>
+              <div
+                className={imageLoaded ? "Profile--Image_Frame" : "Inactive"}
+              >
+                <img src={imageUrl} onLoad={() => setImageLoaded(true)}></img>
+              </div>
+              <IoMdPerson
+                className={imageLoaded ? "Inactive" : "Profile--Image--Icon"}
+              />
+            </>
           ) : (
             <IoMdPerson className="Profile--Image--Icon" />
           )}
