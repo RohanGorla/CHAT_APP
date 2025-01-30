@@ -20,6 +20,7 @@ function FriendsList() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [friendListSearch, setFriendListSearch] = useState("");
+  const [loadedImages, setLoadedImages] = useState([]);
 
   /* SORT THE CHATS ACCORDING TO RECENT MESSAGE RECEIVED OR SENT */
   function sortChats(rooms) {
@@ -150,9 +151,29 @@ function FriendsList() {
               <div className="Friend_Card--Image">
                 <div className="Friend_Card--Image_Icon_Container">
                   {room.imageUrl ? (
-                    <div className="Friend_Card--Image_Frame">
-                      <img src={room.imageUrl}></img>
-                    </div>
+                    <>
+                      <div
+                        className={
+                          loadedImages.includes(room.imageTag)
+                            ? "Friend_Card--Image_Frame"
+                            : "Inactive"
+                        }
+                      >
+                        <img
+                          src={room.imageUrl}
+                          onLoad={() =>
+                            setLoadedImages((prev) => [...prev, room.imageTag])
+                          }
+                        ></img>
+                      </div>
+                      <IoMdPerson
+                        className={
+                          loadedImages.includes(room.imageTag)
+                            ? "Inactive"
+                            : "Friend_Card--Image_Icon"
+                        }
+                      />
+                    </>
                   ) : (
                     <IoMdPerson className="Friend_Card--Image_Icon" />
                   )}
