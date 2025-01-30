@@ -123,7 +123,7 @@ function Register() {
               className={
                 usernameActive
                   ? "Login_Form--Field--Character_Count"
-                  : "Login_Form--Field--Character_Count--Inactive"
+                  : "Inactive"
               }
             >
               {username.length}/30
@@ -144,19 +144,11 @@ function Register() {
               onChange={(e) => setPassword(e.target.value)}
             ></input>
             <AiFillEye
-              className={
-                showPassword
-                  ? "Login_Password--Show"
-                  : "Login_Password--Show--Inactive"
-              }
+              className={showPassword ? "Login_Password--Show" : "Inactive"}
               onClick={() => setShowPassword(!showPassword)}
             />
             <AiFillEyeInvisible
-              className={
-                showPassword
-                  ? "Login_Password--Show--Inactive"
-                  : "Login_Password--Show"
-              }
+              className={showPassword ? "Inactive" : "Login_Password--Show"}
               onClick={() => setShowPassword(!showPassword)}
             />
           </div>
@@ -176,17 +168,13 @@ function Register() {
             ></input>
             <AiFillEye
               className={
-                showConfirmPassword
-                  ? "Login_Password--Show"
-                  : "Login_Password--Show--Inactive"
+                showConfirmPassword ? "Login_Password--Show" : "Inactive"
               }
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             />
             <AiFillEyeInvisible
               className={
-                showConfirmPassword
-                  ? "Login_Password--Show--Inactive"
-                  : "Login_Password--Show"
+                showConfirmPassword ? "Inactive" : "Login_Password--Show"
               }
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             />
