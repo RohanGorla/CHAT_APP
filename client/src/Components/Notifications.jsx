@@ -12,6 +12,7 @@ function Notifications() {
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [reversedNotifications, setReversedNotifications] = useState([]);
+  const [loadedImages, setLoadedImages] = useState([]);
 
   /* ACCEPT FRIEND REQUEST SOCKET METHOD */
   async function acceptRequest(request) {
@@ -66,17 +67,23 @@ function Notifications() {
           if (
             reverseNotificationList[i].to.usr_id === userData.userId &&
             reverseNotificationList[i].from.imageTag
-          )
+          ) {
             reverseNotificationList[i].imageUrl = await generateGetUrl(
               reverseNotificationList[i].from.imageTag
             );
+            reverseNotificationList[i].imageTag =
+              reverseNotificationList[i].from.imageTag;
+          }
           if (
             reverseNotificationList[i].from.userId === userData.userId &&
             reverseNotificationList[i].to.imageTag
-          )
+          ) {
             reverseNotificationList[i].imageUrl = await generateGetUrl(
               reverseNotificationList[i].to.imageTag
             );
+            reverseNotificationList[i].imageTag =
+              reverseNotificationList[i].to.imageTag;
+          }
         }
         setReversedNotifications(reverseNotificationList);
       }
@@ -103,9 +110,32 @@ function Notifications() {
                 <div className="Notifications_Card--Image_Container">
                   <div className="Notifications_Card--Image_Icon_Container">
                     {notification.imageUrl ? (
-                      <div className="Notifications_Card--Image_Frame">
-                        <img src={notification.imageUrl}></img>
-                      </div>
+                      <>
+                        <div
+                          className={
+                            loadedImages.includes(notification.imageTag)
+                              ? "Notifications_Card--Image_Frame"
+                              : "Inactive"
+                          }
+                        >
+                          <img
+                            src={notification.imageUrl}
+                            onLoad={() =>
+                              setLoadedImages((prev) => [
+                                ...prev,
+                                notification.imageTag,
+                              ])
+                            }
+                          ></img>
+                        </div>
+                        <IoMdPerson
+                          className={
+                            loadedImages.includes(notification.imageTag)
+                              ? "Inactive"
+                              : "Notifications_Card--Image_Icon"
+                          }
+                        />
+                      </>
                     ) : (
                       <IoMdPerson className="Notifications_Card--Image_Icon" />
                     )}
