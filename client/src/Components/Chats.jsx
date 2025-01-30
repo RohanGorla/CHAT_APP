@@ -37,6 +37,7 @@ function Chats() {
   const [confirmDelete, setConfirmDelete] = useState(false);
   const [confirmRemove, setConfirmRemove] = useState(false);
   const [confirmExit, setConfirmExit] = useState(false);
+  const [confirmDeleteGroup, setConfirmDeleteGroup] = useState(false);
   const [addFriends, setAddFriends] = useState(false);
   const [addFriendsList, setAddFriendsList] = useState([]);
   const [addFriendsSearch, setAddFriendsSearch] = useState("");
@@ -913,7 +914,7 @@ function Chats() {
               <div
                 className={
                   currentRoom.type === "group"
-                    ? confirmDelete
+                    ? confirmDeleteGroup
                       ? "Inactive"
                       : "Chat--Room_Information--Buttons"
                     : "Inactive"
@@ -922,11 +923,36 @@ function Chats() {
                 <button
                   className="Chat--Room_Information--Buttons--Danger"
                   onClick={() => {
-                    setConfirmDelete(true);
+                    setConfirmDeleteGroup(true);
                   }}
                 >
                   Delete group
                 </button>
+              </div>
+              {/* CONFIRM DELETE GROUP OPTIONS - AVAILABLE ONLY TO THE GROUP CREATOR */}
+              <div
+                className={
+                  confirmDeleteGroup
+                    ? "Chat--Room_Information--Confirm_Delete"
+                    : "Inactive"
+                }
+              >
+                <p className="Chat--Room_Information--Confirm_Delete--Message">
+                  By deleting this group, all the group chat messages will be
+                  deleted and the group will no longer exist. Do you want to
+                  proceed?
+                </p>
+                <div className="Chat--Room_Information--Buttons">
+                  <button
+                    className="Chat--Room_Information--Buttons--Cancel"
+                    onClick={() => setConfirmDeleteGroup(false)}
+                  >
+                    Cancel
+                  </button>
+                  <button className="Chat--Room_Information--Buttons--Danger">
+                    Confirm delete group
+                  </button>
+                </div>
               </div>
             </div>
           </div>
