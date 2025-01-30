@@ -174,14 +174,6 @@
   }
 }
 
-.FindFriends--Selected_User--Confirm_Remove--Inactive {
-  display: none;
-}
-
-.FindFriends--Selected_User_Container--Hidden {
-  display: none;
-}
-
 .FindFriends_Container {
   height: 100%;
   width: 100%;

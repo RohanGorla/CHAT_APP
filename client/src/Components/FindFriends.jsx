@@ -97,9 +97,7 @@ function FindFriends() {
       {/* CARD TO SHOW SELECTED USER'S DETAILS AND OPTIONS */}
       <div
         className={
-          showDetailsCard
-            ? "FindFriends--Selected_User_Container"
-            : "FindFriends--Selected_User_Container--Hidden"
+          showDetailsCard ? "FindFriends--Selected_User_Container" : "Inactive"
         }
         onClick={(e) => {
           setShowDetailsCard(false);
@@ -165,7 +163,7 @@ function FindFriends() {
             className={
               showConfirmRemove
                 ? "FindFriends--Selected_User--Confirm_Remove"
-                : "FindFriends--Selected_User--Confirm_Remove--Inactive"
+                : "Inactive"
             }
           >
             <i className="FindFriends--Selected_User--Confirm_Remove--Message">

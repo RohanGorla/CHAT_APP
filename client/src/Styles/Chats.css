@@ -775,10 +775,6 @@
   text-overflow: ellipsis;
 }
 
-.Chat--Message_Card--Userid--Inactive {
-  display: none;
-}
-
 .Chat--Message_Card--Message {
   font-size: var(--Chat_Message);
 }
