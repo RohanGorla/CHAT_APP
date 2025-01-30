@@ -41,6 +41,7 @@ function Chats() {
   const [addFriendsList, setAddFriendsList] = useState([]);
   const [addFriendsSearch, setAddFriendsSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
+  const [loadedImages, setLoadedImages] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -431,9 +432,32 @@ function Chats() {
                           <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
                             <div className="Chat--Room_Information--Add_Friends--Friend_Image">
                               {friend.imageUrl ? (
-                                <div className="Chat--Room_Information--Add_Friends--Friend_Image_Frame">
-                                  <img src={friend.imageUrl}></img>
-                                </div>
+                                <>
+                                  <div
+                                    className={
+                                      loadedImages.includes(friend.imageTag)
+                                        ? "Chat--Room_Information--Add_Friends--Friend_Image_Frame"
+                                        : "Inactive"
+                                    }
+                                  >
+                                    <img
+                                      src={friend.imageUrl}
+                                      onLoad={() =>
+                                        setLoadedImages((prev) => [
+                                          ...prev,
+                                          friend.imageTag,
+                                        ])
+                                      }
+                                    ></img>
+                                  </div>
+                                  <IoMdPerson
+                                    className={
+                                      loadedImages.includes(friend.imageTag)
+                                        ? "Inactive"
+                                        : "Chat--Room_Information--Add_Friends--Friend_Icon"
+                                    }
+                                  />
+                                </>
                               ) : (
                                 <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
                               )}
@@ -467,9 +491,32 @@ function Chats() {
               {/* ROOM INFORMATION */}
               <div className="Chat--Room_Information--Image">
                 {currentRoom.imageUrl ? (
-                  <div className="Chat--Room_Information--Image_Frame">
-                    <img src={currentRoom.imageUrl}></img>
-                  </div>
+                  <>
+                    <div
+                      className={
+                        loadedImages.includes(currentRoom.imageTag)
+                          ? "Chat--Room_Information--Image_Frame"
+                          : "Inactive"
+                      }
+                    >
+                      <img
+                        src={currentRoom.imageUrl}
+                        onLoad={() =>
+                          setLoadedImages((prev) => [
+                            ...prev,
+                            currentRoom.imageTag,
+                          ])
+                        }
+                      ></img>
+                    </div>
+                    <IoMdPerson
+                      className={
+                        loadedImages.includes(currentRoom.imageTag)
+                          ? "Inactive"
+                          : "Chat--Room_Information--Image--Icon"
+                      }
+                    />
+                  </>
                 ) : (
                   <IoMdPerson className="Chat--Room_Information--Image--Icon" />
                 )}
@@ -574,9 +621,32 @@ function Chats() {
                     <div className="Chat--Room_Information--Friend--Image_Container">
                       <div className="Chat--Room_Information--Friend--Image">
                         {userData.imageUrl ? (
-                          <div className="Chat--Room_Information--Friend--Image_Frame">
-                            <img src={userData.imageUrl}></img>
-                          </div>
+                          <>
+                            <div
+                              className={
+                                loadedImages.includes(userData.imageTag)
+                                  ? "Chat--Room_Information--Friend--Image_Frame"
+                                  : "Inactive"
+                              }
+                            >
+                              <img
+                                src={userData.imageUrl}
+                                onLoad={() =>
+                                  setLoadedImages((prev) => [
+                                    ...prev,
+                                    userData.imageTag,
+                                  ])
+                                }
+                              ></img>
+                            </div>
+                            <IoMdPerson
+                              className={
+                                loadedImages.includes(userData.imageTag)
+                                  ? "Inactive"
+                                  : "Chat--Room_Information--Friend--Icon"
+                              }
+                            />
+                          </>
                         ) : (
                           <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
                         )}
@@ -616,9 +686,32 @@ function Chats() {
                         >
                           <div className="Chat--Room_Information--Friend--Image">
                             {friend.imageUrl ? (
-                              <div className="Chat--Room_Information--Friend--Image_Frame">
-                                <img src={friend.imageUrl}></img>
-                              </div>
+                              <>
+                                <div
+                                  className={
+                                    loadedImages.includes(friend.imageTag)
+                                      ? "Chat--Room_Information--Friend--Image_Frame"
+                                      : "Inactive"
+                                  }
+                                >
+                                  <img
+                                    src={friend.imageUrl}
+                                    onLoad={() =>
+                                      setLoadedImages((prev) => [
+                                        ...prev,
+                                        friend.imageTag,
+                                      ])
+                                    }
+                                  ></img>
+                                </div>
+                                <IoMdPerson
+                                  className={
+                                    loadedImages.includes(friend.imageTag)
+                                      ? "Inactive"
+                                      : "Chat--Room_Information--Friend--Icon"
+                                  }
+                                />
+                              </>
                             ) : (
                               <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
                             )}
@@ -811,9 +904,32 @@ function Chats() {
           <div className="Chat--Image">
             <div className="Chat--Image_Icon_Container">
               {currentRoom.imageUrl ? (
-                <div className="Chat--Image_Frame">
-                  <img src={currentRoom.imageUrl}></img>
-                </div>
+                <>
+                  <div
+                    className={
+                      loadedImages.includes(currentRoom.imageTag)
+                        ? "Chat--Image_Frame"
+                        : "Inactive"
+                    }
+                  >
+                    <img
+                      src={currentRoom.imageUrl}
+                      onLoad={() =>
+                        setLoadedImages((prev) => [
+                          ...prev,
+                          currentRoom.imageTag,
+                        ])
+                      }
+                    ></img>
+                  </div>
+                  <IoMdPerson
+                    className={
+                      loadedImages.includes(currentRoom.imageTag)
+                        ? "Inactive"
+                        : "Chat--Image_Icon"
+                    }
+                  />
+                </>
               ) : (
                 <IoMdPerson className="Chat--Image_Icon" />
               )}
