@@ -867,7 +867,7 @@ function Chats() {
               <div
                 className={
                   currentRoom.type === "group"
-                    ? confirmExit
+                    ? confirmExit || confirmDeleteGroup
                       ? "Inactive"
                       : "Chat--Room_Information--Buttons"
                     : "Inactive"
@@ -885,7 +885,7 @@ function Chats() {
               {/* CONFIRM EXIT GROUP OPTIONS FOR GROUP TYPE ROOM */}
               <div
                 className={
-                  confirmExit
+                  currentRoom.type === "group" && confirmExit
                     ? "Chat--Room_Information--Confirm_Delete"
                     : "Inactive"
                 }
@@ -914,7 +914,7 @@ function Chats() {
               <div
                 className={
                   currentRoom.type === "group"
-                    ? confirmDeleteGroup
+                    ? confirmDeleteGroup || confirmExit
                       ? "Inactive"
                       : "Chat--Room_Information--Buttons"
                     : "Inactive"
@@ -924,6 +924,7 @@ function Chats() {
                   className="Chat--Room_Information--Buttons--Danger"
                   onClick={() => {
                     setConfirmDeleteGroup(true);
+                    setConfirmExit(false);
                   }}
                 >
                   Delete group
@@ -932,7 +933,7 @@ function Chats() {
               {/* CONFIRM DELETE GROUP OPTIONS - AVAILABLE ONLY TO THE GROUP CREATOR */}
               <div
                 className={
-                  confirmDeleteGroup
+                  currentRoom.type === "group" && confirmDeleteGroup
                     ? "Chat--Room_Information--Confirm_Delete"
                     : "Inactive"
                 }
