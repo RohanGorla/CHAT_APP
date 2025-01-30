@@ -110,10 +110,6 @@
   color: rgb(213, 15, 15);
 }
 
-.User_Nav_Options--Alert--Inactive {
-  display: none;
-}
-
 .User_Nav_Options--Active {
   color: rgb(46, 46, 58);
 }
@@ -128,6 +124,10 @@
 
 .User_Outlet_Container {
   height: calc(100dvh - 70px);
+}
+
+.Inactive {
+  display: none;
 }
 
 @media (max-width: 1000px) {

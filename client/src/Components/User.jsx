@@ -507,7 +507,7 @@ function User() {
               className={
                 newNotifications.length
                   ? "User_Nav_Options--Alert"
-                  : "User_Nav_Options--Alert--Inactive"
+                  : "Inactive"
               }
             />
             <NavLink
