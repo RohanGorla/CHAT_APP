@@ -96,7 +96,7 @@ function Notifications() {
                 className={
                   notification.to.usr_id === userData.userId &&
                   notification.type === "Reject"
-                    ? "Notifications_Card--Inactive"
+                    ? "Inactive"
                     : "Notifications_Card"
                 }
               >
@@ -115,7 +115,7 @@ function Notifications() {
                 <div
                   className={
                     notification.from.userId === userData.userId
-                      ? "Notifications_Card--User_Details--Inactive"
+                      ? "Inactive"
                       : "Notifications_Card--User_Details"
                   }
                 >
@@ -145,7 +145,7 @@ function Notifications() {
                   className={
                     notification.from.userId === userData.userId
                       ? "Notifications_Card--Sent"
-                      : "Notifications_Card--Sent--Inactive"
+                      : "Inactive"
                   }
                 >
                   <div className="Notifications_Card--Sent--Details">
@@ -161,7 +161,7 @@ function Notifications() {
                       className={
                         notification.type === "Request"
                           ? "Notifications_Card--Sent--Icon"
-                          : "Notifications_Card--Sent--Icon--Inactive"
+                          : "Inactive"
                       }
                     />
                     {/* SHOWN WHEN REQUEST IS REJECTED */}
@@ -169,7 +169,7 @@ function Notifications() {
                       className={
                         notification.type === "Reject"
                           ? "Notifications_Card--Reject--Icon"
-                          : "Notifications_Card--Reject--Icon--Inactive"
+                          : "Inactive"
                       }
                     />
                   </div>
@@ -177,7 +177,7 @@ function Notifications() {
                     className={
                       notification.type === "Reject"
                         ? "Notifications_Card--Reject--Options"
-                        : "Notifications_Card--Reject--Options--Inactive"
+                        : "Inactive"
                     }
                   >
                     <button
