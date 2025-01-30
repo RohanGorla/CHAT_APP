@@ -15,6 +15,7 @@ function FindFriends() {
   const [showDetailsCard, setShowDetailsCard] = useState(false);
   const [selectedUser, setSelectedUser] = useState({});
   const [showConfirmRemove, setShowConfirmRemove] = useState(false);
+  const [loadedImages, setLoadedImages] = useState([]);
 
   /* FRIENDS IDS LISTS */
   const friendsIds = useMemo(() => {
@@ -120,9 +121,32 @@ function FindFriends() {
           <div className="FindFriends--Selected_User--Image">
             <div className="FindFriends--Selected_User--Image_Icon_Container">
               {selectedUser.imageUrl ? (
-                <div className="FindFriends--Selected_User--Image_Frame">
-                  <img src={selectedUser.imageUrl}></img>
-                </div>
+                <>
+                  <div
+                    className={
+                      loadedImages.includes(selectedUser.imageTag)
+                        ? "FindFriends--Selected_User--Image_Frame"
+                        : "Inactive"
+                    }
+                  >
+                    <img
+                      src={selectedUser.imageUrl}
+                      onLoad={() =>
+                        setLoadedImages((prev) => [
+                          ...prev,
+                          selectedUser.imageTag,
+                        ])
+                      }
+                    ></img>
+                  </div>
+                  <IoMdPerson
+                    className={
+                      loadedImages.includes(selectedUser.imageTag)
+                        ? "Inactive"
+                        : "FindFriends--Selected_User--Image_Icon"
+                    }
+                  />
+                </>
               ) : (
                 <IoMdPerson className="FindFriends--Selected_User--Image_Icon" />
               )}
@@ -218,9 +242,24 @@ function FindFriends() {
                   <div className="FindFriends_User_Card--Image">
                     <div className="FindFriends_User_Card--Image_Icon_Container">
                       {user.imageUrl ? (
-                        <div className="FindFriends_User_Card--Image_Frame">
-                          <img src={user.imageUrl}></img>
-                        </div>
+                        <>
+                          <div
+                            className={
+                              loadedImages.includes(user.imageTag)
+                                ? "FindFriends_User_Card--Image_Frame"
+                                : "Inactive"
+                            }
+                          >
+                            <img src={user.imageUrl}></img>
+                          </div>
+                          <IoMdPerson
+                            className={
+                              loadedImages.includes(user.imageTag)
+                                ? "Inactive"
+                                : "FindFriends_User_Card--Image_Icon"
+                            }
+                          />
+                        </>
                       ) : (
                         <IoMdPerson className="FindFriends_User_Card--Image_Icon" />
                       )}
