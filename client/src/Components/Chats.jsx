@@ -545,7 +545,10 @@ function Chats() {
                   <IoMdPerson className="Chat--Room_Information--Image--Icon" />
                 )}
                 {/* ROOM INFORMATION - IMAGE SELECTOR */}
-                <label htmlFor="Chat--Room_Information--Image_Select">
+                <label
+                  className={currentRoom.type === "group" ? "" : "Inactive"}
+                  htmlFor="Chat--Room_Information--Image_Select"
+                >
                   <FaCamera className="Chat--Room_Information--Image_Edit--Icon" />
                 </label>
                 <input
