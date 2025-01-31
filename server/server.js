@@ -466,6 +466,18 @@ io.on("connection", async (socket) => {
       });
     }
   );
+  /* DELETE GROUP */
+  socket.on("delete_group", async ({ id, groupName, from, members }) => {
+    const updateUserRooms = await userInfoCollection.updateMany(
+      {
+        usr_id: { $in: members },
+      },
+      { $pull: { rooms: { $in: [id] } } }
+    );
+    const deleteRoom = await roomsCollection.deleteOne({ roomId: id });
+    const deleteChat = await chatMessagesCollection.deleteMany({ room: id });
+    io.to(id).emit("group_deleted", { id, groupName, from });
+  });
   /* UPDATE PROFILE PICTURE */
   socket.on("update_profile_picture", async ({ userId, key, friends }) => {
     const updateUserInfo = await userInfoCollection.updateOne(
