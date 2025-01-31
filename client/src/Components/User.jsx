@@ -200,6 +200,14 @@ function User() {
       setSearchRooms(updatedRooms);
       Popup(`${oldRoomname} is now ${newRoomname}`, "Good");
     });
+    socket.on("group_deleted", ({ id, groupName, from }) => {
+      const updatedRooms = rooms.filter((room) => room.roomId !== id);
+      setRooms(updatedRooms);
+      setSearchRooms(updatedRooms);
+      if (from.userId === userData.userId)
+        return Popup(`You deleted ${groupName}.`, "Bad");
+      Popup(`${from.username} deleted ${groupName}!`, "Bad");
+    });
     /* UPDATE CREDENTIAL RELATED EVENTS */
     socket.on("update_profile_picture", async ({ userId, key, url }) => {
       /* CHANGE PROFILE PICTURE IN FRIENDS LIST */
