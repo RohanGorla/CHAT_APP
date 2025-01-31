@@ -114,6 +114,16 @@ function Chats() {
     navigate("/user/friends");
   }
 
+  /* DELETE GROUP */
+  function deleteGroup() {
+    socket.emit("delete_group", {
+      id,
+      groupName: currentRoom.name,
+      from: userData,
+      members: currentRoom.users,
+    });
+  }
+
   /* UPLOAD GROUP PICTURE */
   async function uploadGroupPicture() {
     if (!groupPicture) return;
@@ -955,7 +965,10 @@ function Chats() {
                   >
                     Cancel
                   </button>
-                  <button className="Chat--Room_Information--Buttons--Danger">
+                  <button
+                    className="Chat--Room_Information--Buttons--Danger"
+                    onClick={deleteGroup}
+                  >
                     Confirm delete group
                   </button>
                 </div>
