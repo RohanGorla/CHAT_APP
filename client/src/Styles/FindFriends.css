@@ -64,7 +64,7 @@
 }
 
 .FindFriends--Selected_User--Image_Icon_Container {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   width: 80px;
   height: 80px;
   display: flex;
@@ -251,7 +251,7 @@
 }
 
 .FindFriends_User_Card--Image_Icon_Container {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   height: 45px;
   width: 45px;

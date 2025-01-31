@@ -1,7 +1,7 @@
 :root {
   --Friends_Main_Font: "Inter", sans-serif;
   --Friends_Sub_Font: "Varela Round", sans-serif;
-  --Friends_Group_Icon_Size: 22px;
+  --Friends_Group_Icon_Size: 28px;
   --Friends_User_Icon_Size: 30px;
   --Friends_Chat_Name: 18px;
   --Friends_Last_Message: 16px;
@@ -28,7 +28,7 @@
 
 .Friends_List {
   position: relative;
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   font-family: var(--Friends_Main_Font);
   overflow-y: scroll;
   height: 100%;
@@ -41,12 +41,12 @@
 }
 
 .Friends_List::-webkit-scrollbar-track {
-  background: rgb(20, 33, 61);
+  background: rgb(20, 30, 60);
   border-radius: 3px;
 }
 
 .Friends_List::-webkit-scrollbar-thumb {
-  background: rgb(20, 33, 61);
+  background: rgb(20, 30, 60);
   border-radius: 3px;
 }
 
@@ -60,17 +60,21 @@
   right: 10px;
   z-index: 1;
   background-color: rgb(51, 214, 91);
+  background-color: rgb(112, 224, 0);
   display: flex;
   height: 45px;
   width: 45px;
   justify-content: center;
   align-items: center;
+  border: 2px solid transparent;
   border-radius: 50%;
   cursor: pointer;
   &:hover {
     background-color: black;
+    border: 2px solid rgb(112, 224, 0);
     .Friends_List--New_Group--Icon {
       color: rgb(51, 214, 91);
+      color: rgb(112, 224, 0);
     }
   }
 }
@@ -120,7 +124,7 @@
 }
 
 .Friend_Card--Image_Icon_Container {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   height: 45px;
   width: 45px;
@@ -176,7 +180,7 @@
 }
 
 .Friend_Card--Time--Unread {
-  color: rgb(51, 214, 91);
+  color: rgb(112, 224, 0);
 }
 
 .Friend_Card--Message_Container {
@@ -193,7 +197,7 @@
 }
 
 .Friend_Card--Unread_Message_Count {
-  color: rgb(51, 214, 91);
+  color: rgb(112, 224, 0);
   text-align: end;
   min-width: 8%;
 }
@@ -214,7 +218,7 @@
 }
 
 .Friends_Chat {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   font-family: var(--Friends_Sub_Font);
   display: flex;
   height: 100%;
@@ -248,6 +252,7 @@
 
 @media (max-width: 900px) {
   :root {
+    --Friends_Group_Icon_Size: 26px;
     --Friends_User_Icon_Size: 25px;
     --Friends_Chat_Name: 16px;
     --Friends_Last_Message: 14px;
@@ -296,6 +301,7 @@
 
 @media (max-width: 600px) {
   :root {
+    --Friends_Group_Icon_Size: 24px;
     --Friends_User_Icon_Size: 30px;
     --Friends_Chat_Name: 18px;
     --Friends_Last_Message: 16px;

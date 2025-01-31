@@ -86,22 +86,22 @@
 }
 
 .Profile--Confirm_Profile_Picture--Confirm_Button {
-  background-color: rgb(16, 226, 69);
+  background-color: rgb(112, 224, 0);
   margin-right: 0.7em;
   &:hover {
     background-color: rgb(25, 25, 25);
-    color: rgb(16, 226, 69);
-    border: 2px solid rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
 }
 
 .Profile--Confirm_Profile_Picture--Cancel_Button {
-  background-color: red;
+  background-color: white;
   margin-right: 0.7em;
   &:hover {
-    background-color: rgb(25, 25, 25);
-    color: red;
-    border: 2px solid red;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
   }
 }
 
@@ -117,7 +117,7 @@
 
 .Profile--Image {
   position: relative;
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   width: 150px;
   height: 150px;
   display: flex;
@@ -157,7 +157,7 @@
   font-size: var(--Profile--Image_Edit--Icon);
   cursor: pointer;
   &:hover {
-    color: rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
   }
 }
 
@@ -249,22 +249,22 @@
 }
 
 .Profile--Edit_Credentials--Buttons--Cancel {
-  background-color: red;
+  background-color: white;
   margin-right: 0.7em;
   &:hover {
-    background-color: rgb(25, 25, 25);
-    color: red;
-    border: 2px solid red;
+    background-color: black;
+    color: white;
+    border: 2px solid white;
   }
 }
 
 .Profile--Edit_Credentials--Buttons--Save {
-  background-color: rgb(16, 226, 69);
+  background-color: rgb(112, 224, 0);
   margin-right: 0.7em;
   &:hover {
     background-color: rgb(25, 25, 25);
-    color: rgb(16, 226, 69);
-    border: 2px solid rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
 }
 
@@ -279,7 +279,7 @@
   font-size: var(--Profile_Edit_Button);
   cursor: pointer;
   &:hover {
-    color: rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
   }
 }
 

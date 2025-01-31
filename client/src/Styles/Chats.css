@@ -45,7 +45,7 @@
 
 .Chat_Container {
   position: relative;
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   height: 100%;
   width: 75%;
 }
@@ -271,7 +271,7 @@
 }
 
 .Chat--Room_Information--Add_Friends--Friend_Image {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   height: 45px;
   width: 45px;
@@ -341,7 +341,7 @@
 
 .Chat--Room_Information--Image {
   position: relative;
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -376,7 +376,7 @@
   font-size: var(--Chat_Room_Info_Edit_Icon);
   cursor: pointer;
   &:hover {
-    color: rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
   }
 }
 
@@ -421,7 +421,7 @@
   font-size: var(--Chat_Room_Info_Edit_Icon);
   cursor: pointer;
   &:hover {
-    color: rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
   }
 }
 
@@ -470,13 +470,13 @@
 }
 
 .Chat--Room_Information--Edit_Room_Name--Buttons--Done {
-  background-color: rgb(16, 226, 69);
+  background-color: rgb(112, 224, 0);
   border: 2px solid rgb(15, 15, 15);
   cursor: pointer;
   &:hover {
     background-color: black;
-    color: rgb(16, 226, 69);
-    border: 2px solid rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
 }
 
@@ -493,7 +493,7 @@
   font-family: var(--Chat_Sub_Font);
   font-size: var(--Chat_Room_Info_Button);
   font-weight: 600;
-  background-color: rgb(16, 226, 69);
+  background-color: rgb(112, 224, 0);
   padding: 0.5em 1.2em;
   border-style: none;
   border-radius: 7px;
@@ -501,8 +501,8 @@
   cursor: pointer;
   &:hover {
     background-color: black;
-    color: rgb(16, 226, 69);
-    border: 2px solid rgb(16, 226, 69);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
   }
 }
 
@@ -535,7 +535,7 @@
 }
 
 .Chat--Room_Information--Friend--Image {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   height: 45px;
   width: 45px;
@@ -668,7 +668,7 @@
 }
 
 .Chat--Image_Icon_Container {
-  background-color: rgb(20, 33, 61);
+  background-color: rgb(20, 30, 60);
   display: flex;
   height: 45px;
   width: 45px;
@@ -729,12 +729,12 @@
 }
 
 .Chat--Messages::-webkit-scrollbar-track {
-  background: rgb(20, 33, 61);
+  background: rgb(20, 30, 60);
   border-radius: 3px;
 }
 
 .Chat--Messages::-webkit-scrollbar-thumb {
-  background: rgb(20, 33, 61);
+  background: rgb(20, 30, 60);
   border-radius: 3px;
 }
 
@@ -792,7 +792,7 @@
 
 .Chat--Message_Card--Read_Status--True {
   font-size: 12px;
-  color: rgb(16, 226, 69);
+  color: rgb(112, 224, 0);
   margin-left: 0.5em;
 }
 
@@ -825,7 +825,7 @@
   border-radius: 100px;
   cursor: pointer;
   &:hover {
-    background-color: rgb(32, 139, 58);
+    background-color: rgb(112, 224, 0, 0.6);
     color: white;
   }
 }

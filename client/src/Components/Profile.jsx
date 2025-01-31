@@ -243,6 +243,12 @@ function Profile() {
             Set the selected image as your profile picture?
           </p>
           <button
+            className="Profile--Confirm_Profile_Picture--Cancel_Button"
+            onClick={() => setConfirmProfilePicture(false)}
+          >
+            Cancel
+          </button>
+          <button
             className="Profile--Confirm_Profile_Picture--Confirm_Button"
             onClick={() => {
               setConfirmProfilePicture(false);
@@ -250,12 +256,6 @@ function Profile() {
             }}
           >
             Confirm
-          </button>
-          <button
-            className="Profile--Confirm_Profile_Picture--Cancel_Button"
-            onClick={() => setConfirmProfilePicture(false)}
-          >
-            Cancel
           </button>
         </div>
       </div>

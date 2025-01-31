@@ -38,11 +38,11 @@
 }
 
 .User_PopUp_Card--Good {
-  box-shadow: 15px 0px rgb(15, 213, 15) inset;
+  box-shadow: 15px 0px rgb(15, 210, 15) inset;
 }
 
 .User_PopUp_Card--Bad {
-  box-shadow: 15px 0px rgb(213, 15, 15) inset;
+  box-shadow: 15px 0px rgb(210, 15, 15) inset;
 }
 
 .User_PopUp--Message {
@@ -64,7 +64,7 @@
 }
 
 .User_PopUp--Icon--Good {
-  color: rgb(15, 213, 15);
+  color: rgb(112, 224, 0);
 }
 
 .User_PopUp--Icon--Bad {
@@ -74,7 +74,7 @@
 .User_Navbar {
   position: inherit;
   z-index: 20;
-  background-color: rgb(32, 139, 58);
+  background-color: rgb(30, 140, 60);
   height: 70px;
   display: flex;
   justify-content: space-between;
@@ -86,7 +86,6 @@
   font-family: var(--User_Main_Font);
   font-size: var(--User_Element_Fontsize);
   font-weight: 700;
-  color: rgb(13, 6, 48);
   color: white;
 }
 
@@ -103,11 +102,11 @@
   position: absolute;
   top: 0px;
   right: 0px;
-  color: rgb(213, 15, 15);
+  color: rgb(210, 15, 15);
 }
 
 .User_Nav_Options--Active {
-  color: rgb(46, 46, 58);
+  color: rgb(45, 45, 60);
 }
 
 .User_Nav_Options--Inactive {
