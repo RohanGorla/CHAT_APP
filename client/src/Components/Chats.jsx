@@ -22,9 +22,9 @@ function Chats() {
     setRoomChats,
     currentRoom,
     setCurrentRoom,
-    usernameColor,
   } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  const usernameColors = ["orange", "green", "violet", "goldenrod"];
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
   const [unreadMessages, setUnreadMessages] = useState(false);
@@ -219,9 +219,8 @@ function Chats() {
   /* GET THE ROOM INFORMATION FROM THE ROOM ID */
   useEffect(() => {
     const room = rooms.filter((room) => room.roomId === id);
-    if (!room.length) {
-      navigate("/user/friends");
-    } else {
+    if (!room.length) navigate("/user/friends");
+    else {
       switch (room[0]?.type) {
         /* IF SINGLE CHAT */
         case "single":
@@ -235,6 +234,11 @@ function Chats() {
         /* IF GROUP CHAT */
         case "group":
           room[0].friendsList = room[0].members;
+          room[0].userIdColors = {};
+          room[0].users.forEach((user) => {
+            room[0].userIdColors[`${user}`] =
+              usernameColors[Math.floor(Math.random() * usernameColors.length)];
+          });
           break;
       }
       setFriendsList(room[0]?.friendsList);
@@ -1074,7 +1078,11 @@ function Chats() {
                           : "Chat--Message_Card--Userid"
                         : "Inactive"
                     }
-                    // style={{ color: usernameColor }}
+                    style={{
+                      color: currentRoom.userIdColors
+                        ? currentRoom.userIdColors[message.usr_id]
+                        : "white",
+                    }}
                   >
                     {message.usr_id}
                   </p>
