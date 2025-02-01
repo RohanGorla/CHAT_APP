@@ -14,7 +14,6 @@ function FriendsList() {
     setCurrentRoom,
     chats,
     setRoomChats,
-    setUsernameColor,
   } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
@@ -130,18 +129,6 @@ function FriendsList() {
                 if (params.id !== room.roomId) {
                   setRoomChats(roomChats);
                   setCurrentRoom(room);
-                  /* SELECT AND SET A UNIQUE COLOR FOR USERNAME IN CHATS PAGE CARDS */
-                  const usernameColors = [
-                    "orange",
-                    "green",
-                    "violet",
-                    "goldenrod",
-                  ];
-                  const randomColor =
-                    usernameColors[
-                      Math.floor(Math.random() * usernameColors.length)
-                    ];
-                  setUsernameColor(randomColor);
                   /* NAVIGATE TO THE DESIRED CHAT PAGE */
                   return navigate(`/user/chats/${room.roomId}`);
                 }

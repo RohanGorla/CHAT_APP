@@ -26,7 +26,6 @@ function User() {
   const [currentRoom, setCurrentRoom] = useState("");
   const [chats, setChats] = useState([]);
   const [roomChats, setRoomChats] = useState([]);
-  const [usernameColor, setUsernameColor] = useState("");
 
   /* GET PROFILE PICTURE GET URL FUNCTION */
   async function generateGetUrl(key) {
@@ -565,8 +564,6 @@ function User() {
             setChats,
             roomChats,
             setRoomChats,
-            usernameColor,
-            setUsernameColor,
           }}
         />
       </section>
