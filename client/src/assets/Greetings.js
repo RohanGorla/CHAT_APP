@@ -9,6 +9,15 @@ const greetings = {
     "Click a fren's name to begin. Who knows? You might even solve the mystery of why they never reply on time.",
     "Frens dont just follow back—they chat back too. Pick someone and start the kind of conversation that turns casual follows into meaningful connections.",
   ],
+  noFriends: [
+    "Ah yes, the ultimate social experience—talking to yourself. If that's your thing, carry on! But if you'd rather chat with actual humans, maybe go find some frens?",
+    "Look at all these amazing conversations… oh wait, there are none. But don't worry, you can fix that by, you know, making some frens.",
+    "This app is so much fun when you have people to talk to! Right now? Not so much. But don't worry, making frens is just a few clicks away.",
+    "You've unlocked the rarest achievement in chat history: 'Absolutely No Conversations.' Wanna break that record? Start adding some frens before this place turns into a museum.",
+    "Your social life called. It's on life support. You can either pull the plug or start following some people before this app thinks you're a bot.",
+    "Right now, your chats are like a haunted house—spookily silent. Add some frens before the ghosts start talking back.",
+    "Your chat list is basically a blank canvas. Time to turn it into a masterpiece—go find some frens and start paint(text)ing!",
+  ],
 };
 
 export default greetings;
