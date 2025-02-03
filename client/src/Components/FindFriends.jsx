@@ -255,7 +255,15 @@ function FindFriends() {
                                 : "Inactive"
                             }
                           >
-                            <img src={user.imageUrl}></img>
+                            <img
+                              src={user.imageUrl}
+                              onLoad={() =>
+                                setLoadedImages((prev) => [
+                                  ...prev,
+                                  user.imageTag,
+                                ])
+                              }
+                            ></img>
                           </div>
                           <IoMdPerson
                             className={
