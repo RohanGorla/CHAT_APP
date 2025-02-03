@@ -7,6 +7,7 @@ import { GoBellFill, GoDotFill } from "react-icons/go";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
 import axios from "axios";
+import logoUrl from "../assets/Logo";
 
 function User() {
   /* ESTABLISHING CONNECTION TO THE WEB SOCKET */
@@ -484,7 +485,10 @@ function User() {
       </div>
       {/* NAVBAR */}
       <nav className="User_Navbar">
-        <p className="User_Appname">Frens</p>
+        <div className="User_App--Logo_And_Name">
+          <img className="User_App--Logo" src={`data:image/png;base64,${logoUrl}`}></img>
+          <p className="User_App--Name">frens</p>
+        </div>
         <div className="User_Nav_Options">
           {/* NAVBAR CHATS ICON */}
           <div className="User_Nav_Options--Navlink">
