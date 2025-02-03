@@ -85,9 +85,7 @@
 .User_App--Logo_And_Name {
   display: flex;
   align-items: center;
-  gap: 0.5em;
   gap: 0.75em;
-  gap: 1em;
 }
 
 .User_App--Logo {
