@@ -82,7 +82,23 @@
   padding-inline: 1em 3em;
 }
 
-.User_Appname {
+.User_App--Logo_And_Name {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.User_App--Logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-style: none;
+  border-radius: 50%;
+}
+
+.User_App--Name {
   font-family: var(--User_Main_Font);
   font-size: var(--User_Element_Fontsize);
   font-weight: 700;
@@ -135,6 +151,11 @@
     padding-inline: 1em 2em;
   }
 
+  .User_App--Logo {
+    height: 45px;
+    width: 45px;
+  }
+
   .User_Outlet_Container {
     height: calc(100dvh - 60px);
   }
@@ -165,6 +186,15 @@
   .User_Navbar {
     height: 50px;
     padding-inline: 1em;
+  }
+
+  .User_App--Logo_And_Name {
+    gap: 0.3em;
+  }
+
+  .User_App--Logo {
+    height: 35px;
+    width: 35px;
   }
 
   .User_Outlet_Container {
