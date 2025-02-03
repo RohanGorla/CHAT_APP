@@ -335,6 +335,15 @@
     width: 70px;
     height: 70px;
   }
+
+  .FindFriends--Selected_User--Image_Frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    mask: radial-gradient(circle, black 35px, transparent 36px);
+  }
 }
 
 @media (max-width: 600px) {
@@ -361,6 +370,15 @@
   .FindFriends--Selected_User--Image_Icon_Container {
     width: 60px;
     height: 60px;
+  }
+
+  .FindFriends--Selected_User--Image_Frame {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    mask: radial-gradient(circle, black 30px, transparent 31px);
   }
 
   .FindFriends_Container {
