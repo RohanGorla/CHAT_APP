@@ -750,29 +750,40 @@
   margin: 0.2em 0em;
 }
 
-.Chat--Message_Card--Others {
-  background-color: rgb(15, 15, 15);
-  margin-right: auto;
-  border-radius: 10px 10px 10px 0px;
-}
-
 .Chat--Message_Card--Own {
   background-color: black;
   margin-left: auto;
   border-radius: 10px 10px 0px 10px;
 }
 
+.Chat--Message_Card--Others {
+  background-color: rgb(15, 15, 15);
+  margin-right: auto;
+  border-radius: 10px 10px 10px 0px;
+}
+
 .Chat--Message_Card p {
   font-family: var(--Chat_Sub_Font);
+}
+
+.Chat--Message_Card--Left p {
+  color: rgb(254, 254, 254, 0.5);
 }
 
 .Chat--Message_Card--Userid {
   font-size: var(--Chat_Userid);
   font-weight: 600;
+  display: flex;
+  align-items: center;
   margin-bottom: 0.3em;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.Chat--Message_Card--Userid--Icon {
+  color: red;
+  margin-right: 0.3em;
 }
 
 .Chat--Message_Card--Message {
