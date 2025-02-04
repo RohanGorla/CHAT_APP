@@ -7,10 +7,11 @@ import { FaXmark } from "react-icons/fa6";
 function CreateGroup() {
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
-  const { socket, friends } = useOutletContext();
+  const { socket, friends, rooms } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLE */
-  const [sortedFriends, setSortedFriends] = useState(friends);
+  const [actualFriends, setActualFriends] = useState([]);
+  const [sortedFriends, setSortedFriends] = useState(actualFriends);
   const [groupName, setGroupName] = useState("");
   const [friendListSearch, setFriendListSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
@@ -41,7 +42,7 @@ function CreateGroup() {
   /* FILTER THE FRIENDS LIST BASED ON SEARCH INPUT */
   useEffect(() => {
     if (friendListSearch.length) {
-      const filteredFriends = friends.filter(
+      const filteredFriends = actualFriends.filter(
         (friend) =>
           friend.usr_nm
             .toLowerCase()
@@ -50,12 +51,25 @@ function CreateGroup() {
       );
       sortFriendsList(filteredFriends);
     } else {
-      sortFriendsList(friends);
+      sortFriendsList(actualFriends);
     }
-  }, [friendListSearch]);
+  }, [friendListSearch, actualFriends]);
 
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS WHEN EVER SELECTED FRIENDS LIST CHANGES */
-  useEffect(() => sortFriendsList(friends), [selectedFriends]);
+  useEffect(
+    () => sortFriendsList(actualFriends),
+    [selectedFriends, actualFriends]
+  );
+
+  /* FILTER OUT ACTUAL FRIENDS LIST BY CHECKING IF THEY HAVE A SINGLE TYPE ROOM */
+  useEffect(() => {
+    const filteredFriends = friends.filter((friend) =>
+      rooms.find(
+        (room) => room.type === "single" && room.users.includes(friend.usr_id)
+      )
+    );
+    setActualFriends(filteredFriends);
+  }, [rooms]);
 
   return (
     <div className="CreateGroup_Page">
