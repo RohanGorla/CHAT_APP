@@ -8,6 +8,7 @@
   --Chat_Room_Info_Add_Friends_Username: 16px;
   --Chat_Room_Info_Add_Friends_UserId: 14px;
   --Chat_Room_Info_Add_Friends_Selected_Icon: 25px;
+  --Chat_Room_Info_Add_Friends_List_Empty: 18px;
   --Chat_Room_Info_Icon: 170px;
   --Chat_Room_Info_Confirm_Group_Picture: 18px;
   --Chat_Room_Info_Room_Name: 20px;
@@ -337,6 +338,13 @@
 .Chat--Room_Information--Add_Friends--Selected_Icon {
   font-size: var(--Chat_Room_Info_Add_Friends_Selected_Icon);
   color: rgb(112, 224, 0);
+}
+
+.Chat--Room_Information--Add_Friends--Friends_List--Empty {
+  font-size: var(--Chat_Room_Info_Add_Friends_List_Empty);
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1em;
 }
 
 .Chat--Room_Information--Image {
@@ -935,6 +943,7 @@
     --Chat_Room_Info_Add_Friends_Heading: 18px;
     --Chat_Room_Info_Add_Friends_Search: 16px;
     --Chat_Room_Info_Add_Friends_Selected_Icon: 23px;
+    --Chat_Room_Info_Add_Friends_List_Empty: 16px;
     --Chat_Room_Info_Icon: 170px;
     --Chat_Room_Info_Room_Name: 18px;
     --Chat_Room_Info_Edit_Icon: 20px;

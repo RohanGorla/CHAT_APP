@@ -448,82 +448,94 @@ function Chats() {
                   </div>
                   {/* ADD FRIENDS - FRIENDS LIST */}
                   <div className="Chat--Room_Information--Add_Friends--Friends_List">
-                    {addFriendsList.map((friend, index) => {
-                      return (
-                        <div
-                          key={index}
-                          className="Chat--Room_Information--Add_Friends--Friend_Card"
-                          onClick={() => {
-                            if (selectedFriends.includes(friend.usr_id)) {
-                              const updatedList = selectedFriends.filter(
-                                (id) => id !== friend.usr_id
-                              );
-                              setSelectedFriends(updatedList);
-                            } else {
-                              setSelectedFriends([
-                                ...selectedFriends,
-                                friend.usr_id,
-                              ]);
-                            }
-                            setAddFriendsSearch("");
-                          }}
-                        >
-                          <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
-                            <div className="Chat--Room_Information--Add_Friends--Friend_Image">
-                              {friend.imageUrl ? (
-                                <>
-                                  <div
-                                    className={
-                                      loadedImages.includes(friend.imageTag)
-                                        ? "Chat--Room_Information--Add_Friends--Friend_Image_Frame"
-                                        : "Inactive"
-                                    }
-                                  >
-                                    <img
-                                      src={friend.imageUrl}
-                                      onLoad={() =>
-                                        setLoadedImages((prev) => [
-                                          ...prev,
-                                          friend.imageTag,
-                                        ])
-                                      }
-                                    ></img>
-                                  </div>
-                                  <IoMdPerson
-                                    className={
-                                      loadedImages.includes(friend.imageTag)
-                                        ? "Inactive"
-                                        : "Chat--Room_Information--Add_Friends--Friend_Icon"
-                                    }
-                                  />
-                                </>
-                              ) : (
-                                <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
-                              )}
-                            </div>
-                          </div>
-                          <div className="Chat--Room_Information--Add_Friends--Friend_Details">
-                            <div className="Chat--Room_Information--Add_Friends--Name_And_Id">
-                              <p className="Chat--Room_Information--Add_Friends--Friend_Username">
-                                {friend.usr_nm}
-                              </p>
-                              <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
-                                {friend.usr_id}
-                              </p>
-                            </div>
-                            <div
-                              className={
-                                selectedFriends.includes(friend.usr_id)
-                                  ? "Chat--Room_Information--Add_Friends--Selected"
-                                  : "Inactive"
+                    {addFriendsList.length ? (
+                      addFriendsList.map((friend, index) => {
+                        return (
+                          <div
+                            key={index}
+                            className="Chat--Room_Information--Add_Friends--Friend_Card"
+                            onClick={() => {
+                              if (selectedFriends.includes(friend.usr_id)) {
+                                const updatedList = selectedFriends.filter(
+                                  (id) => id !== friend.usr_id
+                                );
+                                setSelectedFriends(updatedList);
+                              } else {
+                                setSelectedFriends([
+                                  ...selectedFriends,
+                                  friend.usr_id,
+                                ]);
                               }
-                            >
-                              <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
+                              setAddFriendsSearch("");
+                            }}
+                          >
+                            <div className="Chat--Room_Information--Add_Friends--Friend_Image_Container">
+                              <div className="Chat--Room_Information--Add_Friends--Friend_Image">
+                                {friend.imageUrl ? (
+                                  <>
+                                    <div
+                                      className={
+                                        loadedImages.includes(friend.imageTag)
+                                          ? "Chat--Room_Information--Add_Friends--Friend_Image_Frame"
+                                          : "Inactive"
+                                      }
+                                    >
+                                      <img
+                                        src={friend.imageUrl}
+                                        onLoad={() =>
+                                          setLoadedImages((prev) => [
+                                            ...prev,
+                                            friend.imageTag,
+                                          ])
+                                        }
+                                      ></img>
+                                    </div>
+                                    <IoMdPerson
+                                      className={
+                                        loadedImages.includes(friend.imageTag)
+                                          ? "Inactive"
+                                          : "Chat--Room_Information--Add_Friends--Friend_Icon"
+                                      }
+                                    />
+                                  </>
+                                ) : (
+                                  <IoMdPerson className="Chat--Room_Information--Add_Friends--Friend_Icon" />
+                                )}
+                              </div>
+                            </div>
+                            <div className="Chat--Room_Information--Add_Friends--Friend_Details">
+                              <div className="Chat--Room_Information--Add_Friends--Name_And_Id">
+                                <p className="Chat--Room_Information--Add_Friends--Friend_Username">
+                                  {friend.usr_nm}
+                                </p>
+                                <p className="Chat--Room_Information--Add_Friends--Friend_UserId">
+                                  {friend.usr_id}
+                                </p>
+                              </div>
+                              <div
+                                className={
+                                  selectedFriends.includes(friend.usr_id)
+                                    ? "Chat--Room_Information--Add_Friends--Selected"
+                                    : "Inactive"
+                                }
+                              >
+                                <SiTicktick className="Chat--Room_Information--Add_Friends--Selected_Icon" />
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
+                        );
+                      })
+                    ) : actualFriends.length ? (
+                      <p className="Chat--Room_Information--Add_Friends--Friends_List--Empty">
+                        {addFriendsSearch.length
+                          ? `No match found!`
+                          : `All your frens are already in the group!`}
+                      </p>
+                    ) : (
+                      <p className="Chat--Room_Information--Add_Friends--Friends_List--Empty">
+                        You have no frens to add to the group!
+                      </p>
+                    )}
                   </div>
                 </div>
               </div>
