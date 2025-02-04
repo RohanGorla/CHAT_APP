@@ -312,6 +312,8 @@ function User() {
       setNotifications(updatedNotifications);
       /* CHANGE USERID IN CHATS */
       const updatedChats = chats.map((chat) => {
+        if (typeof chat.read !== "boolean" && chat.read.includes(oldUserid))
+          chat.read[chat.read.indexOf(oldUserid)] = newUserid;
         if (chat.usr_id === oldUserid) chat.usr_id = newUserid;
         return chat;
       });
@@ -486,7 +488,10 @@ function User() {
       {/* NAVBAR */}
       <nav className="User_Navbar">
         <div className="User_App--Logo_And_Name">
-          <img className="User_App--Logo" src={`data:image/png;base64,${logoUrl}`}></img>
+          <img
+            className="User_App--Logo"
+            src={`data:image/png;base64,${logoUrl}`}
+          ></img>
           <p className="User_App--Name">frens</p>
         </div>
         <div className="User_Nav_Options">
