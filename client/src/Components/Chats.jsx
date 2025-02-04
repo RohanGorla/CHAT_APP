@@ -6,6 +6,7 @@ import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
 import { FaEdit, FaCamera } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
+import { GiCancel } from "react-icons/gi";
 import FriendsList from "./FriendsList";
 import axios from "axios";
 
@@ -1067,7 +1068,9 @@ function Chats() {
                   className={
                     userData?.userId === message.usr_id
                       ? "Chat--Message_Card Chat--Message_Card--Own"
-                      : "Chat--Message_Card Chat--Message_Card--Others"
+                      : currentRoom.users.includes(message.usr_id)
+                      ? "Chat--Message_Card Chat--Message_Card--Others"
+                      : "Chat--Message_Card Chat--Message_Card--Others Chat--Message_Card--Left"
                   }
                 >
                   <p
@@ -1081,10 +1084,19 @@ function Chats() {
                     style={{
                       color: currentRoom.userIdColors
                         ? currentRoom.userIdColors[message.usr_id]
-                        : "white",
+                        : null,
                     }}
                   >
-                    {message.usr_id}
+                    <GiCancel
+                      className={
+                        currentRoom.users.includes(message.usr_id)
+                          ? "Inactive"
+                          : "Chat--Message_Card--Userid--Icon"
+                      }
+                    />
+                    <span className="Chat--Message_Card--Userid--Text">
+                      {message.usr_id}
+                    </span>
                   </p>
                   <p className="Chat--Message_Card--Message">{message.msg}</p>
                   <div className="Chat--Message_Card--Time_And_Status">
