@@ -40,6 +40,7 @@ function Chats() {
   const [confirmExit, setConfirmExit] = useState(false);
   const [confirmDeleteGroup, setConfirmDeleteGroup] = useState(false);
   const [addFriends, setAddFriends] = useState(false);
+  const [actualFriends, setActualFriends] = useState([]);
   const [addFriendsList, setAddFriendsList] = useState([]);
   const [addFriendsSearch, setAddFriendsSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
@@ -182,22 +183,6 @@ function Chats() {
     setSelectedFriends([]);
   }
 
-  /* FUNCTION TO SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
-  function sortFriendsList(list) {
-    /* FILTER OUT USERS FROM FRIENDS LIST WHO ARE NOT ALREADY INCLUDED IN THE GROUP */
-    const notIncludedFriends = list.filter(
-      (friend) => !currentRoom.users.includes(friend.usr_id)
-    );
-    /* FILTER 'NOT INCLUDED FRIENDS LIST' BASED ON SELECTED STATUS */
-    const selectedList = notIncludedFriends.filter((friend) =>
-      selectedFriends.includes(friend.usr_id)
-    );
-    const notSelectedList = notIncludedFriends.filter(
-      (friend) => !selectedFriends.includes(friend.usr_id)
-    );
-    setAddFriendsList([...selectedList, ...notSelectedList]);
-  }
-
   /* MAKE ADJUSTMENTS TO THE HEIGHTS OF NECESSARY COMPONENTS WHENEVER TEXT CHANGES IN TEXTAREA */
   useEffect(() => {
     const chatContainer = chatContainerRef.current;
@@ -301,10 +286,26 @@ function Chats() {
       });
   }, [roomChats]);
 
+  /* FUNCTION TO SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
+  function sortFriendsList(list) {
+    /* FILTER OUT USERS FROM FRIENDS LIST WHO ARE NOT ALREADY INCLUDED IN THE GROUP */
+    const notIncludedFriends = list.filter(
+      (friend) => !currentRoom.users.includes(friend.usr_id)
+    );
+    /* FILTER 'NOT INCLUDED FRIENDS LIST' BASED ON SELECTED STATUS */
+    const selectedList = notIncludedFriends.filter((friend) =>
+      selectedFriends.includes(friend.usr_id)
+    );
+    const notSelectedList = notIncludedFriends.filter(
+      (friend) => !selectedFriends.includes(friend.usr_id)
+    );
+    setAddFriendsList([...selectedList, ...notSelectedList]);
+  }
+
   /* SORT THE ADD FRIENDS SECTION FRIENDS LIST BASED ON SEARCH INPUT */
   useEffect(() => {
     if (addFriendsSearch.length) {
-      const filteredFriends = friends.filter(
+      const filteredFriends = actualFriends.filter(
         (friend) =>
           friend.usr_nm
             .toLowerCase()
@@ -313,14 +314,24 @@ function Chats() {
       );
       sortFriendsList(filteredFriends);
     } else {
-      sortFriendsList(friends);
+      sortFriendsList(actualFriends);
     }
   }, [addFriendsSearch, rooms]);
 
   /* SORT THE FRIENDS LIST BASED ON SELECTED FRIENDS IN ADD FRIENDS SECTION */
   useEffect(() => {
-    if (currentRoom.type === "group") sortFriendsList(friends);
-  }, [selectedFriends]);
+    if (currentRoom.type === "group") sortFriendsList(actualFriends);
+  }, [selectedFriends, actualFriends]);
+
+  /* FILTER OUT ACTUAL FRIENDS LIST BY CHECKING IF THEY HAVE A SINGLE TYPE ROOM */
+  useEffect(() => {
+    const filteredFriends = friends.filter((friend) =>
+      rooms.find(
+        (room) => room.type === "single" && room.users.includes(friend.usr_id)
+      )
+    );
+    setActualFriends(filteredFriends);
+  }, [rooms]);
 
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
