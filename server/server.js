@@ -570,11 +570,23 @@ io.on("connection", async (socket) => {
       },
       { $pull: { users: oldUserid } }
     );
-    const UpdateChatMessages = await chatMessagesCollection.updateMany(
+    const updateChatMessages = await chatMessagesCollection.updateMany(
       {
         usr_id: oldUserid,
       },
       { $set: { usr_id: newUserid } }
+    );
+    const removeIdFromMessageReadList = await chatMessagesCollection.updateMany(
+      {
+        read: oldUserid,
+      },
+      { $push: { read: newUserid } }
+    );
+    const addIdToMessageReadList = await chatMessagesCollection.updateMany(
+      {
+        read: oldUserid,
+      },
+      { $pull: { read: oldUserid } }
     );
     const updateSentNotifications = await notificationsCollection.updateMany(
       {
