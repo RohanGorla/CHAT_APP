@@ -122,79 +122,89 @@ function CreateGroup() {
           </div>
           {/* FRIENDS LIST */}
           <div className="CreateGroup--Select_Friends--Friends_List">
-            {sortedFriends.map((friend, index) => {
-              return (
-                <div
-                  key={index}
-                  className="CreateGroup--Friends_List--Friend"
-                  onClick={() => {
-                    if (selectedFriends.includes(friend.usr_id)) {
-                      const updatedList = selectedFriends.filter(
-                        (id) => id !== friend.usr_id
-                      );
-                      setSelectedFriends(updatedList);
-                    } else {
-                      setSelectedFriends([...selectedFriends, friend.usr_id]);
-                    }
-                    setFriendListSearch("");
-                  }}
-                >
-                  <div className="CreateGroup--Friends_List--Friend_Image_Container">
-                    <div className="CreateGroup--Friends_List--Friend_Image">
-                      {friend.imageUrl ? (
-                        <>
-                          <div
-                            className={
-                              loadedImages.includes(friend.imageTag)
-                                ? "CreateGroup--Friends_List--Friend_Image_Frame"
-                                : "Inactive"
-                            }
-                          >
-                            <img
-                              src={friend.imageUrl}
-                              onLoad={() =>
-                                setLoadedImages((prev) => [
-                                  ...prev,
-                                  friend.imageTag,
-                                ])
-                              }
-                            ></img>
-                          </div>
-                          <IoMdPerson
-                            className={
-                              loadedImages.includes(friend.imageTag)
-                                ? "Inactive"
-                                : "CreateGroup--Friends_List--Friend_Icon"
-                            }
-                          />
-                        </>
-                      ) : (
-                        <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
-                      )}
-                    </div>
-                  </div>
-                  <div className="CreateGroup--Friends_List--Friend_Details">
-                    <div className="CreateGroup--Friends_List--Friend_Details--Name_And_Id">
-                      <p className="CreateGroup--Friends_List--Friend_Username">
-                        {friend.usr_nm}
-                      </p>
-                      <p className="CreateGroup--Friends_List--Friend_Userid">
-                        {friend.usr_id}
-                      </p>
-                    </div>
-                    <div
-                      className={
-                        selectedFriends.includes(friend.usr_id)
-                          ? "CreateGroup--Friends_List--Friend_Details--Selected"
-                          : "Inactive"
+            {sortedFriends.length ? (
+              sortedFriends.map((friend, index) => {
+                return (
+                  <div
+                    key={index}
+                    className="CreateGroup--Friends_List--Friend"
+                    onClick={() => {
+                      if (selectedFriends.includes(friend.usr_id)) {
+                        const updatedList = selectedFriends.filter(
+                          (id) => id !== friend.usr_id
+                        );
+                        setSelectedFriends(updatedList);
+                      } else {
+                        setSelectedFriends([...selectedFriends, friend.usr_id]);
                       }
-                    >
-                      <SiTicktick className="CreateGroup--Friends_List--Friend_Details--Selected_Icon" />
+                      setFriendListSearch("");
+                    }}
+                  >
+                    <div className="CreateGroup--Friends_List--Friend_Image_Container">
+                      <div className="CreateGroup--Friends_List--Friend_Image">
+                        {friend.imageUrl ? (
+                          <>
+                            <div
+                              className={
+                                loadedImages.includes(friend.imageTag)
+                                  ? "CreateGroup--Friends_List--Friend_Image_Frame"
+                                  : "Inactive"
+                              }
+                            >
+                              <img
+                                src={friend.imageUrl}
+                                onLoad={() =>
+                                  setLoadedImages((prev) => [
+                                    ...prev,
+                                    friend.imageTag,
+                                  ])
+                                }
+                              ></img>
+                            </div>
+                            <IoMdPerson
+                              className={
+                                loadedImages.includes(friend.imageTag)
+                                  ? "Inactive"
+                                  : "CreateGroup--Friends_List--Friend_Icon"
+                              }
+                            />
+                          </>
+                        ) : (
+                          <IoMdPerson className="CreateGroup--Friends_List--Friend_Icon" />
+                        )}
+                      </div>
+                    </div>
+                    <div className="CreateGroup--Friends_List--Friend_Details">
+                      <div className="CreateGroup--Friends_List--Friend_Details--Name_And_Id">
+                        <p className="CreateGroup--Friends_List--Friend_Username">
+                          {friend.usr_nm}
+                        </p>
+                        <p className="CreateGroup--Friends_List--Friend_Userid">
+                          {friend.usr_id}
+                        </p>
+                      </div>
+                      <div
+                        className={
+                          selectedFriends.includes(friend.usr_id)
+                            ? "CreateGroup--Friends_List--Friend_Details--Selected"
+                            : "Inactive"
+                        }
+                      >
+                        <SiTicktick className="CreateGroup--Friends_List--Friend_Details--Selected_Icon" />
+                      </div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+            ) : actualFriends.length ? (
+              <p className="CreateGroup--Friends_List--Empty">
+                No match found!
+              </p>
+            ) : (
+              <p className="CreateGroup--Friends_List--Empty">
+                You have no frens to create a group!
+              </p>
+            )}
           </div>
         </section>
       </div>

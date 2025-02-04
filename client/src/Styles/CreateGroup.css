@@ -9,6 +9,7 @@
   --CreateGroup--Friends_List_Username: 16px;
   --CreateGroup--Friends_List_Userid: 14px;
   --CreateGroup--Friends_Selected_Icon: 25px;
+  --CreateGroup--Friends_List_Empty: 18px;
 }
 
 .CreateGroup_Page {
@@ -236,6 +237,14 @@
   color: rgb(112, 224, 0);
 }
 
+.CreateGroup--Friends_List--Empty {
+  font-family: var(--CreateGroup_Main_Font);
+  font-size: var(--CreateGroup--Friends_List_Empty);
+  font-weight: 600;
+  text-align: center;
+  margin-top: 1em;
+}
+
 .Inactive {
   display: none;
 }
@@ -278,6 +287,7 @@
     --CreateGroup--Input: 15px;
     --CreateGroup--Create_Button: 12px;
     --CreateGroup--Friends_Selected_Icon: 20px;
+    --CreateGroup--Friends_List_Empty: 16px;
   }
 
   .CreateGroup_Page {
