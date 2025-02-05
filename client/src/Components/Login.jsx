@@ -63,7 +63,7 @@ function Login() {
           className="Login_Page--App_Logo"
           src={`data:image/png;base64,${logoUrl}`}
         ></img>
-        <p className="Login_Page--Welcome_Message">Welcome, please login!</p>
+        <p className="Login_Page--Message">Welcome, please login!</p>
       </div>
       {/* LOGIN FORM */}
       <form className="Login_Page--Form" onSubmit={checkUser}>
