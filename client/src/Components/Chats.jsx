@@ -1093,9 +1093,10 @@ function Chats() {
                   className={
                     userData?.userId === message.usr_id
                       ? "Chat--Message_Card Chat--Message_Card--Own"
-                      : currentRoom.users.includes(message.usr_id)
-                      ? "Chat--Message_Card Chat--Message_Card--Others"
-                      : "Chat--Message_Card Chat--Message_Card--Others Chat--Message_Card--Left"
+                      : !currentRoom.users.includes(message.usr_id) &&
+                        !message.incognito
+                      ? "Chat--Message_Card Chat--Message_Card--Others Chat--Message_Card--Left"
+                      : "Chat--Message_Card Chat--Message_Card--Others"
                   }
                 >
                   <p
