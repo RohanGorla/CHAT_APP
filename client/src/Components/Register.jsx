@@ -78,9 +78,7 @@ function Register() {
           className="Login_Page--App_Logo"
           src={`data:image/png;base64,${logoUrl}`}
         ></img>
-        <p className="Login_Page--Message">
-          Create your frens account!
-        </p>
+        <p className="Login_Page--Message">Create your frens account!</p>
       </div>
       {/* USER REGISTER FORM */}
       <form className="Login_Page--Form" onSubmit={registerUser}>
@@ -207,6 +205,18 @@ function Register() {
           </span>
         </p>
       </form>
+      <div className="Login_Page--App_Info">
+        <div className="Login_Page--App_Info--Logo_And_Name">
+          <img
+            className="Login_Page--App_Info--Logo"
+            src={`data:image/png;base64,${logoUrl}`}
+          ></img>
+          <p className="Login_Page--App_Info--Name">Frens - online messenger</p>
+        </div>
+        <p className="Login_Page--App_Info--CreatedBy">
+          Created by - Rohan Gorla
+        </p>
+      </div>
     </div>
   );
 }
