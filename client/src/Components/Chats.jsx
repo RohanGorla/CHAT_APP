@@ -335,6 +335,11 @@ function Chats() {
     setActualFriends(filteredFriends);
   }, [rooms]);
 
+  /* RESET THE INCOGNITO STATE WHEN USER OPENS DIFFERENTS CHAT */
+  useEffect(() => {
+    setIncognito(false);
+  }, [id]);
+
   useEffect(() => {
     /* NAVIGATE TO LOGIN PAGE IF USER IS NOT LOGGED IN */
     if (!userData) navigate("/login");
@@ -1007,6 +1012,32 @@ function Chats() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+        {/* INCOGNITO TEXTING MESSAGE */}
+        <div className="Chat--Incognito_Texting">
+          <div className="Chat--Incognito_Texting--Card">
+            <div className="Chat--Incognito_Texting--Header">
+              <FaUserSecret className="Chat--Incognito_Texting--Icon" />
+              <p className="Chat--Incognito_Texting--Heading">
+                Incognito mode - ON
+              </p>
+            </div>
+            <ul className="Chat--Incognito_Texting--Features_List">
+              <li className="Chat--Incognito_Texting--Feature">
+                Messages sent with incognito mode won't show your user id to group
+                members.
+              </li>
+              <li className="Chat--Incognito_Texting--Feature">
+                You can turn it off by clicking the incognito button again.
+              </li>
+              <li className="Chat--Incognito_Texting--Feature">
+                Enjoy the freedom of anonymous texting!
+              </li>
+            </ul>
+            <button className="Chat--Incognito_Texting--Close_Button">
+              Got it!
+            </button>
           </div>
         </div>
         {/* CHAT ROOM BASIC DETAILS */}
