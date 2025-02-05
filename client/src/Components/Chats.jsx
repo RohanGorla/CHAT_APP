@@ -45,6 +45,7 @@ function Chats() {
   const [addFriendsSearch, setAddFriendsSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [loadedImages, setLoadedImages] = useState([]);
+  const [incognito, setIncognito] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -85,6 +86,7 @@ function Chats() {
       id,
       time: new Date(),
       read,
+      incognito,
     });
     setMessage("");
   }
@@ -1175,6 +1177,7 @@ function Chats() {
                     id,
                     time: new Date(),
                     read,
+                    incognito,
                   });
                 }}
               >
@@ -1186,8 +1189,24 @@ function Chats() {
         {/* NEW MESSAGE TYPING SECTION */}
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
-            <button className="Chat--New_Message--Incognito_Button">
-              <FaUserSecret className="Chat--New_Message--Incognito_Button--Icon" />
+            <button
+              className={
+                currentRoom.type === "group"
+                  ? "Chat--New_Message--Incognito_Button"
+                  : "Inactive"
+              }
+              onClick={(e) => {
+                e.preventDefault();
+                setIncognito(!incognito);
+              }}
+            >
+              <FaUserSecret
+                className={
+                  incognito
+                    ? "Chat--New_Message--Incognito_Button--Icon Chat--New_Message--Incognito_Button--Icon--Active"
+                    : "Chat--New_Message--Incognito_Button--Icon"
+                }
+              />
             </button>
             <textarea
               className="Chat--New_Message--Textarea"

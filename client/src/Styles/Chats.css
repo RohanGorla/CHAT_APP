@@ -878,6 +878,10 @@
   font-size: var(--Chat_New_Message_Icons);
 }
 
+.Chat--New_Message--Incognito_Button--Icon--Active {
+  color: rgb(112, 224, 0);
+}
+
 .Chat--New_Message--Textarea {
   background-color: rgb(25, 25, 25);
   font-family: var(--Chat_Sub_Font);
