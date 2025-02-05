@@ -10,6 +10,7 @@ import "./index.css";
 import App from "./App.jsx";
 import Login from "./Components/Login.jsx";
 import Register from "./Components/Register.jsx";
+import ForgotPassword from "./Components/ForgotPassword.jsx";
 import User from "./Components/User.jsx";
 import Friends from "./Components/Friends.jsx";
 import CreateGroup from "./Components/CreateGroup.jsx";
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
         <Route path="" element={<App />} />
         <Route path="login" element={<Login />} />
         <Route path="register" element={<Register />} />
+        <Route path="forgotpassword" element={<ForgotPassword />} />
         <Route path="user" element={<User />}>
           <Route path="friends" element={<Friends />} />
           <Route path="creategroup" element={<CreateGroup />} />
