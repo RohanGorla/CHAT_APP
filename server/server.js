@@ -292,6 +292,7 @@ io.on("connection", async (socket) => {
       room: payload.id,
       time: payload.time,
       read: payload.read,
+      incognito: payload.incognito,
     });
     io.to(payload.id).emit("receive_message", payload);
   });

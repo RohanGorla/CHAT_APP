@@ -1100,7 +1100,7 @@ function Chats() {
                 >
                   <p
                     className={
-                      currentRoom.type === "group"
+                      currentRoom.type === "group" && !message.incognito
                         ? userData?.userId === message.usr_id
                           ? "Inactive"
                           : "Chat--Message_Card--Userid"

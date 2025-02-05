@@ -66,6 +66,7 @@ function User() {
           room: payload.id,
           time: payload.time,
           read: payload.read,
+          incognito: payload.incognito,
         },
       ]);
     });
