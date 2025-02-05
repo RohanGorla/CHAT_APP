@@ -109,6 +109,18 @@ function Login() {
         <button type="submit" disabled={submitted}>
           Login
         </button>
+        {/* NAVIGATE TO PASSWORD RESET PAGE */}
+        <p className="Login--Toggle">
+          Forgot passsword?{" "}
+          <span
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/forgotpassword");
+            }}
+          >
+            Reset password!
+          </span>
+        </p>
         {/* NAVIGATE TO REGISTER PAGE */}
         <p className="Login--Toggle">
           New user?{" "}
