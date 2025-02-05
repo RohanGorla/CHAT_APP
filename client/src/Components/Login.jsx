@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
 import axios from "axios";
+import logoUrl from "../assets/Logo";
 
 function Login() {
   /* SPECIAL VARIABLES */
@@ -56,8 +57,14 @@ function Login() {
 
   return (
     <div className="Login_Page">
-      {/* WELCOME MESSAGE */}
-      <p className="Login_Page--Welcome_Message">Welcome to frens!</p>
+      {/* APP LOGO AND WELCOME MESSAGE */}
+      <div className="Login_Page--Logo_And_Message">
+        <img
+          className="Login_Page--App_Logo"
+          src={`data:image/png;base64,${logoUrl}`}
+        ></img>
+        <p className="Login_Page--Welcome_Message">Welcome, please login!</p>
+      </div>
       {/* LOGIN FORM */}
       <form className="Login_Page--Form" onSubmit={checkUser}>
         {/* LOGIN EMAIL */}
