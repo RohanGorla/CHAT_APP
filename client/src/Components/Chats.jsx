@@ -1187,6 +1187,7 @@ function Chats() {
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
             <textarea
+              className="Chat--New_Message--Textarea"
               ref={textAreaRef}
               type="text"
               value={message}
@@ -1195,8 +1196,8 @@ function Chats() {
               }}
               placeholder="Type a message..."
             ></textarea>
-            <button type="submit">
-              <LuSend size={25} />
+            <button className="Chat--New_Message--Send_Button" type="submit">
+              <LuSend className="Chat--New_Message--Send_Button--Icon" />
             </button>
           </form>
         </section>

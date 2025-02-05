@@ -862,7 +862,7 @@
   align-items: center;
 }
 
-.Chat--New_Message--Form textarea {
+.Chat--New_Message--Textarea {
   background-color: rgb(25, 25, 25);
   font-family: var(--Chat_Sub_Font);
   font-size: 16px;
@@ -870,23 +870,27 @@
   line-height: 1.25;
   display: inline-block;
   height: 50px;
-  width: 70%;
+  width: 80%;
   resize: none;
   overflow: hidden;
   padding: 15px 0;
   border: 0px;
-  margin-right: 2em;
   outline: none;
 }
 
-.Chat--New_Message--Form button {
+.Chat--New_Message--Send_Button {
   background-color: rgb(25, 25, 25);
   color: white;
+  width: 10%;
   display: flex;
   justify-content: center;
   align-items: center;
   border-style: none;
   cursor: pointer;
+}
+
+.Chat--New_Message--Send_Button--Icon {
+  font-size: 25px;
 }
 
 @media (max-width: 1570px) {
