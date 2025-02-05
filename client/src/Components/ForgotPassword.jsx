@@ -18,9 +18,11 @@ function ForgotPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  /* FUNCTION TO RESET USER PASSWORD */
   async function resetPassword(e) {
     e.preventDefault();
     setSubmitted(true);
+    /* CHECK IF PASSWORDS MATCH */
     if (password !== confirmPassword) {
       setMailError(false);
       setPasswordError(true);
@@ -29,6 +31,7 @@ function ForgotPassword() {
       return;
     }
     setPasswordError(false);
+    /* RESET PASSWORD AXIOS REQUEST */
     const response = await axios.post(
       `${import.meta.env.VITE_SERVER_URL}/resetpassword`,
       {
@@ -36,6 +39,21 @@ function ForgotPassword() {
         password,
       }
     );
+    /* IF EMAIL NOT LINKED TO ANY ACCOUNT */
+    if (!response.data.access) {
+      switch (response.data.errorCode) {
+        case "mail":
+          setMailError(true);
+          break;
+      }
+      setErrorMessage(response.data.errorMsg);
+      setSubmitted(false);
+      return;
+    }
+    /* NAVIGATE BACK TO LOGIN PAGE AFTER SUCCESSFUL PASSWORD RESET */
+    setMailError(false);
+    setErrorMessage("");
+    navigate("/login");
   }
 
   return (
@@ -64,7 +82,7 @@ function ForgotPassword() {
           ></input>
           <p>{mailError ? errorMessage : ""}</p>
         </div>
-        {/* USER PASSWORD FOR AUTHENTICATION */}
+        {/* NEW PASSWORD */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Password">New password:</label>
           <div className="Login_Password--Input_Container">
@@ -87,7 +105,7 @@ function ForgotPassword() {
             />
           </div>
         </div>
-        {/* CONFIRM USER PASSWORD */}
+        {/* CONFIRM NEW PASSWORD */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Confirm_Password">Confirm new password:</label>
           <div className="Login_Password--Input_Container">
