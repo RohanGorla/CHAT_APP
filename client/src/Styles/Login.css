@@ -6,6 +6,8 @@
   --Login_Enter_Name_Input: 18px;
   --Login_Error_Message: 16px;
   --Login_Submit_Name_Button: 16px;
+  --Login_App_Name: 16px;
+  --Login_CreatedBy: 14px;
 }
 
 .Login_Page {
@@ -18,13 +20,24 @@
   width: 100dvw;
 }
 
-.Login_Page--Welcome_Message {
+.Login_Page--Logo_And_Message {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-bottom: 1em;
+}
+
+.Login_Page--App_Logo {
+  width: 20px;
+  height: 20px;
+}
+
+.Login_Page--Message {
   font-family: var(--Login_Main_Font);
   font-size: var(--Login_Welcome);
   font-weight: 600;
   word-spacing: 3px;
   color: white;
-  margin-bottom: 1em;
 }
 
 .Login_Page--Form {
@@ -124,6 +137,35 @@ input.Login_Input--Error {
   }
 }
 
+.Login_Page--App_Info {
+  position: absolute;
+  bottom: 10px;
+  font-family: var(--Login_Main_Font);
+  color: white;
+}
+
+.Login_Page--App_Info--Logo_And_Name {
+  display: flex;
+  align-items: center;
+  gap: 0.75em;
+  margin-bottom: 0.5em;
+}
+
+.Login_Page--App_Info--Logo {
+  width: 18px;
+  height: 18px;
+}
+
+.Login_Page--App_Info--Name {
+  font-size: var(--Login_App_Name);
+  font-weight: 600;
+}
+
+.Login_Page--App_Info--CreatedBy {
+  font-size: var(--Login_CreatedBy);
+  text-align: center;
+}
+
 @media (max-width: 550px) {
   :root {
     --Login_Welcome: 18px;
@@ -131,9 +173,21 @@ input.Login_Input--Error {
     --Login_Enter_Name_Input: 16px;
     --Login_Error_Message: 14px;
     --Login_Submit_Name_Button: 14px;
+    --Login_App_Name: 14px;
+    --Login_CreatedBy: 12px;
+  }
+
+  .Login_Page--App_Logo {
+    width: 18px;
+    height: 18px;
   }
 
   .Login_Page--Form input {
     max-width: 250px;
+  }
+
+  .Login_Page--App_Info--Logo {
+    width: 15px;
+    height: 15px;
   }
 }

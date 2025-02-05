@@ -205,6 +205,7 @@ function Register() {
           </span>
         </p>
       </form>
+      {/* APP INFO */}
       <div className="Login_Page--App_Info">
         <div className="Login_Page--App_Info--Logo_And_Name">
           <img
