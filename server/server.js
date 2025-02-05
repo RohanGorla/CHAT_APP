@@ -163,12 +163,23 @@ app.post("/resetpassword", async (req, res) => {
       errorCode: "mail",
     });
 
+  const passwordCheck = await bcrypt.compare(
+    req.body.password,
+    emailRecords[0].pass
+  );
+  if (passwordCheck)
+    return res.send({
+      access: false,
+      errorMsg: "The new password cannot be the same as your current password!",
+      errorCode: "pass",
+    });
   const hashedPassword = await bcrypt.hash(req.body.password, 10);
   const updatePassword = await userInfoCollection.updateOne(
     { email: req.body.mail },
     { $set: { pass: hashedPassword } }
   );
-  return res.send({ access: true });
+  if (updatePassword.acknowledged) return res.send({ access: true });
+  res.send({ access: false });
 });
 
 /* GENERATE THE PROFILE PICTURE GET AND PUT SIGNED URLS */
