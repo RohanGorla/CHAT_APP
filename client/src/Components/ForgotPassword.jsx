@@ -45,6 +45,12 @@ function ForgotPassword() {
         case "mail":
           setMailError(true);
           break;
+
+        case "pass":
+          setPasswordError(true);
+          setPassword("");
+          setConfirmPassword("");
+          break;
       }
       setErrorMessage(response.data.errorMsg);
       setSubmitted(false);
@@ -52,6 +58,7 @@ function ForgotPassword() {
     }
     /* NAVIGATE BACK TO LOGIN PAGE AFTER SUCCESSFUL PASSWORD RESET */
     setMailError(false);
+    setPasswordError(false);
     setErrorMessage("");
     navigate("/login");
   }
