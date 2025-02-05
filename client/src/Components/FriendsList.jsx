@@ -212,7 +212,7 @@ function FriendsList() {
             {friendListSearch.length
               ? rooms.length
                 ? `No match found!`
-                : `Your frens list is empty! Find frens and send them a fren request to show them here!.`
+                : `Your frens list is empty! Find frens and send them a fren request to show them here!`
               : `Oops! Looks like your frens list is empty. Send a request to a fren
             to show them here!`}
           </p>
