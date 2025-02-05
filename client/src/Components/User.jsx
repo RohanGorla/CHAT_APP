@@ -120,11 +120,6 @@ function User() {
       );
       setRooms(updatedRooms);
       setSearchRooms(updatedRooms);
-      const updatedFriends = friends.filter((friend) => {
-        if (friend.usr_id !== from.userId && friend.usr_id !== to.usr_id)
-          return friend;
-      });
-      setFriends(updatedFriends);
       const updatedChats = chats.filter(
         (chat) => chat.room !== roomToRemove.roomId
       );
