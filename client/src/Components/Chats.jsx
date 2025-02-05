@@ -1209,7 +1209,11 @@ function Chats() {
               />
             </button>
             <textarea
-              className="Chat--New_Message--Textarea"
+              className={
+                currentRoom.type === "group"
+                  ? "Chat--New_Message--Textarea Chat--New_Message--Textarea--Group"
+                  : "Chat--New_Message--Textarea"
+              }
               ref={textAreaRef}
               type="text"
               value={message}

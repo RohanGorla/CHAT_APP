@@ -890,12 +890,16 @@
   line-height: 1.25;
   display: inline-block;
   height: 50px;
-  width: calc(100% - 120px);
+  width: calc(100% - 80px);
   resize: none;
   overflow: hidden;
   padding: 15px 0;
   border: 0px;
   outline: none;
+}
+
+.Chat--New_Message--Textarea--Group {
+  width: calc(100% - 120px);
 }
 
 .Chat--New_Message--Send_Button {
@@ -1122,6 +1126,10 @@
   }
 
   .Chat--New_Message--Textarea {
+    width: calc(100% - 70px);
+  }
+
+  .Chat--New_Message--Textarea--Group {
     width: calc(100% - 100px);
   }
 
