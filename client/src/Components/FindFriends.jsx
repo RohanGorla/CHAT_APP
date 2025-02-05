@@ -19,9 +19,14 @@ function FindFriends() {
 
   /* FRIENDS IDS LISTS */
   const friendsIds = useMemo(() => {
-    const ids = friends.map((friend) => friend.usr_id);
+    const actualFriends = friends.filter((friend) =>
+      rooms.find(
+        (room) => room.type === "single" && room.users.includes(friend.usr_id)
+      )
+    );
+    const ids = actualFriends.map((friend) => friend.usr_id);
     return ids;
-  }, [friends]);
+  }, [friends, rooms]);
 
   /* GET ALL FRIEND REQUEST THE USER HAS SENT TO OTHERS */
   const sentRequests = useMemo(() => {
