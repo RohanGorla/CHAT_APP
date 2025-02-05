@@ -26,6 +26,7 @@
   --Chat_Show_Details: 14px;
   --Chat_Userid: 16px;
   --Chat_Message: 18px;
+  --Chat_New_Message_Icons: 25px;
 }
 
 .Chat_Page {
@@ -862,6 +863,21 @@
   align-items: center;
 }
 
+.Chat--New_Message--Incognito_Button {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  width: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  cursor: pointer;
+}
+
+.Chat--New_Message--Incognito_Button--Icon {
+  font-size: var(--Chat_New_Message_Icons);
+}
+
 .Chat--New_Message--Textarea {
   background-color: rgb(25, 25, 25);
   font-family: var(--Chat_Sub_Font);
@@ -870,7 +886,7 @@
   line-height: 1.25;
   display: inline-block;
   height: 50px;
-  width: 80%;
+  width: calc(100% - 120px);
   resize: none;
   overflow: hidden;
   padding: 15px 0;
@@ -881,7 +897,7 @@
 .Chat--New_Message--Send_Button {
   background-color: rgb(25, 25, 25);
   color: white;
-  width: 10%;
+  width: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -890,7 +906,7 @@
 }
 
 .Chat--New_Message--Send_Button--Icon {
-  font-size: 25px;
+  font-size: var(--Chat_New_Message_Icons);
 }
 
 @media (max-width: 1570px) {
@@ -977,6 +993,7 @@
     --Chat_Room_Info_Confirm_Message: 13px;
     --Chat_Userid: 12px;
     --Chat_Message: 14px;
+    --Chat_New_Message_Icons: 22px;
   }
 
   .Chat--Room_Information_Container {
@@ -1094,5 +1111,17 @@
 
   .Chat--Message_Card--Time_And_Status {
     margin-top: 0.3em;
+  }
+
+  .Chat--New_Message--Incognito_Button {
+    width: 50px;
+  }
+
+  .Chat--New_Message--Textarea {
+    width: calc(100% - 100px);
+  }
+
+  .Chat--New_Message--Send_Button {
+    width: 50px;
   }
 }

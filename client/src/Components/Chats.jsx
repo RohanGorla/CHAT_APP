@@ -4,7 +4,7 @@ import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
-import { FaEdit, FaCamera } from "react-icons/fa";
+import { FaEdit, FaCamera, FaUserSecret } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
 import FriendsList from "./FriendsList";
@@ -1186,6 +1186,9 @@ function Chats() {
         {/* NEW MESSAGE TYPING SECTION */}
         <section className="Chat--New_Message" ref={textAreaContainerRef}>
           <form onSubmit={sendMessage} className="Chat--New_Message--Form">
+            <button className="Chat--New_Message--Incognito_Button">
+              <FaUserSecret className="Chat--New_Message--Incognito_Button--Icon" />
+            </button>
             <textarea
               className="Chat--New_Message--Textarea"
               ref={textAreaRef}
