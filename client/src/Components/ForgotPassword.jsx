@@ -18,6 +18,26 @@ function ForgotPassword() {
   const [errorMessage, setErrorMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  async function resetPassword(e) {
+    e.preventDefault();
+    setSubmitted(true);
+    if (password !== confirmPassword) {
+      setMailError(false);
+      setPasswordError(true);
+      setSubmitted(false);
+      setErrorMessage("Passwords donot match!");
+      return;
+    }
+    setPasswordError(false);
+    const response = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/resetpassword`,
+      {
+        mail,
+        password,
+      }
+    );
+  }
+
   return (
     <div className="Login_Page">
       {/* APP LOGO AND RESET PASSWORD MESSAGE */}
@@ -29,7 +49,7 @@ function ForgotPassword() {
         <p className="Login_Page--Message">Set a new password!</p>
       </div>
       {/* PASSWORD RESET FORM */}
-      <form className="Login_Page--Form">
+      <form className="Login_Page--Form" onSubmit={resetPassword}>
         {/* USER EMAIL */}
         <div className="Login_Form--Field">
           <label htmlFor="Login_Mail">Email address:</label>
