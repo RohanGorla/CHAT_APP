@@ -149,6 +149,28 @@ app.post("/registeruser", async (req, res) => {
   }
 });
 
+/* PASSWORD RESET SERVER ROUTE */
+app.post("/resetpassword", async (req, res) => {
+  const emailRecords = await userInfoCollection
+    .find({
+      email: req.body.mail,
+    })
+    .toArray();
+  if (!emailRecords.length)
+    return res.send({
+      access: false,
+      errorMsg: "No account linked with this email address!",
+      errorCode: "mail",
+    });
+
+  const hashedPassword = await bcrypt.hash(req.body.password, 10);
+  const updatePassword = await userInfoCollection.updateOne(
+    { email: req.body.mail },
+    { $set: { pass: hashedPassword } }
+  );
+  return res.send({ access: true });
+});
+
 /* GENERATE THE PROFILE PICTURE GET AND PUT SIGNED URLS */
 app.post("/generateputurl", async (req, res) => {
   if (req.body.oldKey) {
