@@ -25,6 +25,7 @@ function Chats() {
     setCurrentRoom,
   } = useOutletContext();
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
+  const usedIncognito = sessionStorage.getItem("Used_Incognito");
   const usernameColors = ["orange", "green", "violet", "goldenrod"];
   /* STATE VARIABLES AND ELEMENT REFS */
   const [message, setMessage] = useState("");
@@ -45,6 +46,7 @@ function Chats() {
   const [addFriendsSearch, setAddFriendsSearch] = useState("");
   const [selectedFriends, setSelectedFriends] = useState([]);
   const [loadedImages, setLoadedImages] = useState([]);
+  const [showIncognitoFeatures, setShowIncognitoFeatures] = useState(false);
   const [incognito, setIncognito] = useState(false);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
@@ -1014,19 +1016,26 @@ function Chats() {
             </div>
           </div>
         </div>
-        {/* INCOGNITO TEXTING MESSAGE */}
-        <div className="Chat--Incognito_Texting">
+        {/* INCOGNITO TEXTING */}
+        <div
+          className={
+            showIncognitoFeatures ? "Chat--Incognito_Texting" : "Inactive"
+          }
+        >
+          {/* INCOGNITO TEXTING FEATURES CARD */}
           <div className="Chat--Incognito_Texting--Card">
+            {/* INCOGNITO TEXTING FEATURES CARD HEADER */}
             <div className="Chat--Incognito_Texting--Header">
               <FaUserSecret className="Chat--Incognito_Texting--Icon" />
               <p className="Chat--Incognito_Texting--Heading">
                 Incognito mode - ON
               </p>
             </div>
+            {/* INCOGNITO MODE ON FEATURES LIST */}
             <ul className="Chat--Incognito_Texting--Features_List">
               <li className="Chat--Incognito_Texting--Feature">
-                Messages sent with incognito mode won't show your user id to group
-                members.
+                Messages sent with incognito mode won't show your user id to
+                group members.
               </li>
               <li className="Chat--Incognito_Texting--Feature">
                 You can turn it off by clicking the incognito button again.
@@ -1035,7 +1044,14 @@ function Chats() {
                 Enjoy the freedom of anonymous texting!
               </li>
             </ul>
-            <button className="Chat--Incognito_Texting--Close_Button">
+            {/* BUTTON TO CLOSE THE INCOGNITO TEXTING TAB */}
+            <button
+              className="Chat--Incognito_Texting--Close_Button"
+              onClick={() => {
+                setShowIncognitoFeatures(false);
+                sessionStorage.setItem("Used_Incognito", true);
+              }}
+            >
               Got it!
             </button>
           </div>
@@ -1230,6 +1246,7 @@ function Chats() {
               onClick={(e) => {
                 e.preventDefault();
                 setIncognito(!incognito);
+                if (!usedIncognito) setShowIncognitoFeatures(true);
               }}
             >
               <FaUserSecret
