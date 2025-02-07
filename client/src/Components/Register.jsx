@@ -78,7 +78,7 @@ function Register() {
           className="Login_Page--App_Logo"
           src={`data:image/png;base64,${logoUrl}`}
         ></img>
-        <p className="Login_Page--Message">Create your frens account!</p>
+        <p className="Login_Page--Message">Create your frens account</p>
       </div>
       {/* USER REGISTER FORM */}
       <form className="Login_Page--Form" onSubmit={registerUser}>

@@ -71,7 +71,7 @@ function ForgotPassword() {
           className="Login_Page--App_Logo"
           src={`data:image/png;base64,${logoUrl}`}
         ></img>
-        <p className="Login_Page--Message">Set a new password!</p>
+        <p className="Login_Page--Message">Set a new password</p>
       </div>
       {/* PASSWORD RESET FORM */}
       <form className="Login_Page--Form" onSubmit={resetPassword}>
