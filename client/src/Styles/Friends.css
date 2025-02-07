@@ -26,6 +26,40 @@
   min-width: 400px;
 }
 
+.Friends_List_Component {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+
+.Friends_List--New_Group {
+  position: absolute;
+  bottom: 40px;
+  right: 20px;
+  z-index: 1;
+  background-color: rgb(112, 224, 0);
+  display: flex;
+  height: 45px;
+  width: 45px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  border-radius: 50%;
+  cursor: pointer;
+  &:hover {
+    background-color: black;
+    border: 2px solid rgb(112, 224, 0);
+    .Friends_List--New_Group--Icon {
+      color: rgb(112, 224, 0);
+    }
+  }
+}
+
+.Friends_List--New_Group--Icon {
+  font-size: var(--Friends_Group_Icon_Size);
+  color: black;
+}
+
 .Friends_List {
   position: relative;
   background-color: rgb(20, 30, 60);
@@ -52,36 +86,6 @@
 
 .Friends_List:hover::-webkit-scrollbar-thumb {
   background: rgb(100, 99, 99);
-}
-
-.Friends_List--New_Group {
-  position: absolute;
-  bottom: 40px;
-  right: 10px;
-  z-index: 1;
-  background-color: rgb(51, 214, 91);
-  background-color: rgb(112, 224, 0);
-  display: flex;
-  height: 45px;
-  width: 45px;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  cursor: pointer;
-  &:hover {
-    background-color: black;
-    border: 2px solid rgb(112, 224, 0);
-    .Friends_List--New_Group--Icon {
-      color: rgb(51, 214, 91);
-      color: rgb(112, 224, 0);
-    }
-  }
-}
-
-.Friends_List--New_Group--Icon {
-  font-size: var(--Friends_Group_Icon_Size);
-  color: black;
 }
 
 .Friends_List--Search {

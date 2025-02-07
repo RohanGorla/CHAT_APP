@@ -85,7 +85,7 @@ function FriendsList() {
   }, []);
 
   return (
-    <section className="Friends_List">
+    <section className="Friends_List_Component">
       {/* CREATE A NEW FRIENDS GROUP */}
       <div
         className="Friends_List--New_Group"
@@ -93,131 +93,138 @@ function FriendsList() {
       >
         <MdGroupAdd className="Friends_List--New_Group--Icon" />
       </div>
-      {/* SEARCH FRIEND IN FRIENDS LIST */}
-      <search className="Friends_List--Search">
-        <input
-          type="text"
-          value={friendListSearch}
-          onChange={(e) => {
-            setFriendListSearch(e.target.value);
-          }}
-          placeholder="Search your frens list..."
-        ></input>
-      </search>
-      {/* FRIENDS AND GROUPS LIST */}
-      {searchRooms.length ? (
-        searchRooms.map((room, index) => {
-          /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
-          const roomChats = chats.filter((chat) => chat.room === room.roomId);
-          let unreadMessages;
-          if (room.type === "single")
-            unreadMessages = roomChats.filter(
-              (chat) => chat.read === false && chat.usr_id !== userData.userId
-            );
-          else
-            unreadMessages = roomChats.filter(
-              (chat) => !chat.read.includes(userData.userId)
-            );
-          const currentDate = new Date().toLocaleDateString("en-IN");
-          return (
-            /* EACH FRIEND'S DISPLAY CARD */
-            <div
-              key={index}
-              className="Friends_List--Friend_Card"
-              onClick={() => {
-                /* AVOID RENAVIGATION TO THE SAME PAGE */
-                if (params.id !== room.roomId) {
-                  setRoomChats(roomChats);
-                  setCurrentRoom(room);
-                  /* NAVIGATE TO THE DESIRED CHAT PAGE */
-                  return navigate(`/user/chats/${room.roomId}`);
-                }
-              }}
-            >
-              {/* USER/GROUP DISPLAY PICTURE */}
-              <div className="Friend_Card--Image">
-                <div className="Friend_Card--Image_Icon_Container">
-                  {room.imageUrl ? (
-                    <>
-                      <div
-                        className={
-                          loadedImages.includes(room.imageTag)
-                            ? "Friend_Card--Image_Frame"
-                            : "Inactive"
-                        }
-                      >
-                        <img
-                          src={room.imageUrl}
-                          onLoad={() =>
-                            setLoadedImages((prev) => [...prev, room.imageTag])
+      <div className="Friends_List">
+        {/* SEARCH FRIEND IN FRIENDS LIST */}
+        <search className="Friends_List--Search">
+          <input
+            type="text"
+            value={friendListSearch}
+            onChange={(e) => {
+              setFriendListSearch(e.target.value);
+            }}
+            placeholder="Search your frens list..."
+          ></input>
+        </search>
+        {/* FRIENDS AND GROUPS LIST */}
+        {searchRooms.length ? (
+          searchRooms.map((room, index) => {
+            /* FILTER OUT THIS FRIEND/GROUP ROOM CHATS FROM ALL CHATS */
+            const roomChats = chats.filter((chat) => chat.room === room.roomId);
+            let unreadMessages;
+            if (room.type === "single")
+              unreadMessages = roomChats.filter(
+                (chat) => chat.read === false && chat.usr_id !== userData.userId
+              );
+            else
+              unreadMessages = roomChats.filter(
+                (chat) => !chat.read.includes(userData.userId)
+              );
+            const currentDate = new Date().toLocaleDateString("en-IN");
+            return (
+              /* EACH FRIEND'S DISPLAY CARD */
+              <div
+                key={index}
+                className="Friends_List--Friend_Card"
+                onClick={() => {
+                  /* AVOID RENAVIGATION TO THE SAME PAGE */
+                  if (params.id !== room.roomId) {
+                    setRoomChats(roomChats);
+                    setCurrentRoom(room);
+                    /* NAVIGATE TO THE DESIRED CHAT PAGE */
+                    return navigate(`/user/chats/${room.roomId}`);
+                  }
+                }}
+              >
+                {/* USER/GROUP DISPLAY PICTURE */}
+                <div className="Friend_Card--Image">
+                  <div className="Friend_Card--Image_Icon_Container">
+                    {room.imageUrl ? (
+                      <>
+                        <div
+                          className={
+                            loadedImages.includes(room.imageTag)
+                              ? "Friend_Card--Image_Frame"
+                              : "Inactive"
                           }
-                        ></img>
-                      </div>
-                      <IoMdPerson
-                        className={
-                          loadedImages.includes(room.imageTag)
-                            ? "Inactive"
-                            : "Friend_Card--Image_Icon"
-                        }
-                      />
-                    </>
-                  ) : (
-                    <IoMdPerson className="Friend_Card--Image_Icon" />
-                  )}
+                        >
+                          <img
+                            src={room.imageUrl}
+                            onLoad={() =>
+                              setLoadedImages((prev) => [
+                                ...prev,
+                                room.imageTag,
+                              ])
+                            }
+                          ></img>
+                        </div>
+                        <IoMdPerson
+                          className={
+                            loadedImages.includes(room.imageTag)
+                              ? "Inactive"
+                              : "Friend_Card--Image_Icon"
+                          }
+                        />
+                      </>
+                    ) : (
+                      <IoMdPerson className="Friend_Card--Image_Icon" />
+                    )}
+                  </div>
+                </div>
+                {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
+                <div className="Friend_Card--Details">
+                  <div className="Friend_Card--Name_And_Time">
+                    <p className="Friend_Card--Name">{room.name}</p>
+                    <p
+                      className={
+                        unreadMessages.length
+                          ? "Friend_Card--Time Friend_Card--Time--Unread"
+                          : "Friend_Card--Time"
+                      }
+                    >
+                      {room.lastMessage
+                        ? room.lastMessageDate === currentDate
+                          ? `${
+                              room.lastMessageTime.split(" ")[0]
+                            } ${room.lastMessageTime
+                              .split(" ")[1]
+                              .toUpperCase()}`
+                          : room.lastMessageDate
+                        : null}
+                    </p>
+                  </div>
+                  <div className="Friend_Card--Message_Container">
+                    <p className="Friend_Card--Message">
+                      {room?.lastMessage
+                        ? room.lastMessage.msg
+                        : room.type === "single"
+                        ? `Say hello, to your fren!`
+                        : `Say hello, to your frens!`}
+                    </p>
+                    <span className="Friend_Card--Unread_Message_Count">
+                      {unreadMessages.length
+                        ? unreadMessages.length < 100
+                          ? unreadMessages.length
+                          : `99+`
+                        : null}
+                    </span>
+                  </div>
                 </div>
               </div>
-              {/* CHAT INFO AND LATEST MESSAGE DISPLAY */}
-              <div className="Friend_Card--Details">
-                <div className="Friend_Card--Name_And_Time">
-                  <p className="Friend_Card--Name">{room.name}</p>
-                  <p
-                    className={
-                      unreadMessages.length
-                        ? "Friend_Card--Time Friend_Card--Time--Unread"
-                        : "Friend_Card--Time"
-                    }
-                  >
-                    {room.lastMessage
-                      ? room.lastMessageDate === currentDate
-                        ? `${
-                            room.lastMessageTime.split(" ")[0]
-                          } ${room.lastMessageTime.split(" ")[1].toUpperCase()}`
-                        : room.lastMessageDate
-                      : null}
-                  </p>
-                </div>
-                <div className="Friend_Card--Message_Container">
-                  <p className="Friend_Card--Message">
-                    {room?.lastMessage
-                      ? room.lastMessage.msg
-                      : room.type === "single"
-                      ? `Say hello, to your fren!`
-                      : `Say hello, to your frens!`}
-                  </p>
-                  <span className="Friend_Card--Unread_Message_Count">
-                    {unreadMessages.length
-                      ? unreadMessages.length < 100
-                        ? unreadMessages.length
-                        : `99+`
-                      : null}
-                  </span>
-                </div>
-              </div>
-            </div>
-          );
-        })
-      ) : (
-        <div className="Friends_List--Empty">
-          <p className="Friends_List--Empty--Message">
-            {friendListSearch.length
-              ? rooms.length
-                ? `No match found!`
-                : `Your frens list is empty! Find frens and send them a fren request to show them here!`
-              : `Oops! Looks like your frens list is empty. Send a request to a fren
+            );
+          })
+        ) : (
+          <div className="Friends_List--Empty">
+            <p className="Friends_List--Empty--Message">
+              {friendListSearch.length
+                ? rooms.length
+                  ? `No match found!`
+                  : `Your frens list is empty! Find frens and send them a fren request to show them here!`
+                : `Oops! Looks like your frens list is empty. Send a request to a fren
             to show them here!`}
-          </p>
-        </div>
-      )}
+            </p>
+          </div>
+        )}
+      </div>
     </section>
   );
 }
