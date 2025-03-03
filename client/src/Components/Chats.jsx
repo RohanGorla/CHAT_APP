@@ -50,7 +50,7 @@ function Chats() {
   const [incognito, setIncognito] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState({});
   const [showMessageOptions, setShowMessageOptions] = useState(false);
-  const [editMessage, setEditMessage] = useState("");
+  const [editedMessage, setEditedMessage] = useState("");
   const [readByList, setReadByList] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
@@ -98,6 +98,14 @@ function Chats() {
     setMessage("");
   }
 
+  function editMessage() {
+    socket.emit("edit_message", {
+      id: selectedMessage._id,
+      room: id,
+      message: editedMessage,
+    });
+  }
+
   /* DELETE YOUR MESSAGE FROM CHAT */
   function deleteMessage() {
     socket.emit("delete_message", {
@@ -107,7 +115,7 @@ function Chats() {
     });
     setShowMessageOptions(false);
     setSelectedMessage({});
-    setEditMessage("");
+    setEditedMessage("");
     setReadByList([]);
   }
 
@@ -1077,24 +1085,27 @@ function Chats() {
                 </p>
                 <textarea
                   className="Chat--Message_Information--Section--Textarea"
-                  value={editMessage}
+                  value={editedMessage}
                   onChange={(e) => {
-                    setEditMessage(e.target.value);
+                    setEditedMessage(e.target.value);
                   }}
                 ></textarea>
                 <button
                   className={
-                    selectedMessage.msg !== editMessage
+                    selectedMessage.msg !== editedMessage
                       ? "Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset"
                       : "Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset--Inactive"
                   }
                   onClick={() => {
-                    setEditMessage(selectedMessage.msg);
+                    setEditedMessage(selectedMessage.msg);
                   }}
                 >
                   Reset
                 </button>
-                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Edit">
+                <button
+                  className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Edit"
+                  onClick={editMessage}
+                >
                   Done
                 </button>
               </div>
@@ -1349,7 +1360,7 @@ function Chats() {
                         onClick={() => {
                           setSelectedMessage(message);
                           setShowMessageOptions(true);
-                          setEditMessage(message.msg);
+                          setEditedMessage(message.msg);
                           const readBy = friendsList.filter((friend) =>
                             message.read.includes(friend.usr_id)
                           );
