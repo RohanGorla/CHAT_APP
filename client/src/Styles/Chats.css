@@ -701,6 +701,32 @@
   }
 }
 
+.Chat--Message_Information--Section--Textarea {
+  font-size: var(--Chat_Message_Information_Section_Note);
+  display: block;
+  width: 100%;
+}
+
+.Chat--Message_Information--Section--Button--Reset {
+  background-color: white;
+  margin-right: 0.5em;
+  &:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+  }
+}
+
+.Chat--Message_Information--Section--Button--Edit {
+  background-color: rgb(112, 224, 0);
+  &:hover {
+    background-color: rgb(15, 15, 15);
+    color: rgb(112, 224, 0);
+    border: 2px solid rgb(112, 224, 0);
+  }
+}
+
+
 .Chat--Incognito_Texting {
   background-color: rgb(15, 15, 15, 0.7);
   font-family: var(--Chat_Sub_Font);
