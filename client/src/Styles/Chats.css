@@ -21,6 +21,9 @@
   --Chat_Room_Info_Email--Heading: 18px;
   --Chat_Room_Info_Button: 14px;
   --Chat_Room_Info_Confirm_Message: 16px;
+  --Chat_Message_Information_Title: 22px;
+  --Chat_Message_Information_Section_Title: 20px;
+  --Chat_Message_Information_Section_Note: 16px;
   --Chat_Incognito_Texting_Heading: 20px;
   --Chat_Icon_Size: 30px;
   --Chat_Name: 18px;
@@ -656,6 +659,48 @@
   }
 }
 
+.Chat--Message_Information--Title {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Message_Information_Title);
+  font-weight: 600;
+}
+
+.Chat--Message_Information--Section {
+  margin-top: 1.5em;
+}
+
+.Chat--Message_Information--Section--Title {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Message_Information_Section_Title);
+  font-weight: 600;
+  margin-bottom: 0.4em;
+}
+
+.Chat--Message_Information--Section--Note {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Message_Information_Section_Note);
+}
+
+.Chat--Message_Information--Section--Button {
+  font-family: var(--Chat_Sub_Font);
+  font-size: var(--Chat_Room_Info_Button);
+  font-weight: 600;
+  padding: 0.5em 1.2em;
+  border: 2px solid rgb(15, 15, 15);
+  border-radius: 7px;
+  margin-top: 0.4em;
+  cursor: pointer;
+}
+
+.Chat--Message_Information--Section--Button--Delete {
+  background-color: red;
+  &:hover {
+    background-color: rgb(15, 15, 15);
+    color: red;
+    border: 2px solid red;
+  }
+}
+
 .Chat--Incognito_Texting {
   background-color: rgb(15, 15, 15, 0.7);
   font-family: var(--Chat_Sub_Font);
@@ -877,7 +922,11 @@
 
 .Chat--Message_Card--Options--Icon {
   font-size: 16px;
+  color: grey;
   cursor: pointer;
+  &:hover {
+    color: white;
+  }
 }
 
 .Chat--Message_Card--Time {
