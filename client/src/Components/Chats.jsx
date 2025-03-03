@@ -1020,6 +1020,42 @@ function Chats() {
             </div>
           </div>
         </div>
+        {/* MESSAGE INFORMATION CARD */}
+        <div
+          className={
+            showMessageOptions ? "Chat--Room_Information_Container" : "Inactive"
+          }
+        >
+          <div className="Chat--Room_Information">
+            {/* ROOM INFORMATION SCROLLABLE SECTION */}
+            <div className="Chat--Room_Information--Inner_Container">
+              {/* CLOSE ROOM INFORMATION */}
+              <FaXmark
+                onClick={() => {
+                  setShowMessageOptions(false);
+                }}
+                className="Chat--Room_Information--Close"
+              />
+              {/* MESSAGE INFORMATION HEADER */}
+              <p className="Chat--Message_Information--Title">
+                Message information
+              </p>
+              {/* MESSAGE DELETE OPTION */}
+              <div className="Chat--Message_Information--Section">
+                <p className="Chat--Message_Information--Section--Title">
+                  Delete message
+                </p>
+                <p className="Chat--Message_Information--Section--Note">
+                  This will permanently delete this message from the chat for
+                  you and everyone else!
+                </p>
+                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Delete">
+                  Delete message
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
         {/* INCOGNITO TEXTING */}
         <div
           className={
