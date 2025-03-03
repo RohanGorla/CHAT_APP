@@ -2,6 +2,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
+import { BsInfoCircleFill } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
 import { FaEdit, FaCamera, FaUserSecret } from "react-icons/fa";
@@ -1173,7 +1174,10 @@ function Chats() {
                     </span>
                   </p>
                   <p className="Chat--Message_Card--Message">{message.msg}</p>
-                  <div className="Chat--Message_Card--Time_And_Status">
+                  <div className="Chat--Message_Card--Time_And_Info">
+                    <div className="Chat--Message_Card--Options">
+                      <BsInfoCircleFill className="Chat--Message_Card--Options--Icon" />
+                    </div>
                     <p className="Chat--Message_Card--Time">
                       {currentDate === messageDate
                         ? `${messageTime.split(" ")[0]} ${messageTime

@@ -862,15 +862,27 @@
   font-size: var(--Chat_Message);
 }
 
-.Chat--Message_Card--Time_And_Status {
+.Chat--Message_Card--Time_And_Info {
   display: flex;
   align-items: center;
   justify-content: end;
   margin-top: 0.7em;
 }
 
+.Chat--Message_Card--Options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Chat--Message_Card--Options--Icon {
+  font-size: 16px;
+  cursor: pointer;
+}
+
 .Chat--Message_Card--Time {
   font-size: 10px;
+  margin-left: 1em;
 }
 
 .Chat--Message_Card--Read_Status--True {
@@ -1180,7 +1192,7 @@
     letter-spacing: 0.5px;
   }
 
-  .Chat--Message_Card--Time_And_Status {
+  .Chat--Message_Card--Time_And_Info {
     margin-top: 0.3em;
   }
 
