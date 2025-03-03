@@ -50,6 +50,7 @@ function Chats() {
   const [incognito, setIncognito] = useState(false);
   const [selectedMessage, setSelectedMessage] = useState({});
   const [showMessageOptions, setShowMessageOptions] = useState(false);
+  const [editMessage, setEditMessage] = useState("");
   const [readByList, setReadByList] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
@@ -1053,6 +1054,25 @@ function Chats() {
                   Delete message
                 </button>
               </div>
+              {/* MESSAGE EDIT OPTION */}
+              <div className="Chat--Message_Information--Section">
+                <p className="Chat--Message_Information--Section--Title">
+                  Edit message
+                </p>
+                <textarea
+                  className="Chat--Message_Information--Section--Textarea"
+                  value={editMessage}
+                  onChange={(e) => {
+                    setEditMessage(e.target.value);
+                  }}
+                ></textarea>
+                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset">
+                  Reset
+                </button>
+                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Edit">
+                  Done
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -1223,6 +1243,7 @@ function Chats() {
                         onClick={() => {
                           setSelectedMessage(message);
                           setShowMessageOptions(true);
+                          setEditMessage(message.msg);
                           const readBy = friendsList.filter((friend) =>
                             message.read.includes(friend.usr_id)
                           );
