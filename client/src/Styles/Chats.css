@@ -704,7 +704,10 @@
 .Chat--Message_Information--Section--Textarea {
   font-size: var(--Chat_Message_Information_Section_Note);
   display: block;
+  resize: vertical;
   width: 100%;
+  padding: 0.3em;
+  outline: none;
 }
 
 .Chat--Message_Information--Section--Button--Reset {
