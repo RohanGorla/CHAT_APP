@@ -312,12 +312,13 @@ io.on("connection", async (socket) => {
     io.to(id).emit("message_read_updated", { id, userData, type });
   });
   /* DELETE A MESSAGE FROM A CHAT */
-  socket.on("delete_message", async ({ id, room }) => {
+  socket.on("delete_message", async ({ id, room, usr_id }) => {
     const messageId = new ObjectId(id);
     const messageRecord = await chatMessagesCollection.deleteOne({
       _id: messageId,
     });
-    if (messageRecord.acknowledged) io.to(room).emit("message_deleted", { id });
+    if (messageRecord.acknowledged)
+      io.to(room).emit("message_deleted", { id, usr_id });
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {

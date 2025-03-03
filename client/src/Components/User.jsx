@@ -77,9 +77,10 @@ function User() {
       });
       setChats(updatedChat);
     });
-    socket.on("message_deleted", ({ id }) => {
+    socket.on("message_deleted", ({ id, usr_id }) => {
       const updatedChat = chats.filter((message) => message._id !== id);
       setChats(updatedChat);
+      if (userData.userId === usr_id) Popup(`Message deleted!`, "Good");
     });
     socket.on("chat_deleted", ({ from, to, room }) => {
       const updatedChat = chats.filter(

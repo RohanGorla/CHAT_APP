@@ -103,6 +103,7 @@ function Chats() {
     socket.emit("delete_message", {
       id: selectedMessage._id,
       room: id,
+      usr_id: userData.userId,
     });
     setShowMessageOptions(false);
     setSelectedMessage({});
