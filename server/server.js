@@ -317,6 +317,7 @@ io.on("connection", async (socket) => {
     const messageRecord = await chatMessagesCollection.deleteOne({
       _id: messageId,
     });
+    if (messageRecord.acknowledged) io.to(room).emit("message_deleted", { id });
   });
   /* SEND FRIEND REQUESTS TO USERS */
   socket.on("send_request", async (payload) => {
