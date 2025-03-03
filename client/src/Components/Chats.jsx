@@ -102,7 +102,8 @@ function Chats() {
     socket.emit("edit_message", {
       id: selectedMessage._id,
       room: id,
-      message: editedMessage,
+      msg: editedMessage,
+      usr_id: userData.userId,
     });
   }
 
