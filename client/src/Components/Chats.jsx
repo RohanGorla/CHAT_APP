@@ -1073,6 +1073,87 @@ function Chats() {
                   Done
                 </button>
               </div>
+              {/* MESSAGE INFORMATION - READ BY LIST */}
+              <div className="Chat--Room_Information--Friends_List">
+                <p className="Chat--Message_Information--Section--Title">
+                  Read by
+                </p>
+                {/* FRIENDS LIST - FRIENDS CARDS LIST */}
+                {readByList.length ? (
+                  readByList?.map((friend, index) => {
+                    return (
+                      <div
+                        key={index}
+                        className="Chat--Room_Information--Friend_Container"
+                      >
+                        {/* ROOM FRIENDS INFORMATION */}
+                        <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
+                          {/* SHOW FRIENDS IMAGES ONLY IN GROUP TYPE ROOM */}
+                          <div
+                            className={
+                              currentRoom.type === "group"
+                                ? "Chat--Room_Information--Friend--Image_Container"
+                                : "Inactive"
+                            }
+                          >
+                            <div className="Chat--Room_Information--Friend--Image">
+                              {friend.imageUrl ? (
+                                <>
+                                  <div
+                                    className={
+                                      loadedImages.includes(friend.imageTag)
+                                        ? "Chat--Room_Information--Friend--Image_Frame"
+                                        : "Inactive"
+                                    }
+                                  >
+                                    <img
+                                      src={friend.imageUrl}
+                                      onLoad={() =>
+                                        setLoadedImages((prev) => [
+                                          ...prev,
+                                          friend.imageTag,
+                                        ])
+                                      }
+                                    ></img>
+                                  </div>
+                                  <IoMdPerson
+                                    className={
+                                      loadedImages.includes(friend.imageTag)
+                                        ? "Inactive"
+                                        : "Chat--Room_Information--Friend--Icon"
+                                    }
+                                  />
+                                </>
+                              ) : (
+                                <IoMdPerson className="Chat--Room_Information--Friend--Icon" />
+                              )}
+                            </div>
+                          </div>
+                          {/* SHOW FRIENDS DETAILS */}
+                          <div
+                            className={
+                              currentRoom.type === "group"
+                                ? "Chat--Room_Information--Friend--Details--Group"
+                                : "Chat--Room_Information--Friend--Details--Single"
+                            }
+                          >
+                            <p className="Chat--Room_Information--Friend_Username">
+                              {friend.usr_nm}
+                            </p>
+                            <p className="Chat--Room_Information--Friend_Userid">
+                              {friend.usr_id}
+                            </p>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })
+                ) : (
+                  <div className="Chat--Message_Information--Not_Read">
+                    <p>Message not read!</p>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>

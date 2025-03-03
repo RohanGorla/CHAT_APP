@@ -726,6 +726,10 @@
   }
 }
 
+.Chat--Message_Information--Not_Read {
+  font-family: var(--Chat_Main_Font);
+  font-size: var(--Chat_Message_Information_Section_Note);
+}
 
 .Chat--Incognito_Texting {
   background-color: rgb(15, 15, 15, 0.7);
