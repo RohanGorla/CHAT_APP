@@ -77,6 +77,16 @@ function User() {
       });
       setChats(updatedChat);
     });
+    socket.on("message_edited", ({ id, msg, usr_id }) => {
+      const updatedChat = chats.map((message) => {
+        if (message._id === id) {
+          message.msg = msg;
+          return message;
+        } else return message;
+      });
+      setChats(updatedChat);
+      if (userData.userId === usr_id) Popup(`Message has been edited!`, "Good");
+    });
     socket.on("message_deleted", ({ id, usr_id }) => {
       const updatedChat = chats.filter((message) => message._id !== id);
       setChats(updatedChat);
