@@ -104,6 +104,10 @@ function Chats() {
       id: selectedMessage._id,
       room: id,
     });
+    setShowMessageOptions(false);
+    setSelectedMessage({});
+    setEditMessage("");
+    setReadByList([]);
   }
 
   /* DELETE ALL THE CHAT MESSAGES SOCKET EVENT */
