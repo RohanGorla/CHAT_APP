@@ -311,6 +311,16 @@ io.on("connection", async (socket) => {
       );
     io.to(id).emit("message_read_updated", { id, userData, type });
   });
+  /* EDIT MESSAGE TEXT */
+  socket.on("edit_message", async ({ id, room, message }) => {
+    const messageId = new ObjectId(id);
+    const messageRecord = await chatMessagesCollection.updateOne(
+      {
+        _id: messageId,
+      },
+      { $set: { msg: message } }
+    );
+  });
   /* DELETE A MESSAGE FROM A CHAT */
   socket.on("delete_message", async ({ id, room, usr_id }) => {
     const messageId = new ObjectId(id);
