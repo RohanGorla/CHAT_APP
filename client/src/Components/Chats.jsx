@@ -102,6 +102,7 @@ function Chats() {
   function deleteMessage() {
     socket.emit("delete_message", {
       id: selectedMessage._id,
+      room: id,
     });
   }
 
