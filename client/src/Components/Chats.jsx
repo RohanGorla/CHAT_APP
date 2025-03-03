@@ -98,6 +98,7 @@ function Chats() {
     setMessage("");
   }
 
+  /* EDIT USER MESSAGE TEXT */
   function editMessage() {
     socket.emit("edit_message", {
       id: selectedMessage._id,
@@ -107,7 +108,7 @@ function Chats() {
     });
   }
 
-  /* DELETE YOUR MESSAGE FROM CHAT */
+  /* DELETE USER MESSAGE FROM CHAT */
   function deleteMessage() {
     socket.emit("delete_message", {
       id: selectedMessage._id,
@@ -1115,7 +1116,7 @@ function Chats() {
                 <p className="Chat--Message_Information--Section--Title">
                   Read by
                 </p>
-                {/* FRIENDS LIST - FRIENDS CARDS LIST */}
+                {/* READ BY FRIENDS CARDS LIST */}
                 {readByList.length ? (
                   readByList?.map((friend, index) => {
                     return (
@@ -1123,7 +1124,7 @@ function Chats() {
                         key={index}
                         className="Chat--Room_Information--Friend_Container"
                       >
-                        {/* ROOM FRIENDS INFORMATION */}
+                        {/* READ BY FRIENDS INFORMATION */}
                         <div className="Chat--Room_Information--Friend Chat--Room_Information--Friend--Group">
                           {/* SHOW FRIENDS IMAGES ONLY IN GROUP TYPE ROOM */}
                           <div
@@ -1362,8 +1363,11 @@ function Chats() {
                           setSelectedMessage(message);
                           setShowMessageOptions(true);
                           setEditedMessage(message.msg);
-                          const readBy = friendsList.filter((friend) =>
-                            message.read.includes(friend.usr_id)
+                          const readBy = friendsList.filter(
+                            (friend) =>
+                              (currentRoom?.type === "group" &&
+                                message.read.includes(friend.usr_id)) ||
+                              (currentRoom?.type === "single" && message.read)
                           );
                           setReadByList(readBy);
                         }}
