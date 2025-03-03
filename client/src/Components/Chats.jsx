@@ -98,6 +98,13 @@ function Chats() {
     setMessage("");
   }
 
+  /* DELETE YOUR MESSAGE FROM CHAT */
+  function deleteMessage() {
+    socket.emit("delete_message", {
+      id: selectedMessage._id,
+    });
+  }
+
   /* DELETE ALL THE CHAT MESSAGES SOCKET EVENT */
   function deleteChat(friend) {
     socket.emit("delete_chat", {
@@ -1050,7 +1057,10 @@ function Chats() {
                   This will permanently delete this message from the chat for
                   you and everyone else!
                 </p>
-                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Delete">
+                <button
+                  className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Delete"
+                  onClick={deleteMessage}
+                >
                   Delete message
                 </button>
               </div>
