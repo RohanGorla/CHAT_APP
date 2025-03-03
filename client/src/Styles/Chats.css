@@ -717,6 +717,12 @@
   }
 }
 
+.Chat--Message_Information--Section--Button--Reset--Inactive {
+  background-color: gray;
+  margin-right: 0.5em;
+  cursor: auto;
+}
+
 .Chat--Message_Information--Section--Button--Edit {
   background-color: rgb(112, 224, 0);
   &:hover {

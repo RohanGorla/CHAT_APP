@@ -1082,7 +1082,16 @@ function Chats() {
                     setEditMessage(e.target.value);
                   }}
                 ></textarea>
-                <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset">
+                <button
+                  className={
+                    selectedMessage.msg !== editMessage
+                      ? "Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset"
+                      : "Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Reset--Inactive"
+                  }
+                  onClick={() => {
+                    setEditMessage(selectedMessage.msg);
+                  }}
+                >
                   Reset
                 </button>
                 <button className="Chat--Message_Information--Section--Button Chat--Message_Information--Section--Button--Edit">
