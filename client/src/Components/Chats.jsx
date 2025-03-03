@@ -2,10 +2,9 @@ import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
 import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
-import { BsInfoCircleFill } from "react-icons/bs";
 import { GoDotFill } from "react-icons/go";
 import { FaXmark } from "react-icons/fa6";
-import { FaEdit, FaCamera, FaUserSecret } from "react-icons/fa";
+import { FaEdit, FaCamera, FaUserSecret, FaInfoCircle } from "react-icons/fa";
 import { SiTicktick } from "react-icons/si";
 import { GiCancel } from "react-icons/gi";
 import FriendsList from "./FriendsList";
@@ -49,6 +48,9 @@ function Chats() {
   const [loadedImages, setLoadedImages] = useState([]);
   const [showIncognitoFeatures, setShowIncognitoFeatures] = useState(false);
   const [incognito, setIncognito] = useState(false);
+  const [selectedMessage, setSelectedMessage] = useState({});
+  const [showMessageOptions, setShowMessageOptions] = useState(false);
+  const [readByList, setReadByList] = useState([]);
   const chatContainerRef = useRef(null);
   const messagesRef = useRef(null);
   const textAreaContainerRef = useRef(null);
@@ -1176,7 +1178,21 @@ function Chats() {
                   <p className="Chat--Message_Card--Message">{message.msg}</p>
                   <div className="Chat--Message_Card--Time_And_Info">
                     <div className="Chat--Message_Card--Options">
-                      <BsInfoCircleFill className="Chat--Message_Card--Options--Icon" />
+                      <FaInfoCircle
+                        className={
+                          message.usr_id === userData.userId
+                            ? "Chat--Message_Card--Options--Icon"
+                            : "Inactive"
+                        }
+                        onClick={() => {
+                          setSelectedMessage(message);
+                          setShowMessageOptions(true);
+                          const readBy = friendsList.filter((friend) =>
+                            message.read.includes(friend.usr_id)
+                          );
+                          setReadByList(readBy);
+                        }}
+                      />
                     </div>
                     <p className="Chat--Message_Card--Time">
                       {currentDate === messageDate
