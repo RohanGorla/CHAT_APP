@@ -285,16 +285,17 @@ io.on("connection", async (socket) => {
   });
   /* HANDLE INCOMING MESSAGES */
   socket.on("send_message", async (payload) => {
-    await chatMessagesCollection.insertOne({
-      usr_nm: payload.userData.username,
-      usr_id: payload.userData.userId,
-      msg: payload.message,
-      room: payload.id,
+    const messageRecord = {
+      usr_nm: payload.usr_nm,
+      usr_id: payload.usr_id,
+      msg: payload.msg,
+      room: payload.room,
       time: payload.time,
       read: payload.read,
       incognito: payload.incognito,
-    });
-    io.to(payload.id).emit("receive_message", payload);
+    };
+    await chatMessagesCollection.insertOne(messageRecord);
+    io.to(payload.room).emit("receive_message", messageRecord);
   });
   /* UPDATE THE MESSAGE READ STATUS */
   socket.on("update_message_read", async ({ id, userData, type }) => {
