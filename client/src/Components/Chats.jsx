@@ -83,9 +83,10 @@ function Chats() {
     if (currentRoom.type === "single") read = false;
     else read = [userData.userId];
     socket.emit("send_message", {
-      userData,
-      message,
-      id,
+      usr_nm: userData.username,
+      usr_id: userData.userId,
+      msg: message,
+      room: id,
       time: new Date(),
       read,
       incognito,
@@ -1220,9 +1221,10 @@ function Chats() {
                     read = [userData.userId];
                   }
                   socket.emit("send_message", {
-                    userData,
-                    message: msg,
-                    id,
+                    usr_nm: userData.username,
+                    usr_id: userData.userId,
+                    msg,
+                    room: id,
                     time: new Date(),
                     read,
                     incognito,
