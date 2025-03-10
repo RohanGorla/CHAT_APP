@@ -66,8 +66,16 @@ function User() {
   useEffect(() => {
     /* CHAT RELATED EVENTS */
     socket.on("receive_message", (payload) => {
-      payload.msg = decryptMessage(payload.msg);
-      setChats([...chats, payload]);
+      const newMessage = {
+        usr_nm: payload.usr_nm,
+        usr_id: payload.usr_id,
+        msg: decryptMessage(payload.msg),
+        room: payload.room,
+        time: payload.time,
+        read: payload.read,
+        incognito: payload.incognito,
+      };
+      setChats([...chats, newMessage]);
     });
     socket.on("message_read_updated", ({ id, userData, type }) => {
       const updatedChat = chats.filter((message) => {

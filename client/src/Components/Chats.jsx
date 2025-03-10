@@ -95,7 +95,6 @@ function Chats() {
     if (currentRoom.type === "single") read = false;
     else read = [userData.userId];
     const encryptedMessage = encryptMessage(message);
-    console.log(encryptedMessage);
     socket.emit("send_message", {
       usr_nm: userData.username,
       usr_id: userData.userId,
