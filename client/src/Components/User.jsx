@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import CryptoJS from "crypto-js";
 import { io } from "socket.io-client";
 import { IoIosChatboxes, IoMdPerson } from "react-icons/io";
 import { RiSearch2Fill } from "react-icons/ri";
@@ -14,6 +15,7 @@ function User() {
   const socket = useMemo(() => io(`${import.meta.env.VITE_SERVER_URL}`), []);
   /* SPECIAL VARIABLES */
   const navigate = useNavigate();
+  const secretKey = import.meta.env.VITE_SECRET_KEY;
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   /* STATE VARIABLES */
   const [showPopup, setShowPopup] = useState(false);
@@ -39,6 +41,13 @@ function User() {
     return generateGetUrlResponse.data.url;
   }
 
+  /* MESSAGE DECRYPTING FUNCTION */
+  function decryptMessage(encryptedText) {
+    const messageData = CryptoJS.AES.decrypt(encryptedText, secretKey);
+    const messageText = messageData.toString(CryptoJS.enc.Utf8);
+    return messageText;
+  }
+
   /* SHOW AND HIDE POPUP NOTIFICATION FUNCTION */
   function Popup(message, type) {
     setShowPopup(true);
@@ -57,6 +66,7 @@ function User() {
   useEffect(() => {
     /* CHAT RELATED EVENTS */
     socket.on("receive_message", (payload) => {
+      payload.msg = decryptMessage(payload.msg);
       setChats([...chats, payload]);
     });
     socket.on("message_read_updated", ({ id, userData, type }) => {
@@ -80,7 +90,7 @@ function User() {
     socket.on("message_edited", ({ id, msg, usr_id }) => {
       const updatedChat = chats.map((message) => {
         if (message._id === id) {
-          message.msg = msg;
+          message.msg = decryptMessage(msg);
           return message;
         } else return message;
       });
@@ -444,10 +454,14 @@ function User() {
                 break;
             }
           }
+          const updatedChats = chats.map((chat) => {
+            chat.msg = decryptMessage(chat.msg);
+            return chat;
+          });
           setRooms(rooms);
           setSearchRooms(rooms);
           setFriends(friends);
-          setChats(chats);
+          setChats(updatedChats);
           setNotifications(notifications);
         }
       );
