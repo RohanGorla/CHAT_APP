@@ -25,6 +25,7 @@ function Chats() {
     currentRoom,
     setCurrentRoom,
   } = useOutletContext();
+  const secretKey = import.meta.env.VITE_SECRET_KEY;
   const userData = JSON.parse(localStorage.getItem("ChatApp_UserInfo"));
   const usedIncognito = sessionStorage.getItem("Used_Incognito");
   const usernameColors = ["orange", "green", "violet", "goldenrod"];
@@ -80,10 +81,16 @@ function Chats() {
     }
   }
 
+  /* FUNCTIONS TO ENCRYPT AND DECRYPT MESSAGES */
   function encryptMessage(msg) {
-    const secretKey = import.meta.env.VITE_SECRET_KEY;
     const encryptedText = CryptoJS.AES.encrypt(msg, secretKey).toString();
     return encryptedText;
+  }
+
+  function decryptMessage(encryptedText) {
+    const messageData = CryptoJS.AES.decrypt(encryptedText, secretKey);
+    const messageText = messageData.toString(CryptoJS.enc.Utf8);
+    return messageText;
   }
 
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
@@ -1316,6 +1323,7 @@ function Chats() {
                   hour12: true,
                 }
               );
+              const actualMessage = decryptMessage(message.msg);
               let readByAll = false;
               if (currentRoom.type === "group") {
                 readByAll = currentRoom.users.every((id) =>
@@ -1359,7 +1367,7 @@ function Chats() {
                       {message.usr_id}
                     </span>
                   </p>
-                  <p className="Chat--Message_Card--Message">{message.msg}</p>
+                  <p className="Chat--Message_Card--Message">{actualMessage}</p>
                   <div className="Chat--Message_Card--Time_And_Info">
                     <div className="Chat--Message_Card--Options">
                       <FaInfoCircle
