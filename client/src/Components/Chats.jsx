@@ -87,12 +87,6 @@ function Chats() {
     return encryptedText;
   }
 
-  function decryptMessage(encryptedText) {
-    const messageData = CryptoJS.AES.decrypt(encryptedText, secretKey);
-    const messageText = messageData.toString(CryptoJS.enc.Utf8);
-    return messageText;
-  }
-
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   function sendMessage(e) {
     e?.preventDefault();
@@ -119,7 +113,7 @@ function Chats() {
     socket.emit("edit_message", {
       id: selectedMessage._id,
       room: id,
-      msg: editedMessage,
+      msg: encryptMessage(editedMessage),
       usr_id: userData.userId,
     });
   }
@@ -1323,7 +1317,6 @@ function Chats() {
                   hour12: true,
                 }
               );
-              const actualMessage = decryptMessage(message.msg);
               let readByAll = false;
               if (currentRoom.type === "group") {
                 readByAll = currentRoom.users.every((id) =>
@@ -1367,7 +1360,7 @@ function Chats() {
                       {message.usr_id}
                     </span>
                   </p>
-                  <p className="Chat--Message_Card--Message">{actualMessage}</p>
+                  <p className="Chat--Message_Card--Message">{message.msg}</p>
                   <div className="Chat--Message_Card--Time_And_Info">
                     <div className="Chat--Message_Card--Options">
                       <FaInfoCircle
