@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useNavigate, useOutletContext, useParams } from "react-router-dom";
+import CryptoJS from "crypto-js";
 import { LuSend } from "react-icons/lu";
 import { IoMdPerson, IoMdArrowRoundBack } from "react-icons/io";
 import { GoDotFill } from "react-icons/go";
@@ -79,6 +80,12 @@ function Chats() {
     }
   }
 
+  function encryptMessage(msg) {
+    const secretKey = import.meta.env.VITE_SECRET_KEY;
+    const encryptedText = CryptoJS.AES.encrypt(msg, secretKey).toString();
+    return encryptedText;
+  }
+
   /* SEND MESSAGES TO THE WEB SOCKET SERVER */
   function sendMessage(e) {
     e?.preventDefault();
@@ -86,10 +93,12 @@ function Chats() {
     let read;
     if (currentRoom.type === "single") read = false;
     else read = [userData.userId];
+    const encryptedMessage = encryptMessage(message);
+    console.log(encryptedMessage);
     socket.emit("send_message", {
       usr_nm: userData.username,
       usr_id: userData.userId,
-      msg: message,
+      msg: encryptedMessage,
       room: id,
       time: new Date(),
       read,
@@ -1413,10 +1422,10 @@ function Chats() {
                 onClick={() => {
                   let msg, read;
                   if (currentRoom.type === "single") {
-                    msg = `Hello, ${currentRoom?.name}`;
+                    msg = encryptMessage(`Hello, ${currentRoom?.name}`);
                     read = false;
                   } else {
-                    msg = `Hello, frens`;
+                    msg = encryptMessage(`Hello, frens`);
                     read = [userData.userId];
                   }
                   socket.emit("send_message", {
